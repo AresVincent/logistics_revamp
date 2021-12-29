@@ -8,3 +8,7 @@
 
 ## front
 **/*.lock
+/ant-design-vue-jeecg/.env.production
+/ant-design-vue-jeecg/.env.test
+/ant-design-vue-jeecg/.env.development
+/ant-design-vue-jeecg/Dockerfile
