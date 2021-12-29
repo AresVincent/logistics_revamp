@@ -19,14 +19,14 @@
         default: 'ant-pro-trend'
       },
       /**
-       * 上升下降标识：up|down
+       * 上升下降標識：up|down
        */
       flag: {
         type: String,
         required: true
       },
       /**
-       * 颜色反转
+       * 顏色反轉
        */
       reverseColor: {
         type: Boolean,

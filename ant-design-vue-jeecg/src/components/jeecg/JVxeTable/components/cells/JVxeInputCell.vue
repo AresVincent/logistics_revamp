@@ -18,14 +18,14 @@
     mixins: [JVxeCellMixins],
     methods: {
 
-      /** 处理change事件 */
+      /** 處理change事件 */
       handleChange(event) {
         let {$type} = this
         let {target} = event
         let {value, selectionStart} = target
         let change = true
         if ($type === JVXETypes.inputNumber) {
-          // 判断输入的值是否匹配数字正则表达式，不匹配就还原
+          // 判斷輸入的值是否匹配数字正則表達式，不匹配就還原
           if (!NumberRegExp.test(value) && (value !== '' && value !== '-')) {
             change = false
             value = this.innerValue
@@ -36,7 +36,7 @@
             }
           }
         }
-        // 触发事件，存储输入的值
+        // 觸發事件，存儲輸入的值
         if (change) {
           this.handleChangeCommon(value)
         }
@@ -46,11 +46,11 @@
         }
       },
 
-      /** 处理blur失去焦点事件 */
+      /** 處理blur失去焦點事件 */
       handleBlur(event) {
         let {$type} = this
         let {target} = event
-        // 判断输入的值是否匹配数字正则表达式，不匹配就置空
+        // 判斷輸入的值是否匹配数字正則表達式，不匹配就置空
         if ($type === JVXETypes.inputNumber) {
           if (!NumberRegExp.test(target.value)) {
             target.value = ''
@@ -64,10 +64,10 @@
       },
 
     },
-    // 【组件增强】注释详见：JVxeCellMixins.js
+    // 【組件增強】註釋詳見：JVxeCellMixins.js
     enhanced: {
       installOptions: {
-        // 自动聚焦的 class 类名
+        // 自動聚焦的 class 類名
         autofocus: '.ant-input',
       },
       getValue(value) {

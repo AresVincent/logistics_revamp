@@ -3,7 +3,7 @@ import { ENCRYPTED_STRING } from "@/store/mutation-types"
 import Vue from 'vue'
 
 /**
- * 获取加密字符串，并对结果进行缓存
+ * 獲取加密字符串，並對結果進行緩存
  */
 export function getEncryptedString() {
   return getAction("/sys/getEncryptedString",{}).then((res)=>{

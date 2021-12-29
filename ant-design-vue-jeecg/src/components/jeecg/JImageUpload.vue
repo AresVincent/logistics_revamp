@@ -61,9 +61,9 @@
       text:{
         type:String,
         required:false,
-        default:"上传"
+        default:"上傳"
       },
-      /*这个属性用于控制文件上传的业务路径*/
+      /*這個屬性用於控制文件上傳的業務路徑*/
       bizPath:{
         type:String,
         required:false,
@@ -83,13 +83,13 @@
         required:false,
         default: false
       },
-      //update-begin-author:wangshuai date:20201021 for:LOWCOD-969 新增number属性，用于判断上传数量
+      //update-begin-author:wangshuai date:20201021 for:LOWCOD-969 新增number屬性，用於判斷上傳數量
       number:{
         type:Number,
         required:false,
         default:0
       }
-      //update-end-author:wangshuai date:20201021 for:LOWCOD-969 新增number属性，用于判断上传数量
+      //update-end-author:wangshuai date:20201021 for:LOWCOD-969 新增number屬性，用於判斷上傳數量
     },
     watch:{
       value: {
@@ -103,7 +103,7 @@
             this.picUrl = false;
           }
         },
-        //立刻执行handler
+        //立刻執行handler
         immediate: true
       }
     },
@@ -138,18 +138,18 @@
       beforeUpload: function(file){
         var fileType = file.type;
         if(fileType.indexOf('image')<0){
-          this.$message.warning('请上传图片');
+          this.$message.warning('請上傳圖片');
           return false;
         }
       },
       handleChange(info) {
         this.picUrl = false;
         let fileList = info.fileList
-        //update-begin-author:wangshuai date:20201022 for:LOWCOD-969 判断number是否大于0和是否多选，返回选定的元素。
+        //update-begin-author:wangshuai date:20201022 for:LOWCOD-969 判斷number是否大於0和是否多選，返回選定的元素。
         if(this.number>0 && this.isMultiple){
           fileList = fileList.slice(-this.number);
         }
-        //update-end-author:wangshuai date:20201022 for:LOWCOD-969 判断number是否大于0和是否多选，返回选定的元素。
+        //update-end-author:wangshuai date:20201022 for:LOWCOD-969 判斷number是否大於0和是否多選，返回選定的元素。
         if(info.file.status==='done'){
           if(info.file.response.success){
             this.picUrl = true;
@@ -160,9 +160,9 @@
               return file;
             });
           }
-          //this.$message.success(`${info.file.name} 上传成功!`);
+          //this.$message.success(`${info.file.name} 上傳成功!`);
         }else if (info.file.status === 'error') {
-          this.$message.error(`${info.file.name} 上传失败.`);
+          this.$message.error(`${info.file.name} 上傳失敗.`);
         }else if(info.file.status === 'removed'){
           this.handleDelete(info.file)
         }
@@ -171,7 +171,7 @@
           this.handlePathChange()
         }
       },
-      // 预览
+      // 預覽
       handlePreview (file) {
         this.previewImage = file.url || file.thumbUrl
         this.previewVisible = true
@@ -193,13 +193,13 @@
           arr.push(uploadFiles[uploadFiles.length-1].response.message)
         }else{
           for(let a=0;a<uploadFiles.length;a++){
-            // update-begin-author:taoyan date:20200819 for:【开源问题z】上传图片组件 LOWCOD-783
+            // update-begin-author:taoyan date:20200819 for:【開源問題z】上傳圖片組件 LOWCOD-783
             if(uploadFiles[a].status === 'done' ) {
               arr.push(uploadFiles[a].response.message)
             }else{
               return;
             }
-            // update-end-author:taoyan date:20200819 for:【开源问题z】上传图片组件 LOWCOD-783
+            // update-end-author:taoyan date:20200819 for:【開源問題z】上傳圖片組件 LOWCOD-783
           }
         }
         if(arr.length>0){
@@ -208,7 +208,7 @@
         this.$emit('change', path);
       },
       handleDelete(file){
-        //如有需要新增 删除逻辑
+        //如有需要新增 刪除邏輯
         console.log(file)
       },
       handleCancel() {
@@ -227,13 +227,13 @@
 </script>
 
 <style scoped>
-  /* update--begin--autor:lvdandan-----date:20201016------for：j-image-upload图片组件单张图片详情回显空白
+  /* update--begin--autor:lvdandan-----date:20201016------for：j-image-upload圖片組件單張圖片詳情回顯空白
   * https://github.com/zhangdaiscott/jeecg-boot/issues/1810
   * https://github.com/zhangdaiscott/jeecg-boot/issues/1779
   */
 
   /deep/ .imgupload .iconp{padding:20px;}
-  /* update--end--autor:lvdandan-----date:20201016------for：j-image-upload图片组件单张图片详情回显空白*/
+  /* update--end--autor:lvdandan-----date:20201016------for：j-image-upload圖片組件單張圖片詳情回顯空白*/
 
   /deep/ .image-upload-single-over .ant-upload-select{display: none}
 </style>

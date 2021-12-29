@@ -6,7 +6,7 @@
       <textarea ref="textarea"></textarea>
       <span @click="nullTipClick" class="null-tip" :class="{'null-tip-hidden':hasCode}" :style="nullTipStyle">{{ placeholderShow }}</span>
       <template v-if="languageChange">
-        <a-select v-model="mode" size="small" class="code-mode-select" @change="changeMode" placeholder="请选择主题">
+        <a-select v-model="mode" size="small" class="code-mode-select" @change="changeMode" placeholder="請選擇主題">
           <a-select-option
             v-for="mode in modes"
             :key="mode.value"
@@ -21,19 +21,19 @@
 </template>
 
 <script type="text/ecmascript-6">
-  // 引入全局实例
+  // 引入全局實例
   import _CodeMirror from 'codemirror'
 
-  // 核心样式
+  // 核心樣式
   import 'codemirror/lib/codemirror.css'
-  // 引入主题后还需要在 options 中指定主题才会生效 darcula  gruvbox-dark hopscotch  monokai
+  // 引入主題后還需要在 options 中指定主題才會生效 darcula  gruvbox-dark hopscotch  monokai
   import 'codemirror/theme/panda-syntax.css'
   //提示css
   import "codemirror/addon/hint/show-hint.css";
 
-  // 需要引入具体的语法高亮库才会有对应的语法高亮效果
-  // codemirror 官方其实支持通过 /addon/mode/loadmode.js 和 /mode/meta.js 来实现动态加载对应语法高亮库
-  // 但 vue 貌似没有无法在实例初始化后再动态加载对应 JS ，所以此处才把对应的 JS 提前引入
+  // 需要引入具體的語法高亮庫才會有對應的語法高亮效果
+  // codemirror 官方其實支持通過 /addon/mode/loadmode.js 和 /mode/meta.js 來實現動態加載對應語法高亮庫
+  // 但 vue 貌似沒有無法在實例初始化后再動態加載對應 JS ，所以此處才把對應的 JS 提前引入
   import 'codemirror/mode/javascript/javascript.js'
   import 'codemirror/mode/css/css.js'
   import 'codemirror/mode/xml/xml.js'
@@ -48,18 +48,18 @@
 
   import { isIE11, isIE } from '@/utils/browser'
 
-  // 尝试获取全局实例
+  // 嘗試獲取全局實例
   const CodeMirror = window.CodeMirror || _CodeMirror
 
   export default {
     name: 'JCodeEditor',
     props: {
-      // 外部传入的内容，用于实现双向绑定
+      // 外部傳入的內容，用於實現雙向綁定
       value: {
         type: String,
         default: ''
       },
-      // 外部传入的语法类型
+      // 外部傳入的語法類型
       language: {
         type: String,
         default: null
@@ -73,31 +73,31 @@
         type: String,
         default: null
       },
-      // 显示行号
+      // 显示行號
       lineNumbers: {
         type: Boolean,
         default: true
       },
-      // 是否显示全屏按钮
+      // 是否显示全屏按鈕
       fullScreen: {
         type: Boolean,
         default: false
       },
-      // 全屏以后的z-index
+      // 全屏以後的z-index
       zIndex: {
         type: [Number, String],
         default: 999
       },
-      // 是否自适应高度，可以传String或Boolean
-      // 传 String 类型只能写"!ie" ，
-      // 填写这个字符串，代表其他浏览器自适应高度
-      // 唯独IE下不自适应高度，因为IE下不支持min、max-height样式
-      // 如果填写的不是"!ie"就视为true
+      // 是否自適應高度，可以傳String或Boolean
+      // 傳 String 類型只能寫"!ie" ，
+      // 填寫這個字符串，代表其他瀏覽器自適應高度
+      // 唯獨IE下不自適應高度，因為IE下不支持min、max-height樣式
+      // 如果填寫的不是"!ie"就視為true
       autoHeight: {
         type: [String, Boolean],
         default: true
       },
-      // 不自适应高度的情况下生效的固定高度
+      // 不自適應高度的情況下生效的固定高度
       height: {
         type: [String, Number],
         default: '240px'
@@ -105,22 +105,22 @@
     },
     data () {
       return {
-        // 内部真实的内容
+        // 內部真實的內容
         code: '',
         iconType: 'fullscreen',
         hasCode:false,
-        // 默认的语法类型
+        // 默認的語法類型
         mode: 'javascript',
-        // 编辑器实例
+        // 編輯器實例
         coder: null,
-        // 默认配置
+        // 默認配置
         options: {
-          // 缩进格式
+          // 縮進格式
           tabSize: 2,
-          // 主题，对应主题库 JS 需要提前引入
+          // 主題，對應主題庫 JS 需要提前引入
           theme: 'panda-syntax',
           line: true,
-         // extraKeys: {'Ctrl': 'autocomplete'},//自定义快捷键
+         // extraKeys: {'Ctrl': 'autocomplete'},//自定義快捷鍵
           hintOptions: {
             tables: {
               users: ['name', 'score', 'birthDate'],
@@ -128,8 +128,8 @@
             }
           },
         },
-        // 支持切换的语法高亮类型，对应 JS 已经提前引入
-        // 使用的是 MIME-TYPE ，不过作为前缀的 text/ 在后面指定时写死了
+        // 支持切換的語法高亮類型，對應 JS 已經提前引入
+        // 使用的是 MIME-TYPE ，不過作為前綴的 text/ 在後面指定時寫死了
         modes: [{
           value: 'css',
           label: 'CSS'
@@ -167,7 +167,7 @@
           value: 'markdown',
           label: 'Markdown'
         }],
-        // code 编辑器 是否全屏
+        // code 編輯器 是否全屏
         fullCoder: false
       }
     },
@@ -193,12 +193,12 @@
         immediate: true,
         handler(language) {
           this._getCoder().then(() => {
-            // 尝试从父容器获取语法类型
+            // 嘗試從父容器獲取語法類型
             if (language) {
-              // 获取具体的语法类型对象
+              // 獲取具體的語法類型對象
               let modeObj = this._getLanguage(language)
 
-              // 判断父容器传入的语法是否被支持
+              // 判斷父容器傳入的語法是否被支持
               if (modeObj) {
                 this.mode = modeObj.label
                 this.coder.setOption('mode', `text/${modeObj.value}`)
@@ -211,7 +211,7 @@
     computed: {
       placeholderShow() {
         if (this.placeholder == null) {
-          return `请在此输入${this.language}代码`
+          return `請在此輸入${this.language}代碼`
         } else {
           return this.placeholder
         }
@@ -270,9 +270,9 @@
     methods: {
       // 初始化
       _initialize () {
-        // 初始化编辑器实例，传入需要被实例化的文本域对象和默认配置
+        // 初始化編輯器實例，傳入需要被實例化的文本域對象和默認配置
         this.coder = CodeMirror.fromTextArea(this.$refs.textarea, this.coderOptions)
-        // 编辑器赋值
+        // 編輯器賦值
         if(this.value||this.code){
           this.hasCode=true
           //this.coder.setValue(this.value || this.code)
@@ -281,7 +281,7 @@
           this.coder.setValue('')
           this.hasCode=false
         }
-        // 支持双向绑定
+        // 支持雙向綁定
         this.coder.on('change', (coder) => {
           this.code = coder.getValue()
           if(this.code){
@@ -321,16 +321,16 @@
           }
         },300)
       },
-      // 获取当前语法类型
+      // 獲取當前語法類型
       _getLanguage (language) {
-        // 在支持的语法类型列表中寻找传入的语法类型
+        // 在支持的語法類型列表中尋找傳入的語法類型
         return this.modes.find((mode) => {
-          // 所有的值都忽略大小写，方便比较
+          // 所有的值都忽略大小寫，方便比較
           let currentLanguage = language.toLowerCase()
           let currentLabel = mode.label.toLowerCase()
           let currentValue = mode.value.toLowerCase()
 
-          // 由于真实值可能不规范，例如 java 的真实值是 x-java ，所以讲 value 和 label 同时和传入语法进行比较
+          // 由於真實值可能不規範，例如 java 的真實值是 x-java ，所以講 value 和 label 同時和傳入語法進行比較
           return currentLabel === currentLanguage || currentValue === currentLanguage
         })
       },
@@ -348,13 +348,13 @@
       },
       // 更改模式
       changeMode (val) {
-        // 修改编辑器的语法配置
+        // 修改編輯器的語法配置
         this.coder.setOption('mode', `text/${val}`)
 
-        // 获取修改后的语法
+        // 獲取修改后的語法
         let label = this._getLanguage(val).label.toLowerCase()
 
-        // 允许父容器通过以下函数监听当前的语法值
+        // 允許父容器通過以下函數監聽當前的語法值
         this.$emit('language-change', label)
       },
       nullTipClick(){
@@ -400,13 +400,13 @@
     .null-tip-hidden{
       display: none;
     }
-    /**选中样式偶然出现高度不够的情况*/
+    /**選中樣式偶然出現高度不夠的情況*/
     .CodeMirror-selected{
       min-height: 19px !important;
     }
   }
 
-  /* 全屏样式 */
+  /* 全屏樣式 */
   .full-screen-parent {
     position: relative;
 

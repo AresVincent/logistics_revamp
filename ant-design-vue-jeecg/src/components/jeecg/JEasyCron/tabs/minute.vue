@@ -5,8 +5,8 @@
         <a-radio value="TYPE_EVERY" class="choice" :disabled="disabled">每分</a-radio>
       </div>
       <div class="item">
-        <a-radio value="TYPE_RANGE" class="choice" :disabled="disabled">区间</a-radio>
-        从
+        <a-radio value="TYPE_RANGE" class="choice" :disabled="disabled">區間</a-radio>
+        從
         <a-input-number :disabled="type!==TYPE_RANGE || disabled" :max="maxValue" :min="minValue" :precision="0" class="w60" v-model="valueRange.start"/>
         分
         至
@@ -14,10 +14,10 @@
         分
       </div>
       <div class="item">
-        <a-radio value="TYPE_LOOP" class="choice" :disabled="disabled">循环</a-radio>
-        从
+        <a-radio value="TYPE_LOOP" class="choice" :disabled="disabled">循環</a-radio>
+        從
         <a-input-number :disabled="type!==TYPE_LOOP || disabled" :max="maxValue" :min="minValue" :precision="0" class="w60" v-model="valueLoop.start"/>
-        分开始，间隔
+        分開始，間隔
         <a-input-number :disabled="type!==TYPE_LOOP || disabled" :max="maxValue" :min="minValue" :precision="0" class="w60" v-model="valueLoop.interval"/>
         分
       </div>

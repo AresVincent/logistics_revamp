@@ -22,9 +22,9 @@ export default {
         }
         if (placeholder === undefined) {
           if (dictCode) {
-            options.props['placeholder'] = `请选择${label}`
+            options.props['placeholder'] = `請選擇${label}`
           } else {
-            options.props['placeholder'] = `请输入${label}`
+            options.props['placeholder'] = `請輸入${label}`
           }
         } else {
           options.props['placeholder'] = placeholder

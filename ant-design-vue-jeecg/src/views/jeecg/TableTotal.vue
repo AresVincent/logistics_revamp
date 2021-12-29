@@ -24,7 +24,7 @@
             align: 'center',
             dataIndex: 'rowIndex',
             customRender: function (text, r, index) {
-              return (text !== '合计') ? (parseInt(index) + 1) : text
+              return (text !== '合計') ? (parseInt(index) + 1) : text
             }
           },
           {
@@ -32,42 +32,42 @@
             dataIndex: 'name',
           },
           {
-            title: '贡献点',
+            title: '貢獻點',
             dataIndex: 'point',
           },
           {
-            title: '等级',
+            title: '等級',
             dataIndex: 'level',
           },
           {
-            title: '更新时间',
+            title: '更新時間',
             dataIndex: 'updateTime',
           },
         ],
-        /* 分页参数 */
+        /* 分頁參數 */
         ipagination:{
           current: 1,
           pageSize: 10,
           pageSizeOptions: ['10', '20', '30'],
           showTotal: (total, range) => {
-            return range[0] + "-" + range[1] + " 共" + total + "条"
+            return range[0] + "-" + range[1] + " 共" + total + "條"
           },
           showQuickJumper: true,
           showSizeChanger: true,
           total: 0
         },
         dataSource: [
-          { id:"1",name: '张三', point: 23, level: 3, updateTime: '2019-8-14' },
+          { id:"1",name: '張三', point: 23, level: 3, updateTime: '2019-8-14' },
           { name: '小王', point: 6, level: 1, updateTime: '2019-8-13' },
           { name: '李四', point: 53, level: 8, updateTime: '2019-8-12' },
-          { name: '小红', point: 44, level: 5, updateTime: '2019-8-11' },
+          { name: '小紅', point: 44, level: 5, updateTime: '2019-8-11' },
           { name: '王五', point: 97, level: 10, updateTime: '2019-8-10' },
           { name: '小明', point: 33, level: 2, updateTime: '2019-8-10' },
-          { name: '小张', point: 33, level: 2, updateTime: '2019-8-10' },
+          { name: '小張', point: 33, level: 2, updateTime: '2019-8-10' },
           { name: '小六', point: 33, level: 2, updateTime: '2019-8-10' },
           { name: '小五', point: 33, level: 2, updateTime: '2019-8-10' },
-          { name: '小赵', point: 33, level: 2, updateTime: '2019-8-10' },
-          { name: '李华', point: 33, level: 2, updateTime: '2019-8-10' },
+          { name: '小趙', point: 33, level: 2, updateTime: '2019-8-10' },
+          { name: '李華', point: 33, level: 2, updateTime: '2019-8-10' },
           { name: '小康', point: 33, level: 2, updateTime: '2019-8-10' },
           { name: '小鹿', point: 33, level: 2, updateTime: '2019-8-10' },
         ],
@@ -77,7 +77,7 @@
     },
     mounted() {
       // this.tableAddTotalRow(this.columns, this.dataSource)
-      /*新增分页合计方法*/
+      /*新增分頁合計方法*/
       this.newDataSource=this.dataSource
       this.dataHandling(this.ipagination.pageSize-1)
     },
@@ -87,10 +87,10 @@
       }
     },
     methods: {
-      /** 表格增加合计行 */
+      /** 表格增加合計行 */
       tableAddTotalRow(columns, dataSource) {
         let numKey = 'rowIndex'
-        let totalRow = { [numKey]: '合计' }
+        let totalRow = { [numKey]: '合計' }
         columns.forEach(column => {
           let { key, dataIndex } = column
           if (![key, dataIndex].includes(numKey)) {
@@ -113,10 +113,10 @@
       handleTableChange(pagination, filters, sorter) {
         this.ipagination = pagination;
       },
-      /*如果分页走这个方法*/
+      /*如果分頁走這個方法*/
       dataHandling(num) {
         this.newArr=[];
-        let arrLength = this.newDataSource.length; // 数组长度;
+        let arrLength = this.newDataSource.length; // 數組長度;
         let index = 0;
         for (let i = 0; i < arrLength; i++) {
           if (i % num === 0 && i !== 0) {
@@ -133,7 +133,7 @@
           let newArr= { };
           newArr.name="-";
           newArr.updateTime="-";
-          newArr.rowIndex="合计"
+          newArr.rowIndex="合計"
           var level=0;
           var point=0;
           for (let j=0;j<arr.length;j++){

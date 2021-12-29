@@ -15,63 +15,63 @@
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="消息标题">
-          <a-input placeholder="请输入消息标题" v-decorator="['esTitle', {}]"/>
+          label="消息標題">
+          <a-input placeholder="請輸入消息標題" v-decorator="['esTitle', {}]"/>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="发送内容">
-          <a-input placeholder="请输入发送内容" v-decorator="['esContent', {}]"/>
+          label="發送內容">
+          <a-input placeholder="請輸入發送內容" v-decorator="['esContent', {}]"/>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="发送所需参数">
-          <a-input placeholder="请输入发送所需参数Json格式" v-decorator="['esParam', {}]"/>
+          label="發送所需參數">
+          <a-input placeholder="請輸入發送所需參數Json格式" v-decorator="['esParam', {}]"/>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           label="接收人">
-          <a-input placeholder="请输入接收人" v-decorator="['esReceiver', {}]"/>
+          <a-input placeholder="請輸入接收人" v-decorator="['esReceiver', {}]"/>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="发送方式">
-          <j-dict-select-tag :triggerChange="true" dictCode="msgType" v-decorator="[ 'esType', {}]" placeholder="请选择发送方式">
+          label="發送方式">
+          <j-dict-select-tag :triggerChange="true" dictCode="msgType" v-decorator="[ 'esType', {}]" placeholder="請選擇發送方式">
           </j-dict-select-tag>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="发送时间">
+          label="發送時間">
           <a-date-picker showTime format='YYYY-MM-DD HH:mm:ss' v-decorator="[ 'esSendTime', {}]"/>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="发送状态">
-          <j-dict-select-tag :triggerChange="true" dictCode="msgSendStatus" v-decorator="[ 'esSendStatus', {}]" placeholder="请选择发送状态">
+          label="發送狀態">
+          <j-dict-select-tag :triggerChange="true" dictCode="msgSendStatus" v-decorator="[ 'esSendStatus', {}]" placeholder="請選擇發送狀態">
           </j-dict-select-tag>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="发送次数">
+          label="發送次數">
           <a-input-number v-decorator="[ 'esSendNum', {}]"/>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="发送失败原因">
+          label="發送失敗原因">
           <a-input v-decorator="['esResult', {}]"/>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="备注">
+          label="備註">
           <a-input v-decorator="['remark', {}]"/>
         </a-form-item>
       </a-form>
@@ -126,7 +126,7 @@
         this.visible = true;
         this.$nextTick(() => {
           this.form.setFieldsValue(pick(this.model, 'esContent', 'esParam', 'esReceiver', 'esResult', 'esSendNum', 'esSendStatus', 'esTitle', 'esType', 'remark'))
-          //时间格式化
+          //時間格式化
           this.form.setFieldsValue({esSendTime: this.model.esSendTime ? moment(this.model.esSendTime) : null})
         });
 
@@ -137,7 +137,7 @@
       },
       handleOk() {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.form.validateFields((err, values) => {
           if (!err) {
             that.confirmLoading = true;
@@ -151,7 +151,7 @@
               method = 'put';
             }
             let formData = Object.assign(this.model, values);
-            //时间格式化
+            //時間格式化
             formData.esSendTime = formData.esSendTime ? formData.esSendTime.format('YYYY-MM-DD HH:mm:ss') : null;
 
             console.log(formData)

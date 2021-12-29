@@ -4,7 +4,7 @@
 
       <a-alert type="info" :showIcon="true">
         <div slot="message">
-          上次更新时间：{{ this.time }}
+          上次更新時間：{{ this.time }}
           <a-divider type="vertical"/>
           <a @click="handleClickUpdate">立即更新</a>
         </div>
@@ -48,7 +48,7 @@
         loading: true,
         tableLoading: true,
         columns: [{
-          title: '参数',
+          title: '參數',
           width: '30%',
           dataIndex: 'param',
           scopedSlots: { customRender: 'param' }
@@ -58,32 +58,32 @@
           dataIndex: 'text',
           scopedSlots: { customRender: 'text' }
         }, {
-          title: '当前值',
+          title: '當前值',
           width: '30%',
           dataIndex: 'value',
           scopedSlots: { customRender: 'value' }
         }],
         dataSource: [],
-        // 列表通过 textInfo 渲染出颜色、描述和单位
+        // 列表通過 textInfo 渲染出顏色、描述和單位
         textInfo: {
-          'jvm.memory.max': { color: 'purple', text: 'JVM 最大内存', unit: 'MB' },
-          'jvm.memory.committed': { color: 'purple', text: 'JVM 可用内存', unit: 'MB' },
-          'jvm.memory.used': { color: 'purple', text: 'JVM 已用内存', unit: 'MB' },
-          'jvm.buffer.memory.used': { color: 'cyan', text: 'JVM 缓冲区已用内存', unit: 'MB' },
-          'jvm.buffer.count': { color: 'cyan', text: '当前缓冲区数量', unit: '个' },
-          'jvm.threads.daemon': { color: 'green', text: 'JVM 守护线程数量', unit: '个' },
-          'jvm.threads.live': { color: 'green', text: 'JVM 当前活跃线程数量', unit: '个' },
-          'jvm.threads.peak': { color: 'green', text: 'JVM 峰值线程数量', unit: '个' },
-          'jvm.classes.loaded': { color: 'orange', text: 'JVM 已加载 Class 数量', unit: '个' },
-          'jvm.classes.unloaded': { color: 'orange', text: 'JVM 未加载 Class 数量', unit: '个' },
-          'jvm.gc.memory.allocated': { color: 'pink', text: 'GC 时, 年轻代分配的内存空间', unit: 'MB' },
-          'jvm.gc.memory.promoted': { color: 'pink', text: 'GC 时, 老年代分配的内存空间', unit: 'MB' },
-          'jvm.gc.max.data.size': { color: 'pink', text: 'GC 时, 老年代的最大内存空间', unit: 'MB' },
-          'jvm.gc.live.data.size': { color: 'pink', text: 'FullGC 时, 老年代的内存空间', unit: 'MB' },
-          'jvm.gc.pause.count': { color: 'blue', text: '系统启动以来GC 次数', unit: '次' },
-          'jvm.gc.pause.totalTime': { color: 'blue', text: '系统启动以来GC 总耗时', unit: '秒' }
+          'jvm.memory.max': { color: 'purple', text: 'JVM 最大內存', unit: 'MB' },
+          'jvm.memory.committed': { color: 'purple', text: 'JVM 可用內存', unit: 'MB' },
+          'jvm.memory.used': { color: 'purple', text: 'JVM 已用內存', unit: 'MB' },
+          'jvm.buffer.memory.used': { color: 'cyan', text: 'JVM 緩衝區已用內存', unit: 'MB' },
+          'jvm.buffer.count': { color: 'cyan', text: '當前緩衝區數量', unit: '個' },
+          'jvm.threads.daemon': { color: 'green', text: 'JVM 守護線程數量', unit: '個' },
+          'jvm.threads.live': { color: 'green', text: 'JVM 當前活躍線程數量', unit: '個' },
+          'jvm.threads.peak': { color: 'green', text: 'JVM 峰值線程數量', unit: '個' },
+          'jvm.classes.loaded': { color: 'orange', text: 'JVM 已加載 Class 數量', unit: '個' },
+          'jvm.classes.unloaded': { color: 'orange', text: 'JVM 未加載 Class 數量', unit: '個' },
+          'jvm.gc.memory.allocated': { color: 'pink', text: 'GC 時, 年輕代分配的內存空間', unit: 'MB' },
+          'jvm.gc.memory.promoted': { color: 'pink', text: 'GC 時, 老年代分配的內存空間', unit: 'MB' },
+          'jvm.gc.max.data.size': { color: 'pink', text: 'GC 時, 老年代的最大內存空間', unit: 'MB' },
+          'jvm.gc.live.data.size': { color: 'pink', text: 'FullGC 時, 老年代的內存空間', unit: 'MB' },
+          'jvm.gc.pause.count': { color: 'blue', text: '系統啟動以來GC 次數', unit: '次' },
+          'jvm.gc.pause.totalTime': { color: 'blue', text: '系統啟動以來GC 總耗時', unit: '秒' }
         },
-        // 当一条记录中需要取出多条数据的时候需要配置该字段
+        // 當一條記錄中需要取出多條數據的時候需要配置該字段
         moreInfo: {
           'jvm.gc.pause': ['.count', '.totalTime']
         }
@@ -100,7 +100,7 @@
 
       loadTomcatInfo() {
         this.tableLoading = true
-        this.time = moment().format('YYYY年MM月DD日 HH时mm分ss秒')
+        this.time = moment().format('YYYY年MM月DD日 HH時mm分ss秒')
         Promise.all([
           getAction('actuator/metrics/jvm.memory.max'),
           getAction('actuator/metrics/jvm.memory.committed'),
@@ -148,7 +148,7 @@
 
         }).catch((e) => {
           console.error(e)
-          this.$message.error('获取JVM信息失败')
+          this.$message.error('獲取JVM信息失敗')
         }).finally(() => {
           this.loading = false
           this.tableLoading = false

@@ -41,25 +41,25 @@
         type: String,
         default: ''
       },
-      /** 是否返回 id，默认 false，返回 code */
+      /** 是否返回 id，默認 false，返回 code */
       returnId: {
         type: Boolean,
         default: false
       },
       placeholder: {
         type: String,
-        default: '请选择'
+        default: '請選擇'
       },
       disabled: {
         type: Boolean,
         default: false
       },
-      // 是否支持多选，默认 true
+      // 是否支持多選，默認 true
       multiple: {
         type: Boolean,
         default: true
       },
-      // 是否显示按钮，默认 true
+      // 是否显示按鈕，默認 true
       buttons: {
         type: Boolean,
         default: true
@@ -74,10 +74,10 @@
         type: Array,
         default: () => ['id', 'id']
       },
-      // 选择按钮文字
+      // 選擇按鈕文字
       selectButtonText: {
         type: String,
-        default: '选择'
+        default: '選擇'
       },
 
     },
@@ -133,7 +133,7 @@
         this.dataSourceMap = dataSourceMap
       },
       handleDropdownVisibleChange() {
-        // 解决antdv自己的bug —— open 设置为 false 了，点击后还是添加了 open 样式，导致点击事件失效
+        // 解決antdv自己的bug —— open 設置為 false 了，點擊后還是添加了 open 樣式，導致點擊事件失效
         this.selectOpen = true
         this.$nextTick(() => {
           this.selectOpen = false

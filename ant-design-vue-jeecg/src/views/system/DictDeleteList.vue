@@ -6,7 +6,7 @@
     :maskClosable="false"
     @cancel="handleCancel">
     <template slot="footer">
-      <a-button @click="handleCancel">关闭</a-button>
+      <a-button @click="handleCancel">關閉</a-button>
     </template>
     <a-table
       ref="table"
@@ -19,7 +19,7 @@
       <span slot="action" slot-scope="text, record">
         <a @click="handleBack(record.id)"><a-icon type="redo"/>字典取回</a>
         <a-divider type="vertical"/>
-        <a @click="handleDelete(record.id)"><a-icon type="scissor"/>彻底删除</a>
+        <a @click="handleDelete(record.id)"><a-icon type="scissor"/>徹底刪除</a>
       </span>
     </a-table>
 
@@ -52,12 +52,12 @@
             }
           },
           {
-            title: '字典名称',
+            title: '字典名稱',
             align: "left",
             dataIndex: 'dictName'
           },
           {
-            title: '字典编号',
+            title: '字典編號',
             align: "left",
             dataIndex: 'dictCode'
           },
@@ -109,10 +109,10 @@
       },
       handleDelete(id){
         this.$confirm({
-          title: '彻底删除字典',
+          title: '徹底刪除字典',
           content: (<div>
-            <p>您确定要彻底删除这个字典项吗？</p>
-            <p style="color:red;">注意：彻底删除后将无法恢复，请谨慎操作！</p>
+            <p>您確定要徹底刪除這個字典項嗎？</p>
+            <p style="color:red;">注意：徹底刪除后將無法恢復，請謹慎操作！</p>
             </div>),
           centered: false,
           onOk: () => {

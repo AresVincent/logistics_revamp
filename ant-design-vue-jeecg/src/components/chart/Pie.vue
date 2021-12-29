@@ -56,7 +56,7 @@
     computed: {
       data() {
         let dv = new DataSet.View().source(this.dataSource)
-        // 计算数据百分比
+        // 計算數據百分比
         dv.transform({
           type: 'percent',
           field: 'count',

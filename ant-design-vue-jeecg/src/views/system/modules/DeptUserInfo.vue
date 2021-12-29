@@ -1,35 +1,35 @@
 <template>
   <a-card :bordered="false">
-    <!-- 查询区域 -->
+    <!-- 查詢區域 -->
     <div class="table-page-search-wrapper">
-      <!-- 搜索区域 -->
+      <!-- 搜索區域 -->
       <a-form layout="inline">
         <a-row :gutter="10">
           <a-col :md="10" :sm="12">
-            <a-form-item label="用户账号" style="margin-left:8px">
-              <a-input placeholder="请输入账号" v-model="queryParam.username"></a-input>
+            <a-form-item label="用戶賬號" style="margin-left:8px">
+              <a-input placeholder="請輸入賬號" v-model="queryParam.username"></a-input>
             </a-form-item>
           </a-col>
           <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
             <a-col :md="6" :sm="24">
-             <a-button type="primary" @click="searchQuery" icon="search" style="margin-left: 18px">查询</a-button>
+             <a-button type="primary" @click="searchQuery" icon="search" style="margin-left: 18px">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
             </a-col>
           </span>
         </a-row>
       </a-form>
     </div>
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator" :md="24" :sm="24" style="margin-top: -15px">
-      <!--<a-button @click="handleEdit" type="primary" icon="edit" style="margin-top: 16px">用户编辑</a-button>-->
-      <a-button @click="handleAddUserDepart" type="primary" icon="plus">添加已有用户</a-button>
-      <a-button @click="handleAdd" type="primary" icon="plus" style="margin-top: 16px">新建用户</a-button>
+      <!--<a-button @click="handleEdit" type="primary" icon="edit" style="margin-top: 16px">用戶編輯</a-button>-->
+      <a-button @click="handleAddUserDepart" type="primary" icon="plus">添加已有用戶</a-button>
+      <a-button @click="handleAdd" type="primary" icon="plus" style="margin-top: 16px">新建用戶</a-button>
 
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel">
             <a-icon type="delete"/>
-            取消关联
+            取消關聯
           </a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作
@@ -38,11 +38,11 @@
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{
-        selectedRowKeys.length }}</a>项
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{
+        selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -61,7 +61,7 @@
 
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">編輯</a>
 
           <a-divider type="vertical"/>
 
@@ -71,16 +71,16 @@
             </a>
             <a-menu slot="overlay">
                 <a-menu-item>
-                <a href="javascript:;" @click="handleDeptRole(record)">部门角色</a>
+                <a href="javascript:;" @click="handleDeptRole(record)">部門角色</a>
               </a-menu-item>
 
               <a-menu-item>
-                <a href="javascript:;" @click="handleDetail(record)">用户详情</a>
+                <a href="javascript:;" @click="handleDetail(record)">用戶詳情</a>
               </a-menu-item>
 
               <a-menu-item>
-                <a-popconfirm title="确定取消与选中部门关联吗?" @confirm="() => handleDelete(record.id)">
-                  <a>取消关联</a>
+                <a-popconfirm title="確定取消與選中部門關聯嗎?" @confirm="() => handleDelete(record.id)">
+                  <a>取消關聯</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -90,9 +90,9 @@
 
       </a-table>
     </div>
-    <!-- table区域-end -->
+    <!-- table區域-end -->
 
-    <!-- 表单区域 -->
+    <!-- 表單區域 -->
     <user-modal ref="modalForm" @ok="modalFormOk"></user-modal>
     <Select-User-Modal ref="selectUserModal" @selectFinished="selectOK"></Select-User-Modal>
     <dept-role-user-modal ref="deptRoleUser"></dept-role-user-modal>
@@ -116,32 +116,32 @@
     },
     data() {
       return {
-        description: '用户信息',
+        description: '用戶信息',
         currentDeptId: '',
         currentDept: {},
-        // 表头
+        // 表頭
         columns: [{
-            title: '用户账号',
+            title: '用戶賬號',
             align: "center",
             dataIndex: 'username'
           },
           {
-            title: '用户名称',
+            title: '用戶名稱',
             align: "center",
             dataIndex: 'realname'
           },
           {
-            title: '部门',
+            title: '部門',
             align: "center",
             dataIndex: 'orgCode'
           },
           {
-            title: '性别',
+            title: '性別',
             align: "center",
             dataIndex: 'sex_dictText'
           },
           {
-            title: '电话',
+            title: '電話',
             align: "center",
             dataIndex: 'phone'
           },
@@ -170,15 +170,15 @@
       },
       loadData(arg) {
         if (!this.url.list) {
-          this.$message.error("请设置url.list属性!")
+          this.$message.error("請設置url.list屬性!")
           return
         }
-        //加载数据 若传入参数1则加载第一页的内容
+        //加載數據 若傳入參數1則加載第一頁的內容
         if (arg === 1) {
           this.ipagination.current = 1;
         }
         //if (this.currentDeptId === '') return;
-        let params = this.getQueryParams();//查询条件
+        let params = this.getQueryParams();//查詢條件
         params.depId = this.currentDeptId;
         getAction(this.url.list, params).then((res) => {
           if (res.success && res.result) {
@@ -190,16 +190,16 @@
       batchDel: function () {
 
         if (!this.url.deleteBatch) {
-          this.$message.error("请设置url.deleteBatch属性!")
+          this.$message.error("請設置url.deleteBatch屬性!")
           return
         }
         if (!this.currentDeptId) {
-          this.$message.error("未选中任何部门，无法取消部门与用户的关联!")
+          this.$message.error("未選中任何部門，無法取消部門與用戶的關聯!")
           return
         }
 
         if (this.selectedRowKeys.length <= 0) {
-          this.$message.warning('请选择一条记录！');
+          this.$message.warning('請選擇一條記錄！');
           return;
         } else {
           var ids = "";
@@ -209,12 +209,12 @@
           var that = this;
           console.log(this.currentDeptId);
           this.$confirm({
-            title: "确认取消",
-            content: "是否取消用户与选中部门的关联?",
+            title: "確認取消",
+            content: "是否取消用戶與選中部門的關聯?",
             onOk: function () {
               deleteAction(that.url.deleteBatch, {depId: that.currentDeptId, userIds: ids}).then((res) => {
                 if (res.success) {
-                  that.$message.success("删除用户与选中部门关系成功！");
+                  that.$message.success("刪除用戶與選中部門關係成功！");
                   that.loadData();
                   that.onClearSelected();
                 } else {
@@ -227,18 +227,18 @@
       },
       handleDelete: function (id) {
         if (!this.url.delete) {
-          this.$message.error("请设置url.delete属性!")
+          this.$message.error("請設置url.delete屬性!")
           return
         }
         if (!this.currentDeptId) {
-          this.$message.error("未选中任何部门，无法取消部门与用户的关联!")
+          this.$message.error("未選中任何部門，無法取消部門與用戶的關聯!")
           return
         }
 
         var that = this;
         deleteAction(that.url.delete, {depId: this.currentDeptId, userId: id}).then((res) => {
           if (res.success) {
-            that.$message.success("删除用户与选中部门关系成功！");
+            that.$message.success("刪除用戶與選中部門關係成功！");
             if (this.selectedRowKeys.length>0){
                for(let i =0; i<this.selectedRowKeys.length;i++){
                    if (this.selectedRowKeys[i] == id){
@@ -265,30 +265,30 @@
       },
       hasSelectDept() {
         if (this.currentDeptId == '') {
-          this.$message.error("请选择一个部门!")
+          this.$message.error("請選擇一個部門!")
           return false;
         }
         return true;
       },
       handleAddUserDepart() {
         if (this.currentDeptId == '' ) {
-          this.$message.error("请选择一个部门!")
+          this.$message.error("請選擇一個部門!")
         } else {
           this.$refs.selectUserModal.visible = true;
         }
       },
       handleEdit: function (record) {
-        this.$refs.modalForm.title = "编辑";
+        this.$refs.modalForm.title = "編輯";
         this.$refs.modalForm.departDisabled = true;
         this.$refs.modalForm.disableSubmit = false;
         this.$refs.modalForm.edit(record);
       },
       handleAdd: function () {
         if (this.currentDeptId == '') {
-          this.$message.error("请选择一个部门!")
+          this.$message.error("請選擇一個部門!")
         } else {
           this.$refs.modalForm.departDisabled = true;
-          //初始化负责部门
+          //初始化負責部門
           this.$refs.modalForm.nextDepartOptions=[{value:this.currentDept.key,label:this.currentDept.title}]
           this.$refs.modalForm.title = "新增";
           this.$refs.modalForm.edit({activitiSync:'1',userIdentity:1,selecteddeparts:this.currentDeptId})
@@ -314,16 +314,16 @@
       handleDeptRole(record){
         if(this.currentDeptId != ''){
           this.$refs.deptRoleUser.add(record,this.currentDeptId);
-          this.$refs.deptRoleUser.title = "部门角色分配";
+          this.$refs.deptRoleUser.title = "部門角色分配";
         }else{
-          this.$message.warning("请先选择一个部门!");
+          this.$message.warning("請先選擇一個部門!");
         }
       }
     }
   }
 </script>
 <style scoped>
-  /** Button按钮间距 */
+  /** Button按鈕間距 */
   .ant-btn {
     margin-left: 3px
   }

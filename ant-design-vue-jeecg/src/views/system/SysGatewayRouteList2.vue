@@ -3,9 +3,9 @@
 <!--    <div style="padding-bottom: 2px">-->
 <!--      <a-alert type="warning" show-icon>-->
 <!--        <div slot="message" style="width: 100%">-->
-<!--          <span>路由配置请慎重</span>-->
+<!--          <span>路由配置請慎重</span>-->
 <!--          <span style="display:inline-block;float:right;padding-right: 5px">-->
-<!--            <a @click="clearRedis"><a-icon type="reload" />清除缓存</a>-->
+<!--            <a @click="clearRedis"><a-icon type="reload" />清除緩存</a>-->
 <!--          </span>-->
 <!--        </div>-->
 <!--      </a-alert>-->
@@ -27,7 +27,7 @@
 <!--    data () {-->
 <!--      return {-->
 <!--        eleId:'jsoneditor',-->
-<!--        description: 'gateway路由管理管理页面',-->
+<!--        description: 'gateway路由管理管理頁面',-->
 <!--        editor: null,-->
 <!--        editorWidth:400,-->
 <!--        editorHeight:500,-->
@@ -41,7 +41,7 @@
 <!--    },-->
 <!--    created() {-->
 <!--      let winWidth = window.innerWidth;-->
-<!--      console.log("页面宽度",winWidth)-->
+<!--      console.log("頁面寬度",winWidth)-->
 <!--      this.editorWidth = winWidth-->
 
 <!--    },-->
@@ -65,17 +65,17 @@
 <!--        getAction(this.url.list).then(res=>{-->
 <!--          if(res.success){-->
 <!--            let array = res.result-->
-<!--            console.log('当前路由配置信息为', array)-->
+<!--            console.log('當前路由配置信息為', array)-->
 <!--            this.editor.set(array)-->
 <!--          }-->
 <!--        })-->
 <!--      },-->
-<!--      // 获取json-->
+<!--      // 獲取json-->
 <!--      submitForm() {-->
 <!--        let text = this.editor.getText()-->
-<!--        console.log("保存的json数据",text)-->
+<!--        console.log("保存的json數據",text)-->
 <!--        if(!text || text.length<=0 || text=='{}' || text=='[]'){-->
-<!--          this.$message.warning('未录入任何信息')-->
+<!--          this.$message.warning('未錄入任何信息')-->
 <!--          return ;-->
 <!--        }-->
 <!--        postAction(this.url.update,{-->

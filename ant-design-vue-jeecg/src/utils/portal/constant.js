@@ -1,5 +1,5 @@
 /**
- * 功能模块
+ * 功能模塊
  * @type {{LEAVE_EARLY: {text: string, value: string}, LATE: {text: string, value: string}, ABSENT: {text: string, value: string}, NO_SIGN: {text: string, value: string}, NORMAL: {text: string, value: string}}}
  */
 export const FunctionEnum = {

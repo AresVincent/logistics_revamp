@@ -1,7 +1,7 @@
 import { asyncRouterMap, constantRouterMap } from "@/config/router.config"
 
 /**
- * 过滤账户是否拥有某一个权限，并将菜单从加载列表移除
+ * 過濾賬戶是否擁有某一個權限，並將菜單從加載列表移除
  *
  * @param permission
  * @param route
@@ -22,7 +22,7 @@ function hasPermission(permission, route) {
 }
 
 /**
- * 单账户多角色时，使用该方法可过滤角色不存在的菜单
+ * 單賬戶多角色時，使用該方法可過濾角色不存在的菜單
  *
  * @param roles
  * @param route
@@ -75,7 +75,7 @@ const permission = {
         resolve()
       })
     },
-    // 动态添加主界面路由，需要缓存
+    // 動態添加主界面路由，需要緩存
     UpdateAppRouter({ commit }, routes) {
       return new Promise(resolve => {
         //const [ roles ] = routes.constRoutes

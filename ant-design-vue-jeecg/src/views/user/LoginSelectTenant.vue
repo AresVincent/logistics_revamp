@@ -7,19 +7,19 @@
     :maskClosable="false">
 
     <template slot="footer">
-      <a-button type="primary" @click="selectOk">确认</a-button>
+      <a-button type="primary" @click="selectOk">確認</a-button>
     </template>
 
     <a-form-model>
       <a-form-model-item v-if="isMultiTenant" :labelCol="{span:4}" :wrapperCol="{span:20}" style="margin-bottom:10px" :validate-status="validate_status1">
         <a-tooltip placement="topLeft" >
           <template slot="title">
-            <span>您有多个租户，请选择登录租户</span>
+            <span>您有多個租戶，請選擇登錄租戶</span>
           </template>
           <a-avatar style="backgroundColor:#87d068" icon="gold" />
         </a-tooltip>
 
-        <a-select @change="handleTenantChange" :class="{'valid-error':validate_status1=='error'}" placeholder="请选择登录租户" style="margin-left:10px;width: 80%">
+        <a-select @change="handleTenantChange" :class="{'valid-error':validate_status1=='error'}" placeholder="請選擇登錄租戶" style="margin-left:10px;width: 80%">
           <a-icon slot="suffixIcon" type="gold" />
           <a-select-option v-for="d in tenantList" :key="d.id" :value="d.id">
             {{ d.name }}
@@ -31,12 +31,12 @@
       <a-form-model-item v-if="isMultiDepart" :labelCol="{span:4}" :wrapperCol="{span:20}" style="margin-bottom:10px" :validate-status="validate_status2">
         <a-tooltip placement="topLeft" >
           <template slot="title">
-            <span>您有多个部门，请选择登录部门</span>
+            <span>您有多個部門，請選擇登錄部門</span>
           </template>
           <a-avatar style="backgroundColor:rgb(104, 208, 203);" icon="gold" />
         </a-tooltip>
 
-        <a-select @change="handleDepartChange" :class="{'valid-error':validate_status2=='error'}" placeholder="请选择登录部门" style="margin-left:10px;width: 80%">
+        <a-select @change="handleDepartChange" :class="{'valid-error':validate_status2=='error'}" placeholder="請選擇登錄部門" style="margin-left:10px;width: 80%">
           <a-icon slot="suffixIcon" type="gold" />
           <a-select-option v-for="d in departList" :key="d.id" :value="d.orgCode">
             {{ d.departName }}
@@ -76,11 +76,11 @@ export default {
     computed:{
       title(){
         if(this.isMultiDepart && this.isMultiTenant){
-          return '请选择租户和部门'
+          return '請選擇租戶和部門'
         }else if(this.isMultiDepart && !this.isMultiTenant){
-          return '请选择部门'
+          return '請選擇部門'
         }else if(!this.isMultiDepart && this.isMultiTenant){
-          return '请选择租户'
+          return '請選擇租戶'
         }
       }
     },
@@ -94,11 +94,11 @@ export default {
       },
       bizDepart(loginResult){
         let multi_depart = loginResult.multi_depart
-        //0:无部门 1:一个部门 2:多个部门
+        //0:無部門 1:一個部門 2:多個部門
         if(multi_depart==0){
           this.$notification.warn({
             message: '提示',
-            description: `您尚未归属部门,请确认账号信息`,
+            description: `您尚未歸屬部門,請確認賬號信息`,
             duration:3
           });
           this.isMultiDepart = false
@@ -141,8 +141,8 @@ export default {
       },
       requestFailed (err) {
         this.$notification[ 'error' ]({
-          message: '登录失败',
-          description: ((err.response || {}).data || {}).message || err.message || "请求出现错误，请稍后再试",
+          message: '登錄失敗',
+          description: ((err.response || {}).data || {}).message || err.message || "請求出現錯誤，請稍後再試",
           duration: 4,
         });
         this.loginBtn = false;
@@ -161,7 +161,7 @@ export default {
                 const userInfo = res.result.userInfo;
                 Vue.ls.set(USER_INFO, userInfo, 7 * 24 * 60 * 60 * 1000);
                 this.$store.commit('SET_INFO', userInfo);
-                //console.log("---切换组织机构---userInfo-------",store.getters.userInfo.orgCode);
+                //console.log("---切換組織機構---userInfo-------",store.getters.userInfo.orgCode);
                 resolve();
               }else{
                 this.requestFailed(res)
@@ -189,7 +189,7 @@ export default {
             this.$emit('success')
           }
         }).catch(()=>{
-          console.log('登录选择出问题')
+          console.log('登錄選擇出問題')
         })
       },
       handleTenantChange(e){

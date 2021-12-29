@@ -10,7 +10,7 @@
 <script>
   import JVxeCellMixins from '@/components/jeecg/JVxeTable/mixins/JVxeCellMixins'
 
-  // JVxe 进度条组件
+  // JVxe 進度條組件
   export default {
     name: 'JVxeProgressCell',
     mixins: [JVxeCellMixins],
@@ -29,7 +29,7 @@
       },
     },
     methods: {},
-    // 【组件增强】注释详见：JVxeCellMixins.js
+    // 【組件增強】註釋詳見：JVxeCellMixins.js
     enhanced: {
       switches: {
         editRender: false,
@@ -50,7 +50,7 @@
 </script>
 
 <style scoped lang="less">
-  // 关闭进度条的动画，防止滚动时动态赋值出现问题
+  // 關閉進度條的動畫，防止滾動時動態賦值出現問題
   .j-vxe-progress.no-animation {
     /deep/ .ant-progress-success-bg,
     /deep/ .ant-progress-bg {

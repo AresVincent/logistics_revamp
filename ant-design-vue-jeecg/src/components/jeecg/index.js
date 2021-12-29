@@ -33,7 +33,7 @@ import JSelectMultiUser from '../jeecgbiz/JSelectMultiUser.vue'
 import JSelectPosition from '../jeecgbiz/JSelectPosition.vue'
 import JSelectRole from '../jeecgbiz/JSelectRole.vue'
 import JSelectUserByDep from '../jeecgbiz/JSelectUserByDep.vue'
-//引入需要全局注册的js函数和变量
+//引入需要全局註冊的js函數和變量
 import { Modal, notification,message } from 'ant-design-vue'
 import lodash_object from 'lodash'
 import debounce from 'lodash/debounce'
@@ -79,7 +79,7 @@ export default {
     Vue.component('JSelectUserByDep', JSelectUserByDep)
     Vue.component(JEasyCron.name, JEasyCron)
 
-    //注册全局js函数和变量
+    //註冊全局js函數和變量
     Vue.prototype.$Jnotification = notification
     Vue.prototype.$Jmodal = Modal
     Vue.prototype.$Jmessage = message

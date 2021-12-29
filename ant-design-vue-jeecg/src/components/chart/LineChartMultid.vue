@@ -44,7 +44,7 @@
         type: Array,
         default: () => ['jeecg', 'jeebt']
       },
-      // 别名，需要的格式：[{field:'name',alias:'姓名'}, {field:'sex',alias:'性别'}]
+      // 別名，需要的格式：[{field:'name',alias:'姓名'}, {field:'sex',alias:'性別'}]
       aliases:{
         type: Array,
         default: () => []
@@ -75,7 +75,7 @@
           value: 'y'
         })
         let rows =  dv.rows
-        // 替换别名
+        // 替換別名
         rows.forEach(row => {
           for (let item of this.aliases) {
             if (item.field === row.x) {

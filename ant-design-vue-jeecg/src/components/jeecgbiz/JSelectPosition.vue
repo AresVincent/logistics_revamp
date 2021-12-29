@@ -12,16 +12,16 @@
     data() {
       return {
         settings: {
-          name: '职务',
+          name: '職務',
           displayKey: 'name',
           returnKeys: ['id', 'code'],
           listUrl: '/sys/position/list',
           queryParamCode: 'name',
-          queryParamText: '职务名称',
+          queryParamText: '職務名稱',
           columns: [
-            { title: '职务名称', dataIndex: 'name', align: 'center', width: '30%', widthRight: '70%' },
-            { title: '职务编码', dataIndex: 'code', align: 'center', width: '35%' },
-            { title: '职级', dataIndex: 'rank_dictText', align: 'center', width: '25%' }
+            { title: '職務名稱', dataIndex: 'name', align: 'center', width: '30%', widthRight: '70%' },
+            { title: '職務編碼', dataIndex: 'code', align: 'center', width: '35%' },
+            { title: '職級', dataIndex: 'rank_dictText', align: 'center', width: '25%' }
           ]
         }
       }

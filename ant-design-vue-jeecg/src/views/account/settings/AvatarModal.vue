@@ -1,5 +1,5 @@
 <template>
-  <a-modal :visible="visible" title="修改头像" :maskClosable="false" :confirmLoading="confirmLoading" :width="800" @cancel="cancelHandel">
+  <a-modal :visible="visible" title="修改頭像" :maskClosable="false" :confirmLoading="confirmLoading" :width="800" @cancel="cancelHandel">
     <a-row>
       <a-col :xs="24" :md="12" :style="{height: '350px'}">
         <vue-cropper
@@ -54,7 +54,7 @@
       edit(id) {
         this.visible = true;
         this.id = id;
-        /* 获取原始头像 */
+        /* 獲取原始頭像 */
 
       },
       close() {
@@ -71,7 +71,7 @@
         setTimeout(() => {
           vm.confirmLoading = false
           vm.close()
-          vm.$message.success('上传头像成功');
+          vm.$message.success('上傳頭像成功');
         }, 2000)
 
       },

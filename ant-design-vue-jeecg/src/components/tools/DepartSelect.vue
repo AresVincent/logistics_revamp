@@ -6,8 +6,8 @@
     :closable="false"
     :maskClosable="closable">
     <template slot="footer">
-      <a-button v-if="closable" @click="close">关闭</a-button>
-      <a-button type="primary" @click="departOk">确认</a-button>
+      <a-button v-if="closable" @click="close">關閉</a-button>
+      <a-button type="primary" @click="departOk">確認</a-button>
     </template>
 
     <a-form>
@@ -18,11 +18,11 @@
         :validate-status="validate_status">
         <a-tooltip placement="topLeft" >
           <template slot="title">
-            <span>您隶属于多部门，请选择当前所在部门</span>
+            <span>您隸屬於多部門，請選擇當前所在部門</span>
           </template>
           <a-avatar style="backgroundColor:#87d068" icon="gold" />
         </a-tooltip>
-        <a-select v-model="departSelected" :class="{'valid-error':validate_status=='error'}" placeholder="请选择登录部门" style="margin-left:10px;width: 80%">
+        <a-select v-model="departSelected" :class="{'valid-error':validate_status=='error'}" placeholder="請選擇登錄部門" style="margin-left:10px;width: 80%">
           <a-icon slot="suffixIcon" type="gold" />
           <a-select-option
             v-for="d in departList"
@@ -36,7 +36,7 @@
 
 
   </a-modal>
-    
+
 </template>
 
 <script>
@@ -50,7 +50,7 @@
     props:{
       title:{
         type:String,
-        default:"部门选择",
+        default:"部門選擇",
         required:false
       },
       closable:{
@@ -104,7 +104,7 @@
               this.departSelected = orgCode
               this.departList  = departs
               if(this.currDepartName){
-                this.currTitle ="部门切换（当前部门 : "+this.currDepartName+"）"
+                this.currTitle ="部門切換（當前部門 : "+this.currDepartName+"）"
               }
 
             }
@@ -129,17 +129,17 @@
             const userInfo = res.result.userInfo;
             Vue.ls.set(USER_INFO, userInfo, 7 * 24 * 60 * 60 * 1000);
             store.commit('SET_INFO', userInfo);
-            //console.log("---切换组织机构---userInfo-------",store.getters.userInfo.orgCode);
+            //console.log("---切換組織機構---userInfo-------",store.getters.userInfo.orgCode);
             this.departClear()
           }
         })
       },
       show(){
-        //如果组件传值username此处就不用loadDepartList了
+        //如果組件傳值username此處就不用loadDepartList了
         this.loadDepartList().then(()=>{
           this.visible=true
           if(!this.departList || this.departList.length<=0){
-            this.$message.warning("您尚未设置部门信息!")
+            this.$message.warning("您尚未設置部門信息!")
             this.departClear()
           }
         })

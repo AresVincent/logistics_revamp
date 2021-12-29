@@ -4,7 +4,7 @@
       <div id="loader"></div>
       <div class="loader-section section-left"></div>
       <div class="loader-section section-right"></div>
-      <div class="load_title">正在登录 JeecgBoot 低代码平台，请耐心等待</div>
+      <div class="load_title">正在登錄 JeecgBoot 低代碼平台，請耐心等待</div>
     </div>
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
     }
   },
   beforeCreate() {
-    // 如果当前 不是 OAuth2APP环境，就重定向到 /user/login 页面
+    // 如果當前 不是 OAuth2APP環境，就重定向到 /user/login 頁面
     if (!isOAuth2AppEnv()) {
       this.$router.replace({path: '/user/login'})
     }
@@ -38,24 +38,24 @@ export default {
   methods: {
     ...mapActions(['ThirdLogin']),
 
-    /** 检测当前的环境 */
+    /** 檢測當前的環境 */
     checkEnv() {
-      // 判断当时是否是企业微信环境
+      // 判斷當時是否是企業微信環境
       if (/wxwork/i.test(navigator.userAgent)) {
         this.env.thirdApp = true
         this.env.wxWork = true
       }
-      // 判断当时是否是钉钉环境
+      // 判斷當時是否是釘釘環境
       if (/dingtalk/i.test(navigator.userAgent)) {
         this.env.thirdApp = true
         this.env.dingtalk = true
       }
     },
 
-    /** 进行OAuth2登录操作 */
+    /** 進行OAuth2登錄操作 */
     doOAuth2Login() {
       if (this.env.thirdApp) {
-        // 判断是否携带了Token，是就说明登录成功
+        // 判斷是否攜帶了Token，是就說明登錄成功
         if (this.$route.query.oauth2LoginToken) {
           this.thirdType = this.$route.query.thirdType
           let token = this.$route.query.oauth2LoginToken
@@ -68,7 +68,7 @@ export default {
       }
     },
 
-    // 根据token执行登录
+    // 根據token執行登錄
     doThirdLogin(token) {
       let param = {}
       param.thirdType = this.thirdType
@@ -82,19 +82,19 @@ export default {
       })
     },
     loginSuccess() {
-      // 登陆成功，重定向到主页
+      // 登陸成功，重定向到主頁
       this.$router.replace({path: INDEX_MAIN_PAGE_PATH})
-      // TODO 这个提示是否还需要？
+      // TODO 這個提示是否還需要？
       this.$notification.success({
-        message: '欢迎',
-        description: `${timeFix()}，欢迎回来`,
+        message: '歡迎',
+        description: `${timeFix()}，歡迎回來`,
       })
     },
     requestFailed(err) {
       this.$error({
-        title: '登录失败',
-        content: ((err.response || {}).data || {}).message || err.message || '请求出现错误，请稍后再试',
-        okText: '重新登陆',
+        title: '登錄失敗',
+        content: ((err.response || {}).data || {}).message || err.message || '請求出現錯誤，請稍後再試',
+        okText: '重新登陸',
         onOk() {
           window.location.reload()
         },
@@ -104,17 +104,17 @@ export default {
       })
     },
 
-    /** 企业微信OAuth2登录 */
+    /** 企業微信OAuth2登錄 */
     doWechatEnterpriseOAuth2Login() {
       this.sysOAuth2Login('wechat_enterprise')
     },
 
-    /** 钉钉OAuth2登录 */
+    /** 釘釘OAuth2登錄 */
     doDingTalkOAuth2Login() {
       this.sysOAuth2Login('dingtalk')
     },
 
-    /** 后台构造oauth2登录地址 */
+    /** 後台構造oauth2登錄地址 */
     sysOAuth2Login(source) {
       let url = `${window._CONFIG['domianURL']}/sys/thirdLogin/oauth2/${source}/login`
       url += `?state=${encodeURIComponent(window.location.origin)}`

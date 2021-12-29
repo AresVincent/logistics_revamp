@@ -29,12 +29,12 @@
         type: Array,
         default: () => []
       },
-      // x 轴别名
+      // x 軸別名
       x: {
         type: String,
         default: 'x'
       },
-      // y 轴别名
+      // y 軸別名
       y: {
         type: String,
         default: 'y'

@@ -41,7 +41,7 @@
       max: 100
     }, {
       dataKey: 'user',
-      alias: '类型'
+      alias: '類型'
     }
   ]
 

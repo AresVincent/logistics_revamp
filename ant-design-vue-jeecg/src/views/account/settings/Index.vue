@@ -12,17 +12,17 @@
           >
             <a-menu-item key="settings">
               <a  @click="settingsClick()">
-                基本设置
+                基本設置
               </a>
             </a-menu-item>
             <a-menu-item key="security">
-              <a @click="securityClick()">安全设置</a>
+              <a @click="securityClick()">安全設置</a>
             </a-menu-item>
             <a-menu-item key="custom">
-              <a @click="customClick()"> 个性化</a>
+              <a @click="customClick()"> 個性化</a>
             </a-menu-item>
             <a-menu-item key="binding">
-              <a @click="bindingClick()">账户绑定</a>
+              <a @click="bindingClick()">賬戶綁定</a>
             </a-menu-item>
             <a-menu-item key="notification">
               <a @click="notificationClick()">新消息通知</a>
@@ -81,17 +81,17 @@
           outputType: 'jpeg',
           canScale: false,
           autoCrop: true,
-          // 只有自动截图开启 宽度高度才生效
+          // 只有自動截圖開啟 寬度高度才生效
           autoCropWidth: 180,
           autoCropHeight: 180,
           fixedBox: true,
-          // 开启宽度和高度比例
+          // 開啟寬度和高度比例
           fixed: true,
           fixedNumber: [1, 1]
         },
 
         pageTitle: '',
-        title:"基本设置",
+        title:"基本設置",
         security:false,
         baseSetting:true,
         custom:false,
@@ -113,14 +113,14 @@
         let routes = this.$route.matched.concat()
         this.defaultSelectedKeys = [ routes.pop().path ]
       },
-      //update-begin--Author:wangshuai  Date:20200729 for：聚合路由错误 issues#1441--------------------
+      //update-begin--Author:wangshuai  Date:20200729 for：聚合路由錯誤 issues#1441--------------------
       settingsClick(){
         this.security=false
         this.custom=false
         this.notification=false
         this.binding=false
         this.baseSetting=true
-        this.title="基本设置"
+        this.title="基本設置"
       },
       securityClick(){
         this.baseSetting=false
@@ -128,7 +128,7 @@
         this.notification=false
         this.binding=false
         this.security=true
-        this.title="安全设置"
+        this.title="安全設置"
       },
       notificationClick(){
         this.security=false
@@ -144,7 +144,7 @@
         this.notification=false;
         this.custom=false;
         this.binding=true
-        this.title="账号绑定"
+        this.title="賬號綁定"
       },
       customClick(){
         this.security=false
@@ -152,9 +152,9 @@
         this.notification=false;
         this.binding=false
         this.custom=true;
-        this.title="个性化"
+        this.title="個性化"
       }
-      //update-end--Author:wangshuai  Date:20200729 for：聚合路由错误 issues#1441--------------------
+      //update-end--Author:wangshuai  Date:20200729 for：聚合路由錯誤 issues#1441--------------------
     },
   }
 </script>

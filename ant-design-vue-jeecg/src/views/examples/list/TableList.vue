@@ -4,55 +4,55 @@
       <a-form layout="inline">
         <a-row :gutter="48">
           <a-col :md="8" :sm="24">
-            <a-form-item label="规则编号">
+            <a-form-item label="規則編號">
               <a-input v-model="queryParam.id" placeholder=""/>
             </a-form-item>
           </a-col>
           <a-col :md="8" :sm="24">
-            <a-form-item label="使用状态">
-              <a-select v-model="queryParam.status" placeholder="请选择" default-value="0">
+            <a-form-item label="使用狀態">
+              <a-select v-model="queryParam.status" placeholder="請選擇" default-value="0">
                 <a-select-option value="0">全部</a-select-option>
-                <a-select-option value="1">关闭</a-select-option>
-                <a-select-option value="2">运行中</a-select-option>
+                <a-select-option value="1">關閉</a-select-option>
+                <a-select-option value="2">運行中</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
           <template v-if="advanced">
             <a-col :md="8" :sm="24">
-              <a-form-item label="调用次数">
+              <a-form-item label="調用次數">
                 <a-input-number v-model="queryParam.callNo" style="width: 100%"/>
               </a-form-item>
             </a-col>
             <a-col :md="8" :sm="24">
               <a-form-item label="更新日期">
-                <a-date-picker v-model="queryParam.date" style="width: 100%" placeholder="请输入更新日期"/>
+                <a-date-picker v-model="queryParam.date" style="width: 100%" placeholder="請輸入更新日期"/>
               </a-form-item>
             </a-col>
             <a-col :md="8" :sm="24">
-              <a-form-item label="使用状态">
-                <a-select v-model="queryParam.useStatus" placeholder="请选择" default-value="0">
+              <a-form-item label="使用狀態">
+                <a-select v-model="queryParam.useStatus" placeholder="請選擇" default-value="0">
                   <a-select-option value="0">全部</a-select-option>
-                  <a-select-option value="1">关闭</a-select-option>
-                  <a-select-option value="2">运行中</a-select-option>
+                  <a-select-option value="1">關閉</a-select-option>
+                  <a-select-option value="2">運行中</a-select-option>
                 </a-select>
               </a-form-item>
             </a-col>
             <a-col :md="8" :sm="24">
-              <a-form-item label="使用状态">
-                <a-select placeholder="请选择" default-value="0">
+              <a-form-item label="使用狀態">
+                <a-select placeholder="請選擇" default-value="0">
                   <a-select-option value="0">全部</a-select-option>
-                  <a-select-option value="1">关闭</a-select-option>
-                  <a-select-option value="2">运行中</a-select-option>
+                  <a-select-option value="1">關閉</a-select-option>
+                  <a-select-option value="2">運行中</a-select-option>
                 </a-select>
               </a-form-item>
             </a-col>
           </template>
           <a-col :md="!advanced && 8 || 24" :sm="24">
             <span class="table-page-search-submitButtons" :style="advanced && { float: 'right', overflow: 'hidden' } || {} ">
-              <a-button type="primary">查询</a-button>
+              <a-button type="primary">查詢</a-button>
               <a-button style="margin-left: 8px" @click="resetSearchForm">重置</a-button>
               <a @click="toggleAdvanced" style="margin-left: 8px">
-                {{ advanced ? '收起' : '展开' }}
+                {{ advanced ? '收起' : '展開' }}
                 <a-icon :type="advanced ? 'up' : 'down'"/>
               </a>
             </span>
@@ -65,9 +65,9 @@
       <a-button type="primary" icon="plus" @click="() => this.handleModalVisible(true)">新建</a-button>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
-          <a-menu-item key="1"><a-icon type="delete" />删除</a-menu-item>
+          <a-menu-item key="1"><a-icon type="delete" />刪除</a-menu-item>
           <!-- lock | unlock -->
-          <a-menu-item key="2"><a-icon type="lock" />锁定</a-menu-item>
+          <a-menu-item key="2"><a-icon type="lock" />鎖定</a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px">
           批量操作 <a-icon type="down" />
@@ -84,7 +84,7 @@
       @onSelect="onChange"
     >
       <span slot="action" slot-scope="text, record">
-        <a @click="handleEdit(record)">编辑</a>
+        <a @click="handleEdit(record)">編輯</a>
         <a-divider type="vertical" />
         <a-dropdown>
           <a class="ant-dropdown-link">
@@ -92,13 +92,13 @@
           </a>
           <a-menu slot="overlay">
             <a-menu-item>
-              <a href="javascript:;">详情</a>
+              <a href="javascript:;">詳情</a>
             </a-menu-item>
             <a-menu-item>
               <a href="javascript:;">禁用</a>
             </a-menu-item>
             <a-menu-item>
-              <a href="javascript:;">删除</a>
+              <a href="javascript:;">刪除</a>
             </a-menu-item>
           </a-menu>
         </a-dropdown>
@@ -116,17 +116,17 @@
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="规则编号"
+          label="規則編號"
           hasFeedback
           validateStatus="success"
         >
-          <a-input placeholder="规则编号" v-model="mdl.no" id="no" />
+          <a-input placeholder="規則編號" v-model="mdl.no" id="no" />
         </a-form-item>
 
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="服务调用次数"
+          label="服務調用次數"
           hasFeedback
           validateStatus="success"
         >
@@ -136,7 +136,7 @@
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="状态"
+          label="狀態"
           hasFeedback
           validateStatus="warning"
         >
@@ -152,7 +152,7 @@
           :wrapperCol="wrapperCol"
           label="描述"
           hasFeedback
-          help="请填写一段描述"
+          help="請填寫一段描述"
         >
           <a-textarea :rows="5" v-model="mdl.description" placeholder="..." id="description"/>
         </a-form-item>
@@ -160,7 +160,7 @@
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="更新时间"
+          label="更新時間"
           hasFeedback
           validateStatus="error"
         >
@@ -175,11 +175,11 @@
       </a-form>
     </a-modal>
 
-    <a-modal title="新建规则" destroyOnClose :visible="visibleCreateModal" @ok="handleCreateModalOk" @cancel="handleCreateModalCancel">
+    <a-modal title="新建規則" destroyOnClose :visible="visibleCreateModal" @ok="handleCreateModalOk" @cancel="handleCreateModalCancel">
       <!---->
       <a-form style="margin-top: 8px" :autoFormCreate="(form)=>{this.createForm = form}">
-        <a-form-item :labelCol="{ span: 5 }" :wrapperCol="{ span: 15 }" label="描述" fieldDecoratorId="description" :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入至少五个字符的规则描述！', min: 5 }]}">
-          <a-input placeholder="请输入" />
+        <a-form-item :labelCol="{ span: 5 }" :wrapperCol="{ span: 15 }" label="描述" fieldDecoratorId="description" :fieldDecoratorOptions="{rules: [{ required: true, message: '請輸入至少五個字符的規則描述！', min: 5 }]}">
+          <a-input placeholder="請輸入" />
         </a-form-item>
       </a-form>
     </a-modal>
@@ -217,14 +217,14 @@
         form: null,
         mdl: {},
 
-        // 高级搜索 展开/关闭
+        // 高級搜索 展開/關閉
         advanced: true,
-        // 查询参数
+        // 查詢參數
         queryParam: {},
-        // 表头
+        // 表頭
         columns: [
           {
-            title: '规则编号',
+            title: '規則編號',
             dataIndex: 'no'
           },
           {
@@ -232,19 +232,19 @@
             dataIndex: 'description'
           },
           {
-            title: '服务调用次数',
+            title: '服務調用次數',
             dataIndex: 'callNo',
             sorter: true,
             needTotal: true,
             customRender: (text) => text + ' 次'
           },
           {
-            title: '状态',
+            title: '狀態',
             dataIndex: 'status',
             needTotal: true
           },
           {
-            title: '更新时间',
+            title: '更新時間',
             dataIndex: 'updatedAt',
             sorter: true
           },
@@ -255,7 +255,7 @@
             scopedSlots: { customRender: 'action' },
           }
         ],
-        // 加载数据方法 必须为 Promise 对象
+        // 加載數據方法 必須為 Promise 對象
         loadData: parameter => {
           return getServiceList(Object.assign(parameter, this.queryParam))
             .then(res => {
@@ -280,7 +280,7 @@
 
       },
 
-      //添加逻辑
+      //添加邏輯
       handleModalVisible(isVisible) {
         this.visibleCreateModal = isVisible;
       },

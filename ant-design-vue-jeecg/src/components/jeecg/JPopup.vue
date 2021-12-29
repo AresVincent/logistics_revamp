@@ -60,7 +60,7 @@
       },
       placeholder: {
         type: String,
-        default: '请选择',
+        default: '請選擇',
         required: false
       },
       value: {
@@ -82,7 +82,7 @@
         required: false,
         default: false
       },
-      //popup动态参数 支持系统变量语法
+      //popup動態參數 支持系統變量語法
       param:{
         type: Object,
         required: false,
@@ -93,7 +93,7 @@
         required: false,
         default: ','
       },
-      /** 分组ID，用于将多个popup的请求合并到一起，不传不分组 */
+      /** 分組ID，用於將多個popup的請求合併到一起，不傳不分組 */
       groupId: String
 
     },
@@ -128,11 +128,11 @@
     },
     mounted() {
       if (!this.orgFields || !this.destFields || !this.code) {
-        this.$message.error('popup参数未正确配置!')
+        this.$message.error('popup參數未正確配置!')
         this.avalid = false
       }
       if (this.destFields.split(',').length != this.orgFields.split(',').length) {
-        this.$message.error('popup参数未正确配置,原始值和目标值数量不一致!')
+        this.$message.error('popup參數未正確配置,原始值和目標值數量不一致!')
         this.avalid = false
       }
     },
@@ -159,7 +159,7 @@
         }
       },
       callBack(rows) {
-        // update--begin--autor:lvdandan-----date:20200630------for：多选时未带回多个值------
+        // update--begin--autor:lvdandan-----date:20200630------for：多選時未帶回多個值------
         let orgFieldsArr = this.orgFields.split(',')
         let destFieldsArr = this.destFields.split(',')
         let resetText = false
@@ -173,11 +173,11 @@
             let tempDestArr = []
             for(let rw of rows){
               let val = rw[orgFieldsArr[i]]
-              // update--begin--autor:liusq-----date:20210713------for：处理val等于0的情况issues/I3ZL4T------
+              // update--begin--autor:liusq-----date:20210713------for：處理val等於0的情況issues/I3ZL4T------
               if(typeof val=='undefined'|| val==null || val.toString()==""){
                 val = ""
               }
-              // update--end--autor:liusq-----date:20210713------for：处理val等于0的情况issues/I3ZL4T------
+              // update--end--autor:liusq-----date:20210713------for：處理val等於0的情況issues/I3ZL4T------
               tempDestArr.push(val)
             }
             res[destFieldsArr[i]] = tempDestArr.join(",")
@@ -193,13 +193,13 @@
             }
             this.showText = tempText.join(",")
           }
-          // update--end--autor:lvdandan-----date:20200630------for：多选时未带回多个值------
+          // update--end--autor:lvdandan-----date:20200630------for：多選時未帶回多個值------
         }
         if (this.triggerChange) {
-          //v-dec时即triggerChange为true时 将整个对象给form页面 让他自己setFieldsValue
+          //v-dec時即triggerChange為true時 將整個對象給form頁面 讓他自己setFieldsValue
           this.$emit('callback', res)
         } else {
-          //v-model时 需要传一个参数field 表示当前这个字段 从而根据这个字段的顺序找到原始值
+          //v-model時 需要傳一個參數field 表示當前這個字段 從而根據這個字段的順序找到原始值
           // this.$emit("input",row[orgFieldsArr[destFieldsArr.indexOf(this.field)]])
           let str = ''
           if(this.showText){

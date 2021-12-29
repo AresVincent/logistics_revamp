@@ -1,5 +1,5 @@
 /**
- * 获取字符串的长度ascii长度为1 中文长度为2
+ * 獲取字符串的長度ascii長度為1 中文長度為2
  * @param str
  * @returns {number}
  */
@@ -13,7 +13,7 @@ export const getStrFullLength = (str = '') =>
   }, 0)
 
 /**
- * 给定一个字符串和一个长度,将此字符串按指定长度截取
+ * 給定一個字符串和一個長度,將此字符串按指定長度截取
  * @param str
  * @param maxLength
  * @returns {string}
@@ -34,13 +34,13 @@ export const cutStrByFullLength = (str = '', maxLength) => {
   }, '')
 }
 
-// 下划线转换驼峰
+// 下劃線轉換駝峰
 export function underLinetoHump(name) {
   return name.replace(/\_(\w)/g, function(all, letter){
     return letter.toUpperCase();
   });
 }
-// 驼峰转换下划线
+// 駝峰轉換下劃線
 export function humptoUnderLine(name) {
   return name.replace(/([A-Z])/g,"_$1").toLowerCase();
 }

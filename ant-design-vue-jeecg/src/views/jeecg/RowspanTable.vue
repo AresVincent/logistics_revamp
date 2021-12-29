@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false">
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <a-table
       ref="table"
       size="default"
@@ -11,7 +11,7 @@
       :dataSource="dataSource">
 
     </a-table>
-    <!-- table区域-end -->
+    <!-- table區域-end -->
 
 
   </a-card>
@@ -25,14 +25,14 @@
     },
     data() {
       return {
-        description: '存放位置设置表管理页面',
+        description: '存放位置設置表管理頁面',
         levelNum:{},
         gridNum:0,
         boxNum:0,
         cabinetNo:"",
-        // 表头
+        // 表頭
         columns: [ {
-          title: '分组一',
+          title: '分組一',
           align: "center",
           dataIndex: 'cabinetNo',
           customRender: (value, row, index) => {
@@ -49,7 +49,7 @@
           },
         },
           {
-            title: '分组二',
+            title: '分組二',
             align: "center",
             dataIndex: 'levelNo',
             customRender: (value, row, index) => {
@@ -57,7 +57,7 @@
                 children: value,
                 attrs: {},
               };
-              //当前列跨行的条数
+              //當前列跨行的條數
               var a = parseInt(this.levelNum);
               var b = parseInt(this.gridNum)*parseInt(this.boxNum);
               console.log(a);
@@ -75,7 +75,7 @@
             }
           },
           {
-            title: '分组三',
+            title: '分組三',
             align: "center",
             dataIndex: 'gridNo',
             customRender: (value, row, index) => {
@@ -108,7 +108,7 @@
             align: "center",
             dataIndex: 'maxNum'
           },],
-        //数据集
+        //數據集
         dataSource: [{
           "id": "cb1dfd12cbeca3f8ba121439ee7e2411",
           "attributeId": "e62831f314e1390edbd884e9d9e6aca6",

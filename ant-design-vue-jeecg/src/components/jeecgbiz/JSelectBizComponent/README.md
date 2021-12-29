@@ -1,6 +1,6 @@
 # JSelectBizComponent
 
-Jeecg 选择组件的公共可复用组件
+Jeecg 選擇組件的公共可復用組件
 
 ## 引用方式
 
@@ -12,25 +12,25 @@ export default {
 }
 ```
 
-## 参数
+## 參數
 
-### 配置参数
+### 配置參數
 
-| 参数名                | 类型    | 必填 | 默认值       | 备注                                                                                 |
+| 參數名                | 類型    | 必填 | 默認值       | 備註                                                                                 |
 |-----------------------|---------|------|--------------|--------------------------------------------------------------------------------------|
-| rowKey                | String  |      | "id"         | 唯一标识的字段名                                                                     |
-| value(v-model)        | String  |      | ""           | 默认选择的数据，多个用半角逗号分割                                                   |
-| name                  | String  |      | ""           | 显示名字，例如选择用户就填写"用户"                                                   |
-| listUrl               | String  | 是   |              | 数据请求地址，必须是封装了分页的地址                                                 |
-| valueUrl              | String  |      | ""           | 获取显示文本的地址，例如存的是 username，可以通过该地址获取到 realname               |
-| displayKey            | String  |      | null         | 显示在标签上的字段 key    ，不传则直接显示数据                                       |
-| returnKeys            | Array   |      | ['id', 'id'] | v-model 绑定的 keys，是个数组，默认使用第二项，当配置了 `returnId=true` 就返回第一项 |
-| returnId              | Boolean |      | false        | 返回ID，设为true后将返回配置的 `returnKeys` 中的第一项                               |
-| selectButtonText      | String  |      | "选择"       | 选择按钮的文字                                                                       |
-| queryParamText        | String  |      | null         | 查询条件显示文字，不传则使用 `name`                                                  |
-| columns               | Array   | 是   |              | 列配置项，与antd的table的配置完全一致。列的第一项会被配置成右侧已选择的列表上        |
-| columns[0].widthRight | String   |      | null         | 仅列的第一项可以应用此配置，表示右侧已选择列表的宽度，建议 `70%`，不传则应用`width`  |
-| placeholder           | String  |      | "请选择"     | 占位符                                                                               |
+| rowKey                | String  |      | "id"         | 唯一標識的字段名                                                                     |
+| value(v-model)        | String  |      | ""           | 默認選擇的數據，多個用半角逗號分割                                                   |
+| name                  | String  |      | ""           | 显示名字，例如選擇用戶就填寫"用戶"                                                   |
+| listUrl               | String  | 是   |              | 數據請求地址，必須是封裝了分頁的地址                                                 |
+| valueUrl              | String  |      | ""           | 獲取显示文本的地址，例如存的是 username，可以通過該地址獲取到 realname               |
+| displayKey            | String  |      | null         | 显示在標籤上的字段 key    ，不傳則直接显示數據                                       |
+| returnKeys            | Array   |      | ['id', 'id'] | v-model 綁定的 keys，是個數組，默認使用第二項，當配置了 `returnId=true` 就返回第一項 |
+| returnId              | Boolean |      | false        | 返回ID，設為true后將返回配置的 `returnKeys` 中的第一項                               |
+| selectButtonText      | String  |      | "選擇"       | 選擇按鈕的文字                                                                       |
+| queryParamText        | String  |      | null         | 查詢條件显示文字，不傳則使用 `name`                                                  |
+| columns               | Array   | 是   |              | 列配置項，與antd的table的配置完全一致。列的第一項會被配置成右側已選擇的列表上        |
+| columns[0].widthRight | String   |      | null         | 僅列的第一項可以應用此配置，表示右側已選擇列表的寬度，建議 `70%`，不傳則應用`width`  |
+| placeholder           | String  |      | "請選擇"     | 佔位符                                                                               |
 | disabled              | Boolean |      | false        | 是否禁用                                                                             |
-| multiple              | Boolean |      | false        | 是否可多选                                                                           |
-| buttons               | Boolean |      | true         | 是否显示"选择"按钮，如果不显示，可以直接点击文本框打开选择界面                       |
+| multiple              | Boolean |      | false        | 是否可多選                                                                           |
+| buttons               | Boolean |      | true         | 是否显示"選擇"按鈕，如果不显示，可以直接點擊文本框打開選擇界面                       |

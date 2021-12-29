@@ -78,13 +78,13 @@
 </script>
 <style lang="less" scoped>
 
-  /* update_begin author:sunjianlei date:20190509 for: 修改侧边导航栏滚动条的样式 */
+  /* update_begin author:sunjianlei date:20190509 for: 修改側邊導航欄滾動條的樣式 */
   .sider {
     @scrollBarSize: 10px;
 
     ul.ant-menu {
 
-      /* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+      /* 定義滾動條高寬及背景 高寬分別對應橫豎滾動條的尺寸*/
       &::-webkit-scrollbar {
         width: @scrollBarSize;
         height: @scrollBarSize;
@@ -106,12 +106,12 @@
       -ms-scroll-snap-type: proximity;
       -ms-scroll-snap-points-x: snapList(100%, 200%, 300%, 400%, 500%);
 
-      /* 定义滚动条轨道 */
+      /* 定義滾動條軌道 */
       &::-webkit-scrollbar-track {
         background-color: transparent;
       }
 
-      /* 定义滑块 */
+      /* 定義滑塊 */
       &::-webkit-scrollbar-thumb {
         border-radius: @scrollBarSize;
         background-color: #eee;
@@ -127,7 +127,7 @@
       }
     }
 
-    /** 暗色系滚动条样式 */
+    /** 暗色系滾動條樣式 */
     &.dark ul.ant-menu {
       &::-webkit-scrollbar-thumb {
         background-color: #666666;
@@ -144,10 +144,10 @@
 
   }
 
-  /* update_end author:sunjianlei date:20190509 for: 修改侧边导航栏滚动条的样式 */
+  /* update_end author:sunjianlei date:20190509 for: 修改側邊導航欄滾動條的樣式 */
 </style>
 
-<!-- update_begin author:sunjianlei date:20190530 for: 选中首页的时候不显示背景颜色 -->
+<!-- update_begin author:sunjianlei date:20190530 for: 選中首頁的時候不显示背景顏色 -->
 <style lang="less">
   .ant-menu.ant-menu-root {
     & > .ant-menu-item:first-child {
@@ -177,4 +177,4 @@
     }
   }
 </style>
-<!-- update_end author:sunjianlei date:20190530 for: 选中首页的时候不显示背景颜色 -->
+<!-- update_end author:sunjianlei date:20190530 for: 選中首頁的時候不显示背景顏色 -->

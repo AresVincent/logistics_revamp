@@ -1,11 +1,11 @@
 import md5 from 'md5'
-//签名密钥串(前后端要一致，正式发布请自行修改)
+//簽名密鑰串(前後端要一致，正式發布請自行修改)
 const signatureSecret = "dd05f1c54d63749eda95f9fa6d49v442a";
 
 export default class signMd5Utils {
   /**
-   * json参数升序
-   * @param jsonObj 发送参数
+   * json參數升序
+   * @param jsonObj 發送參數
    */
 
   static sortAsc(jsonObj) {
@@ -25,9 +25,9 @@ export default class signMd5Utils {
 
 
   /**
-   * @param url 请求的url,应该包含请求参数(url的?后面的参数)
-   * @param requestParams 请求参数(POST的JSON参数)
-   * @returns {string} 获取签名
+   * @param url 請求的url,應該包含請求參數(url的?後面的參數)
+   * @param requestParams 請求參數(POST的JSON參數)
+   * @returns {string} 獲取簽名
    */
   static getSign(url, requestParams) {
     let urlParams = this.parseQueryString(url);
@@ -39,8 +39,8 @@ export default class signMd5Utils {
   }
 
   /**
-   * @param url 请求的url
-   * @returns {{}} 将url中请求参数组装成json对象(url的?后面的参数)
+   * @param url 請求的url
+   * @returns {{}} 將url中請求參數組裝成json對象(url的?後面的參數)
    */
   static parseQueryString(url) {
     let urlReg = /^[^\?]+\?([\w\W]+)$/,
@@ -48,20 +48,20 @@ export default class signMd5Utils {
       urlArray = urlReg.exec(url),
       result = {};
 
-    // 获取URL上最后带逗号的参数变量 sys/dict/getDictItems/sys_user,realname,username
-    //【这边条件没有encode】带条件参数例子：/sys/dict/getDictItems/sys_user,realname,id,username!='admin'%20order%20by%20create_time
+    // 獲取URL上最後帶逗號的參數變量 sys/dict/getDictItems/sys_user,realname,username
+    //【這邊條件沒有encode】帶條件參數例子：/sys/dict/getDictItems/sys_user,realname,id,username!='admin'%20order%20by%20create_time
     let lastpathVariable = url.substring(url.lastIndexOf('/') + 1);
     if(lastpathVariable.includes(",")){
       if(lastpathVariable.includes("?")){
         lastpathVariable = lastpathVariable.substring(0, lastpathVariable.indexOf("?"));
       }
-      //解决Sign 签名校验失败 #2728
+      //解決Sign 簽名校驗失敗 #2728
       result["x-path-variable"] = decodeURIComponent(lastpathVariable);
     }
     if (urlArray && urlArray[1]) {
       let paramString = urlArray[1], paramResult;
       while ((paramResult = paramReg.exec(paramString)) != null) {
-        //数字值转为string类型，前后端加密规则保持一致
+        //数字值轉為string類型，前後端加密規則保持一致
         if(this.myIsNaN(paramResult[2])){
           paramResult[2] = paramResult[2].toString()
         }
@@ -72,13 +72,13 @@ export default class signMd5Utils {
   }
 
   /**
-   * @returns {*} 将两个对象合并成一个
+   * @returns {*} 將兩個對象合併成一個
    */
   static mergeObject(objectOne, objectTwo) {
     if (objectTwo && Object.keys(objectTwo).length > 0) {
       for (let key in objectTwo) {
         if (objectTwo.hasOwnProperty(key) === true) {
-          //数字值转为string类型，前后端加密规则保持一致
+          //数字值轉為string類型，前後端加密規則保持一致
           if(this.myIsNaN(objectTwo[key])){
             objectTwo[key] = objectTwo[key].toString()
           }
@@ -121,7 +121,7 @@ export default class signMd5Utils {
     if (msecs < 10) secs = '0' + msecs
     return year + '' + month + '' + day + '' + hours + '' + mins + '' + secs
   }
-    // true:数值型的，false：非数值型
+    // true:數值型的，false：非數值型
   static myIsNaN(value) {
     return typeof value === 'number' && !isNaN(value);
   }

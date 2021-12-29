@@ -1,19 +1,19 @@
 <template>
   <div>
     <a-form-model ref="form" :model="model" :rules="validatorRules" class="password-retrieval-form" @keyup.enter.native="nextStep">
-      <a-form-model-item label="手机" required prop="phone" :labelCol="{span: 5}" :wrapperCol="{span: 19}">
+      <a-form-model-item label="手機" required prop="phone" :labelCol="{span: 5}" :wrapperCol="{span: 19}">
         <a-row :gutter="16">
           <a-col class="gutter-row" :span="20">
-            <a-input v-model="model.phone" type="text" autocomplete="false" placeholder="请输入手机号">
+            <a-input v-model="model.phone" type="text" autocomplete="false" placeholder="請輸入手機號">
               <a-icon slot="prefix" type="phone" :style="{ color: 'rgba(0,0,0,.25)'}"/>
             </a-input>
           </a-col>
         </a-row>
       </a-form-model-item>
-      <a-form-model-item v-if="show" required prop="captcha" label="验证码" :labelCol="{span: 5}" :wrapperCol="{span: 19}">
+      <a-form-model-item v-if="show" required prop="captcha" label="驗證碼" :labelCol="{span: 5}" :wrapperCol="{span: 19}">
         <a-row :gutter="16">
           <a-col class="gutter-row" :span="12">
-            <a-input v-model="model.captcha" type="text" placeholder="手机短信验证码">
+            <a-input v-model="model.captcha" type="text" placeholder="手機短信驗證碼">
               <a-icon slot="prefix" type="code" :style="{ color: 'rgba(0,0,0,.25)'}"/>
             </a-input>
           </a-col>
@@ -23,12 +23,12 @@
               size="default"
               :disabled="state.smsSendBtn"
               @click.stop.prevent="getCaptcha"
-              v-text="!state.smsSendBtn && '获取验证码' || (state.time+' s')"></a-button>
+              v-text="!state.smsSendBtn && '獲取驗證碼' || (state.time+' s')"></a-button>
           </a-col>
         </a-row>
       </a-form-model-item>
       <a-form-model-item :wrapperCol="{span: 19, offset: 5}">
-        <router-link style="float: left;line-height: 40px;" :to="{ name: 'login' }">使用已有账户登录</router-link>
+        <router-link style="float: left;line-height: 40px;" :to="{ name: 'login' }">使用已有賬戶登錄</router-link>
         <a-button type="primary" @click="nextStep" style="margin-left: 20px">下一步</a-button>
       </a-form-model-item>
     </a-form-model>
@@ -59,11 +59,11 @@
         },
         validatorRules: {
           phone: [
-            { required: true, message: '请输入手机号码!' },
+            { required: true, message: '請輸入手機號碼!' },
             { validator: this.validatePhone }
           ],
           captcha: [
-            { required: true, message: '请输入短信验证码!' }
+            { required: true, message: '請輸入短信驗證碼!' }
           ]
         },
       }
@@ -112,7 +112,7 @@
                 window.clearInterval(interval);
               }
             }, 1000);
-            const hide = that.$message.loading('验证码发送中..', 0);
+            const hide = that.$message.loading('驗證碼發送中..', 0);
             let smsParams = {
               mobile: that.model.phone,
               smsmode: "2"
@@ -131,7 +131,7 @@
       },
       cmsFailed(err) {
         this.$notification['error']({
-          message: "验证错误",
+          message: "驗證錯誤",
           description: err,
           duration: 4,
         });
@@ -149,9 +149,9 @@
       },
       validatePhone(rule,value,callback){
           if(value){
-            var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+            var myreg=/^852\d{8}$/;
             if(!myreg.test(value)){
-              callback("请输入正确的手机号")
+              callback("請輸入正確的手機號")
             }else{
               callback();
             }

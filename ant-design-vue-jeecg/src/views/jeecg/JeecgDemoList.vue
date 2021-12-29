@@ -1,22 +1,22 @@
 <template>
   <a-card :bordered="false">
 
-    <!-- 查询区域 -->
+    <!-- 查詢區域 -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
 
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="用户名">
-              <j-input placeholder="请输入名称模糊查询" v-model="queryParam.name"></j-input>
+            <a-form-item label="用戶名">
+              <j-input placeholder="請輸入名稱模糊查詢" v-model="queryParam.name"></j-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="年龄">
-             <!-- <a-input placeholder="请输入名称查询" v-model="queryParam.age"></a-input>-->
-              <a-input placeholder="最小年龄" type="ge" v-model="queryParam.age_begin" style="width:calc(50% - 15px);"></a-input>
+            <a-form-item label="年齡">
+             <!-- <a-input placeholder="請輸入名稱查詢" v-model="queryParam.age"></a-input>-->
+              <a-input placeholder="最小年齡" type="ge" v-model="queryParam.age_begin" style="width:calc(50% - 15px);"></a-input>
               <span class="group-query-strig">~</span>
-              <a-input placeholder="最大年龄" type="le" v-model="queryParam.age_end" style="width:calc(50% - 15px);"></a-input>
+              <a-input placeholder="最大年齡" type="le" v-model="queryParam.age_end" style="width:calc(50% - 15px);"></a-input>
             </a-form-item>
           </a-col>
           <template v-if="toggleSearchStatus">
@@ -24,27 +24,27 @@
               <a-form-item label="生日">
                 <a-range-picker v-model="queryParam.birthdayRange"
                                 format="YYYY-MM-DD"
-                                :placeholder="['开始时间', '结束时间']"
+                                :placeholder="['開始時間', '結束時間']"
                                 @change="onBirthdayChange" />
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="性别">
-                <j-dict-select-tag v-model="queryParam.sex" placeholder="请选择性别" dictCode="sex"/>
+              <a-form-item label="性別">
+                <j-dict-select-tag v-model="queryParam.sex" placeholder="請選擇性別" dictCode="sex"/>
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="选择用户">
-                <j-dict-select-tag v-model="queryParam.id" placeholder="请选择用户" dictCode="demo,name,id"/>
+              <a-form-item label="選擇用戶">
+                <j-dict-select-tag v-model="queryParam.id" placeholder="請選擇用戶" dictCode="demo,name,id"/>
               </a-form-item>
             </a-col>
           </template>
           <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
               <a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
+                {{ toggleSearchStatus ? '收起' : '展開' }}
                 <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
               </a>
             </a-col>
@@ -53,22 +53,22 @@
       </a-form>
     </div>
 
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="plus" @click="jump">创建单据</a-button>
-      <a-button type="primary" icon="plus" @click="onetomany">一对多</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('单表示例')">导出</a-button>
+      <a-button type="primary" icon="plus" @click="jump">創建單據</a-button>
+      <a-button type="primary" icon="plus" @click="onetomany">一對多</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('單表示例')">導出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" icon="import">导入</a-button>
+        <a-button type="primary" icon="import">導入</a-button>
       </a-upload>
-      <!-- 高级查询区域 -->
+      <!-- 高級查詢區域 -->
       <j-super-query :fieldList="fieldList" ref="superQueryModal" @handleSuperQuery="handleSuperQuery"></j-super-query>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel">
             <a-icon type="delete"/>
-            删除
+            刪除
           </a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作
@@ -77,16 +77,16 @@
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{
-          selectedRowKeys.length }}</a>项
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{
+          selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
         <span style="float:right;">
           <a @click="loadData()"><a-icon type="sync" />刷新</a>
           <a-divider type="vertical" />
-          <a-popover title="自定义列" trigger="click" placement="leftBottom">
+          <a-popover title="自定義列" trigger="click" placement="leftBottom">
             <template slot="content">
               <a-checkbox-group @change="onColSettingsChange" v-model="settingColumns" :defaultValue="settingColumns">
                 <a-row style="width: 400px">
@@ -98,7 +98,7 @@
                 </a-row>
               </a-checkbox-group>
             </template>
-            <a><a-icon type="setting" />设置</a>
+            <a><a-icon type="setting" />設置</a>
           </a-popover>
         </span>
       </div>
@@ -131,15 +131,15 @@
         <a-icon slot="filterIcon" type='setting' :style="{ fontSize:'16px',color:  '#108ee9' }" />
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">編輯</a>
 
           <a-divider type="vertical"/>
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down"/></a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+                  <a>刪除</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -148,12 +148,12 @@
 
       </a-table>
     </div>
-    <!-- table区域-end -->
+    <!-- table區域-end -->
 
-    <!-- 表单区域 -->
+    <!-- 表單區域 -->
     <jeecgDemo-modal ref="modalForm" @ok="modalFormOk"></jeecgDemo-modal>
 
-    <!-- 一对多表单区域 -->
+    <!-- 一對多表單區域 -->
     <JeecgDemoTabsModal ref="jeecgDemoTabsModal" @ok="modalFormOk"></JeecgDemoTabsModal>
 
   </a-card>
@@ -169,16 +169,16 @@
   import Vue from 'vue'
   import { filterObj } from '@/utils/util';
 
-  //高级查询modal需要参数
+  //高級查詢modal需要參數
   const superQueryFieldList=[
     {
       type: "string",
       value: "name",
-      text: "用户名"
+      text: "用戶名"
     }, {
       type: "int",
       value: "age",
-      text: "年龄"
+      text: "年齡"
     }, {
       type: "date",
       value: "birthday",
@@ -196,15 +196,15 @@
     },
     data() {
       return {
-        description: '单表示例列表',
-        //字典数组缓存
+        description: '單表示例列表',
+        //字典數組緩存
         sexDictOptions: [],
         importExcelUrl:`${window._CONFIG['domianURL']}/test/jeecgDemo/importExcel`,
-        //表头
+        //表頭
         columns:[],
-        //列设置
+        //列設置
         settingColumns:[],
-        //列定义
+        //列定義
         defColumns: [
           {
             title: '#',
@@ -222,26 +222,26 @@
             dataIndex: 'name'
           },
           {
-            title: '关键词',
+            title: '關鍵詞',
             align: "center",
             dataIndex: 'keyWord'
           },
           {
-            title: '打卡时间',
+            title: '打卡時間',
             align: "center",
             dataIndex: 'punchTime'
           },
           {
-            title: '性别',
+            title: '性別',
             align: "center",
             dataIndex: 'sex',
             customRender: (text) => {
-              //字典值替换通用方法
+              //字典值替換通用方法
               return filterDictTextByCache('sex', text);
             }
           },
           {
-            title: '年龄',
+            title: '年齡',
             align: "center",
             dataIndex: 'age'
           },
@@ -251,12 +251,12 @@
             dataIndex: 'birthday'
           },
           {
-            title: '邮箱',
+            title: '郵箱',
             align: "center",
             dataIndex: 'email'
           },
           {
-            title: '个人简介',
+            title: '個人簡介',
             align: "center",
             dataIndex: 'content'
           },
@@ -281,7 +281,7 @@
     },
     methods: {
       getQueryParams(){
-        //高级查询器
+        //高級查詢器
         let sqp = {}
         if(this.superQueryParams){
           sqp['superQueryParams']=encodeURI(this.superQueryParams)
@@ -292,12 +292,12 @@
         param.field = this.getQueryField();
         param.pageNo = this.ipagination.current;
         param.pageSize = this.ipagination.pageSize;
-        delete param.birthdayRange; //范围参数不传递后台
+        delete param.birthdayRange; //範圍參數不傳遞後台
         return filterObj(param);
       },
       initDictConfig() {
         console.log("--我才是真的方法!--")
-        //初始化字典 - 性别
+        //初始化字典 - 性別
         initDictOptions('sex').then((res) => {
           if (res.success) {
             this.sexDictOptions = res.result;
@@ -306,9 +306,9 @@
       },
       onetomany: function () {
         this.$refs.jeecgDemoTabsModal.add();
-        this.$refs.jeecgDemoTabsModal.title = "编辑";
+        this.$refs.jeecgDemoTabsModal.title = "編輯";
       },
-      //跳转单据页面
+      //跳轉單據頁面
       jump() {
         this.$router.push({path: '/jeecg/helloworld'})
       },
@@ -317,7 +317,7 @@
         this.queryParam.birthday_begin=dateString[0];
         this.queryParam.birthday_end=dateString[1];
       },
-      //列设置更改事件
+      //列設置更改事件
       onColSettingsChange (checkedValues) {
         var key = this.$route.name+":colsettings";
         Vue.ls.set(key, checkedValues, 7 * 24 * 60 * 60 * 1000)
@@ -334,7 +334,7 @@
         this.columns =  cols;
       },
       initColumns(){
-        //权限过滤（列权限控制时打开，修改第二个参数为授权码前缀）
+        //權限過濾（列權限控制時打開，修改第二個參數為授權碼前綴）
         //this.defColumns = colAuthFilter(this.defColumns,'testdemo:');
 
         var key = this.$route.name+":colsettings";

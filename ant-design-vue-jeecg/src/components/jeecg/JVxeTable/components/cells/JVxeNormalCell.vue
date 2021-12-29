@@ -23,12 +23,12 @@
       },
     },
     methods: {
-      // 特效结束
+      // 特效結束
       handleEffectEnd() {
         this.$delete(this.reloadEffectRowKeysMap, this.row.id)
       },
     },
-    // 【组件增强】注释详见：JVxeCellMixins.js
+    // 【組件增強】註釋詳見：JVxeCellMixins.js
     enhanced: {
       switches: {
         editRender: false,

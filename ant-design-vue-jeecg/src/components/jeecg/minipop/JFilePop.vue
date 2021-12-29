@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-modal
-      :title="fileType === 'image' ? '图片上传' : '文件上传'"
+      :title="fileType === 'image' ? '圖片上傳' : '文件上傳'"
       :width="width"
       :visible="visible"
       @ok="ok"
@@ -91,7 +91,7 @@
       },
       ok(){
         if(!this.filePath){
-          this.$message.error("未上传任何文件")
+          this.$message.error("未上傳任何文件")
           return false;
         }
         let arr = this.filePath.split(",")

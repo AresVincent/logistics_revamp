@@ -2,16 +2,16 @@
   <a-card :body-style="{padding: '24px 32px'}" :bordered="false">
     <a-form @submit="handleSubmit" :form="form">
       <a-form-item
-        label="标题"
+        label="標題"
         :labelCol="{lg: {span: 7}, sm: {span: 7}}"
         :wrapperCol="{lg: {span: 10}, sm: {span: 17} }">
         <a-input
           v-decorator="[
             'name',
-            {rules: [{ required: true, message: '请输入标题' }]}
+            {rules: [{ required: true, message: '請輸入標題' }]}
           ]"
           name="name"
-          placeholder="给目标起个名字" />
+          placeholder="給目標起個名字" />
       </a-form-item>
       <a-form-item
         label="起止日期"
@@ -22,54 +22,54 @@
           style="width: 100%"
           v-decorator="[
             'buildTime',
-            {rules: [{ required: true, message: '请选择起止日期' }]}
+            {rules: [{ required: true, message: '請選擇起止日期' }]}
           ]" />
       </a-form-item>
       <a-form-item
-        label="目标描述"
+        label="目標描述"
         :labelCol="{lg: {span: 7}, sm: {span: 7}}"
         :wrapperCol="{lg: {span: 10}, sm: {span: 17} }">
         <a-textarea
           rows="4"
-          placeholder="请输入你阶段性工作目标"
+          placeholder="請輸入你階段性工作目標"
           v-decorator="[
             'description',
-            {rules: [{ required: true, message: '请输入目标描述' }]}
+            {rules: [{ required: true, message: '請輸入目標描述' }]}
           ]" />
       </a-form-item>
       <a-form-item
-        label="衡量标准"
+        label="衡量標準"
         :labelCol="{lg: {span: 7}, sm: {span: 7}}"
         :wrapperCol="{lg: {span: 10}, sm: {span: 17} }">
         <a-textarea
           rows="4"
-          placeholder="请输入衡量标准"
+          placeholder="請輸入衡量標準"
           v-decorator="[
             'type',
-            {rules: [{ required: true, message: '请输入衡量标准' }]}
+            {rules: [{ required: true, message: '請輸入衡量標準' }]}
           ]" />
       </a-form-item>
       <a-form-item
-        label="客户"
+        label="客戶"
         :labelCol="{lg: {span: 7}, sm: {span: 7}}"
         :wrapperCol="{lg: {span: 10}, sm: {span: 17} }">
-        <a-input 
-          placeholder="请描述你服务的客户，内部客户直接 @姓名／工号"
+        <a-input
+          placeholder="請描述你服務的客戶，內部客戶直接 @姓名／工號"
           v-decorator="[
             'customer',
-            {rules: [{ required: true, message: '请描述你服务的客户' }]}
+            {rules: [{ required: true, message: '請描述你服務的客戶' }]}
           ]" />
       </a-form-item>
       <a-form-item
-        label="邀评人"
+        label="邀評人"
         :labelCol="{lg: {span: 7}, sm: {span: 7}}"
         :wrapperCol="{lg: {span: 10}, sm: {span: 17} }"
         :required="false"
       >
-        <a-input placeholder="请直接 @姓名／工号，最多可邀请 5 人" />
+        <a-input placeholder="請直接 @姓名／工號，最多可邀請 5 人" />
       </a-form-item>
       <a-form-item
-        label="权重"
+        label="權重"
         :labelCol="{lg: {span: 7}, sm: {span: 7}}"
         :wrapperCol="{lg: {span: 10}, sm: {span: 17} }"
         :required="false"
@@ -78,16 +78,16 @@
         <span> %</span>
       </a-form-item>
       <a-form-item
-        label="目标公开"
+        label="目標公開"
         :labelCol="{lg: {span: 7}, sm: {span: 7}}"
         :wrapperCol="{lg: {span: 10}, sm: {span: 17} }"
         :required="false"
-        help="客户、邀评人默认被分享"
+        help="客戶、邀評人默認被分享"
       >
         <a-radio-group v-model="value">
-          <a-radio :value="1">公开</a-radio>
-          <a-radio :value="2">部分公开</a-radio>
-          <a-radio :value="3">不公开</a-radio>
+          <a-radio :value="1">公開</a-radio>
+          <a-radio :value="2">部分公開</a-radio>
+          <a-radio :value="3">不公開</a-radio>
         </a-radio-group>
         <a-form-item>
           <a-select mode="multiple" v-if="value === 2">
@@ -113,7 +113,7 @@
     name: 'BaseForm',
     data () {
       return {
-        description: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
+        description: '表單頁用於向用戶收集或驗證信息，基礎表單常見於數據項較少的表單場景。',
         value: 1,
 
         // form

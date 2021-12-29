@@ -1,7 +1,7 @@
 <template>
   <a-card :bordered="false">
 
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator" :md="24" :sm="24" style="margin: -25px 0px 10px 2px">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
 
@@ -9,7 +9,7 @@
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel">
             <a-icon type="delete"/>
-            删除
+            刪除
           </a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作
@@ -18,10 +18,10 @@
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -38,7 +38,7 @@
         @change="handleTableChange">
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">編輯</a>
           <a-divider type="vertical"/>
           <a-dropdown>
             <a class="ant-dropdown-link">
@@ -46,12 +46,12 @@
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a href="javascript:;" @click="handleDetail(record)">详情</a>
+                <a href="javascript:;" @click="handleDetail(record)">詳情</a>
               </a-menu-item>
 
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+                  <a>刪除</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -60,9 +60,9 @@
 
       </a-table>
     </div>
-    <!-- table区域-end -->
+    <!-- table區域-end -->
 
-    <!-- 表单区域 -->
+    <!-- 表單區域 -->
     <JeecgOrderTicket-modal ref="modalForm" @ok="modalFormOk"></JeecgOrderTicket-modal>
   </a-card>
 </template>
@@ -80,26 +80,26 @@
     },
     data() {
       return {
-        description: '机票信息',
-        // 表头
+        description: '機票信息',
+        // 表頭
         columns: [{
-          title: '航班号',
+          title: '航班號',
           align: "center",
           dataIndex: 'ticketCode'
         }, {
-          title: '航班时间',
+          title: '航班時間',
           align: "center",
           dataIndex: 'tickectDate'
         }, {
-          title: '订单号码',
+          title: '訂單號碼',
           align: "center",
           dataIndex: 'orderId',
         }, {
-          title: '创建人',
+          title: '創建人',
           align: "center",
           dataIndex: 'createBy'
         }, {
-          title: '创建时间',
+          title: '創建時間',
           align: "center",
           dataIndex: 'createTime',
           sorter: true
@@ -123,7 +123,7 @@
           this.ipagination.current = 1;
         }
         var params = this.getQueryParams();
-        //update-begin--Author:kangxiaolin  Date:20190905 for：[442]主子表分开维护，生成的代码子表的分页改为真实的分页--------------------
+        //update-begin--Author:kangxiaolin  Date:20190905 for：[442]主子表分開維護，生成的代碼子表的分頁改為真實的分頁--------------------
         getAction(this.url.list, {orderId: params.mainId ,pageNo : this.ipagination.current,
           pageSize :this.ipagination.pageSize}).then((res) => {
           if (res.success) {
@@ -133,7 +133,7 @@
             this.dataSource = null;
           }
         })
-        //update-end--Author:kangxiaolin  Date:20190905 for：[442]主子表分开维护，生成的代码子表的分页改为真实的分页--------------------
+        //update-end--Author:kangxiaolin  Date:20190905 for：[442]主子表分開維護，生成的代碼子表的分頁改為真實的分頁--------------------
       },
       getOrderMain(orderId) {
         this.queryParam.mainId = orderId;
@@ -141,7 +141,7 @@
       },
       handleAdd: function () {
         this.$refs.modalForm.add(this.queryParam.mainId);
-        this.$refs.modalForm.title = "添加机票信息";
+        this.$refs.modalForm.title = "添加機票信息";
       },
     }
   }

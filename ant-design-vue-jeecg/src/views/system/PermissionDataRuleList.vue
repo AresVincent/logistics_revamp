@@ -1,11 +1,11 @@
 <template>
   <a-drawer
-    title="数据权限规则"
+    title="數據權限規則"
     :width="drawerWidth"
     @close="onClose"
     :visible="visible">
 
-    <!-- 抽屉内容的border -->
+    <!-- 抽屜內容的border -->
     <div
       :style="{
         padding:'10px',
@@ -16,18 +16,18 @@
         <a-form @keyup.enter.native="searchQuery">
           <a-row :gutter="12">
             <a-col :md="8" :sm="8">
-              <a-form-item label="规则名称" :labelCol="{span: 8}" :wrapperCol="{span: 14, offset: 1}">
-                <a-input placeholder="请输入规则名称" v-model="queryParam.ruleName"></a-input>
+              <a-form-item label="規則名稱" :labelCol="{span: 8}" :wrapperCol="{span: 14, offset: 1}">
+                <a-input placeholder="請輸入規則名稱" v-model="queryParam.ruleName"></a-input>
               </a-form-item>
             </a-col>
             <a-col :md="8" :sm="8">
-              <a-form-item label="规则值" :labelCol="{span: 8}" :wrapperCol="{span: 14, offset: 1}">
-                <a-input placeholder="请输入规则值" v-model="queryParam.ruleValue"></a-input>
+              <a-form-item label="規則值" :labelCol="{span: 8}" :wrapperCol="{span: 14, offset: 1}">
+                <a-input placeholder="請輸入規則值" v-model="queryParam.ruleValue"></a-input>
               </a-form-item>
             </a-col>
             <a-col :md="7" :sm="8">
               <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-                <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+                <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
                 <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
               </span>
             </a-col>
@@ -49,11 +49,11 @@
           :rowClassName="getRowClassname">
           <span slot="action" slot-scope="text, record">
             <a @click="handleEdit(record)">
-              <a-icon type="edit"/>编辑
+              <a-icon type="edit"/>編輯
             </a>
             <a-divider type="vertical"/>
-            <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-              <a>删除</a>
+            <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+              <a>刪除</a>
             </a-popconfirm>
           </span>
         </a-table>
@@ -70,17 +70,17 @@
 
   const columns = [
     {
-      title: '规则名称',
+      title: '規則名稱',
       dataIndex: 'ruleName',
       key: 'ruleName'
     },
     {
-      title: '规则字段',
+      title: '規則字段',
       dataIndex: 'ruleColumn',
       key: 'ruleColumn'
     },
     {
-      title: '规则值',
+      title: '規則值',
       dataIndex: 'ruleValue',
       key: 'ruleValue'
     },
@@ -117,13 +117,13 @@
     },
     methods: {
       loadData() {
-        //20190908 scott for: 首次进入菜单列表的时候，不加载权限列表
+        //20190908 scott for: 首次進入菜單列表的時候，不加載權限列表
         if(!this.permId){
           return
         }
         let that = this
         this.dataSource = []
-        var params = this.getQueryParams()//查询条件
+        var params = this.getQueryParams()//查詢條件
         getPermissionRuleList(params).then((res) => {
           if (res.success) {
             that.dataSource = res.result
@@ -162,7 +162,7 @@
       onClose() {
         this.visible = false
       },
-      // 根据屏幕变化,设置抽屉尺寸
+      // 根據屏幕變化,設置抽屜尺寸
       resetScreenSize() {
         let screenWidth = document.body.clientWidth
         if (screenWidth < 500) {

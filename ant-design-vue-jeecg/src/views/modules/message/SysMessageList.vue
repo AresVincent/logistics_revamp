@@ -1,33 +1,33 @@
 <template>
   <a-card :bordered="false">
 
-    <!-- 查询区域 -->
+    <!-- 查詢區域 -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :md="6" :sm="8">
-            <a-form-item label="消息标题">
-              <a-input placeholder="请输入消息标题" v-model="queryParam.esTitle"></a-input>
+            <a-form-item label="消息標題">
+              <a-input placeholder="請輸入消息標題" v-model="queryParam.esTitle"></a-input>
             </a-form-item>
           </a-col>
           <a-col :md="6" :sm="8">
-            <a-form-item label="发送内容">
-              <a-input placeholder="请输入发送内容" v-model="queryParam.esContent"></a-input>
+            <a-form-item label="發送內容">
+              <a-input placeholder="請輸入發送內容" v-model="queryParam.esContent"></a-input>
             </a-form-item>
           </a-col>
           <template v-if="toggleSearchStatus">
             <a-col :md="6" :sm="8">
               <a-form-item label="接收人">
-                <a-input placeholder="请输入接收人" v-model="queryParam.esReceiver"></a-input>
+                <a-input placeholder="請輸入接收人" v-model="queryParam.esReceiver"></a-input>
               </a-form-item>
             </a-col>
           </template>
           <a-col :md="6" :sm="8">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
               <a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
+                {{ toggleSearchStatus ? '收起' : '展開' }}
                 <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
               </a>
             </span>
@@ -37,19 +37,19 @@
       </a-form>
     </div>
 
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" v-show="show" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" v-show="show" icon="download" @click="handleExportXls('消息')">导出</a-button>
+      <a-button type="primary" v-show="show" icon="download" @click="handleExportXls('消息')">導出</a-button>
       <a-upload v-show="show" name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl"
                 @change="handleImportExcel">
-        <a-button type="primary" icon="import">导入</a-button>
+        <a-button type="primary" icon="import">導入</a-button>
       </a-upload>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel">
             <a-icon type="delete"/>
-            删除
+            刪除
           </a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作
@@ -58,11 +58,11 @@
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{
-        selectedRowKeys.length }}</a>项
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{
+        selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -78,23 +78,23 @@
         :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
         @change="handleTableChange">
 
-        <!-- 字符串超长截取省略号显示-->
+        <!-- 字符串超長截取省略號显示-->
         <span slot="esContent" slot-scope="text">
           <j-ellipsis :value="text" :length="10" />
         </span>
 
         <span slot="action" slot-scope="text, record">
-          <a href="javascript:;" @click="handleDetail(record)">详情</a>
+          <a href="javascript:;" @click="handleDetail(record)">詳情</a>
           <a-divider type="vertical"/>
           <a-dropdown>
             <a class="ant-dropdown-link">更多<a-icon type="down"/></a>
             <a-menu slot="overlay">
                <a-menu-item v-show="show">
-                <a  @click="handleEdit(record)">编辑</a>
+                <a  @click="handleEdit(record)">編輯</a>
               </a-menu-item>
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+                  <a>刪除</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -103,9 +103,9 @@
 
       </a-table>
     </div>
-    <!-- table区域-end -->
+    <!-- table區域-end -->
 
-    <!-- 表单区域 -->
+    <!-- 表單區域 -->
     <sysMessage-modal ref="modalForm" @ok="modalFormOk"></sysMessage-modal>
   </a-card>
 </template>
@@ -124,10 +124,10 @@
     },
     data() {
       return {
-        description: '消息管理页面',
-        // 新增修改按钮是否显示
+        description: '消息管理頁面',
+        // 新增修改按鈕是否显示
         show: false,
-        // 表头
+        // 表頭
         columns: [
           {
             title: '#',
@@ -140,12 +140,12 @@
             }
           },
           {
-            title: '消息标题',
+            title: '消息標題',
             align: "center",
             dataIndex: 'esTitle'
           },
           {
-            title: '发送内容',
+            title: '發送內容',
             align: "center",
             dataIndex: 'esContent',
             scopedSlots: {customRender: 'esContent'},
@@ -156,22 +156,22 @@
             dataIndex: 'esReceiver'
           },
           {
-            title: '发送次数',
+            title: '發送次數',
             align: "center",
             dataIndex: 'esSendNum'
           },
           {
-            title: '发送状态',
+            title: '發送狀態',
             align: 'center',
             dataIndex: 'esSendStatus_dictText'
           },
           {
-            title: '发送时间',
+            title: '發送時間',
             align: "center",
             dataIndex: 'esSendTime'
           },
           {
-            title: '发送方式',
+            title: '發送方式',
             align: 'center',
             dataIndex: 'esType_dictText'
           },
@@ -200,7 +200,7 @@
   }
 </script>
 <style lang="less" scoped>
-  /** Button按钮间距 */
+  /** Button按鈕間距 */
   .ant-btn {
     margin-left: 3px
   }

@@ -6,7 +6,7 @@
     :confirmLoading="confirmLoading"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
 
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
@@ -14,48 +14,48 @@
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="用户名">
-          <a-input placeholder="请输入用户名" v-decorator="['userName', {}]" readOnly/>
+          label="用戶名">
+          <a-input placeholder="請輸入用戶名" v-decorator="['userName', {}]" readOnly/>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="代理人用户名">
-          <j-select-user-by-dep placeholder="请输入代理人用户名" v-decorator="['agentUserName', validatorRules.agentUserName]" :trigger-change="true"></j-select-user-by-dep>
+          label="代理人用戶名">
+          <j-select-user-by-dep placeholder="請輸入代理人用戶名" v-decorator="['agentUserName', validatorRules.agentUserName]" :trigger-change="true"></j-select-user-by-dep>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="代理开始时间">
+          label="代理開始時間">
           <j-date
             v-decorator="[ 'startTime', validatorRules.startTime]"
             :trigger-change="true"
             :showTime="true"
             date-format="YYYY-MM-DD HH:mm:ss"
             style="width:100%"
-            placeholder="请选择开始时间" >
+            placeholder="請選擇開始時間" >
           </j-date>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="代理结束时间">
+          label="代理結束時間">
           <j-date
             v-decorator="[ 'endTime', validatorRules.endTime]"
             :trigger-change="true"
             :showTime="true"
             date-format="YYYY-MM-DD HH:mm:ss"
             style="width:100%"
-            placeholder="请选择结束时间" >
+            placeholder="請選擇結束時間" >
           </j-date>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="状态">
+          label="狀態">
           <a-radio-group class="fontiframe" name="radioGroup" v-decorator="[ 'status', {}]">
             <a-radio class="radioGroup" value="1">有效</a-radio>
-            <a-radio class="radioGroup" value="0">无效</a-radio>
+            <a-radio class="radioGroup" value="0">無效</a-radio>
           </a-radio-group>
         </a-form-item>
 
@@ -94,9 +94,9 @@
         confirmLoading: false,
         form: this.$form.createForm(this),
         validatorRules:{
-          agentUserName:{rules: [{ required: true, message: '请输入代理人用户名!' }]},
-          startTime:{rules: [{ required: true, message: '请输入代理开始时间!' }]},
-          endTime:{rules: [{ required: true, message: '请输入代理结束时间!' }]},
+          agentUserName:{rules: [{ required: true, message: '請輸入代理人用戶名!' }]},
+          startTime:{rules: [{ required: true, message: '請輸入代理開始時間!' }]},
+          endTime:{rules: [{ required: true, message: '請輸入代理結束時間!' }]},
         },
         url: {
           add: "/sys/sysUserAgent/add",
@@ -114,10 +114,10 @@
 
       },
       init () {
-        var params = {userName:this.username};//查询条件
+        var params = {userName:this.username};//查詢條件
         getAction(this.url.queryByUserName,params).then((res)=>{
           if(res.success){
-            console.log("获取流程节点信息",res);
+            console.log("獲取流程節點信息",res);
             this.edit (res.result);
           }else{
             this.edit({userName:this.username,status:"0"});
@@ -138,7 +138,7 @@
       },
       handleOk () {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.form.validateFields((err, values) => {
           if (!err) {
             that.confirmLoading = true;

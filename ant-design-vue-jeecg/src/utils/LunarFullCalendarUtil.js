@@ -8,57 +8,57 @@
 
 import { getRefPromise } from '@/utils/JEditableTableUtil'
 
-/* 日历的视图类型 */
+/* 日曆的視圖類型 */
 const calendarViewType = {
-  month: 'month', // 月视图
-  basicWeek: 'basicWeek',  // 基础周视图
-  basicDay: 'basicDay',//  基础天视图
-  agendaWeek: 'agendaWeek', // 议程周视图
-  agendaDay: 'agendaDay', // 议程天视图
+  month: 'month', // 月視圖
+  basicWeek: 'basicWeek',  // 基礎周視圖
+  basicDay: 'basicDay',//  基礎天視圖
+  agendaWeek: 'agendaWeek', // 議程周視圖
+  agendaDay: 'agendaDay', // 議程天視圖
 }
 
-/* 定义默认视图 */
+/* 定義默認視圖 */
 const defaultView = calendarViewType.month
 
-/* 定义日历默认配置 */
+/* 定義日曆默認配置 */
 const defaultSettings = {
   locale: 'zh-cn',
-  // 按钮文字
+  // 按鈕文字
   buttonText: {
     today: '今天',
     month: '月',
     week: '周',
     day: '日'
   },
-  // 头部排列方式
+  // 頭部排列方式
   header: {
     left: 'prev,next, today',
     center: 'title',
     right: 'hide, custom, month,agendaWeek,agendaDay'
   },
-  //点击今天日列表图
+  //點擊今天日列表圖
   eventLimitClick: 'day',
-  // 隐藏超出的事件
+  // 隱藏超出的事件
   eventLimit: true,
-  // 设置每周开始日期为周日
+  // 設置每週開始日期為周日
   firstDay: 0,
-  // 默认显示视图
+  // 默認显示視圖
   defaultView,
   timeFormat: 'H:mm',
   axisFormat: 'H:mm',
-  // agenda视图下是否显示all-day
+  // agenda視圖下是否显示all-day
   allDaySlot: true,
-  // agenda视图下all-day的显示文本
+  // agenda視圖下all-day的显示文本
   allDayText: '全天',
-  // 时区默认本地的
+  // 時區默認本地的
   timezone: 'local',
-  // 周视图和日视同的左侧时间显示
+  // 周視圖和日視同的左側時間显示
   slotLabelFormat: 'HH:mm',
-  // 设置第二天阈值
+  // 設置第二天閾值
   nextDayThreshold: '00:00:00',
 }
 
-/** 提供了一些增强方法 */
+/** 提供了一些增強方法 */
 const CalendarMixins = {
   data() {
     return {
@@ -69,7 +69,7 @@ const CalendarMixins = {
 
     getCalendarConfigEventHandler() {
       return {
-        // 处理 view changed 事件
+        // 處理 view changed 事件
         viewRender: (view, element) => {
           let { type } = view
 
@@ -88,7 +88,7 @@ const CalendarMixins = {
       }
     },
 
-    /** 获取 LunarFullCalendar 实例，ref = baseCalendar */
+    /** 獲取 LunarFullCalendar 實例，ref = baseCalendar */
     getCalendar(fn) {
       return getRefPromise(this, 'baseCalendar').then(fn)
     },
@@ -97,7 +97,7 @@ const CalendarMixins = {
       this.getCalendar(ref => ref.$emit(name, data))
     },
 
-    /** 强制重新加载所有的事件（日程）*/
+    /** 強制重新加載所有的事件（日程）*/
     calendarReloadEvents() {
       this.calendarEmit('reload-events')
     }

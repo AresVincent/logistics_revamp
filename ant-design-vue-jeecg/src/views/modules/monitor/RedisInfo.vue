@@ -1,7 +1,7 @@
 <template>
   <a-skeleton active :loading="loading" :paragraph="{rows: 17}">
     <a-card>
-      <!-- Radis 信息实时监控 -->
+      <!-- Radis 信息實時監控 -->
       <a-row :gutter="8">
         <a-col :sm="24" :xl="12">
           <area-chart-ty v-bind="memory"/>
@@ -11,7 +11,7 @@
         </a-col>
       </a-row>
 
-      <h3>Redis 详细信息</h3>
+      <h3>Redis 詳細信息</h3>
       <a-table
         :loading="tableLoading"
         :columns="columns"
@@ -35,15 +35,15 @@
       return {
         loading: true,
         tableLoading: true,
-        // 定时器ID
+        // 定時器ID
         timer: null,
-        // 定时器周期
+        // 定時器周期
         millisec: 3000,
-        // Key 实时数量
+        // Key 實時數量
         key: {
-          title: 'Radis Key 实时数量（个）',
+          title: 'Radis Key 實時數量（個）',
           dataSource: [],
-          y: '数量（个）',
+          y: '數量（個）',
           height: 340,
           min: 0,
           max: 100,
@@ -51,11 +51,11 @@
           lineSize: 8,
           lineColor: '#DC143C'
         },
-        // 内存实时占用情况
+        // 內存實時佔用情況
         memory: {
-          title: 'Radis 内存实时占用情况（KB）',
+          title: 'Radis 內存實時佔用情況（KB）',
           dataSource: [],
-          y: '内存（KB）',
+          y: '內存（KB）',
           min: 0,
           max: 3000,
           height: 340,
@@ -95,7 +95,7 @@
     },
     methods: {
 
-      /** 开启定时器 */
+      /** 開啟定時器 */
       openTimer() {
         this.loadData()
         this.closeTimer()
@@ -106,12 +106,12 @@
         }, this.millisec)
       },
 
-      /** 关闭定时器 */
+      /** 關閉定時器 */
       closeTimer() {
         if (this.timer) clearInterval(this.timer)
       },
 
-      /** 查询数据 */
+      /** 查詢數據 */
       loadData() {
         Promise.all([
           getAction(this.url.keysSize),
@@ -122,22 +122,22 @@
           let [{ dbSize: currentSize }, memoryInfo] = res
           let currentMemory = memoryInfo.used_memory / 1000
 
-          // push 数据
+          // push 數據
           this.key.dataSource.push({ x: time, y: currentSize })
           this.memory.dataSource.push({ x: time, y: currentMemory })
-          // 最大长度为6
+          // 最大長度為6
           if (this.key.dataSource.length > 6) {
             this.key.dataSource.splice(0, 1)
             this.memory.dataSource.splice(0, 1)
           }
 
-          // 计算 Key 最大最小值
+          // 計算 Key 最大最小值
           let keyPole = this.getMaxAndMin(this.key.dataSource, 'y')
           this.key.max = Math.floor(keyPole[0]) + 10
           this.key.min = Math.floor(keyPole[1]) - 10
           if (this.key.min < 0) this.key.min = 0
 
-          // 计算 Memory 最大最小值
+          // 計算 Memory 最大最小值
           let memoryPole = this.getMaxAndMin(this.memory.dataSource, 'y')
           this.memory.max = Math.floor(memoryPole[0]) + 100
           this.memory.min = Math.floor(memoryPole[1]) - 100
@@ -146,14 +146,14 @@
         }).catch((e) => {
           console.error(e)
           this.closeTimer()
-          this.$message.error('获取 Redis 信息失败')
+          this.$message.error('獲取 Redis 信息失敗')
         }).finally(() => {
           this.loading = false
         })
 
       },
 
-      // 获取一组数据中最大和最小的值
+      // 獲取一組數據中最大和最小的值
       getMaxAndMin(dataSource, field) {
         let maxValue = null, minValue = null
         dataSource.forEach(item => {

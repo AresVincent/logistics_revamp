@@ -2,15 +2,15 @@
   <div class="config-list">
     <a-radio-group v-model="type">
       <div class="item">
-        <a-radio value="TYPE_NOT_SET" class="choice" :disabled="disableChoice">不设置</a-radio>
-        <span class="tip-info">日和周只能设置其中之一</span>
+        <a-radio value="TYPE_NOT_SET" class="choice" :disabled="disableChoice">不設置</a-radio>
+        <span class="tip-info">日和周只能設置其中之一</span>
       </div>
       <div class="item">
         <a-radio value="TYPE_EVERY" class="choice" :disabled="disableChoice">每日</a-radio>
       </div>
       <div class="item">
-        <a-radio value="TYPE_RANGE" class="choice" :disabled="disableChoice">区间</a-radio>
-        从
+        <a-radio value="TYPE_RANGE" class="choice" :disabled="disableChoice">區間</a-radio>
+        從
         <a-input-number :disabled="type!==TYPE_RANGE || disableChoice" :max="maxValue" :min="minValue" :precision="0" class="w60" v-model="valueRange.start"/>
         日
         至
@@ -18,10 +18,10 @@
         日
       </div>
       <div class="item">
-        <a-radio value="TYPE_LOOP" class="choice" :disabled="disableChoice">循环</a-radio>
-        从
+        <a-radio value="TYPE_LOOP" class="choice" :disabled="disableChoice">循環</a-radio>
+        從
         <a-input-number :disabled="type!==TYPE_LOOP || disableChoice" :max="maxValue" :min="minValue" :precision="0" class="w60" v-model="valueLoop.start"/>
-        日开始，间隔
+        日開始，間隔
         <a-input-number :disabled="type!==TYPE_LOOP || disableChoice" :max="maxValue" :min="minValue" :precision="0" class="w60" v-model="valueLoop.interval"/>
         日
       </div>
@@ -32,7 +32,7 @@
         日，最近的工作日
       </div>
       <div class="item">
-        <a-radio value="TYPE_LAST" class="choice" :disabled="disableChoice">最后一日</a-radio>
+        <a-radio value="TYPE_LAST" class="choice" :disabled="disableChoice">最後一日</a-radio>
       </div>
       <div class="item">
         <a-radio value="TYPE_SPECIFY" class="choice" :disabled="disableChoice">指定</a-radio>
@@ -70,7 +70,7 @@ export default {
   },
   watch: {
     value_c(newVal, oldVal) {
-      // 数值变化
+      // 數值變化
       this.updateValue()
     },
     week(newVal, oldVal) {

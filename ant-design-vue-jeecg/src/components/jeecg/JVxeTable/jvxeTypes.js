@@ -1,17 +1,17 @@
-// 组件类型
+// 組件類型
 export default JVXETypes
 export const JVXETypes = {
-  // 为了防止和 vxe 内置的类型冲突，所以加上一个前缀
-  // 前缀是自动加的，代码中直接用就行（JVXETypes.input）
+  // 為了防止和 vxe 內置的類型衝突，所以加上一個前綴
+  // 前綴是自動加的，代碼中直接用就行（JVXETypes.input）
   _prefix: 'j-',
 
-  // 行号列
+  // 行號列
   rowNumber: 'row-number',
-  // 选择列
+  // 選擇列
   rowCheckbox: 'row-checkbox',
-  // 单选列
+  // 單選列
   rowRadio: 'row-radio',
-  // 展开列
+  // 展開列
   rowExpand: 'row-expand',
   // 上下排序
   rowDragSort: 'row-drag-sort',
@@ -27,16 +27,16 @@ export const JVXETypes = {
   upload: 'upload',
   // 下拉搜索
   selectSearch: 'select-search',
-  // 下拉多选
+  // 下拉多選
   selectMultiple: 'select-multiple',
-  // 进度条
+  // 進度條
   progress: 'progress',
-  //部门选择
+  //部門選擇
   departSelect: 'sel_depart',
-  //用户选择
+  //用戶選擇
   userSelect: 'sel_user',
 
-  // 拖轮Tags（暂无用）
+  // 拖輪Tags（暫無用）
   tags: 'tags',
 
   slot: 'slot',

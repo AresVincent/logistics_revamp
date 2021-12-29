@@ -13,10 +13,10 @@
 <script>
   /**
    * 使用方法
-   * 在form下直接写这个组件就行了，
+   * 在form下直接寫這個組件就行了，
    *<a-form layout="inline" :form="form" >
    *     <j-form-container :disabled="true">
-   *         <!-- 表单内容省略..... -->
+   *         <!-- 表單內容省略..... -->
    *     </j-form-container>
    *</a-form>
    */
@@ -30,7 +30,7 @@
       }
     },
     mounted(){
-      console.log("我是表单禁用专用组件,但是我并不支持表单中iframe的内容禁用")
+      console.log("我是表單禁用專用組件,但是我並不支持表單中iframe的內容禁用")
     }
   }
 </script>

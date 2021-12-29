@@ -1,22 +1,22 @@
 /*
 *
-* 这里填写用户自定义的表达式
-* 可用在Online表单的默认值表达式中使用
-* 需要外部使用的变量或方法一定要 export，否则无法识别
+* 這裏填寫用戶自定義的表達式
+* 可用在Online表單的默認值表達式中使用
+* 需要外部使用的變量或方法一定要 export，否則無法識別
 * 示例：
-*   export const name = '张三'; // const 是常量
-*   export let age = 17; // 看情况 export const 还是 let ，两者都可正常使用
-*   export function content(arg) { // export 方法，可传参数，使用时要加括号，值一定要return回去，可以返回Promise
+*   export const name = '張三'; // const 是常量
+*   export let age = 17; // 看情況 export const 還是 let ，兩者都可正常使用
+*   export function content(arg) { // export 方法，可傳參數，使用時要加括號，值一定要return回去，可以返回Promise
 *     return 'content' + arg;
 *   }
-*   export const address = (arg) => content(arg) + ' | 北京市'; // export 箭头函数也可以
+*   export const address = (arg) => content(arg) + ' | 北京市'; // export 箭頭函數也可以
 *
 */
 
-/** 字段默认值官方示例：获取地址 */
+/** 字段默認值官方示例：獲取地址 */
 export function demoFieldDefVal_getAddress(arg) {
   if (!arg) {
-    arg = '朝阳区'
+    arg = '朝陽區'
   }
   return `北京市 ${arg}`
 }

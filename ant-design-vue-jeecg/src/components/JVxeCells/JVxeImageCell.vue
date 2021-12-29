@@ -3,14 +3,14 @@
     <template v-if="hasFile" v-for="(file, fileKey) of [innerFile || {}]">
       <div :key="fileKey" style="position: relative;">
         <template v-if="!file || !(file['url'] || file['path'] || file['message'])">
-          <a-tooltip :title="'请稍后: ' + JSON.stringify (file) + ((file['url'] || file['path'] || file['message']))">
+          <a-tooltip :title="'請稍後: ' + JSON.stringify (file) + ((file['url'] || file['path'] || file['message']))">
             <a-icon type="loading"/>
           </a-tooltip>
         </template>
         <template v-else-if="file['path']">
-          <img class="j-editable-image" :src="imgSrc" alt="无图片" @click="handleMoreOperation"/>
+          <img class="j-editable-image" :src="imgSrc" alt="無圖片" @click="handleMoreOperation"/>
         </template>
-        <a-tooltip v-else :title="file.message||'上传失败'" @click="handleClickShowImageError">
+        <a-tooltip v-else :title="file.message||'上傳失敗'" @click="handleClickShowImageError">
           <a-icon type="exclamation-circle" style="color:red;"/>
         </a-tooltip>
 
@@ -25,10 +25,10 @@
 
             <a-menu slot="overlay">
               <a-menu-item v-if="originColumn.allowDownload !== false" @click="handleClickDownloadFile">
-                <span><a-icon type="download"/>&nbsp;下载</span>
+                <span><a-icon type="download"/>&nbsp;下載</span>
               </a-menu-item>
               <a-menu-item v-if="originColumn.allowRemove !== false" @click="handleClickDeleteFile">
-                <span><a-icon type="delete"/>&nbsp;删除</span>
+                <span><a-icon type="delete"/>&nbsp;刪除</span>
               </a-menu-item>
               <a-menu-item @click="handleMoreOperation(originColumn)">
                 <span><a-icon type="bars"/> 更多</span>
@@ -50,7 +50,7 @@
       v-bind="cellProps"
       @change="handleChangeUpload"
     >
-      <a-button icon="upload">{{originColumn.btnText || '上传图片'}}</a-button>
+      <a-button icon="upload">{{originColumn.btnText || '上傳圖片'}}</a-button>
     </a-upload>
     <j-file-pop ref="filePop" @ok="handleFileSuccess" :number="number"/>
   </div>
@@ -86,7 +86,7 @@
         return headers
       },
 
-      /** 上传请求地址 */
+      /** 上傳請求地址 */
       uploadAction() {
         if (!this.originColumn.action) {
           return window._CONFIG['domianURL'] + '/sys/common/upload'
@@ -99,7 +99,7 @@
         return this.innerFile != null
       },
 
-      /** 预览图片地址 */
+      /** 預覽圖片地址 */
       imgSrc() {
         if (this.innerFile) {
           if (this.innerFile['url']) {
@@ -135,15 +135,15 @@
     },
     methods: {
 
-      // 点击更多按钮
+      // 點擊更多按鈕
       handleMoreOperation(originColumn) {
-        //update-begin-author:wangshuai date:20201021 for:LOWCOD-969 判断传过来的字段是否存在number，用于控制上传文件
+        //update-begin-author:wangshuai date:20201021 for:LOWCOD-969 判斷傳過來的字段是否存在number，用於控制上傳文件
         if (originColumn.number) {
           this.number = originColumn.number
         } else {
           this.number = 0
         }
-        //update-end-author:wangshuai date:20201021 for:LOWCOD-969 判断传过来的字段是否存在number，用于控制上传文件
+        //update-end-author:wangshuai date:20201021 for:LOWCOD-969 判斷傳過來的字段是否存在number，用於控制上傳文件
         if(originColumn && originColumn.fieldExtendJson){
           let json = JSON.parse(originColumn.fieldExtendJson);
           this.number = json.uploadnum?json.uploadnum:0;
@@ -155,7 +155,7 @@
         this.$refs.filePop.show('', path, 'img')
       },
 
-      // 更多上传回调
+      // 更多上傳回調
       handleFileSuccess(file) {
         if (file) {
           this.innerFile.path = file.path
@@ -163,11 +163,11 @@
         }
       },
 
-      // 弹出上传出错详细信息
+      // 彈出上傳出錯詳細信息
       handleClickShowImageError() {
         let file = this.innerFile || null
         if (file && file['message']) {
-          this.$error({title: '上传出错', content: '错误信息：' + file['message'], maskClosable: true})
+          this.$error({title: '上傳出錯', content: '錯誤信息：' + file['message'], maskClosable: true})
         }
       },
 
@@ -191,15 +191,15 @@
               this.handleChangeCommon(value)
             } else {
               value['status'] = 'error'
-              value['message'] = file.response.message || '未知错误'
+              value['message'] = file.response.message || '未知錯誤'
             }
           } else {
-            // 考虑到如果设置action上传路径为非jeecg-boot后台，可能不会返回 success 属性的情况，就默认为成功
+            // 考慮到如果設置action上傳路徑為非jeecg-boot後台，可能不會返回 success 屬性的情況，就默認為成功
             value['path'] = file.response[this.responseName]
             this.handleChangeCommon(value)
           }
         } else if (file.status === 'error') {
-          value['message'] = file.response.message || '未知错误'
+          value['message'] = file.response.message || '未知錯誤'
         }
         this.innerFile = value
       },
@@ -215,7 +215,7 @@
       },
 
     },
-    // 【组件增强】注释详见：JVxeCellMixins.js
+    // 【組件增強】註釋詳見：JVxeCellMixins.js
     enhanced: {
       switches: {visible: true},
       getValue: value => JVxeUploadCell.enhanced.getValue(value),

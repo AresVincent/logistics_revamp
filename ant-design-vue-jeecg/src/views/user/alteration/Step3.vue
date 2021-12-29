@@ -2,15 +2,15 @@
   <div>
     <a-form-model ref="form" :model="model" :rules="validatorRules" class="password-retrieval-form">
 
-      <a-form-model-item label="账号名" v-bind="layout">
+      <a-form-model-item label="賬號名" v-bind="layout">
         <a-input type="text" :value="accountName" disabled/>
       </a-form-model-item>
 
-      <a-form-model-item prop="password" label="新密码" v-bind="layout" class="stepFormText">
+      <a-form-model-item prop="password" label="新密碼" v-bind="layout" class="stepFormText">
         <a-input v-model="model.password" type="password" autocomplete="false"/>
       </a-form-model-item>
 
-      <a-form-model-item prop="confirmPassword" label="确认密码" v-bind="layout" class="stepFormText">
+      <a-form-model-item prop="confirmPassword" label="確認密碼" v-bind="layout" class="stepFormText">
         <a-input v-model="model.confirmPassword" type="password" autocomplete="false"/>
       </a-form-model-item>
 
@@ -41,10 +41,10 @@
         accountName: this.userList.username,
         validatorRules: {
           password: [{
-            required: true, pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,.\/]).{8,}$/, message: '密码由8位数字、大小写字母和特殊符号组成!!'
+            required: true, pattern: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,.\/]).{8,}$/, message: '密碼由8位数字、大小寫字母和特殊符號組成!!'
           }],
           confirmPassword: [
-            { required: true, message: '密码不能为空!'},
+            { required: true, message: '密碼不能為空!'},
             { validator: this.handlePasswordCheck}
           ]
         }
@@ -88,13 +88,13 @@
       handlePasswordCheck (rule, value, callback) {
         let password = this.model['password']
         if (value && password && value.trim() !== password.trim()) {
-          callback(new Error('两次密码不一致'))
+          callback(new Error('兩次密碼不一致'))
         }
         callback()
       },
       passwordFailed(err){
         this.$notification[ 'error' ]({
-          message: "更改密码失败",
+          message: "更改密碼失敗",
           description:err,
           duration: 4,
         });

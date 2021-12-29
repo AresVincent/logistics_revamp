@@ -1,7 +1,7 @@
 <template>
   <a-card :bordered="false">
 
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
       <a-button
@@ -9,16 +9,16 @@
         v-if="selectedRowKeys.length > 0"
         ghost
         type="primary"
-        icon="delete">批量删除
+        icon="delete">批量刪除
       </a-button>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
 
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i>已选择&nbsp;<a style="font-weight: 600">{{
-        selectedRowKeys.length }}</a>项&nbsp;&nbsp;
+        <i class="anticon anticon-info-circle ant-alert-icon"></i>已選擇&nbsp;<a style="font-weight: 600">{{
+        selectedRowKeys.length }}</a>項&nbsp;&nbsp;
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -34,7 +34,7 @@
         @expandedRowsChange="handleExpandedRowsChange">
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">編輯</a>
 
           <a-divider type="vertical"/>
           <a-dropdown>
@@ -43,35 +43,35 @@
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a href="javascript:;" @click="handleDetail(record)">详情</a>
+                <a href="javascript:;" @click="handleDetail(record)">詳情</a>
               </a-menu-item>
               <a-menu-item>
-                <a href="javascript:;" @click="handleAddSub(record)">添加下级</a>
+                <a href="javascript:;" @click="handleAddSub(record)">添加下級</a>
               </a-menu-item>
               <a-menu-item>
-                <a href="javascript:;" @click="handleDataRule(record)">数据规则</a>
+                <a href="javascript:;" @click="handleDataRule(record)">數據規則</a>
               </a-menu-item>
 
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+                  <a>刪除</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
         </span>
-        <!-- 字符串超长截取省略号显示 -->
+        <!-- 字符串超長截取省略號显示 -->
         <span slot="url" slot-scope="text">
           <j-ellipsis :value="text" :length="25"/>
         </span>
-        <!-- 字符串超长截取省略号显示-->
+        <!-- 字符串超長截取省略號显示-->
         <span slot="component" slot-scope="text">
           <j-ellipsis :value="text"/>
         </span>
       </a-table>
 
     </div>
-    <!-- table区域-end -->
+    <!-- table區域-end -->
 
     <permission-modal ref="modalForm" @ok="modalFormOk"></permission-modal>
     <permission-data-rule-list ref="PermissionDataRuleList" @ok="modalFormOk"></permission-data-rule-list>
@@ -88,26 +88,26 @@
 
   const columns = [
     {
-      title: '菜单名称',
+      title: '菜單名稱',
       dataIndex: 'name',
       key: 'name'
     }, {
-      title: '菜单类型',
+      title: '菜單類型',
       dataIndex: 'menuType',
       key: 'menuType',
       customRender: function(text) {
         if (text == 0) {
-          return '菜单'
+          return '菜單'
         } else if (text == 1) {
-          return '菜单'
+          return '菜單'
         } else if (text == 2) {
-          return '按钮/权限'
+          return '按鈕/權限'
         } else {
           return text
         }
       }
     },/*{
-      title: '权限编码',
+      title: '權限編碼',
       dataIndex: 'perms',
       key: 'permissionCode',
     },*/{
@@ -116,13 +116,13 @@
       key: 'icon'
     },
     {
-      title: '组件',
+      title: '組件',
       dataIndex: 'component',
       key: 'component',
       scopedSlots: { customRender: 'component' }
     },
     {
-      title: '路径',
+      title: '路徑',
       dataIndex: 'url',
       key: 'url',
       scopedSlots: { customRender: 'url' }
@@ -152,11 +152,11 @@
     },
     data() {
       return {
-        description: '这是菜单管理页面',
-        // 表头
+        description: '這是菜單管理頁面',
+        // 表頭
         columns: columns,
         loading: false,
-        // 展开的行，受控属性
+        // 展開的行，受控屬性
         expandedRowKeys: [],
         url: {
           list: '/sys/permission/list',
@@ -175,12 +175,12 @@
           }
         })
       },
-      // 打开数据规则编辑
+      // 打開數據規則編輯
       handleDataRule(record) {
         this.$refs.PermissionDataRuleList.edit(record)
       },
       handleAddSub(record) {
-        this.$refs.modalForm.title = "添加子菜单";
+        this.$refs.modalForm.title = "添加子菜單";
         this.$refs.modalForm.disableSubmit = false;
         this.$refs.modalForm.edit({status:'1',permsType:'1',route:true,'parentId':record.id,menuType:1});
       },

@@ -4,13 +4,13 @@
 
       <a-alert type="info" :showIcon="true">
         <div slot="message">
-          共追踪到 {{ dataSource.length }} 条近期HTTP请求记录
+          共追蹤到 {{ dataSource.length }} 條近期HTTP請求記錄
           <a-divider type="vertical"/>
           <a @click="handleClickUpdate">立即刷新</a>
         </div>
       </a-alert>
 
-      <!-- 表格区域 -->
+      <!-- 表格區域 -->
       <a-table
         :columns="columns"
         :dataSource="dataSource"
@@ -67,7 +67,7 @@
           pageSizeOptions: ['10', '20', '30', '40', '100'],
           showQuickJumper: true,
           showSizeChanger: true,
-          showTotal: (total, range) => `显示 ${range[0]} ~ ${range[1]} 条记录，共 ${total} 条记录`
+          showTotal: (total, range) => `显示 ${range[0]} ~ ${range[1]} 條記錄，共 ${total} 條記錄`
         },
         loading: true,
         tableLoading: true
@@ -76,13 +76,13 @@
     computed: {
       columns() {
         return [{
-          title: '请求时间',
+          title: '請求時間',
           dataIndex: 'timestamp',
           customRender(text) {
             return moment(text).format('YYYY-MM-DD HH:mm:ss')
           }
         }, {
-          title: '请求方法',
+          title: '請求方法',
           dataIndex: 'request.method',
           scopedSlots: { customRender: 'requestMethod' },
           filters: [
@@ -94,17 +94,17 @@
           filterMultiple: true,
           onFilter: (value, record) => record.request.method.includes(value)
         }, {
-          title: '请求URL',
+          title: '請求URL',
           dataIndex: 'request.uri',
           customRender(text) {
             return text.split('?')[0]
           }
         }, {
-          title: '响应状态',
+          title: '響應狀態',
           dataIndex: 'response.status',
           scopedSlots: { customRender: 'responseStatus' }
         }, {
-          title: '请求耗时',
+          title: '請求耗時',
           dataIndex: 'timeTaken',
           scopedSlots: { customRender: 'timeTaken' }
         }]
@@ -135,7 +135,7 @@
           this.dataSource = filterData
         }).catch((e) => {
           console.error(e)
-          this.$message.error('获取HTTP信息失败')
+          this.$message.error('獲取HTTP信息失敗')
         }).finally(() => {
           this.loading = false
           this.tableLoading = false

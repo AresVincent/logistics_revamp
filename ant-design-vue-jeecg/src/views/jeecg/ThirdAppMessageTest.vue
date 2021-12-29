@@ -3,27 +3,27 @@
     <a-spin :spinning="loading">
       <a-form-model ref="form" :model="model" :rules="rules">
         <a-tabs>
-          <a-tab-pane tab="消息选项" key="1">
-            <a-form-model-item label="测试APP" prop="app" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-select v-model="model.app" placeholder="请选择测试APP" :options="appOptions"/>
+          <a-tab-pane tab="消息選項" key="1">
+            <a-form-model-item label="測試APP" prop="app" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-select v-model="model.app" placeholder="請選擇測試APP" :options="appOptions"/>
             </a-form-model-item>
-            <a-form-model-item label="发送给所有人" prop="sendAll" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-form-model-item label="發送給所有人" prop="sendAll" :labelCol="labelCol" :wrapperCol="wrapperCol">
               <a-switch checkedChildren="是" unCheckedChildren="否" v-model="model.sendAll" @change="onSendAllChange"/>
             </a-form-model-item>
             <a-form-model-item label="接收人" prop="receiver" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <j-select-multi-user v-model="model.receiver" :disabled="model.sendAll" placeholder="请选择接收人"/>
+              <j-select-multi-user v-model="model.receiver" :disabled="model.sendAll" placeholder="請選擇接收人"/>
             </a-form-model-item>
-            <a-form-model-item label="消息内容" prop="content" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-textarea :rows="5" v-model="model.content" placeholder="请输入消息内容"/>
+            <a-form-model-item label="消息內容" prop="content" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-textarea :rows="5" v-model="model.content" placeholder="請輸入消息內容"/>
             </a-form-model-item>
             <div style="text-align: center;">
-              <a-button type="primary" size="large" @click="onSend" style="width: 120px;">发送</a-button>
+              <a-button type="primary" size="large" @click="onSend" style="width: 120px;">發送</a-button>
             </div>
           </a-tab-pane>
         </a-tabs>
 
         <a-tabs>
-          <a-tab-pane tab="测试结果（刷新自动清空）" key="1">
+          <a-tab-pane tab="測試結果（刷新自動清空）" key="1">
             <a-table
               rowKey="id"
               bordered
@@ -33,7 +33,7 @@
             >
               <div slot="action" slot-scope="text, record">
                 <template v-if="record.app==='DINGTALK'">
-                  <a-popconfirm v-if="!record.recalled" title="确定吗？" @confirm="handleRecall(record)">
+                  <a-popconfirm v-if="!record.recalled" title="確定嗎？" @confirm="handleRecall(record)">
                     <a @click="">撤回</a>
                   </a-popconfirm>
                   <span v-else>已撤回</span>
@@ -77,15 +77,15 @@ export default {
           }
         },
         {
-          title: '测试APP',
+          title: '測試APP',
           align: 'center',
           dataIndex: 'app',
           customRender: (t, r, index) => {
             if (t === 'WECHAT_ENTERPRISE') {
-              return '企业微信'
+              return '企業微信'
             }
             if (t === 'DINGTALK') {
-              return '钉钉'
+              return '釘釘'
             } else {
               return t
             }
@@ -96,11 +96,11 @@ export default {
           align: 'center',
           dataIndex: 'receiver',
           customRender: (t, r, index) => {
-            return r.sendAll ? '【全体】' : t
+            return r.sendAll ? '【全體】' : t
           }
         },
         {
-          title: '消息内容',
+          title: '消息內容',
           align: 'center',
           dataIndex: 'content'
         },
@@ -124,21 +124,21 @@ export default {
   computed: {
     rules() {
       return {
-        app: [{required: true, message: '请选择测试APP'}],
-        url: [{required: this.show, message: '请输入菜单路径!'}],
-        receiver: [{required: !this.model.sendAll, message: '请选择接收人'}],
-        content: [{required: true, message: '消息内容不能为空'}]
+        app: [{required: true, message: '請選擇測試APP'}],
+        url: [{required: this.show, message: '請輸入菜單路徑!'}],
+        receiver: [{required: !this.model.sendAll, message: '請選擇接收人'}],
+        content: [{required: true, message: '消息內容不能為空'}]
       }
     },
     appOptions() {
       return [
         {
-          label: `企业微信${this.enabledTypes.wechatEnterprise ? '' : '（已禁用）'}`,
+          label: `企業微信${this.enabledTypes.wechatEnterprise ? '' : '（已禁用）'}`,
           value: 'WECHAT_ENTERPRISE',
           disabled: !this.enabledTypes.wechatEnterprise
         },
         {
-          label: `钉钉${this.enabledTypes.dingtalk ? '' : '（已禁用）'}`,
+          label: `釘釘${this.enabledTypes.dingtalk ? '' : '（已禁用）'}`,
           value: 'DINGTALK',
           disabled: !this.enabledTypes.dingtalk
         },
@@ -150,7 +150,7 @@ export default {
   },
   methods: {
 
-    // 获取启用的第三方App
+    // 獲取啟用的第三方App
     async loadEnabledTypes() {
       this.enabledTypes = await loadEnabledTypes()
     },

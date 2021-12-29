@@ -1,22 +1,22 @@
-路由/菜单说明
+路由/菜單說明
 ====
 
 
 
-配置文件路径
+配置文件路徑
 ----
 
 `@/config/router.config.js`
 
 
 
-格式和说明
+格式和說明
 ----
 
 ```javascript
 /**
- * 路由配置说明：
- * 建议：sider menu 请不要超过三级菜单，若超过三级菜单，则应该设计为顶部主菜单 配合左侧次级菜单
+ * 路由配置說明：
+ * 建議：sider menu 請不要超過三級菜單，若超過三級菜單，則應該設計為頂部主菜單 配合左側次級菜單
  *
  **/
  {
@@ -34,26 +34,26 @@
 
 
 
-`{ Route }` 对象
+`{ Route }` 對象
 
-| 参数     | 说明                                      | 类型    | 默认值 |
+| 參數     | 說明                                      | 類型    | 默認值 |
 | -------- | ----------------------------------------- | ------- | ------ |
 | hidden   | 控制路由是否显示在 sidebar                | boolean | falase |
-| redirect | 重定向地址, 访问这个路由时,自定进行重定向 | string  | -      |
-| name     | 路由名称, 建议设置,且不能重名             | string  | -      |
-| meta     | 路由元信息（路由附带扩展信息）            | object  | {}     |
+| redirect | 重定向地址, 訪問這個路由時,自定進行重定向 | string  | -      |
+| name     | 路由名稱, 建議設置,且不能重名             | string  | -      |
+| meta     | 路由元信息（路由附帶擴展信息）            | object  | {}     |
 
 
 
-`{ Meta }` 路由元信息对象
+`{ Meta }` 路由元信息對象
 
-| 参数                | 说明                                                         | 类型    | 默认值 |
+| 參數                | 說明                                                         | 類型    | 默認值 |
 | ------------------- | ------------------------------------------------------------ | ------- | ------ |
-| title               | 路由标题, 用于显示面包屑, 页面标题 *推荐设置                 | string  | -      |
-| icon                | 路由在 menu 上显示的图标                                     | string  | -      |
-| keepAlive           | 缓存该路由                                                   | boolean | false  |
-| hiddenHeaderContent | *特殊 隐藏 [PageHeader](https://github.com/sendya/ant-design-pro-vue/blob/master/src/components/layout/PageHeader.vue#L14) 组件中的页面带的 面包屑和页面标题栏 | boolean | false  |
-| permission          | 与项目提供的权限拦截匹配的权限，如果不匹配，则会被禁止访问该路由页面 | array   | []     |
+| title               | 路由標題, 用於显示麵包屑, 頁面標題 *推薦設置                 | string  | -      |
+| icon                | 路由在 menu 上显示的圖標                                     | string  | -      |
+| keepAlive           | 緩存該路由                                                   | boolean | false  |
+| hiddenHeaderContent | *特殊 隱藏 [PageHeader](https://github.com/sendya/ant-design-pro-vue/blob/master/src/components/layout/PageHeader.vue#L14) 組件中的頁面帶的 麵包屑和頁面標題欄 | boolean | false  |
+| permission          | 與項目提供的權限攔截匹配的權限，如果不匹配，則會被禁止訪問該路由頁面 | array   | []     |
 
 
 
@@ -66,7 +66,7 @@ const asyncRouterMap = [
     path: '/',
     name: 'index',
     component: BasicLayout,
-    meta: { title: '首页' },
+    meta: { title: '首頁' },
     redirect: '/dashboard/analysis',
     children: [
       {
@@ -74,20 +74,20 @@ const asyncRouterMap = [
         component: Layout,
         name: 'dashboard',
         redirect: '/dashboard/workplace',
-        meta: {title: '仪表盘', icon: 'dashboard', permission: ['dashboard']},
+        meta: {title: '儀錶盤', icon: 'dashboard', permission: ['dashboard']},
         children: [
           {
             path: '/dashboard/analysis',
             name: 'Analysis',
             component: () => import('@/views/dashboard/Analysis'),
-            meta: {title: '分析页', permission: ['dashboard']}
+            meta: {title: '分析頁', permission: ['dashboard']}
           },
           {
             path: '/dashboard/monitor',
             name: 'Monitor',
             hidden: true,
             component: () => import('@/views/dashboard/Monitor'),
-            meta: {title: '监控页', permission: ['dashboard']}
+            meta: {title: '監控頁', permission: ['dashboard']}
           },
           {
             path: '/dashboard/workplace',
@@ -104,21 +104,21 @@ const asyncRouterMap = [
         name: 'result',
         component: PageView,
         redirect: '/result/success',
-        meta: { title: '结果页', icon: 'check-circle-o', permission: [ 'result' ] },
+        meta: { title: '結果頁', icon: 'check-circle-o', permission: [ 'result' ] },
         children: [
           {
             path: '/result/success',
             name: 'ResultSuccess',
             component: () => import(/* webpackChunkName: "result" */ '@/views/result/Success'),
-            // 该页面隐藏面包屑和页面标题栏
+            // 該頁面隱藏麵包屑和頁面標題欄
             meta: { title: '成功', hiddenHeaderContent: true, permission: [ 'result' ] }
           },
           {
             path: '/result/fail',
             name: 'ResultFail',
             component: () => import(/* webpackChunkName: "result" */ '@/views/result/Error'),
-            // 该页面隐藏面包屑和页面标题栏
-            meta: { title: '失败', hiddenHeaderContent: true, permission: [ 'result' ] }
+            // 該頁面隱藏麵包屑和頁面標題欄
+            meta: { title: '失敗', hiddenHeaderContent: true, permission: [ 'result' ] }
           }
         ]
       },
@@ -128,12 +128,12 @@ const asyncRouterMap = [
 ]
 ```
 
-> 1. 请注意 `component: () => import('..') ` 方式引入路由的页面组件为 懒加载模式。具体可以看 [Vue 官方文档](https://router.vuejs.org/zh/guide/advanced/lazy-loading.html)
-> 2. 增加新的路由应该增加在 '/' (index) 路由的 `children` 内
-> 3. `permission` 可以进行自定义修改，只需要对这个模块进行自定义修改即可 [src/store/modules/permission.js#L10](https://github.com/sendya/ant-design-pro-vue/blob/master/src/store/modules/permission.js#L10)
+> 1. 請注意 `component: () => import('..') ` 方式引入路由的頁面組件為 懶加載模式。具體可以看 [Vue 官方文檔](https://router.vuejs.org/zh/guide/advanced/lazy-loading.html)
+> 2. 增加新的路由應該增加在 '/' (index) 路由的 `children` 內
+> 3. `permission` 可以進行自定義修改，只需要對這個模塊進行自定義修改即可 [src/store/modules/permission.js#L10](https://github.com/sendya/ant-design-pro-vue/blob/master/src/store/modules/permission.js#L10)
 
 
 
-附权限路由结构：
+附權限路由結構：
 
-![权限结构](https://static-2.loacg.com/open/static/github/permissions.png)
+![權限結構](https://static-2.loacg.com/open/static/github/permissions.png)

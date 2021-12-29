@@ -9,42 +9,42 @@
 
     <a-spin :spinning="confirmLoading">
       <a-form-model ref="form" :model="orderMainModel" :rules="validatorRules">
-        <!-- 主表单区域 -->
+        <!-- 主表單區域 -->
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           prop="orderCode"
-          label="订单号"
+          label="訂單號"
           required
           hasFeedback>
-          <a-input placeholder="请输入订单号" v-model="orderMainModel.orderCode"  />
+          <a-input placeholder="請輸入訂單號" v-model="orderMainModel.orderCode"  />
         </a-form-model-item>
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="订单类型">
-          <a-select placeholder="请输入订单类型" v-model="orderMainModel.ctype">
-            <a-select-option value="1">国内订单</a-select-option>
-            <a-select-option value="2">国际订单</a-select-option>
+          label="訂單類型">
+          <a-select placeholder="請輸入訂單類型" v-model="orderMainModel.ctype">
+            <a-select-option value="1">國內訂單</a-select-option>
+            <a-select-option value="2">國際訂單</a-select-option>
           </a-select>
         </a-form-model-item>
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="订单日期">
+          label="訂單日期">
           <a-date-picker showTime valueFormat='YYYY-MM-DD HH:mm:ss' v-model="orderMainModel.orderDate"/>
         </a-form-model-item>
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="订单金额">
+          label="訂單金額">
           <a-input-number style="width: 200px" v-model="orderMainModel.orderMoney" />
         </a-form-model-item>
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="订单备注">
-          <a-input placeholder="请输入订单备注" v-model="orderMainModel.content"/>
+          label="訂單備註">
+          <a-input placeholder="請輸入訂單備註" v-model="orderMainModel.content"/>
         </a-form-model-item>
       </a-form-model>
     </a-spin>
@@ -81,7 +81,7 @@
         confirmLoading: false,
         validatorRules: {
           orderCode: [
-            { required: true, message: '请输入订单号!' }
+            { required: true, message: '請輸入訂單號!' }
           ]
         },
         url: {
@@ -99,7 +99,7 @@
       edit(record) {
         this.orderMainModel = Object.assign({}, record);
         console.log(this.orderMainModel)
-        //初始化明细表数据
+        //初始化明細表數據
         this.visible = true;
       },
       close() {
@@ -109,7 +109,7 @@
       },
       handleOk() {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;
@@ -122,7 +122,7 @@
               httpurl += this.url.edit;
               method = 'put';
             }
-           
+
             httpAction(httpurl, this.orderMainModel, method).then((res) => {
               if (res.success) {
                 that.$message.success(res.message);
@@ -156,12 +156,12 @@
     line-height: 0px;
   }
 
-  /** 主表单行间距 */
+  /** 主表單行間距 */
   .ant-form .ant-form-item {
     margin-bottom: 10px;
   }
 
-  /** Tab页面行间距 */
+  /** Tab頁面行間距 */
   .ant-tabs-content .ant-form-item {
     margin-bottom: 0px;
   }

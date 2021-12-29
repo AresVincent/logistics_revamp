@@ -1,44 +1,44 @@
-# JDictSelectTag 组件用法
+# JDictSelectTag 組件用法
 ----
-- 从字典表获取数据,dictCode格式说明: 字典code
+- 從字典表獲取數據,dictCode格式說明: 字典code
 ```html
-<j-dict-select-tag  v-model="queryParam.sex" placeholder="请输入用户性别"
+<j-dict-select-tag  v-model="queryParam.sex" placeholder="請輸入用戶性別"
                   dictCode="sex"/>
 ```
 
 v-decorator用法：
 ```html
-<j-dict-select-tag  v-decorator="['sex', {}]" :triggerChange="true" placeholder="请输入用户性别"
+<j-dict-select-tag  v-decorator="['sex', {}]" :triggerChange="true" placeholder="請輸入用戶性別"
                   dictCode="sex"/>
 ```
 
-- 从数据库表获取字典数据，dictCode格式说明: 表名,文本字段,取值字段
+- 從數據庫表獲取字典數據，dictCode格式說明: 表名,文本字段,取值字段
 ```html
-<j-dict-select-tag v-model="queryParam.username" placeholder="请选择用户名称" 
+<j-dict-select-tag v-model="queryParam.username" placeholder="請選擇用戶名稱" 
                    dictCode="sys_user,realname,id"/>
 ```
 
 
 
-# JDictSelectUtil.js 列表字典函数用法
+# JDictSelectUtil.js 列表字典函數用法
 ----
 
-- 第一步: 引入依赖方法
+- 第一步: 引入依賴方法
 ```html
        import {initDictOptions, filterDictText} from '@/components/dict/JDictSelectUtil'
 ```
 
-- 第二步: 在created()初始化方法执行字典配置方法
+- 第二步: 在created()初始化方法執行字典配置方法
 ```html
       //初始化字典配置
       this.initDictConfig();
 ```
       
-- 第三步: 实现initDictConfig方法，加载列表所需要的字典(列表上有多个字典项，就执行多次initDictOptions方法)
+- 第三步: 實現initDictConfig方法，加載列表所需要的字典(列表上有多個字典項，就執行多次initDictOptions方法)
       
 ```html
       initDictConfig() {
-        //初始化字典 - 性别
+        //初始化字典 - 性別
         initDictOptions('sex').then((res) => {
           if (res.success) {
             this.sexDictOptions = res.result;
@@ -47,37 +47,37 @@ v-decorator用法：
       },
 ```
       
-- 第四步: 实现字段的customRender方法
+- 第四步: 實現字段的customRender方法
 ```html
      customRender: (text, record, index) => {
-       //字典值替换通用方法
+       //字典值替換通用方法
        return filterDictText(this.sexDictOptions, text);
      }
 ```
 
 
-# JMultiSelectTag 多选组件
+# JMultiSelectTag 多選組件
 下拉/checkbox
 
-## 参数配置
-| 参数           | 类型   | 必填 |说明|
+## 參數配置
+| 參數           | 類型   | 必填 |說明|
 |--------------|---------|----|---------|
 | placeholder      |string   | | placeholder |
 | disabled      |Boolean   | | 是否禁用 |
-| type      |string   | | 多选类型 select/checkbox 默认是select |
-| dictCode      |string   | | 数据字典编码或者表名,显示字段名,存储字段名拼接而成的字符串,如果提供了options参数 则此参数可不填|
-| options      |Array   | | 多选项,如果dictCode参数未提供,可以设置此参数加载多选项 |
+| type      |string   | | 多選類型 select/checkbox 默認是select |
+| dictCode      |string   | | 數據字典編碼或者表名,显示字段名,存儲字段名拼接而成的字符串,如果提供了options參數 則此參數可不填|
+| options      |Array   | | 多選項,如果dictCode參數未提供,可以設置此參數加載多選項 |
 
 使用示例
 ----
 ```vue
 <template>
   <a-form>
-    <a-form-item label="下拉多选" style="width: 300px">
+    <a-form-item label="下拉多選" style="width: 300px">
       <j-multi-select-tag
         v-model="selectValue"
         :options="dictOptions"
-        placeholder="请做出你的选择">
+        placeholder="請做出你的選擇">
       </j-multi-select-tag>
       {{ selectValue }}
     </a-form-item>
@@ -102,13 +102,13 @@ v-decorator用法：
         selectValue:"",
         checkboxValue:"",
         dictOptions:[{
-          label:"选项一",
+          label:"選項一",
           value:"1"
         },{
-          label:"选项二",
+          label:"選項二",
           value:"2"
         },{
-          label:"选项三",
+          label:"選項三",
           value:"3"
         }]
       }
@@ -117,17 +117,17 @@ v-decorator用法：
 </script>
 ```
 
-# JSearchSelectTag 字典表的搜索组件
-下拉搜索组件,支持异步加载,异步加载用于大数据量的字典表
+# JSearchSelectTag 字典表的搜索組件
+下拉搜索組件,支持異步加載,異步加載用於大數據量的字典表
 
-## 参数配置
-| 参数           | 类型   | 必填 |说明|
+## 參數配置
+| 參數           | 類型   | 必填 |說明|
 |--------------|---------|----|---------|
 | placeholder      |string   | | placeholder |
 | disabled      |Boolean   | | 是否禁用 |
-| dict      |string   | | 表名,显示字段名,存储字段名拼接而成的字符串,如果提供了dictOptions参数 则此参数可不填|
-| dictOptions      |Array   | | 多选项,如果dict参数未提供,可以设置此参数加载多选项 |
-| async      |Boolean   | | 是否支持异步加载,设置成true,则通过输入的内容加载远程数据,否则在本地过滤数据,默认false|
+| dict      |string   | | 表名,显示字段名,存儲字段名拼接而成的字符串,如果提供了dictOptions參數 則此參數可不填|
+| dictOptions      |Array   | | 多選項,如果dict參數未提供,可以設置此參數加載多選項 |
+| async      |Boolean   | | 是否支持異步加載,設置成true,則通過輸入的內容加載遠程數據,否則在本地過濾數據,默認false|
 
 使用示例
 ----
@@ -136,16 +136,16 @@ v-decorator用法：
   <a-form>
     <a-form-item label="下拉搜索" style="width: 300px">
       <j-search-select-tag
-        placeholder="请做出你的选择"
+        placeholder="請做出你的選擇"
         v-model="selectValue"
         :dictOptions="dictOptions">
       </j-search-select-tag>
       {{ selectValue }}
     </a-form-item>
 
-    <a-form-item label="异步加载" style="width: 300px">
+    <a-form-item label="異步加載" style="width: 300px">
       <j-search-select-tag
-        placeholder="请做出你的选择"
+        placeholder="請做出你的選擇"
         v-model="asyncSelectValue"
         dict="sys_depart,depart_name,id"
         :async="true">
@@ -164,13 +164,13 @@ v-decorator用法：
         selectValue:"",
         asyncSelectValue:"",
         dictOptions:[{
-          text:"选项一",
+          text:"選項一",
           value:"1"
         },{
-          text:"选项二",
+          text:"選項二",
           value:"2"
         },{
-          text:"选项三",
+          text:"選項三",
           value:"3"
         }]
       }

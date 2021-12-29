@@ -1,14 +1,14 @@
 <template>
 
   <div>
-    <a-button @click="handleTableCheck" type="primary">表单验证</a-button>
+    <a-button @click="handleTableCheck" type="primary">表單驗證</a-button>
     <span style="padding-left:8px;"></span>
-    <a-tooltip placement="top" title="获取值，忽略表单验证" :autoAdjustOverflow="true">
-      <a-button @click="handleTableGet" type="primary">获取值</a-button>
+    <a-tooltip placement="top" title="獲取值，忽略表單驗證" :autoAdjustOverflow="true">
+      <a-button @click="handleTableGet" type="primary">獲取值</a-button>
     </a-tooltip>
     <span style="padding-left:8px;"></span>
-    <a-tooltip placement="top" title="模拟加载1000条数据" :autoAdjustOverflow="true">
-      <a-button @click="handleTableSet" type="primary">设置值</a-button>
+    <a-tooltip placement="top" title="模擬加載1000條數據" :autoAdjustOverflow="true">
+      <a-button @click="handleTableSet" type="primary">設置值</a-button>
     </a-tooltip>
 
 
@@ -25,7 +25,7 @@
       @selectRowChange="handleSelectRowChange">
 
       <template v-slot:action="props">
-        <a @click="handleDelete(props)">删除</a>
+        <a @click="handleDelete(props)">刪除</a>
       </template>
 
     </j-editable-table>
@@ -47,46 +47,46 @@
         loading: false,
         columns: [
           {
-            title: '字段名称',
+            title: '字段名稱',
             key: 'dbFieldName',
             // width: '19%',
             width: '300px',
             type: FormTypes.input,
             defaultValue: '',
-            placeholder: '请输入${title}',
+            placeholder: '請輸入${title}',
             validateRules: [
               {
                 required: true, // 必填
-                message: '请输入${title}' // 显示的文本
+                message: '請輸入${title}' // 显示的文本
               },
               {
-                pattern: /^[a-z|A-Z][a-z|A-Z\d_-]{0,}$/, // 正则
-                message: '${title}必须以字母开头，可包含数字、下划线、横杠'
+                pattern: /^[a-z|A-Z][a-z|A-Z\d_-]{0,}$/, // 正則
+                message: '${title}必須以字母開頭，可包含数字、下劃線、橫杠'
               },
               {
                 unique: true,
-                message: '${title}不能重复'
+                message: '${title}不能重複'
               },
               {
                 handler(type, value, row, column, callback, target) {
-                  // type 触发校验的类型（input、change、blur）
-                  // value 当前校验的值
-                  // callback(flag, message) 方法必须执行且只能执行一次
-                  //          flag = 是否通过了校验，不填写或者填写 null 代表不进行任何操作
-                  //          message = 提示的类型，默认使用配置的 message
-                  // target 行编辑的实例对象
+                  // type 觸發校驗的類型（input、change、blur）
+                  // value 當前校驗的值
+                  // callback(flag, message) 方法必須執行且只能執行一次
+                  //          flag = 是否通過了校驗，不填寫或者填寫 null 代表不進行任何操作
+                  //          message = 提示的類型，默認使用配置的 message
+                  // target 行編輯的實例對象
 
                   if (type === 'blur') {
                     if (value === 'abc') {
-                      callback(false, '${title}不能是abc')  // false = 未通过校验
+                      callback(false, '${title}不能是abc')  // false = 未通過校驗
                     } else {
-                      callback(true) // true = 通过验证
+                      callback(true) // true = 通過驗證
                     }
                   } else {
-                    callback(true) // 不填写或者填写 null 代表不进行任何操作
+                    callback(true) // 不填寫或者填寫 null 代表不進行任何操作
                   }
                 },
-                message: '${title}默认提示'
+                message: '${title}默認提示'
               }
             ]
           },
@@ -96,22 +96,22 @@
             type: FormTypes.upload,
             // width: '19%',
             width: '300px',
-            placeholder: '点击上传',
+            placeholder: '點擊上傳',
             token: true,
             responseName: 'message',
             action: window._CONFIG['domianURL'] + '/sys/common/upload',
             data: {
               biz: 'temp',
-              // 更多扩展参数
+              // 更多擴展參數
             },
           },
           {
-            title: '字段类型',
+            title: '字段類型',
             key: 'dbFieldType',
             // width: '18%',
             width: '300px',
             type: FormTypes.select,
-            options: [ // 下拉选项
+            options: [ // 下拉選項
               { title: 'String', value: 'string' },
               { title: 'Integer', value: 'int' },
               { title: 'Double', value: 'double' },
@@ -119,48 +119,48 @@
             ],
             allowInput: true,
             defaultValue: '',
-            placeholder: '请选择${title}',
-            validateRules: [{ required: true, message: '请选择${title}' }]
+            placeholder: '請選擇${title}',
+            validateRules: [{ required: true, message: '請選擇${title}' }]
           },
           {
-            title: '性别（字典）',
+            title: '性別（字典）',
             key: 'sex_dict',
             width: '300px',
             type: FormTypes.select,
             options: [],
             dictCode: 'sex',
-            placeholder: '请选择${title}',
-            validateRules: [{ required: true, message: '请选择${title}' }]
+            placeholder: '請選擇${title}',
+            validateRules: [{ required: true, message: '請選擇${title}' }]
           },
           {
-            title: '多选测试',
+            title: '多選測試',
             key: 'multipleSelect',
             // width: '18%',
             width: '300px',
             type: FormTypes.select,
-            props: { 'mode': 'multiple' }, // 支持多选
+            props: { 'mode': 'multiple' }, // 支持多選
             options: [
               { title: 'String', value: 'string' },
               { title: 'Integer', value: 'int' },
               { title: 'Double', value: 'double' },
               { title: 'Boolean', value: 'boolean' }
             ],
-            defaultValue: ['int', 'boolean'], // 多个默认项
-            // defaultValue: 'string,double,int', // 也可使用这种方式
-            placeholder: '这里可以多选',
-            validateRules: [{ required: true, message: '请选择${title}' }]
+            defaultValue: ['int', 'boolean'], // 多個默認項
+            // defaultValue: 'string,double,int', // 也可使用這種方式
+            placeholder: '這裏可以多選',
+            validateRules: [{ required: true, message: '請選擇${title}' }]
           },
           {
-            title: '字段长度',
+            title: '字段長度',
             key: 'dbLength',
             // width: '8%',
             width: '100px',
             type: FormTypes.inputNumber,
             defaultValue: 32,
             placeholder: '${title}',
-            // 是否是统计列，只有 inputNumber 才能设置统计列
+            // 是否是統計列，只有 inputNumber 才能設置統計列
             statistics: true,
-            validateRules: [{ required: true, message: '请输入${title}' }]
+            validateRules: [{ required: true, message: '請輸入${title}' }]
           },
           {
             title: '日期',
@@ -169,8 +169,8 @@
             width: '320px',
             type: FormTypes.datetime,
             defaultValue: '2019-4-30 14:52:22',
-            placeholder: '请选择${title}',
-            validateRules: [{ required: true, message: '请选择${title}' }]
+            placeholder: '請選擇${title}',
+            validateRules: [{ required: true, message: '請選擇${title}' }]
           },
           {
             title: '数字',
@@ -178,11 +178,11 @@
             width: '320px',
             type: FormTypes.inputNumber,
             defaultValue: '100.32',
-            placeholder: '请选择${title}',
-            validateRules: [{ required: true, message: '请选择${title}' }]
+            placeholder: '請選擇${title}',
+            validateRules: [{ required: true, message: '請選擇${title}' }]
           },
           {
-            title: '可以为空',
+            title: '可以為空',
             key: 'isNull',
             // width: '8%',
             width: '100px',
@@ -219,27 +219,27 @@
     },
     methods: {
 
-      /** 表单验证 */
+      /** 表單驗證 */
       handleTableCheck() {
         this.$refs.editableTable.getValues((error) => {
           if (error === 0) {
-            this.$message.success('验证通过')
+            this.$message.success('驗證通過')
           } else {
-            this.$message.error('验证未通过')
+            this.$message.error('驗證未通過')
           }
         })
       },
-      /** 获取值，忽略表单验证 */
+      /** 獲取值，忽略表單驗證 */
       handleTableGet() {
         this.$refs.editableTable.getValues((error, values) => {
           console.log('values:', values)
         }, false)
         console.log('deleteIds:', this.$refs.editableTable.getDeleteIds())
 
-        this.$message.info('获取值成功，请看控制台输出')
+        this.$message.info('獲取值成功，請看控制台輸出')
 
       },
-      /** 模拟加载1000条数据 */
+      /** 模擬加載1000條數據 */
       handleTableSet() {
         this.randomData(1000, true)
       },
@@ -248,7 +248,7 @@
         this.selectedRowIds = selectedRowIds
       },
 
-      /* 随机生成数据 */
+      /* 隨機生成數據 */
       randomData(size, loading = false) {
         if (loading) {
           this.loading = true

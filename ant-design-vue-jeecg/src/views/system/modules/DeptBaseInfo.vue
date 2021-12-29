@@ -4,38 +4,38 @@
       <a-form-model-item
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
-        label="机构名称">
+        label="機構名稱">
         <a-input style="border:0;" placeholder="" v-model="model.departName"/>
       </a-form-model-item>
-      <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="上级部门">
+      <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="上級部門">
         <a-tree-select
           disabled
           style="width:100%;border: 0;border: none;outline:none;"
           :dropdownStyle="{maxHeight:'200px',overflow:'auto'}"
           :treeData="treeData"
           v-model="model.parentId"
-          placeholder="无">
+          placeholder="無">
         </a-tree-select>
       </a-form-model-item>
       <a-form-model-item
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
-        label="机构编码">
+        label="機構編碼">
         <a-input style="border:0;" placeholder="" v-model="model.orgCode"/>
       </a-form-model-item>
       <a-form-model-item
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
-        label="机构类型">
+        label="機構類型">
           <a-radio-group :disabled="true" v-model="model.orgCategory" read-only>
             <a-radio value="1">
               公司
             </a-radio>
             <a-radio value="2">
-              部门
+              部門
             </a-radio>
             <a-radio value="3">
-              岗位
+              崗位
             </a-radio>
           </a-radio-group>
       </a-form-model-item>
@@ -48,7 +48,7 @@
       <a-form-model-item
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
-        label="手机号">
+        label="手機號">
         <a-input style="border:0;" placeholder="" v-model="model.mobile"/>
       </a-form-model-item>
       <a-form-model-item
@@ -60,7 +60,7 @@
       <a-form-model-item
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
-        label="备注">
+        label="備註">
         <a-textarea style="border:0;" placeholder="" v-model="model.memo"/>
       </a-form-model-item>
     </a-form-model>

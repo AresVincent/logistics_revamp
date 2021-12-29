@@ -4,9 +4,9 @@ import { JVXETypes } from '@comp/jeecg/JVxeTable/index'
 export const VALIDATE_FAILED = Symbol()
 
 /**
- * 获取指定的 $refs 对象
- * 有时候可能会遇到组件未挂载到页面中的情况，导致无法获取 $refs 中的某个对象
- * 这个方法可以等待挂载完成之后再返回 $refs 的对象，避免报错
+ * 獲取指定的 $refs 對象
+ * 有時候可能會遇到組件未掛載到頁面中的情況，導致無法獲取 $refs 中的某個對象
+ * 這個方法可以等待掛載完成之後再返回 $refs 的對象，避免報錯
  * @author sunjianlei
  **/
 export function getRefPromise(vm, name) {
@@ -24,7 +24,7 @@ export function getRefPromise(vm, name) {
   })
 }
 
-/** 获取某一数字输入框列中的最大的值 */
+/** 獲取某一数字輸入框列中的最大的值 */
 export function getInputNumberMaxValue(col, rowsValues) {
   let maxNum = 0
   Object.values(rowsValues).forEach((rowValue, index) => {
@@ -34,7 +34,7 @@ export function getInputNumberMaxValue(col, rowsValues) {
     } catch {
       num = 0
     }
-    // 把首次循环的结果当成最大值
+    // 把首次循環的結果當成最大值
     if (index === 0) {
       maxNum = num
     } else {
@@ -46,10 +46,10 @@ export function getInputNumberMaxValue(col, rowsValues) {
 
 /**
  *
- * 根据 tagName 获取父级节点
+ * 根據 tagName 獲取父級節點
  *
- * @param dom 一级dom节点
- * @param tagName 标签名，不区分大小写
+ * @param dom 一級dom節點
+ * @param tagName 標籤名，不區分大小寫
  * @return {HTMLElement | NULL}
  */
 export function getParentNodeByTagName(dom, tagName = 'body') {
@@ -68,15 +68,15 @@ export function getParentNodeByTagName(dom, tagName = 'body') {
 }
 
 /**
- * vxe columns 封装成高级查询可识别的选项
+ * vxe columns 封裝成高級查詢可識別的選項
  * @param columns
- * @param handler 单独处理方法
+ * @param handler 單獨處理方法
  */
 export function vxePackageToSuperQuery(columns, handler) {
   if (Array.isArray(columns)) {
-    // 高级查询所需要的参数
+    // 高級查詢所需要的參數
     let fieldList = []
-    // 遍历列
+    // 遍歷列
     for (let i = 0; i < columns.length; i++) {
       let col = columns[i]
       if (col.type === JVXETypes.rowCheckbox ||
@@ -109,74 +109,74 @@ export function vxePackageToSuperQuery(columns, handler) {
     }
     return fieldList
   } else {
-    console.error('columns必须是一个数组')
+    console.error('columns必須是一個數組')
   }
   return null
 }
 
 /**
- * 一次性验证主表单和所有的次表单
- * @param form 主表单 form 对象
- * @param cases 接收一个数组，每项都是一个JVxeTable实例
+ * 一次性驗證主表單和所有的次表單
+ * @param form 主表單 form 對象
+ * @param cases 接收一個數組，每項都是一個JVxeTable實例
  * @param autoJumpTab
  * @returns {Promise<any>}
  * @author sunjianlei
  */
 export async function validateFormAndTables(form, cases, autoJumpTab) {
   if (!(form && typeof form.validateFields === 'function')) {
-    throw `form 参数需要的是一个form对象，而传入的却是${typeof form}`
+    throw `form 參數需要的是一個form對象，而傳入的卻是${typeof form}`
   }
   let dataMap = {}
   let values = await new Promise((resolve, reject) => {
-    // 验证主表表单
+    // 驗證主表表單
     form.validateFields((err, values) => {
       err ? reject({error: VALIDATE_FAILED, originError: err}) : resolve(values)
     })
   })
   Object.assign(dataMap, {formValue: values})
-  // 验证所有子表的表单
+  // 驗證所有子表的表單
   let subData = await validateTables(cases, autoJumpTab)
-  // 合并最终数据
+  // 合併最終數據
   dataMap = Object.assign(dataMap, {tablesValue: subData})
   return dataMap
 }
 
 /**
- * 一次性验证主表单和所有的次表单
- * @param form 主表单 form 对象
- * @param cases 接收一个数组，每项都是一个JVxeTable实例
+ * 一次性驗證主表單和所有的次表單
+ * @param form 主表單 form 對象
+ * @param cases 接收一個數組，每項都是一個JVxeTable實例
  * @param autoJumpTab
  * @returns {Promise<any>}
  * @author sunjianlei
  */
 export async function validateFormModelAndTables(form,formData, cases, autoJumpTab) {
   if (!(form && typeof form.validate === 'function')) {
-    throw `form 参数需要的是一个form对象，而传入的却是${typeof form}`
+    throw `form 參數需要的是一個form對象，而傳入的卻是${typeof form}`
   }
   let dataMap = {}
   let values = await new Promise((resolve, reject) => {
-    // 验证主表表单
+    // 驗證主表表單
     form.validate((valid,obj) => {
       valid ?resolve(formData): reject({error: VALIDATE_FAILED, originError: valid})
     })
   })
   Object.assign(dataMap, {formValue: values})
-  // 验证所有子表的表单
+  // 驗證所有子表的表單
   let subData = await validateTables(cases, autoJumpTab)
-  // 合并最终数据
+  // 合併最終數據
   dataMap = Object.assign(dataMap, {tablesValue: subData})
   return dataMap
 }
 
 /**
- * 验证并获取一个或多个表格的所有值
+ * 驗證並獲取一個或多個表格的所有值
  *
- * @param cases 接收一个数组，每项都是一个JVxeTable实例
- * @param autoJumpTab 校验失败后，是否自动跳转tab选项
+ * @param cases 接收一個數組，每項都是一個JVxeTable實例
+ * @param autoJumpTab 校驗失敗后，是否自動跳轉tab選項
  */
 export function validateTables(cases, autoJumpTab = true) {
   if (!Array.isArray(cases)) {
-    throw `'validateTables'函数的'cases'参数需要的是一个数组，而传入的却是${typeof cases}`
+    throw `'validateTables'函數的'cases'參數需要的是一個數組，而傳入的卻是${typeof cases}`
   }
   return new Promise((resolve, reject) => {
     let tablesData = []
@@ -187,28 +187,28 @@ export function validateTables(cases, autoJumpTab = true) {
     (function next() {
       let vm = cases[index]
       vm.validateTable().then(errMap => {
-        // 校验通过
+        // 校驗通過
         if (!errMap) {
           tablesData[index] = vm.getAll()
-          // 判断校验是否全部完成，完成返回成功，否则继续进行下一步校验
+          // 判斷校驗是否全部完成，完成返回成功，否則繼續進行下一步校驗
           if (++index === cases.length) {
             resolve(tablesData)
           } else (
             next()
           )
         } else {
-          // 尝试获取tabKey，如果在ATab组件内即可获取
+          // 嘗試獲取tabKey，如果在ATab組件內即可獲取
           let paneKey
           let tabPane = getVmParentByName(vm, 'ATabPane')
           if (tabPane) {
             paneKey = tabPane.$vnode.key
-            // 自动跳转到该表格
+            // 自動跳轉到該表格
             if (autoJumpTab) {
               let tabs = getVmParentByName(tabPane, 'Tabs')
               tabs && tabs.setActiveKey && tabs.setActiveKey(paneKey)
             }
           }
-          // 出现未验证通过的表单，不再进行下一步校验，直接返回失败
+          // 出現未驗證通過的表單，不再進行下一步校驗，直接返回失敗
           reject({error: VALIDATE_FAILED, index, paneKey, errMap})
         }
       })

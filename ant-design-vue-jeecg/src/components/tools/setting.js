@@ -17,16 +17,16 @@ const colorList = [
     key: '明青', color: '#13C2C2',
   },
   {
-    key: '极光绿', color: '#52C41A',
+    key: '極光綠', color: '#52C41A',
   },
   {
-    key: '拂晓蓝（默认）', color: '#1890FF',
+    key: '拂曉藍（默認）', color: '#1890FF',
   },
   {
-    key: '极客蓝', color: '#2F54EB',
+    key: '極客藍', color: '#2F54EB',
   },
   {
-    key: '酱紫', color: '#722ED1',
+    key: '醬紫', color: '#722ED1',
   },
 ];
 
@@ -39,10 +39,10 @@ const updateTheme = primaryColor => {
   if (!primaryColor) {
     return;
   }
-  const hideMessage = message.loading('正在编译主题！', 0);
-  console.info(`正在编译主题!`)
+  const hideMessage = message.loading('正在編譯主題！', 0);
+  console.info(`正在編譯主題!`)
   function buildIt() {
-    // 正确的判定less是否已经加载less.modifyVars可用
+    // 正確的判定less是否已經加載less.modifyVars可用
     if (!window.less || !window.less.modifyVars) {
       return;
     }

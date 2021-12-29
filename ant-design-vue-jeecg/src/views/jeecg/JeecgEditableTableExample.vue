@@ -7,11 +7,11 @@
         <default-table/>
       </a-tab-pane>
 
-      <a-tab-pane tab="只读列表" key="2">
+      <a-tab-pane tab="只讀列表" key="2">
         <read-only-table/>
       </a-tab-pane>
 
-      <a-tab-pane tab="三级联动" key="3">
+      <a-tab-pane tab="三級聯動" key="3">
         <three-linkage/>
       </a-tab-pane>
 

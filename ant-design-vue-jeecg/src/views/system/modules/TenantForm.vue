@@ -4,32 +4,32 @@
       <a-form-model ref="form" :model="model" slot="detail" :rules="validatorRules">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="租户名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-model="model.name" placeholder="请输入租户名称"></a-input>
+            <a-form-model-item label="租戶名稱" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-model="model.name" placeholder="請輸入租戶名稱"></a-input>
             </a-form-model-item>
           </a-col>
-          
+
           <a-col :span="24">
-            <a-form-model-item label="租户编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="id">
-              <a-input-number style="width: 100%" :min="1" v-model="model.id" placeholder="请输入租户编号" :disabled="disabledId"></a-input-number>
+            <a-form-model-item label="租戶編號" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="id">
+              <a-input-number style="width: 100%" :min="1" v-model="model.id" placeholder="請輸入租戶編號" :disabled="disabledId"></a-input-number>
             </a-form-model-item>
           </a-col>
-          
+
           <a-col :span="24">
-            <a-form-model-item label="开始时间" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <j-date placeholder="请选择开始时间" v-model="model.beginDate" :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" style="width: 100%"/>
-            </a-form-model-item>
-          </a-col>
-          <a-col :span="24">
-            <a-form-model-item label="结束时间" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <j-date placeholder="请选择结束时间" v-model="model.endDate" :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" style="width: 100%"/>
+            <a-form-model-item label="開始時間" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <j-date placeholder="請選擇開始時間" v-model="model.beginDate" :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" style="width: 100%"/>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="状态" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-form-model-item label="結束時間" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <j-date placeholder="請選擇結束時間" v-model="model.endDate" :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" style="width: 100%"/>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="狀態" :labelCol="labelCol" :wrapperCol="wrapperCol">
               <a-radio-group name="tenantStatus" v-model="model.status">
                 <a-radio :value="1">正常</a-radio>
-                <a-radio :value="0">冻结</a-radio>
+                <a-radio :value="0">凍結</a-radio>
               </a-radio-group>
             </a-form-model-item>
           </a-col>
@@ -48,7 +48,7 @@
   import JFormContainer from '@/components/jeecg/JFormContainer'
   import JDate from '@/components/jeecg/JDate'
   import JDictSelectTag from "@/components/dict/JDictSelectTag"
-  
+
   export default {
     name: "TenantForm",
     components: {
@@ -87,7 +87,7 @@
         },
         confirmLoading: false,
         validatorRules: {
-          id:[ { required: true, message: '请输入租户编号!' },]
+          id:[ { required: true, message: '請輸入租戶編號!' },]
         },
         url: {
           add: "/sys/tenant/add",
@@ -143,7 +143,7 @@
       },
       submitForm () {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         that.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;
@@ -161,7 +161,7 @@
                 that.$message.success(res.message);
                 that.$emit('ok');
               }else{
-                if("该编号已存在!" == res.message){
+                if("該編號已存在!" == res.message){
                   this.model.id=""
                 }
                 that.$message.warning(res.message);

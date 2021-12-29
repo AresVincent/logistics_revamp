@@ -2,11 +2,11 @@ import Vue from 'vue'
 import { ACCESS_TOKEN } from "@/store/mutation-types"
 import store from '@/store'
 /**
- * 单点登录
+ * 單點登錄
  */
 const init = (callback) => {
   if (process.env.VUE_APP_SSO == 'true') {
-    console.log("-------单点登录开始-------");
+    console.log("-------單點登錄開始-------");
     let token = Vue.ls.get(ACCESS_TOKEN);
     let st = getUrlParam("ticket");
     let sevice = "http://" + window.location.host + "/";
@@ -20,7 +20,7 @@ const init = (callback) => {
         window.location.href = window._CONFIG['casPrefixUrl'] + "/login?service=" + serviceUrl;
       }
     }
-    console.log("-------单点登录结束-------");
+    console.log("-------單點登錄結束-------");
   }else{
     callback && callback()
   }

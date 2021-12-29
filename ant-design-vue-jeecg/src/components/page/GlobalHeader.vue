@@ -17,12 +17,12 @@
         :type="collapsed ? 'menu-unfold' : 'menu-fold'"
         @click="toggle"/>
 
-      <span v-if="device === 'desktop'">欢迎进入 Jeecg-Boot 企业级低代码平台</span>
-      <span v-else>Jeecg-Boot</span>
+      <span v-if="device === 'desktop'">歡迎進入 King's 管理系統</span>
+      <span v-else>King's 管理系統</span>
 
       <user-menu :theme="theme"/>
     </div>
-    <!-- 顶部导航栏模式 -->
+    <!-- 頂部導航欄模式 -->
     <div v-else :class="['top-nav-header-index', theme]">
       <div class="header-index-wide">
         <div class="header-index-left" :style="topMenuStyle.headerIndexLeft">
@@ -91,7 +91,7 @@
     data() {
       return {
         headerBarFixed: false,
-        //update-begin--author:sunjianlei---date:20190508------for: 顶部导航栏过长时显示更多按钮-----
+        //update-begin--author:sunjianlei---date:20190508------for: 頂部導航欄過長時显示更多按鈕-----
         topMenuStyle: {
           headerIndexLeft: {},
           topNavHeader: {},
@@ -102,27 +102,27 @@
       }
     },
     watch: {
-      /** 监听设备变化 */
+      /** 監聽設備變化 */
       device() {
         if (this.mode === 'topmenu') {
           this.buildTopMenuStyle()
         }
       },
-      /** 监听导航栏模式变化 */
+      /** 監聽導航欄模式變化 */
       mode(newVal) {
         if (newVal === 'topmenu') {
           this.buildTopMenuStyle()
         }
       }
     },
-    //update-end--author:sunjianlei---date:20190508------for: 顶部导航栏过长时显示更多按钮-----
+    //update-end--author:sunjianlei---date:20190508------for: 頂部導航欄過長時显示更多按鈕-----
     mounted() {
       window.addEventListener('scroll', this.handleScroll)
-      //update-begin--author:sunjianlei---date:20190508------for: 顶部导航栏过长时显示更多按钮-----
+      //update-begin--author:sunjianlei---date:20190508------for: 頂部導航欄過長時显示更多按鈕-----
       if (this.mode === 'topmenu') {
         this.buildTopMenuStyle()
       }
-      //update-end--author:sunjianlei---date:20190508------for: 顶部导航栏过长时显示更多按钮-----
+      //update-end--author:sunjianlei---date:20190508------for: 頂部導航欄過長時显示更多按鈕-----
     },
     methods: {
       handleScroll() {
@@ -140,38 +140,38 @@
       toggle() {
         this.$emit('toggle')
       },
-      //update-begin--author:sunjianlei---date:20190508------for: 顶部导航栏过长时显示更多按钮-----
+      //update-begin--author:sunjianlei---date:20190508------for: 頂部導航欄過長時显示更多按鈕-----
       buildTopMenuStyle() {
         if (this.mode === 'topmenu') {
           if (this.device === 'mobile') {
-            // 手机端需要清空样式，否则显示会错乱
+            // 手機端需要清空樣式，否則显示會錯亂
             this.topMenuStyle.topNavHeader = {}
             this.topMenuStyle.topSmenuStyle = {}
             this.topMenuStyle.headerIndexRight = {}
             this.topMenuStyle.headerIndexLeft = {}
           } else {
-            let rightWidth = '360px'
+            let rightWidth = '400px'
             this.topMenuStyle.topNavHeader = { 'min-width': '165px' }
             this.topMenuStyle.topSmenuStyle = { 'width': 'calc(100% - 165px)' }
-            this.topMenuStyle.headerIndexRight = { 'min-width': rightWidth }
+            this.topMenuStyle.headerIndexRight = { 'min-width': rightWidth, 'white-space': 'nowrap' }
             this.topMenuStyle.headerIndexLeft = { 'width': `calc(100% - ${rightWidth})` }
           }
         }
       },
-      //update-begin--author:sunjianlei---date:20190508------for: 顶部导航栏过长时显示更多按钮-----
+      //update-begin--author:sunjianlei---date:20190508------for: 頂部導航欄過長時显示更多按鈕-----
 
-      // update-begin-author:sunjianlei date:20210508 for: 修复动态功能测试菜单、带参数菜单标题错误、展开错误的问题
+      // update-begin-author:sunjianlei date:20210508 for: 修復動態功能測試菜單、帶參數菜單標題錯誤、展開錯誤的問題
       handleUpdateMenuTitle(value) {
         this.$emit('updateMenuTitle', value)
       },
-      // update-end-author:sunjianlei date:20210508 for: 修复动态功能测试菜单、带参数菜单标题错误、展开错误的问题
+      // update-end-author:sunjianlei date:20210508 for: 修復動態功能測試菜單、帶參數菜單標題錯誤、展開錯誤的問題
 
     }
   }
 </script>
 
 <style lang="less" scoped>
-  /* update_begin author:scott date:20190220 for: 缩小首页布局顶部的高度*/
+  /* update_begin author:scott date:20190220 for: 縮小首頁布局頂部的高度*/
 
   @height: 59px;
 
@@ -202,7 +202,7 @@
       background-color: @primary-color;
       transition: background 300ms;
 
-      /* dark 样式 */
+      /* dark 樣式 */
       &.dark {
         color: #000000;
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
@@ -222,6 +222,6 @@
     line-height: @height;
   }
 
-  /* update_end author:scott date:20190220 for: 缩小首页布局顶部的高度*/
+  /* update_end author:scott date:20190220 for: 縮小首頁布局頂部的高度*/
 
 </style>

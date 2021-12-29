@@ -6,20 +6,20 @@
 
           <a-col :md="6" :sm="12">
             <a-form-model-item label="姓名" prop="realname" style="margin-left:8px">
-              <a-input placeholder="请输入姓名查询" v-model="queryParam.realname"></a-input>
+              <a-input placeholder="請輸入姓名查詢" v-model="queryParam.realname"></a-input>
             </a-form-model-item>
           </a-col>
 
 
           <a-col :md="6" :sm="12">
-            <a-form-model-item label="工号" prop="workNo" style="margin-left:8px">
-              <a-input placeholder="请输入工号查询" v-model="queryParam.workNo"></a-input>
+            <a-form-model-item label="工號" prop="workNo" style="margin-left:8px">
+              <a-input placeholder="請輸入工號查詢" v-model="queryParam.workNo"></a-input>
             </a-form-model-item>
           </a-col>
 
           <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
             <a-col :md="6" :sm="24">
-             <a-button type="primary" @click="searchQuery" icon="search" style="margin-left: 18px">查询</a-button>
+             <a-button type="primary" @click="searchQuery" icon="search" style="margin-left: 18px">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
             </a-col>
           </span>
@@ -53,7 +53,7 @@
     props: ['value'],
     data() {
       return {
-        description: '用户信息',
+        description: '用戶信息',
         cardLoading: true,
         positionInfo: {},
         columns: [
@@ -72,38 +72,38 @@
             dataIndex: 'realname'
           },
           {
-            title: '工号',
+            title: '工號',
             width: '15%',
             align: 'center',
             dataIndex: 'workNo'
           },
           {
-            title: '部门',
+            title: '部門',
             width: '20%',
             align: 'center',
             dataIndex: 'departName'
           },
           {
-            title: '职务',
+            title: '職務',
             width: '15%',
             align: 'center',
             dataIndex: 'post',
             customRender: (text) => (text || '').split(',').map(t => this.positionInfo[t] ? this.positionInfo[t] : t).join(',')
           },
           {
-            title: '手机',
+            title: '手機',
             width: '15%',
             align: 'center',
             dataIndex: 'telephone'
           },
           // {
-          //   title: '手机号',
+          //   title: '手機號',
           //   width: '12%',
           //   align: 'center',
           //   dataIndex: 'phone'
           // },
           {
-            title: '公司邮箱',
+            title: '公司郵箱',
             width: '15%',
             align: 'center',
             dataIndex: 'email'
@@ -134,7 +134,7 @@
         if (pageNum === 1) {
             this.ipagination.current = 1
         }
-        // update-begin- --- author:wangshuai ------ date:20200102 ---- for:传过来的部门编码为空全查
+        // update-begin- --- author:wangshuai ------ date:20200102 ---- for:傳過來的部門編碼為空全查
         if (!orgCode) {
             getAction(this.url.list, {
                 ...this.getQueryParams()
@@ -147,9 +147,9 @@
                 this.loading = false
                 this.cardLoading = false
             })
-          // update-end- --- author:wangshuai ------ date:20200102 ---- for:传过来的部门编码为空全查
+          // update-end- --- author:wangshuai ------ date:20200102 ---- for:傳過來的部門編碼為空全查
         }else{
-        //加载数据 若传入参数1则加载第一页的内容
+        //加載數據 若傳入參數1則加載第一頁的內容
         getAction(this.url.list, {
           orgCode,
           ...this.getQueryParams()
@@ -182,7 +182,7 @@
         this.loadData(null, this.value)
       },
 
-      // 查询职务信息
+      // 查詢職務信息
       queryPositionInfo() {
         getAction(this.url.listByPosition, { pageSize: 99999 }).then(res => {
           if (res.success) {

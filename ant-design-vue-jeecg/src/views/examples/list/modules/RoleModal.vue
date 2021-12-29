@@ -13,24 +13,24 @@
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="唯一识别码"
+          label="唯一識別碼"
           hasFeedback
         >
-          <a-input placeholder="唯一识别码" disabled="disabled" v-decorator="[ 'id', {rules: []} ]" />
+          <a-input placeholder="唯一識別碼" disabled="disabled" v-decorator="[ 'id', {rules: []} ]" />
         </a-form-item>
 
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="角色名称"
+          label="角色名稱"
           hasFeedback >
-          <a-input placeholder="起一个名字" v-decorator="[ 'name', {rules: [{ required: true, message: '不起一个名字吗？' }] }]" />
+          <a-input placeholder="起一個名字" v-decorator="[ 'name', {rules: [{ required: true, message: '不起一個名字嗎？' }] }]" />
         </a-form-item>
 
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="状态"
+          label="狀態"
           hasFeedback >
           <a-select v-decorator="[ 'status', {rules: []} ]">
             <a-select-option :value="1">正常</a-select-option>
@@ -52,7 +52,7 @@
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="拥有权限"
+          label="擁有權限"
           hasFeedback
         >
           <a-row :gutter="16" v-for="(permission, index) in permissions" :key="index">
@@ -65,7 +65,7 @@
                 :indeterminate="permission.indeterminate"
                 :checked="permission.checkedAll"
                 @change="onChangeCheckAll($event, permission)">
-                全选
+                全選
               </a-checkbox>
               <a-checkbox-group :options="permission.actionsOptions" v-model="permission.selected" @change="onChangeCheck(permission)" />
             </a-col>
@@ -113,14 +113,14 @@
         this.mdl = Object.assign({}, record)
         this.visible = true
 
-        // 有权限表，处理勾选
+        // 有權限表，處理勾選
         if (this.mdl.permissions && this.permissions) {
-          // 先处理要勾选的权限结构
+          // 先處理要勾選的權限結構
           const permissionsAction = {}
           this.mdl.permissions.forEach(permission => {
             permissionsAction[permission.permissionId] = permission.actionEntitySet.map(entity => entity.action)
           })
-          // 把权限表遍历一遍，设定要勾选的权限 action
+          // 把權限表遍歷一遍，設定要勾選的權限 action
           this.permissions.forEach(permission => {
             permission.selected = permissionsAction[permission.id]
           })
@@ -138,14 +138,14 @@
       },
       handleOk () {
         const _this = this
-        // 触发表单验证
+        // 觸發表單驗證
         this.form.validateFields((err, values) => {
-          // 验证表单没错误
+          // 驗證表單沒錯誤
           if (!err) {
             console.log('form values', values)
 
             _this.confirmLoading = true
-            // 模拟后端请求 2000 毫秒延迟
+            // 模擬後端請求 2000 毫秒延遲
             new Promise((resolve) => {
               setTimeout(() => resolve(), 2000)
             }).then(() => {

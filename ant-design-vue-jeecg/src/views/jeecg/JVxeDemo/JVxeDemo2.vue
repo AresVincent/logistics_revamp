@@ -15,7 +15,7 @@
   >
 
     <template v-slot:toolbarSuffix>
-      <a-button @click="handleTableGet">获取值</a-button>
+      <a-button @click="handleTableGet">獲取值</a-button>
     </template>
 
   </j-vxe-table>
@@ -37,7 +37,7 @@
             key: 'select_dict_search',
             type: JVXETypes.selectDictSearch,
             width: '200px',
-            // 【字典表配置信息】：数据库表名,显示字段名,存储字段名
+            // 【字典表配置信息】：數據庫表名,显示字段名,存儲字段名
             dict: 'sys_user,realname,username',
           },
           {
@@ -51,7 +51,7 @@
             destFields: 'popup,popup_sex,popup_age'
           },
           {
-            title: 'JP-性别',
+            title: 'JP-性別',
             key: 'popup_sex',
             type: JVXETypes.select,
             dictCode: 'sex',
@@ -59,19 +59,19 @@
             width: '100px',
           },
           {
-            title: 'JP-年龄',
+            title: 'JP-年齡',
             key: 'popup_age',
             type: JVXETypes.normal,
             width: '80px',
           },
           {
-            title: '进度条',
+            title: '進度條',
             key: 'progress',
             type: JVXETypes.progress,
             minWidth: '120px'
           },
           {
-            title: '单选',
+            title: '單選',
             key: 'radio',
             type: JVXETypes.radio,
             width: '130px',
@@ -79,28 +79,28 @@
               {text: '男', value: '1'},
               {text: '女', value: '2'},
             ],
-            // 允许清除选择（再点一次取消选择）
+            // 允許清除選擇（再點一次取消選擇）
             allowClear: true
           },
           {
-            title: '上传',
+            title: '上傳',
             key: 'upload',
             type: JVXETypes.upload,
             width: '180px',
-            btnText: '点击上传',
+            btnText: '點擊上傳',
             token: true,
             responseName: 'message',
             action: window._CONFIG['domianURL'] + '/sys/common/upload'
           },
           {
-            title: '图片上传',
+            title: '圖片上傳',
             key: 'image',
             type: JVXETypes.image,
             width: '180px',
             token: true,
           },
           {
-            title: '文件上传',
+            title: '文件上傳',
             key: 'file',
             type: JVXETypes.file,
             width: '180px',
@@ -123,23 +123,23 @@
     },
     methods: {
 
-      // 当分页参数变化时触发的事件
+      // 當分頁參數變化時觸發的事件
       handlePageChange(event) {
-        // 重新赋值
+        // 重新賦值
         this.pagination.current = event.current
         this.pagination.pageSize = event.pageSize
-        // 查询数据
+        // 查詢數據
         this.randomPage(event.current, event.pageSize, true)
       },
 
-      /** 获取值，忽略表单验证 */
+      /** 獲取值，忽略表單驗證 */
       handleTableGet() {
         const values = this.$refs.vTable.getTableData()
-        console.log('获取值:', {values})
-        this.$message.success('获取值成功，请看控制台输出')
+        console.log('獲取值:', {values})
+        this.$message.success('獲取值成功，請看控制台輸出')
       },
 
-      /* 随机生成数据 */
+      /* 隨機生成數據 */
       randomPage(current, pageSize, loading = false) {
         if (loading) {
           this.loading = true

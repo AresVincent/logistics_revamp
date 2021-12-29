@@ -1,22 +1,22 @@
 <template>
   <a-card :bordered="false">
 
-    <!-- 查询区域 -->
+    <!-- 查詢區域 -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
 
           <a-col :md="6" :sm="12">
-            <a-form-item label="账号">
-              <!--<a-input placeholder="请输入账号查询" v-model="queryParam.username"></a-input>-->
-              <j-input placeholder="输入账号模糊查询" v-model="queryParam.username"></j-input>
+            <a-form-item label="賬號">
+              <!--<a-input placeholder="請輸入賬號查詢" v-model="queryParam.username"></a-input>-->
+              <j-input placeholder="輸入賬號模糊查詢" v-model="queryParam.username"></j-input>
             </a-form-item>
           </a-col>
 
           <a-col :md="6" :sm="8">
-            <a-form-item label="性别">
-              <a-select v-model="queryParam.sex" placeholder="请选择性别">
-                <a-select-option value="">请选择</a-select-option>
+            <a-form-item label="性別">
+              <a-select v-model="queryParam.sex" placeholder="請選擇性別">
+                <a-select-option value="">請選擇</a-select-option>
                 <a-select-option value="1">男</a-select-option>
                 <a-select-option value="2">女</a-select-option>
               </a-select>
@@ -26,23 +26,23 @@
 
           <template v-if="toggleSearchStatus">
             <a-col :md="6" :sm="8">
-              <a-form-item label="真实名字">
-                <a-input placeholder="请输入真实名字" v-model="queryParam.realname"></a-input>
+              <a-form-item label="真實名字">
+                <a-input placeholder="請輸入真實名字" v-model="queryParam.realname"></a-input>
               </a-form-item>
             </a-col>
 
             <a-col :md="6" :sm="8">
-              <a-form-item label="手机号码">
-                <a-input placeholder="请输入手机号码查询" v-model="queryParam.phone"></a-input>
+              <a-form-item label="手機號碼">
+                <a-input placeholder="請輸入手機號碼查詢" v-model="queryParam.phone"></a-input>
               </a-form-item>
             </a-col>
 
             <a-col :md="6" :sm="8">
-              <a-form-item label="用户状态">
-                <a-select v-model="queryParam.status" placeholder="请选择">
-                  <a-select-option value="">请选择</a-select-option>
+              <a-form-item label="用戶狀態">
+                <a-select v-model="queryParam.status" placeholder="請選擇">
+                  <a-select-option value="">請選擇</a-select-option>
                   <a-select-option value="1">正常</a-select-option>
-                  <a-select-option value="2">冻结</a-select-option>
+                  <a-select-option value="2">凍結</a-select-option>
                 </a-select>
               </a-form-item>
             </a-col>
@@ -50,10 +50,10 @@
 
           <a-col :md="6" :sm="8">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
               <a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
+                {{ toggleSearchStatus ? '收起' : '展開' }}
                 <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
               </a>
             </span>
@@ -63,12 +63,12 @@
       </a-form>
     </div>
 
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator" style="border-top: 5px">
-      <a-button @click="handleAdd" type="primary" icon="plus" >添加用户</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('用户信息')">导出</a-button>
+      <a-button @click="handleAdd" type="primary" icon="plus" >添加用戶</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('用戶信息')">導出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" icon="import">导入</a-button>
+        <a-button type="primary" icon="import">導入</a-button>
       </a-upload>
       <j-third-app-button biz-type="user" :selected-row-keys="selectedRowKeys" syncToApp syncToLocal @sync-finally="onSyncFinally"/>
       <a-button type="primary" icon="hdd" @click="recycleBinVisible=true">回收站</a-button>
@@ -76,15 +76,15 @@
         <a-menu slot="overlay" @click="handleMenuClick">
           <a-menu-item key="1">
             <a-icon type="delete" @click="batchDel"/>
-            删除
+            刪除
           </a-menu-item>
           <a-menu-item key="2">
             <a-icon type="lock" @click="batchFrozen('2')"/>
-            冻结
+            凍結
           </a-menu-item>
           <a-menu-item key="3">
             <a-icon type="unlock" @click="batchFrozen('1')"/>
-            解冻
+            解凍
           </a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px">
@@ -95,10 +95,10 @@
       <j-super-query :fieldList="superQueryFieldList" @handleSuperQuery="handleSuperQuery"/>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i>已选择&nbsp;<a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项&nbsp;&nbsp;
+        <i class="anticon anticon-info-circle ant-alert-icon"></i>已選擇&nbsp;<a style="font-weight: 600">{{ selectedRowKeys.length }}</a>項&nbsp;&nbsp;
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -121,7 +121,7 @@
         </template>
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)" >编辑</a>
+          <a @click="handleEdit(record)" >編輯</a>
 
           <a-divider type="vertical" />
 
@@ -131,28 +131,28 @@
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a href="javascript:;" @click="handleDetail(record)">详情</a>
+                <a href="javascript:;" @click="handleDetail(record)">詳情</a>
               </a-menu-item>
 
               <a-menu-item>
-                <a href="javascript:;" @click="handleChangePassword(record.username)">密码</a>
+                <a href="javascript:;" @click="handleChangePassword(record.username)">密碼</a>
               </a-menu-item>
 
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+                  <a>刪除</a>
                 </a-popconfirm>
               </a-menu-item>
 
               <a-menu-item v-if="record.status==1">
-                <a-popconfirm title="确定冻结吗?" @confirm="() => handleFrozen(record.id,2,record.username)">
-                  <a>冻结</a>
+                <a-popconfirm title="確定凍結嗎?" @confirm="() => handleFrozen(record.id,2,record.username)">
+                  <a>凍結</a>
                 </a-popconfirm>
               </a-menu-item>
 
               <a-menu-item v-if="record.status==2">
-                <a-popconfirm title="确定解冻吗?" @confirm="() => handleFrozen(record.id,1,record.username)">
-                  <a>解冻</a>
+                <a-popconfirm title="確定解凍嗎?" @confirm="() => handleFrozen(record.id,1,record.username)">
+                  <a>解凍</a>
                 </a-popconfirm>
               </a-menu-item>
 
@@ -163,7 +163,7 @@
 
       </a-table>
     </div>
-    <!-- table区域-end -->
+    <!-- table區域-end -->
 
     <user-modal ref="modalForm" @ok="modalFormOk"></user-modal>
 
@@ -171,7 +171,7 @@
 
     <sys-user-agent-modal ref="sysUserAgentModal"></sys-user-agent-modal>
 
-    <!-- 用户回收站 -->
+    <!-- 用戶回收站 -->
     <user-recycle-bin-modal :visible.sync="recycleBinVisible" @ok="modalFormOk"/>
 
   </a-card>
@@ -203,7 +203,7 @@
     },
     data() {
       return {
-        description: '这是用户管理页面',
+        description: '這是用戶管理頁面',
         queryParam: {},
         recycleBinVisible: false,
         columns: [
@@ -218,20 +218,20 @@
             }
           },*/
           {
-            title: '用户账号',
+            title: '用戶賬號',
             align: "center",
             dataIndex: 'username',
             width: 120,
             sorter: true
           },
           {
-            title: '用户姓名',
+            title: '用戶姓名',
             align: "center",
             width: 100,
             dataIndex: 'realname',
           },
           {
-            title: '头像',
+            title: '頭像',
             align: "center",
             width: 120,
             dataIndex: 'avatar',
@@ -239,7 +239,7 @@
           },
 
           {
-            title: '性别',
+            title: '性別',
             align: "center",
             width: 80,
             dataIndex: 'sex_dictText',
@@ -252,25 +252,25 @@
             dataIndex: 'birthday'
           },
           {
-            title: '手机号码',
+            title: '手機號碼',
             align: "center",
             width: 100,
             dataIndex: 'phone'
           },
           {
-            title: '部门',
+            title: '部門',
             align: "center",
             width: 180,
             dataIndex: 'orgCodeTxt'
           },
           {
-            title: '负责部门',
+            title: '負責部門',
             align: "center",
             width: 180,
             dataIndex: 'departIds_dictText'
           },
           {
-            title: '状态',
+            title: '狀態',
             align: "center",
             width: 80,
             dataIndex: 'status_dictText'
@@ -285,9 +285,9 @@
 
         ],
         superQueryFieldList: [
-          { type: 'input', value: 'username', text: '用户账号', },
-          { type: 'input', value: 'realname', text: '用户姓名', },
-          { type: 'select', value: 'sex', dbType: 'int', text: '性别', dictCode: 'sex' },
+          { type: 'input', value: 'username', text: '用戶賬號', },
+          { type: 'input', value: 'realname', text: '用戶姓名', },
+          { type: 'select', value: 'sex', dbType: 'int', text: '性別', dictCode: 'sex' },
         ],
         url: {
           syncUser: "/act/process/extActProcess/doSyncUser",
@@ -311,7 +311,7 @@
 
       batchFrozen: function (status) {
         if (this.selectedRowKeys.length <= 0) {
-          this.$message.warning('请选择一条记录！');
+          this.$message.warning('請選擇一條記錄！');
           return false;
         } else {
           let ids = "";
@@ -323,15 +323,15 @@
             }
           });
           if (isAdmin) {
-            that.$message.warning('管理员账号不允许此操作,请重新选择！');
+            that.$message.warning('管理員賬號不允許此操作,請重新選擇！');
             return;
           }
           that.selectedRowKeys.forEach(function (val) {
             ids += val + ",";
           });
           that.$confirm({
-            title: "确认操作",
-            content: "是否" + (status == 1 ? "解冻" : "冻结") + "选中账号?",
+            title: "確認操作",
+            content: "是否" + (status == 1 ? "解凍" : "凍結") + "選中賬號?",
             onOk: function () {
               frozenBatch({ids: ids, status: status}).then((res) => {
                 if (res.success) {
@@ -357,9 +357,9 @@
       },
       handleFrozen: function (id, status, username) {
         let that = this;
-        //TODO 后台校验管理员角色
+        //TODO 後台校驗管理員角色
         if ('admin' == username) {
-          that.$message.warning('管理员账号不允许此操作！');
+          that.$message.warning('管理員賬號不允許此操作！');
           return;
         }
         frozenBatch({ids: id, status: status}).then((res) => {
@@ -375,10 +375,10 @@
         this.$refs.passwordmodal.show(username);
       },
       passwordModalOk() {
-        //TODO 密码修改完成 不需要刷新页面，可以把datasource中的数据更新一下
+        //TODO 密碼修改完成 不需要刷新頁面，可以把datasource中的數據更新一下
       },
       onSyncFinally({isToLocal}) {
-        // 同步到本地时刷新下数据
+        // 同步到本地時刷新下數據
         if (isToLocal) {
           this.loadData()
         }

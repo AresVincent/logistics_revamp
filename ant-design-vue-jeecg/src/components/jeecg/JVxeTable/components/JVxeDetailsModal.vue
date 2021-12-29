@@ -1,6 +1,6 @@
 <template>
   <j-modal
-    title="详细信息"
+    title="詳細信息"
     :width="1200"
     :visible="visible"
     @ok="handleOk"

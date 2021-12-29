@@ -8,13 +8,13 @@
       >
 
         <template slot="addonBefore" style="width: 30px">
-          <a-tooltip v-if="file.status === 'uploading'" :title="`上传中(${Math.floor(file.percent)}%)`">
+          <a-tooltip v-if="file.status === 'uploading'" :title="`上傳中(${Math.floor(file.percent)}%)`">
             <a-icon type="loading"/>
           </a-tooltip>
-          <a-tooltip v-else-if="file.status === 'done'" title="上传完成">
+          <a-tooltip v-else-if="file.status === 'done'" title="上傳完成">
             <a-icon type="check-circle" style="color:#00DB00;"/>
           </a-tooltip>
-          <a-tooltip v-else :title="file.message||'上传失败'">
+          <a-tooltip v-else :title="file.message||'上傳失敗'">
             <a-icon type="exclamation-circle" style="color:red;"/>
           </a-tooltip>
         </template>
@@ -30,13 +30,13 @@
 
             <a-menu slot="overlay">
               <!-- <a-menu-item @click="handleClickPreviewFile">-->
-              <!--  <span><a-icon type="eye"/>&nbsp;预览</span>-->
+              <!--  <span><a-icon type="eye"/>&nbsp;預覽</span>-->
               <!-- </a-menu-item>-->
               <a-menu-item v-if="originColumn.allowDownload !== false" @click="handleClickDownloadFile">
-                <span><a-icon type="download"/>&nbsp;下载</span>
+                <span><a-icon type="download"/>&nbsp;下載</span>
               </a-menu-item>
               <a-menu-item v-if="originColumn.allowRemove !== false" @click="handleClickDeleteFile">
-                <span><a-icon type="delete"/>&nbsp;删除</span>
+                <span><a-icon type="delete"/>&nbsp;刪除</span>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
@@ -55,7 +55,7 @@
       v-bind="cellProps"
       @change="handleChangeUpload"
     >
-      <a-button icon="upload">{{originColumn.btnText || '点击上传'}}</a-button>
+      <a-button icon="upload">{{originColumn.btnText || '點擊上傳'}}</a-button>
     </a-upload>
   </div>
 </template>
@@ -123,20 +123,20 @@
               value['path'] = file.response[col.responseName]
             } else {
               value['status'] = 'error'
-              value['message'] = file.response.message || '未知错误'
+              value['message'] = file.response.message || '未知錯誤'
             }
           } else {
-            // 考虑到如果设置action上传路径为非jeecg-boot后台，可能不会返回 success 属性的情况，就默认为成功
+            // 考慮到如果設置action上傳路徑為非jeecg-boot後台，可能不會返回 success 屬性的情況，就默認為成功
             value['path'] = file.response[col.responseName]
           }
         } else if (file.status === 'error') {
-          value['message'] = file.response.message || '未知错误'
+          value['message'] = file.response.message || '未知錯誤'
         }
         this.innerFile = value
       },
 
       // handleClickPreviewFile(id) {
-      //   this.$message.info('尚未实现')
+      //   this.$message.info('尚未實現')
       // },
 
       handleClickDownloadFile(id) {
@@ -152,7 +152,7 @@
       },
 
     },
-    // 【组件增强】注释详见：JVxeCellMixins.js
+    // 【組件增強】註釋詳見：JVxeCellMixins.js
     enhanced: {
       switches: {visible: true},
       getValue: value => fileGetValue(value),

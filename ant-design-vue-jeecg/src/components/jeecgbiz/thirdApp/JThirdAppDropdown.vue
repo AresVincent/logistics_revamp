@@ -12,7 +12,7 @@
 
 <script>
 
-/* JThirdAppButton 的子组件，不可单独使用 */
+/* JThirdAppButton 的子組件，不可單獨使用 */
 export default {
   name: 'JThirdAppDropdown',
   props: {

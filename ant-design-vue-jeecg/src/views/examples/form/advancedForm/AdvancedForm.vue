@@ -1,9 +1,9 @@
 <template>
   <div>
-    <a-card class="card" title="仓库管理" :bordered="false">
+    <a-card class="card" title="倉庫管理" :bordered="false">
       <repository-form ref="repository" :showSubmit="false" />
     </a-card>
-    <a-card class="card" title="任务管理" :bordered="false">
+    <a-card class="card" title="任務管理" :bordered="false">
       <task-form ref="task" :showSubmit="false" />
     </a-card>
 
@@ -31,8 +31,8 @@
               <span v-if="record.isNew">
                 <a @click="saveRow(record.key)">添加</a>
                 <a-divider type="vertical" />
-                <a-popconfirm title="是否要删除此行？" @confirm="remove(record.key)">
-                  <a>删除</a>
+                <a-popconfirm title="是否要刪除此行？" @confirm="remove(record.key)">
+                  <a>刪除</a>
                 </a-popconfirm>
               </span>
               <span v-else>
@@ -42,15 +42,15 @@
               </span>
             </template>
             <span v-else>
-              <a @click="toggle(record.key)">编辑</a>
+              <a @click="toggle(record.key)">編輯</a>
               <a-divider type="vertical" />
-              <a-popconfirm title="是否要删除此行？" @confirm="remove(record.key)">
-                <a>删除</a>
+              <a-popconfirm title="是否要刪除此行？" @confirm="remove(record.key)">
+                <a>刪除</a>
               </a-popconfirm>
             </span>
           </template>
         </a-table>
-        <a-button style="width: 100%; margin-top: 16px; margin-bottom: 8px" type="dashed" icon="plus" @click="newMember">新增成员</a-button>
+        <a-button style="width: 100%; margin-top: 16px; margin-bottom: 8px" type="dashed" icon="plus" @click="newMember">新增成員</a-button>
       </form>
     </a-card>
 
@@ -75,27 +75,27 @@
     },
     data () {
       return {
-        description: '高级表单常见于一次性输入和提交大批量数据的场景。',
+        description: '高級表單常見於一次性輸入和提交大批量數據的場景。',
         loading: false,
 
         // table
         columns: [
           {
-            title: '成员姓名',
+            title: '成員姓名',
             dataIndex: 'name',
             key: 'name',
             width: '20%',
             scopedSlots: { customRender: 'name' }
           },
           {
-            title: '工号',
+            title: '工號',
             dataIndex: 'workId',
             key: 'workId',
             width: '20%',
             scopedSlots: { customRender: 'workId' }
           },
           {
-            title: '所属部门',
+            title: '所屬部門',
             dataIndex: 'department',
             key: 'department',
             width: '40%',
@@ -124,10 +124,10 @@
           },
           {
             key: '3',
-            name: '王小帅',
+            name: '王小帥',
             workId: '003',
             editable: false,
-            department: '财务部'
+            department: '財務部'
           }
         ]
       }
@@ -176,7 +176,7 @@
         }
       },
 
-      // 最终全页面提交
+      // 最終全頁面提交
       validate () {
         this.$refs.repository.form.validateFields((err, values) => {
           if (!err) {

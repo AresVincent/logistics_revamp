@@ -10,7 +10,7 @@
     style="overflow: auto;padding-bottom: 53px;">
 
     <a-form>
-      <a-form-item label='所拥有的部门权限'>
+      <a-form-item label='所擁有的部門權限'>
 
         <a-tree
           v-if="treeData.length>0"
@@ -27,29 +27,29 @@
             {{ slotTitle }}<a-icon v-if="ruleFlag" type="align-left" style="margin-left:5px;color: red;"></a-icon>
           </span>
         </a-tree>
-        <div v-else><h3>无可配置部门权限!</h3></div>
+        <div v-else><h3>無可配置部門權限!</h3></div>
       </a-form-item>
     </a-form>
 
     <div class="drawer-bootom-button">
       <a-dropdown style="float: left" :trigger="['click']" placement="topCenter">
         <a-menu slot="overlay">
-          <a-menu-item key="1" @click="switchCheckStrictly(1)">父子关联</a-menu-item>
-          <a-menu-item key="2" @click="switchCheckStrictly(2)">取消关联</a-menu-item>
-          <a-menu-item key="3" @click="checkALL">全部勾选</a-menu-item>
-          <a-menu-item key="4" @click="cancelCheckALL">取消全选</a-menu-item>
-          <a-menu-item key="5" @click="expandAll">展开所有</a-menu-item>
-          <a-menu-item key="6" @click="closeAll">合并所有</a-menu-item>
+          <a-menu-item key="1" @click="switchCheckStrictly(1)">父子關聯</a-menu-item>
+          <a-menu-item key="2" @click="switchCheckStrictly(2)">取消關聯</a-menu-item>
+          <a-menu-item key="3" @click="checkALL">全部勾選</a-menu-item>
+          <a-menu-item key="4" @click="cancelCheckALL">取消全選</a-menu-item>
+          <a-menu-item key="5" @click="expandAll">展開所有</a-menu-item>
+          <a-menu-item key="6" @click="closeAll">合併所有</a-menu-item>
         </a-menu>
         <a-button>
-          树操作 <a-icon type="up" />
+          樹操作 <a-icon type="up" />
         </a-button>
       </a-dropdown>
-      <a-popconfirm title="确定放弃编辑？" @confirm="close" okText="确定" cancelText="取消">
+      <a-popconfirm title="確定放棄編輯？" @confirm="close" okText="確定" cancelText="取消">
         <a-button style="margin-right: .8rem">取消</a-button>
       </a-popconfirm>
-      <a-button @click="handleSubmit(false)" type="primary" :loading="loading" ghost style="margin-right: 0.8rem">仅保存</a-button>
-      <a-button @click="handleSubmit(true)" type="primary" :loading="loading">保存并关闭</a-button>
+      <a-button @click="handleSubmit(false)" type="primary" :loading="loading" ghost style="margin-right: 0.8rem">僅保存</a-button>
+      <a-button @click="handleSubmit(true)" type="primary" :loading="loading">保存並關閉</a-button>
     </div>
     <dept-role-datarule-modal ref="datarule"></dept-role-datarule-modal>
   </a-drawer>
@@ -78,7 +78,7 @@
         allTreeKeys:[],
         autoExpandParent: true,
         checkStrictly: true,
-        title:"部门角色权限配置",
+        title:"部門角色權限配置",
         visible: false,
         loading: false,
         selectedKeys:[]
@@ -148,7 +148,7 @@
           lastpermissionIds:that.defaultCheckedKeys.join(","),
         };
         that.loading = true;
-        console.log("请求参数：",params);
+        console.log("請求參數：",params);
         saveDeptRolePermission(params).then((res)=>{
           if(res.success){
             that.$message.success(res.message);

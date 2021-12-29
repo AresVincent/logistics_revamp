@@ -39,7 +39,7 @@
         console.log("------url------"+url)
         if (url !== null && url !== undefined) {
           //-----------------------------------------------------------------------------------------
-          //url支持通过 ${token}方式传递当前登录TOKEN
+          //url支持通過 ${token}方式傳遞當前登錄TOKEN
           let tokenStr = "${token}";
           if(url.indexOf(tokenStr)!=-1) {
             let token = Vue.ls.get(ACCESS_TOKEN);
@@ -49,12 +49,12 @@
           }
           //-----------------------------------------------------------------------------------------
 
-          /*update_begin author:wuxianquan date:20190908 for:判断打开方式，新窗口打开时this.$route.meta.internalOrExternal==true */
+          /*update_begin author:wuxianquan date:20190908 for:判斷打開方式，新窗口打開時this.$route.meta.internalOrExternal==true */
           if(this.$route.meta.internalOrExternal != undefined && this.$route.meta.internalOrExternal==true){
             this.closeCurrent();
             window.open(this.url);
           }
-          /*update_end author:wuxianquan date:20190908 for:判断打开方式，新窗口打开时this.$route.meta.internalOrExternal==true */
+          /*update_end author:wuxianquan date:20190908 for:判斷打開方式，新窗口打開時this.$route.meta.internalOrExternal==true */
 
         }
       }

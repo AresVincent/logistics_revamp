@@ -7,7 +7,7 @@
     @ok="handleOk"
     @cancel="handleCancel"
     :okButtonProps="{ props: {disabled: disabled} }"
-    cancelText="关闭">
+    cancelText="關閉">
 
     <a-spin :spinning="confirmLoading">
       <a-form-model ref="form" :model="model" :rules="validatorRules">
@@ -17,8 +17,8 @@
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               prop="titile"
-              label="标题">
-              <a-input placeholder="请输入标题" v-model="model.titile" :readOnly="disableSubmit"/>
+              label="標題">
+              <a-input placeholder="請輸入標題" v-model="model.titile" :readOnly="disableSubmit"/>
             </a-form-model-item>
           </a-col>
           <a-col :span="24/2">
@@ -26,14 +26,14 @@
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               prop="msgCategory"
-              label="消息类型">
+              label="消息類型">
               <a-select
                 v-model="model.msgCategory"
-                placeholder="请选择消息类型"
+                placeholder="請選擇消息類型"
                 :disabled="disableSubmit"
                 :getPopupContainer = "(target) => target.parentNode">
                 <a-select-option value="1">通知公告</a-select-option>
-                <a-select-option value="2">系统消息</a-select-option>
+                <a-select-option value="2">系統消息</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
@@ -44,8 +44,8 @@
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               prop="startTime"
-              label="开始时间:">
-              <j-date style="width: 100%" :getCalendarContainer="node => node.parentNode" v-model="model.startTime"  placeholder="请选择开始时间" showTime dateFormat="YYYY-MM-DD HH:mm:ss" ></j-date>
+              label="開始時間:">
+              <j-date style="width: 100%" :getCalendarContainer="node => node.parentNode" v-model="model.startTime"  placeholder="請選擇開始時間" showTime dateFormat="YYYY-MM-DD HH:mm:ss" ></j-date>
             </a-form-model-item>
           </a-col>
           <a-col :span="24/2">
@@ -53,9 +53,9 @@
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               prop="endTime"
-              label="结束时间"
+              label="結束時間"
               class="endTime">
-              <j-date style="width: 100%" :getCalendarContainer="node => node.parentNode" v-model="model.endTime" placeholder="请选择结束时间" showTime dateFormat="YYYY-MM-DD HH:mm:ss"></j-date>
+              <j-date style="width: 100%" :getCalendarContainer="node => node.parentNode" v-model="model.endTime" placeholder="請選擇結束時間" showTime dateFormat="YYYY-MM-DD HH:mm:ss"></j-date>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -64,10 +64,10 @@
             <a-form-model-item
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
-              label="优先级">
+              label="優先級">
               <a-select
                 v-model="model.priority"
-                placeholder="请选择优先级"
+                placeholder="請選擇優先級"
                 :disabled="disableSubmit"
                 :getPopupContainer = "(target) => target.parentNode">
                 <a-select-option value="L">低</a-select-option>
@@ -81,15 +81,15 @@
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
               prop="msgType"
-              label="通告类型">
+              label="通告類型">
               <a-select
                 v-model="model.msgType"
-                placeholder="请选择通告类型"
+                placeholder="請選擇通告類型"
                 :disabled="disableSubmit"
                 @change="chooseMsgType"
                 :getPopupContainer = "(target) => target.parentNode">
-                <a-select-option value="USER">指定用户</a-select-option>
-                <a-select-option value="ALL">全体用户</a-select-option>
+                <a-select-option value="USER">指定用戶</a-select-option>
+                <a-select-option value="ALL">全體用戶</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
@@ -101,18 +101,18 @@
               :wrapperCol="wrapperCol"
               prop="msgAbstract"
               label="摘要">
-              <a-textarea placeholder="请输入摘要"  v-model="model.msgAbstract" />
+              <a-textarea placeholder="請輸入摘要"  v-model="model.msgAbstract" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24/2">
             <a-form-model-item
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
-              label="指定用户"
+              label="指定用戶"
               v-if="userType">
               <a-select
                 mode="multiple"
-                placeholder="请选择用户"
+                placeholder="請選擇用戶"
                 :labelInValue=true
                 v-model="selectedUser"
                 @dropdownVisibleChange="selectUserIds"
@@ -127,7 +127,7 @@
             <a-form-model-item
               :labelCol="labelColX1"
               :wrapperCol="wrapperColX1"
-              label="内容"
+              label="內容"
               class="j-field-content">
               <j-editor v-model="model.msgContent"></j-editor>
             </a-form-model-item>
@@ -175,12 +175,12 @@
         },
         confirmLoading: false,
         validatorRules:{
-          titile: [{ required: true, message: '请输入标题!' }],
-          msgCategory: [{ required: true, message: '请选择消息类型!' }],
-          msgType:[{ required: true, message: '请选择通告对象类型!' }],
-          endTime:[{ required: true, message: '请选择结束时间!'} ,{validator: this.endTimeValidate}],
-          startTime:[{required: true, message: '请选择开始时间!'},{validator: this.startTimeValidate}],
-          msgAbstract: [{ required: true, message: '请输入摘要!' }],
+          titile: [{ required: true, message: '請輸入標題!' }],
+          msgCategory: [{ required: true, message: '請選擇消息類型!' }],
+          msgType:[{ required: true, message: '請選擇通告對象類型!' }],
+          endTime:[{ required: true, message: '請選擇結束時間!'} ,{validator: this.endTimeValidate}],
+          startTime:[{required: true, message: '請選擇開始時間!'},{validator: this.startTimeValidate}],
+          msgAbstract: [{ required: true, message: '請輸入摘要!' }],
         },
         url: {
           queryByIds: "/sys/user/queryByIds",
@@ -209,13 +209,13 @@
       },
       getUser(record){
         this.model = Object.assign({}, record);
-        // 指定用户
+        // 指定用戶
         if(record&&record.msgType === "USER"){
           this.userType =  true;
           this.userIds = record.userIds;
           getAction(this.url.queryByIds,{userIds:this.userIds}).then((res)=>{
             if(res.success){
-              //update--begin--autor:wangshuai-----date:20200601------for：系统公告选人后，不能删除------
+              //update--begin--autor:wangshuai-----date:20200601------for：系統公告選人後，不能刪除------
               var userList=[];
               for(var i=0;i<res.result.length;i++){
                 var user={};
@@ -224,7 +224,7 @@
                 userList.push(user);
               }
               this.selectedUser=userList;
-              //update--begin--autor:wangshuai-----date:20200601------for：系统公告选人后，不能删除------
+              //update--begin--autor:wangshuai-----date:20200601------for：系統公告選人後，不能刪除------
               this.$refs.UserListModal.edit(res.result,this.userIds);
             }
           });
@@ -238,12 +238,12 @@
       },
       handleOk () {
         const that = this;
-        //当设置指定用户类型，但用户为空时，后台报错
+        //當設置指定用戶類型，但用戶為空時，後台報錯
         if(this.userType &&!(this.userIds!=null && this.userIds.length >0)){
-            this.$message.warning('指定用户不能为空！')
+            this.$message.warning('指定用戶不能為空！')
             return;
           }
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;
@@ -271,7 +271,7 @@
               that.confirmLoading = false;
               that.close();
             })
-            
+
           }else{
             return false;
           }
@@ -302,17 +302,17 @@
           this.userIds = [];
         }
       },
-      // 子modal回调
+      // 子modal回調
       choseUser:function(userList){
         this.selectedUser = [];
         this.userIds = [];
         for(var i=0;i<userList.length;i++){
-          //update--begin--autor:wangshuai-----date:20200601------for：系统公告选人后，不能删除------
+          //update--begin--autor:wangshuai-----date:20200601------for：系統公告選人後，不能刪除------
           var user={};
           user.label =userList[i].realname;
           user.key=userList[i].id;
           this.selectedUser.push(user);
-          //update--end--autor:wangshuai-----date:20200601------for：系统公告选人后，不能删除------
+          //update--end--autor:wangshuai-----date:20200601------for：系統公告選人後，不能刪除------
           this.userIds += userList[i].id+","
         }
       },
@@ -323,7 +323,7 @@
         }else if(moment(value).isBefore(endTime)){
           callback()
         }else{
-          callback("开始时间需小于结束时间")
+          callback("開始時間需小於結束時間")
         }
       },
       endTimeValidate(rule,value,callback){
@@ -333,7 +333,7 @@
         }else if(moment(startTime).isBefore(value)){
           callback()
         }else{
-          callback("结束时间需大于开始时间")
+          callback("結束時間需大於開始時間")
         }
       },
       handleChange(userList) {

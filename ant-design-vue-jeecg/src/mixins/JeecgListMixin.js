@@ -1,7 +1,7 @@
 /**
- * 新增修改完成调用 modalFormOk方法 编辑弹框组件ref定义为modalForm
- * 高级查询按钮调用 superQuery方法  高级查询组件ref定义为superQueryModal
- * data中url定义 list为查询列表  delete为删除单条记录  deleteBatch为批量删除
+ * 新增修改完成調用 modalFormOk方法 編輯彈框組件ref定義為modalForm
+ * 高級查詢按鈕調用 superQuery方法  高級查詢組件ref定義為superQueryModal
+ * data中url定義 list為查詢列表  delete為刪除單條記錄  deleteBatch為批量刪除
  */
 import { filterObj } from '@/utils/util';
 import { deleteAction, getAction,downFile,getFileAccessHttpUrl } from '@/api/manage'
@@ -12,42 +12,42 @@ import store from '@/store'
 export const JeecgListMixin = {
   data(){
     return {
-      /* 查询条件-请不要在queryParam中声明非字符串值的属性 */
+      /* 查詢條件-請不要在queryParam中聲明非字符串值的屬性 */
       queryParam: {},
-      /* 数据源 */
+      /* 數據源 */
       dataSource:[],
-      /* 分页参数 */
+      /* 分頁參數 */
       ipagination:{
         current: 1,
         pageSize: 10,
         pageSizeOptions: ['10', '20', '30'],
         showTotal: (total, range) => {
-          return range[0] + "-" + range[1] + " 共" + total + "条"
+          return range[0] + "-" + range[1] + " 共" + total + "條"
         },
         showQuickJumper: true,
         showSizeChanger: true,
         total: 0
       },
-      /* 排序参数 */
+      /* 排序參數 */
       isorter:{
         column: 'createTime',
         order: 'desc',
       },
-      /* 筛选参数 */
+      /* 篩選參數 */
       filters: {},
-      /* table加载状态 */
+      /* table加載狀態 */
       loading:false,
-      /* table选中keys*/
+      /* table選中keys*/
       selectedRowKeys: [],
-      /* table选中records*/
+      /* table選中records*/
       selectionRows: [],
-      /* 查询折叠 */
+      /* 查詢摺疊 */
       toggleSearchStatus:false,
-      /* 高级查询条件生效状态 */
+      /* 高級查詢條件生效狀態 */
       superQueryFlag:false,
-      /* 高级查询条件 */
+      /* 高級查詢條件 */
       superQueryParams: '',
-      /** 高级查询拼接方式 */
+      /** 高級查詢拼接方式 */
       superQueryMatchType: 'and',
     }
   },
@@ -55,7 +55,7 @@ export const JeecgListMixin = {
       if(!this.disableMixinCreated){
         console.log(' -- mixin created -- ')
         this.loadData();
-        //初始化字典配置 在自己页面定义
+        //初始化字典配置 在自己頁面定義
         this.initDictConfig();
       }
   },
@@ -73,18 +73,18 @@ export const JeecgListMixin = {
   methods:{
     loadData(arg) {
       if(!this.url.list){
-        this.$message.error("请设置url.list属性!")
+        this.$message.error("請設置url.list屬性!")
         return
       }
-      //加载数据 若传入参数1则加载第一页的内容
+      //加載數據 若傳入參數1則加載第一頁的內容
       if (arg === 1) {
         this.ipagination.current = 1;
       }
-      var params = this.getQueryParams();//查询条件
+      var params = this.getQueryParams();//查詢條件
       this.loading = true;
       getAction(this.url.list, params).then((res) => {
         if (res.success) {
-          //update-begin---author:zhangyafei    Date:20201118  for：适配不分页的数据列表------------
+          //update-begin---author:zhangyafei    Date:20201118  for：適配不分頁的數據列表------------
           this.dataSource = res.result.records||res.result;
           if(res.result.total)
           {
@@ -92,7 +92,7 @@ export const JeecgListMixin = {
           }else{
             this.ipagination.total = 0;
           }
-          //update-end---author:zhangyafei    Date:20201118  for：适配不分页的数据列表------------
+          //update-end---author:zhangyafei    Date:20201118  for：適配不分頁的數據列表------------
         }else{
           this.$message.warning(res.message)
         }
@@ -101,10 +101,10 @@ export const JeecgListMixin = {
       })
     },
     initDictConfig(){
-      console.log("--这是一个假的方法!")
+      console.log("--這是一個假的方法!")
     },
     handleSuperQuery(params, matchType) {
-      //高级查询方法
+      //高級查詢方法
       if(!params){
         this.superQueryParams=''
         this.superQueryFlag = false
@@ -116,7 +116,7 @@ export const JeecgListMixin = {
       this.loadData(1)
     },
     getQueryParams() {
-      //获取查询条件
+      //獲取查詢條件
       let sqp = {}
       if(this.superQueryParams){
         sqp['superQueryParams']=encodeURI(this.superQueryParams)
@@ -129,7 +129,7 @@ export const JeecgListMixin = {
       return filterObj(param);
     },
     getQueryField() {
-      //TODO 字段权限控制
+      //TODO 字段權限控制
       var str = "id,";
       this.columns.forEach(function (value) {
         str += "," + value.dataIndex;
@@ -147,6 +147,10 @@ export const JeecgListMixin = {
     },
     searchQuery() {
       this.loadData(1);
+      // 點擊查詢清空列表選中行
+      // https://gitee.com/jeecg/jeecg-boot/issues/I4KTU1
+      this.selectedRowKeys = []
+      this.selectionRows = []
     },
     superQuery() {
       this.$refs.superQueryModal.show();
@@ -157,11 +161,11 @@ export const JeecgListMixin = {
     },
     batchDel: function () {
       if(!this.url.deleteBatch){
-        this.$message.error("请设置url.deleteBatch属性!")
+        this.$message.error("請設置url.deleteBatch屬性!")
         return
       }
       if (this.selectedRowKeys.length <= 0) {
-        this.$message.warning('请选择一条记录！');
+        this.$message.warning('請選擇一條記錄！');
         return;
       } else {
         var ids = "";
@@ -170,13 +174,13 @@ export const JeecgListMixin = {
         }
         var that = this;
         this.$confirm({
-          title: "确认删除",
-          content: "是否删除选中数据?",
+          title: "確認刪除",
+          content: "是否刪除選中數據?",
           onOk: function () {
             that.loading = true;
             deleteAction(that.url.deleteBatch, {ids: ids}).then((res) => {
               if (res.success) {
-                //重新计算分页问题
+                //重新計算分頁問題
                 that.reCalculatePage(that.selectedRowKeys.length)
                 that.$message.success(res.message);
                 that.loadData();
@@ -193,13 +197,13 @@ export const JeecgListMixin = {
     },
     handleDelete: function (id) {
       if(!this.url.delete){
-        this.$message.error("请设置url.delete属性!")
+        this.$message.error("請設置url.delete屬性!")
         return
       }
       var that = this;
       deleteAction(that.url.delete, {id: id}).then((res) => {
         if (res.success) {
-          //重新计算分页问题
+          //重新計算分頁問題
           that.reCalculatePage(1)
           that.$message.success(res.message);
           that.loadData();
@@ -209,11 +213,11 @@ export const JeecgListMixin = {
       });
     },
     reCalculatePage(count){
-      //总数量-count
+      //總數量-count
       let total=this.ipagination.total-count;
-      //获取删除后的分页数
+      //獲取刪除后的分頁數
       let currentIndex=Math.ceil(total/this.ipagination.pageSize);
-      //删除后的分页数<所在当前页
+      //刪除后的分頁數<所在當前頁
       if(currentIndex<this.ipagination.current){
         this.ipagination.current=currentIndex;
       }
@@ -221,7 +225,7 @@ export const JeecgListMixin = {
     },
     handleEdit: function (record) {
       this.$refs.modalForm.edit(record);
-      this.$refs.modalForm.title = "编辑";
+      this.$refs.modalForm.title = "編輯";
       this.$refs.modalForm.disableSubmit = false;
     },
     handleAdd: function () {
@@ -230,8 +234,8 @@ export const JeecgListMixin = {
       this.$refs.modalForm.disableSubmit = false;
     },
     handleTableChange(pagination, filters, sorter) {
-      //分页、排序、筛选变化时触发
-      //TODO 筛选
+      //分頁、排序、篩選變化時觸發
+      //TODO 篩選
       console.log(pagination)
       if (Object.keys(sorter).length > 0) {
         this.isorter.column = sorter.field;
@@ -243,22 +247,22 @@ export const JeecgListMixin = {
     handleToggleSearch(){
       this.toggleSearchStatus = !this.toggleSearchStatus;
     },
-    // 给popup查询使用(查询区域不支持回填多个字段，限制只返回一个字段)
+    // 給popup查詢使用(查詢區域不支持回填多個字段，限制只返回一個字段)
     getPopupField(fields){
       return fields.split(',')[0]
     },
     modalFormOk() {
-      // 新增/修改 成功时，重载列表
+      // 新增/修改 成功時，重載列表
       this.loadData();
-      //清空列表选中
+      //清空列表選中
       this.onClearSelected()
     },
     handleDetail:function(record){
       this.$refs.modalForm.edit(record);
-      this.$refs.modalForm.title="详情";
+      this.$refs.modalForm.title="詳情";
       this.$refs.modalForm.disableSubmit = true;
     },
-    /* 导出 */
+    /* 導出 */
     handleExportXls2(){
       let paramsStr = encodeURI(JSON.stringify(this.getQueryParams()));
       let url = `${window._CONFIG['domianURL']}/${this.url.exportXlsUrl}?paramsStr=${paramsStr}`;
@@ -266,16 +270,16 @@ export const JeecgListMixin = {
     },
     handleExportXls(fileName){
       if(!fileName || typeof fileName != "string"){
-        fileName = "导出文件"
+        fileName = "導出文件"
       }
       let param = this.getQueryParams();
       if(this.selectedRowKeys && this.selectedRowKeys.length>0){
         param['selections'] = this.selectedRowKeys.join(",")
       }
-      console.log("导出参数",param)
+      console.log("導出參數",param)
       downFile(this.url.exportXlsUrl,param).then((data)=>{
         if (!data) {
-          this.$message.warning("文件下载失败")
+          this.$message.warning("文件下載失敗")
           return
         }
         if (typeof window.navigator.msSaveBlob !== 'undefined') {
@@ -288,12 +292,12 @@ export const JeecgListMixin = {
           link.setAttribute('download', fileName+'.xls')
           document.body.appendChild(link)
           link.click()
-          document.body.removeChild(link); //下载完成移除元素
-          window.URL.revokeObjectURL(url); //释放掉blob对象
+          document.body.removeChild(link); //下載完成移除元素
+          window.URL.revokeObjectURL(url); //釋放掉blob對象
         }
       })
     },
-    /* 导入 */
+    /* 導入 */
     handleImportExcel(info){
       this.loading = true;
       if (info.file.status !== 'uploading') {
@@ -302,7 +306,7 @@ export const JeecgListMixin = {
       if (info.file.status === 'done') {
         this.loading = false;
         if (info.file.response.success) {
-          // this.$message.success(`${info.file.name} 文件上传成功`);
+          // this.$message.success(`${info.file.name} 文件上傳成功`);
           if (info.file.response.code === 201) {
             let { message, result: { msg, fileUrl, fileName } } = info.file.response
             let href = window._CONFIG['domianURL'] + fileUrl
@@ -310,12 +314,12 @@ export const JeecgListMixin = {
               title: message,
               content: (<div>
                   <span>{msg}</span><br/>
-                  <span>具体详情请 <a href={href} target="_blank" download={fileName}>点击下载</a> </span>
+                  <span>具體詳情請 <a href={href} target="_blank" download={fileName}>點擊下載</a> </span>
                 </div>
               )
             })
           } else {
-            this.$message.success(info.file.response.message || `${info.file.name} 文件上传成功`)
+            this.$message.success(info.file.response.message || `${info.file.name} 文件上傳成功`)
           }
           this.loadData()
         } else {
@@ -328,9 +332,9 @@ export const JeecgListMixin = {
           const token = Vue.ls.get(ACCESS_TOKEN)
           if (token && data.message.includes("Token失效")) {
             this.$error({
-              title: '登录已过期',
-              content: '很抱歉，登录已过期，请重新登录',
-              okText: '重新登录',
+              title: '登錄已過期',
+              content: '很抱歉，登錄已過期，請重新登錄',
+              okText: '重新登錄',
               mask: false,
               onOk: () => {
                 store.dispatch('Logout').then(() => {
@@ -341,19 +345,19 @@ export const JeecgListMixin = {
             })
           }
         } else {
-          this.$message.error(`文件上传失败: ${info.file.msg} `);
+          this.$message.error(`文件上傳失敗: ${info.file.msg} `);
         }
       }
     },
-    /* 图片预览 */
+    /* 圖片預覽 */
     getImgView(text){
       if(text && text.indexOf(",")>0){
         text = text.substring(0,text.indexOf(","))
       }
       return getFileAccessHttpUrl(text)
     },
-    /* 文件下载 */
-    // update--autor:lvdandan-----date:20200630------for：修改下载文件方法名uploadFile改为downloadFile------
+    /* 文件下載 */
+    // update--autor:lvdandan-----date:20200630------for：修改下載文件方法名uploadFile改為downloadFile------
     downloadFile(text){
       if(!text){
         this.$message.warning("未知的文件")

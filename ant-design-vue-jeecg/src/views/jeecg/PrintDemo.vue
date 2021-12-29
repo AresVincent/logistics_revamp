@@ -5,14 +5,14 @@
     </div>
     <section ref="print" id="printContent" class="abcdefg">
       <div style="text-align: center">
-        <p style="font-size: 24px;font-weight: 800">打印测试表单</p>
+        <p style="font-size: 24px;font-weight: 800">打印測試表單</p>
       </div>
-      <!--签字-->
+      <!--簽字-->
       <a-col :md="24" :sm="24">
       <div class="sign" style="text-align: left;height: inherit">
         <a-col :span="24">
           <span>
-            打印人员:
+            打印人員:
           </span>
           <a-input style="width: 30%" v-model="printer"/>
           <span style="margin-left: 12.5%">打印日期:</span>
@@ -21,7 +21,7 @@
         <a-col :span="24">
         </a-col>
         <a-col :span="24" style="margin-top: 20px">
-          <span>打印内容:</span>
+          <span>打印內容:</span>
           <a-input style="width: 80%" v-model="printContent"/>
         </a-col>
         <a-col :span="24" style="margin-top: 20px">
@@ -29,7 +29,7 @@
           <a-input style="width: 80%" v-model="printReason"/>
         </a-col>
         <a-col style="margin-top: 20px" :span="24">
-          <span>打印图片:</span>
+          <span>打印圖片:</span>
           <br/>
           <a-upload
             action="/jsonplaceholder.typicode.com/posts/"
@@ -83,10 +83,10 @@
           xs: { span: 24 },
           sm: { span: 8 },
         },
-        printer:'张三',
+        printer:'張三',
         printTime:'2019-02-01 12:00:00',
-        printContent:'打印内容就是,做一个打印测试',
-        printReason:'做一个打印测试',
+        printContent:'打印內容就是,做一個打印測試',
+        printReason:'做一個打印測試',
         previewVisible: false,
         previewImage: '',
         fileList: [{
@@ -116,7 +116,7 @@
 
       },
       getDate(){
-        // 当前时间
+        // 當前時間
       },
       handleCancel () {
         this.previewVisible = false
@@ -132,12 +132,12 @@
   }
 </script>
 <style scoped>
-  /*update_begin author:scott date:20191203 for:打印机打印的字体模糊问题 */
+  /*update_begin author:scott date:20191203 for:打印機打印的字體模糊問題 */
   * {
     color: #000000!important;
     -webkit-tap-highlight-color: #000000!important;
   }
-  /*update_end author:scott date:20191203 for:打印机打印的字体模糊问题 */
+  /*update_end author:scott date:20191203 for:打印機打印的字體模糊問題 */
 
   .abcdefg .ant-card-body{
     margin-left: 0%;

@@ -7,22 +7,22 @@
       :visible="visible"
       @ok="handleOk"
       @cancel="handleCancel"
-      cancelText="关闭">
+      cancelText="關閉">
 
 
-      <!-- 查询区域 -->
+      <!-- 查詢區域 -->
       <div class="table-page-search-wrapper">
         <a-form layout="inline"  @keyup.enter.native="searchQuery">
           <a-row :gutter="24">
 
             <a-col :span="10">
-              <a-form-item label="用户账号">
-                <a-input placeholder="请输入用户账号" v-model="queryParam.username"></a-input>
+              <a-form-item label="用戶賬號">
+                <a-input placeholder="請輸入用戶賬號" v-model="queryParam.username"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="8">
                     <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-                      <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+                      <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
                       <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
                     </span>
             </a-col>
@@ -30,7 +30,7 @@
           </a-row>
         </a-form>
       </div>
-      <!-- table区域-begin -->
+      <!-- table區域-begin -->
       <div>
         <a-table
           size="small"
@@ -46,7 +46,7 @@
 
         </a-table>
       </div>
-      <!-- table区域-end -->
+      <!-- table區域-end -->
 
 
     </a-modal>
@@ -61,14 +61,14 @@
     name: "SelectUserModal",
     data() {
       return {
-        title: "添加已有用户",
+        title: "添加已有用戶",
         names: [],
         visible: false,
         placement: 'right',
         description: '',
-        // 查询条件
+        // 查詢條件
         queryParam: {},
-        // 表头
+        // 表頭
         columns1: [
           {
             title: '#',
@@ -81,31 +81,31 @@
             }
           },
           {
-            title: '用户账号',
+            title: '用戶賬號',
             align: "center",
             width: 100,
             dataIndex: 'username'
           },
           {
-            title: '用户名称',
+            title: '用戶名稱',
             align: "center",
             width: 100,
             dataIndex: 'realname'
           },
           {
-            title: '性别',
+            title: '性別',
             align: "center",
             width: 100,
             dataIndex: 'sex_dictText'
           },
           {
-            title: '电话',
+            title: '電話',
             align: "center",
             width: 100,
             dataIndex: 'phone'
           },
           {
-            title: '部门',
+            title: '部門',
             align: "center",
             width: 150,
             dataIndex: 'orgCode'
@@ -113,13 +113,13 @@
         ],
         columns2: [
           {
-            title: '用户账号',
+            title: '用戶賬號',
             align: "center",
             dataIndex: 'username',
 
           },
           {
-            title: '用户名称',
+            title: '用戶名稱',
             align: "center",
             dataIndex: 'realname',
           },
@@ -131,16 +131,16 @@
             scopedSlots: {customRender: 'action'},
           }
         ],
-        //数据集
+        //數據集
         dataSource1: [],
         dataSource2: [],
-        // 分页参数
+        // 分頁參數
         ipagination: {
           current: 1,
           pageSize: 10,
           pageSizeOptions: ['10', '20', '30'],
           showTotal: (total, range) => {
-            return range[0] + "-" + range[1] + " 共" + total + "条"
+            return range[0] + "-" + range[1] + " 共" + total + "條"
           },
           showQuickJumper: true,
           showSizeChanger: true,
@@ -182,11 +182,11 @@
         this.visible = true;
       },
       loadData(arg) {
-        //加载数据 若传入参数1则加载第一页的内容
+        //加載數據 若傳入參數1則加載第一頁的內容
         if (arg === 1) {
           this.ipagination.current = 1;
         }
-        var params = this.getQueryParams();//查询条件
+        var params = this.getQueryParams();//查詢條件
         getAction(this.url.list, params).then((res) => {
           if (res.success) {
             this.dataSource1 = res.result.records;
@@ -202,7 +202,7 @@
         return filterObj(param);
       },
       getQueryField() {
-        //TODO 字段权限控制
+        //TODO 字段權限控制
       },
       onSelectAll(selected, selectedRows, changeRows) {
         if (selected === true) {
@@ -240,9 +240,9 @@
         this.dataSource2.splice(this.dataSource2.indexOf(record), 1);
       },
       handleTableChange(pagination, filters, sorter) {
-        //分页、排序、筛选变化时触发
+        //分頁、排序、篩選變化時觸發
         console.log(sorter);
-        //TODO 筛选
+        //TODO 篩選
         if (Object.keys(sorter).length > 0) {
           this.isorter.column = sorter.field;
           this.isorter.order = "ascend" == sorter.order ? "asc" : "desc"

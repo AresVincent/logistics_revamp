@@ -12,7 +12,7 @@
   >
 
     <slot></slot>
-    <!--有设置标题-->
+    <!--有設置標題-->
     <template v-if="!isNoTitle" slot="title">
       <a-row class="j-modal-title-row" type="flex">
         <a-col class="left">
@@ -23,7 +23,7 @@
         </a-col>
       </a-row>
     </template>
-    <!--没有设置标题-->
+    <!--沒有設置標題-->
     <template v-else slot="title">
       <a-row class="j-modal-title-row" type="flex">
         <a-col v-if="switchFullscreen" class="right" @click="toggleFullscreen">
@@ -32,12 +32,12 @@
       </a-row>
     </template>
 
-    <!-- 处理 scopedSlots -->
+    <!-- 處理 scopedSlots -->
     <template v-for="slotName of scopedSlotsKeys" :slot="slotName">
       <slot :name="slotName"></slot>
     </template>
 
-    <!-- 处理 slots -->
+    <!-- 處理 slots -->
     <template v-for="slotName of slotsKeys" v-slot:[slotName]>
       <slot :name="slotName"></slot>
     </template>
@@ -54,19 +54,19 @@ export default {
     name: 'JModal',
     props: {
       title: String,
-      // 可使用 .sync 修饰符
+      // 可使用 .sync 修飾符
       visible: Boolean,
-      // 是否全屏弹窗，当全屏时无论如何都会禁止 body 滚动。可使用 .sync 修饰符
+      // 是否全屏彈窗，當全屏時無論如何都會禁止 body 滾動。可使用 .sync 修飾符
       fullscreen: {
         type: Boolean,
         default: false
       },
-      // 是否允许切换全屏（允许后右上角会出现一个按钮）
+      // 是否允許切換全屏（允許后右上角會出現一個按鈕）
       switchFullscreen: {
         type: Boolean,
         default: false
       },
-      // 点击确定按钮的时候是否关闭弹窗
+      // 點擊確定按鈕的時候是否關閉彈窗
       okClose: {
         type: Boolean,
         default: true
@@ -74,17 +74,17 @@ export default {
     },
     data() {
       return {
-        // 内部使用的 slots ，不再处理
+        // 內部使用的 slots ，不再處理
         usedSlots: ['title'],
-        // 实际控制是否全屏的参数
+        // 實際控制是否全屏的參數
         innerFullscreen: this.fullscreen,
       }
     },
     computed: {
-      // 一些未处理的参数或特殊处理的参数绑定到 a-modal 上
+      // 一些未處理的參數或特殊處理的參數綁定到 a-modal 上
       _attrs() {
         let attrs = { ...this.$attrs }
-        // 如果全屏就将宽度设为 100%
+        // 如果全屏就將寬度設為 100%
         if (this.innerFullscreen) {
           attrs['width'] = '100%'
         }
@@ -100,7 +100,7 @@ export default {
       },
       modalStyle() {
         let style = {}
-        // 如果全屏就将top设为 0
+        // 如果全屏就將top設為 0
         if (this.innerFullscreen) {
           style['top'] = '0'
         }
@@ -121,7 +121,7 @@ export default {
       allSlotsKeys() {
         return Object.keys(this.$slots).concat(Object.keys(this.$scopedSlots))
       },
-      // 切换全屏的按钮图标
+      // 切換全屏的按鈕圖標
       fullscreenButtonIcon() {
         return this.innerFullscreen ? 'fullscreen-exit' : 'fullscreen'
       },
@@ -158,7 +158,7 @@ export default {
         this.close()
       },
 
-      /** 切换全屏 */
+      /** 切換全屏 */
       toggleFullscreen() {
         this.innerFullscreen = !this.innerFullscreen
         triggerWindowResizeEvent()

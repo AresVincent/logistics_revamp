@@ -5,21 +5,21 @@
         <a-row :gutter="48">
           <a-col :md="8" :sm="24">
             <a-form-item label="角色ID">
-              <a-input placeholder="请输入"/>
+              <a-input placeholder="請輸入"/>
             </a-form-item>
           </a-col>
           <a-col :md="8" :sm="24">
-            <a-form-item label="状态">
-              <a-select placeholder="请选择" default-value="0">
+            <a-form-item label="狀態">
+              <a-select placeholder="請選擇" default-value="0">
                 <a-select-option value="0">全部</a-select-option>
-                <a-select-option value="1">关闭</a-select-option>
-                <a-select-option value="2">运行中</a-select-option>
+                <a-select-option value="1">關閉</a-select-option>
+                <a-select-option value="2">運行中</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
           <a-col :md="8" :sm="24">
             <span class="table-page-search-submitButtons">
-              <a-button type="primary">查询</a-button>
+              <a-button type="primary">查詢</a-button>
               <a-button style="margin-left: 8px">重置</a-button>
             </span>
           </a-col>
@@ -38,7 +38,7 @@
       </span>
 
       <span slot="action" slot-scope="text, record">
-        <a @click="handleEdit(record)">编辑</a>
+        <a @click="handleEdit(record)">編輯</a>
         <a-divider type="vertical" />
         <a-dropdown>
           <a class="ant-dropdown-link">
@@ -46,13 +46,13 @@
           </a>
           <a-menu slot="overlay">
             <a-menu-item>
-              <a href="javascript:;">详情</a>
+              <a href="javascript:;">詳情</a>
             </a-menu-item>
             <a-menu-item>
               <a href="javascript:;">禁用</a>
             </a-menu-item>
             <a-menu-item>
-              <a href="javascript:;">删除</a>
+              <a href="javascript:;">刪除</a>
             </a-menu-item>
           </a-menu>
         </a-dropdown>
@@ -70,27 +70,27 @@
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="唯一识别码"
+          label="唯一識別碼"
           hasFeedback
           validateStatus="success"
         >
-          <a-input placeholder="唯一识别码" v-model="mdl.id" id="no" disabled="disabled" />
+          <a-input placeholder="唯一識別碼" v-model="mdl.id" id="no" disabled="disabled" />
         </a-form-item>
 
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="权限名称"
+          label="權限名稱"
           hasFeedback
           validateStatus="success"
         >
-          <a-input placeholder="起一个名字" v-model="mdl.name" id="permission_name" />
+          <a-input placeholder="起一個名字" v-model="mdl.name" id="permission_name" />
         </a-form-item>
 
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="状态"
+          label="狀態"
           hasFeedback
           validateStatus="warning"
         >
@@ -114,7 +114,7 @@
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="赋予权限"
+          label="賦予權限"
           hasFeedback
         >
           <a-select
@@ -143,7 +143,7 @@
     },
     data () {
       return {
-        description: '列表使用场景：后台管理中的权限管理以及角色管理，可用于基于 RBAC 设计的角色权限控制，颗粒度细到每一个操作类型。',
+        description: '列表使用場景：後台管理中的權限管理以及角色管理，可用於基於 RBAC 設計的角色權限控制，顆粒度細到每一個操作類型。',
 
         visible: false,
         labelCol: {
@@ -157,27 +157,27 @@
         form: null,
         mdl: {},
 
-        // 高级搜索 展开/关闭
+        // 高級搜索 展開/關閉
         advanced: false,
-        // 查询参数
+        // 查詢參數
         queryParam: {},
-        // 表头
+        // 表頭
         columns: [
           {
-            title: '唯一识别码',
+            title: '唯一識別碼',
             dataIndex: 'id'
           },
           {
-            title: '权限名称',
+            title: '權限名稱',
             dataIndex: 'name',
           },
           {
-            title: '可操作权限',
+            title: '可操作權限',
             dataIndex: 'actions',
             scopedSlots: { customRender: 'actions' },
           },
           {
-            title: '状态',
+            title: '狀態',
             dataIndex: 'status',
             scopedSlots: { customRender: 'status' },
           },
@@ -188,9 +188,9 @@
             scopedSlots: { customRender: 'action' },
           }
         ],
-        // 向后端拉取可以用的操作列表
+        // 向後端拉取可以用的操作列表
         permissionList: null,
-        // 加载数据方法 必须为 Promise 对象
+        // 加載數據方法 必須為 Promise 對象
         loadData: parameter => {
           return this.$http.get('/mock/api/permission', {
             params: Object.assign(parameter, this.queryParam)
@@ -226,12 +226,12 @@
         new Promise((resolve => {
           const data = [
             { label: '新增', value: 'add', defaultChecked: false },
-            { label: '查询', value: 'get', defaultChecked: false },
+            { label: '查詢', value: 'get', defaultChecked: false },
             { label: '修改', value: 'update', defaultChecked: false },
             { label: '列表', value: 'query', defaultChecked: false },
-            { label: '删除', value: 'delete', defaultChecked: false },
-            { label: '导入', value: 'import', defaultChecked: false },
-            { label: '导出', value: 'export', defaultChecked: false }
+            { label: '刪除', value: 'delete', defaultChecked: false },
+            { label: '導入', value: 'import', defaultChecked: false },
+            { label: '導出', value: 'export', defaultChecked: false }
           ]
           setTimeout(resolve(data), 1500)
         })).then(res => {

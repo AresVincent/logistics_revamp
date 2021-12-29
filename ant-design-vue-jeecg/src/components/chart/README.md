@@ -1,6 +1,6 @@
-# 报表组件文档
+# 報表組件文檔
 
-## 柱状图
+## 柱狀圖
 
 ##### 引用方式
 
@@ -8,13 +8,13 @@
 import Bar from '@/components/chart/Bar'
 ```
 
-##### 参数列表
+##### 參數列表
 
-| 参数名        | 类型     | 必填 | 说明         |
+| 參數名        | 類型     | 必填 | 說明         |
 |------------|--------|----|------------|
-| title      | string |    | 报表标题       |
-| dataSource | array  | ✔️ | 报表数据源      |
-| height     | number |    | 报表高度，默认254 |
+| title      | string |    | 報表標題       |
+| dataSource | array  | ✔️ | 報表數據源      |
+| height     | number |    | 報表高度，默認254 |
 
 ##### dataSource 示例
 
@@ -35,11 +35,11 @@ import Bar from '@/components/chart/Bar'
 ]
 ```
 
-##### 代码示例
+##### 代碼示例
 
 ```html
 <template>
-    <bar title="柱状图" :dataSource="dataSource" :height="420"/>
+    <bar title="柱狀圖" :dataSource="dataSource" :height="420"/>
 </template>
 
 <script>
@@ -74,7 +74,7 @@ import Bar from '@/components/chart/Bar'
 <style></style>
 ```
 
-## 多列柱状图
+## 多列柱狀圖
 
 ##### 引用方式
 
@@ -82,14 +82,14 @@ import Bar from '@/components/chart/Bar'
 import BarMultid from '@/components/chart/BarMultid'
 ```
 
-##### 参数列表
+##### 參數列表
 
-| 参数名        | 类型     | 必填 | 说明         |
+| 參數名        | 類型     | 必填 | 說明         |
 |------------|--------|----|------------|
-| title      | string |    | 报表标题       |
+| title      | string |    | 報表標題       |
 | fields     | array  |    | 主列字段列表     |
-| dataSource | array  |    | 报表数据源      |
-| height     | number |    | 报表高度，默认254 |
+| dataSource | array  |    | 報表數據源      |
+| height     | number |    | 報表高度，默認254 |
 
 ##### fields 示例
 
@@ -126,9 +126,9 @@ import BarMultid from '@/components/chart/BarMultid'
 ]
 ```
 
-## 迷你柱状图
+## 迷你柱狀圖
 
-不带标题和数据轴的柱状图
+不帶標題和數據軸的柱狀圖
 
 ##### 引用方式
 
@@ -136,13 +136,13 @@ import BarMultid from '@/components/chart/BarMultid'
 import MiniBar from '@/components/chart/MiniBar'
 ```
 
-##### 参数列表
+##### 參數列表
 
-| 参数名        | 类型     | 必填 | 说明            |
+| 參數名        | 類型     | 必填 | 說明            |
 |------------|--------|----|---------------|
-| width      | number |    | 报表宽度度，默认自适应宽度 |
-| height     | number |    | 报表高度，默认200    |
-| dataSource | array  |    | 报表数据源         |
+| width      | number |    | 報表寬度度，默認自適應寬度 |
+| height     | number |    | 報表高度，默認200    |
+| dataSource | array  |    | 報表數據源         |
 
 ##### dataSource 示例
 
@@ -163,7 +163,7 @@ import MiniBar from '@/components/chart/MiniBar'
 ]
 ```
 
-## 面积图
+## 面積圖
 
 ##### 引用方式
 
@@ -171,14 +171,14 @@ import MiniBar from '@/components/chart/MiniBar'
 import AreaChartTy from '@/components/chart/AreaChartTy'
 ```
 
-##### 参数列表
+##### 參數列表
 
-| 参数名        | 类型     | 必填 | 说明         |
+| 參數名        | 類型     | 必填 | 說明         |
 |------------|--------|----|------------|
-| title      | string |    | 报表标题       |
-| dataSource | array  | ✔️ | 报表数据源      |
-| height     | number |    | 报表高度，默认254 |
-| lineSize   | number |    | 线的粗细，默认2   |
+| title      | string |    | 報表標題       |
+| dataSource | array  | ✔️ | 報表數據源      |
+| height     | number |    | 報表高度，默認254 |
+| lineSize   | number |    | 線的粗細，默認2   |
 
 ##### dataSource 示例
 
@@ -199,7 +199,7 @@ import AreaChartTy from '@/components/chart/AreaChartTy'
 ]
 ```
 
-## 多行折线图
+## 多行折線圖
 
 ##### 引用方式
 
@@ -207,14 +207,14 @@ import AreaChartTy from '@/components/chart/AreaChartTy'
 import LineChartMultid from '@/components/chart/LineChartMultid'
 ```
 
-##### 参数列表
+##### 參數列表
 
-| 参数名        | 类型     | 必填 | 说明         |
+| 參數名        | 類型     | 必填 | 說明         |
 |------------|--------|----|------------|
-| title      | string |    | 报表标题       |
+| title      | string |    | 報表標題       |
 | fields     | array  |    | 主列字段列表     |
-| dataSource | array  |    | 报表数据源      |
-| height     | number |    | 报表高度，默认254 |
+| dataSource | array  |    | 報表數據源      |
+| height     | number |    | 報表高度，默認254 |
 
 ##### fields 示例
 
@@ -245,7 +245,7 @@ import LineChartMultid from '@/components/chart/LineChartMultid'
 ]
 ```
 
-## 饼状图
+## 餅狀圖
 
 ##### 引用方式
 
@@ -253,18 +253,18 @@ import LineChartMultid from '@/components/chart/LineChartMultid'
 import Pie from '@/components/chart/Pie'
 ```
 
-##### 参数列表
+##### 參數列表
 
-| 参数名        | 类型     | 必填 | 说明         |
+| 參數名        | 類型     | 必填 | 說明         |
 |------------|--------|----|------------|
-| dataSource | array  |    | 报表数据源      |
-| height     | number |    | 报表高度，默认254 |
+| dataSource | array  |    | 報表數據源      |
+| height     | number |    | 報表高度，默認254 |
 
 ##### dataSource 示例
 
 ```json
 [
-    // 所有的 percent 相加等于 100
+    // 所有的 percent 相加等於 100
     { "item": "一月", "percent": 40 },
     { "item": "二月", "percent": 21 },
     { "item": "三月", "percent": 17 },
@@ -273,7 +273,7 @@ import Pie from '@/components/chart/Pie'
 ]
 ```
 
-## 雷达图
+## 雷達圖
 
 ##### 引用方式
 
@@ -281,18 +281,18 @@ import Pie from '@/components/chart/Pie'
 import Radar from '@/components/chart/Radar'
 ```
 
-##### 参数列表
+##### 參數列表
 
-| 参数名        | 类型     | 必填 | 说明         |
+| 參數名        | 類型     | 必填 | 說明         |
 |------------|--------|----|------------|
-| dataSource | array  |    | 报表数据源      |
-| height     | number |    | 报表高度，默认254 |
+| dataSource | array  |    | 報表數據源      |
+| height     | number |    | 報表高度，默認254 |
 
 ##### dataSource 示例
 
 ```json
 [
-    // score 最小值为 0，最大值为 100
+    // score 最小值為 0，最大值為 100
     { "item": "一月", "score": 40 },
     { "item": "二月", "score": 20 },
     { "item": "三月", "score": 67 },
@@ -301,7 +301,7 @@ import Radar from '@/components/chart/Radar'
 ]
 ```
 
-## 进度条
+## 進度條
 
 ##### 引用方式
 
@@ -309,16 +309,16 @@ import Radar from '@/components/chart/Radar'
 import MiniProgress from '@/components/chart/MiniProgress'
 ```
 
-##### 参数列表
+##### 參數列表
 
-| 参数名        | 类型     | 必填 | 说明                |
+| 參數名        | 類型     | 必填 | 說明                |
 |------------|--------|----|-------------------|
-| percentage | number |    | 当前进度百分比，默认0，最高100 |
-| target     | number |    | 目标值，默认10          |
-| height     | number |    | 进度条高度，默认10        |
-| color      | string |    | 进度条颜色，默认 #13C2C2  |
+| percentage | number |    | 當前進度百分比，默認0，最高100 |
+| target     | number |    | 目標值，默認10          |
+| height     | number |    | 進度條高度，默認10        |
+| color      | string |    | 進度條顏色，默認 #13C2C2  |
 
-## 仪表盘
+## 儀錶盤
 
 ##### 引用方式
 
@@ -326,13 +326,13 @@ import MiniProgress from '@/components/chart/MiniProgress'
 import DashChartDemo from '@/components/chart/DashChartDemo'
 ```
 
-##### 参数列表
+##### 參數列表
 
-| 参数名    | 类型     | 必填 | 说明             |
+| 參數名    | 類型     | 必填 | 說明             |
 |--------|--------|----|----------------|
-| title  | string |    | 报表标题           |
-| value  | number |    | 当前值，默认6.7，最大为9 |
-| height | number |    | 报表高度，默认254     |
+| title  | string |    | 報表標題           |
+| value  | number |    | 當前值，默認6.7，最大為9 |
+| height | number |    | 報表高度，默認254     |
 
 ## 排名列表
 
@@ -342,26 +342,26 @@ import DashChartDemo from '@/components/chart/DashChartDemo'
 import RankList from '@/components/chart/RankList'
 ```
 
-##### 参数列表
+##### 參數列表
 
-| 参数名    | 类型     | 必填 | 说明           |
+| 參數名    | 類型     | 必填 | 說明           |
 |--------|--------|----|--------------|
-| title  | string |    | 报表标题         |
-| list   | array  |    | 排名列表数据       |
-| height | number |    | 报表高度，默认自适应高度 |
+| title  | string |    | 報表標題         |
+| list   | array  |    | 排名列表數據       |
+| height | number |    | 報表高度，默認自適應高度 |
 
 ##### list 示例
 
 ```json
 [
     {
-        "name": "北京朝阳 1 号店",
+        "name": "北京朝陽 1 號店",
         "total": 1981
     },
-    { "name": "北京朝阳 2 号店", "total": 1359 },
-    { "name": "北京朝阳 3 号店", "total": 1354 },
-    { "name": "北京朝阳 4 号店", "total": 263 },
-    { "name": "北京朝阳 5 号店", "total": 446 },
-    { "name": "北京朝阳 6 号店", "total": 796 }
+    { "name": "北京朝陽 2 號店", "total": 1359 },
+    { "name": "北京朝陽 3 號店", "total": 1354 },
+    { "name": "北京朝陽 4 號店", "total": 263 },
+    { "name": "北京朝陽 5 號店", "total": 446 },
+    { "name": "北京朝陽 6 號店", "total": 796 }
 ]
 ```

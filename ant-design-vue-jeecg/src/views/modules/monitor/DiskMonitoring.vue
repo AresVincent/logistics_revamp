@@ -1,5 +1,5 @@
 <template>
-  <a-card title="磁盘监控">
+  <a-card title="磁盤監控">
     <a-row>
       <template v-if="diskInfo && diskInfo.length>0">
         <a-col :span="8" v-for="(item,index) in diskInfo" :key=" 'diskInfo'+index ">
@@ -23,8 +23,8 @@
     },
     data() {
       return {
-        description: '磁盘监控',
-        //数据集
+        description: '磁盤監控',
+        //數據集
         diskInfo:[],
         url:{
           queryDiskInfo:'sys/actuator/redis/queryDiskInfo',

@@ -3,12 +3,12 @@
     <a-input
       v-show="!userIds"
       @click="openSelect"
-      placeholder="请选择用户"
+      placeholder="請選擇用戶"
       v-model="userNames"
       readOnly
       class="jvxe-select-input"
       :disabled="componentDisabled">
-      <a-icon slot="prefix" type="user" title="用户选择控件"/>
+      <a-icon slot="prefix" type="user" title="用戶選擇控件"/>
     </a-input>
     <j-select-user-by-dep-modal
       ref="selectModal"
@@ -122,8 +122,8 @@
         this.$refs.selectModal.showModal()
       },
       selectOK(rows, idstr) {
-        console.log("当前选中用户", rows)
-        console.log("当前选中用户ID", idstr)
+        console.log("當前選中用戶", rows)
+        console.log("當前選中用戶ID", idstr)
         if (!rows) {
           this.userNames = ''
           this.userIds = ''

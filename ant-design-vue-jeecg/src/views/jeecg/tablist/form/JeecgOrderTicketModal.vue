@@ -7,7 +7,7 @@
     :confirmLoading="confirmLoading"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
 
     <a-spin :spinning="confirmLoading">
       <a-form-model ref="form" :model="model" :rules="validatorRules">
@@ -15,15 +15,15 @@
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="航班号"
+          label="航班號"
           prop="ticketCode"
           hasFeedback>
-          <a-input placeholder="请输入航班号" :readOnly="disableSubmit" v-model="model.ticketCode"></a-input>
+          <a-input placeholder="請輸入航班號" :readOnly="disableSubmit" v-model="model.ticketCode"></a-input>
         </a-form-model-item>
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="航班时间"
+          label="航班時間"
           prop="tickectDate"
           hasFeedback>
           <j-date v-model="model.tickectDate"></j-date>
@@ -31,7 +31,7 @@
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="订单号码"
+          label="訂單號碼"
           v-model="this.orderId"
           :hidden="hiding"
           hasFeedback>
@@ -40,7 +40,7 @@
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="创建人"
+          label="創建人"
           :hidden="hiding"
           hasFeedback>
           <a-input v-model="model.createBy" :readOnly="disableSubmit"/>
@@ -48,7 +48,7 @@
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="创建时间"
+          label="創建時間"
           :hidden="hiding"
           hasFeedback>
           <a-input v-model="model.createTime" :readOnly="disableSubmit"/>
@@ -88,8 +88,8 @@
         hiding: false,
         confirmLoading: false,
         validatorRules: {
-          ticketCode:[{required : true, message: '请输入航班号!'}],
-          tickectDate:[{required : true, message: '请输入航班时间!'}]
+          ticketCode:[{required : true, message: '請輸入航班號!'}],
+          tickectDate:[{required : true, message: '請輸入航班時間!'}]
         },
         url: {
           add: '/test/order/addTicket',
@@ -104,7 +104,7 @@
         if (orderId) {
           this.edit({orderId}, '')
         } else {
-          this.$message.warning('请选择一条航班数据')
+          this.$message.warning('請選擇一條航班數據')
         }
       },
       detail(record) {
@@ -131,7 +131,7 @@
       },
       handleOk() {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;

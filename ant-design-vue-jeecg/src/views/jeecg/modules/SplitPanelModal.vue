@@ -7,7 +7,7 @@
     style="top: 0px;"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
 
     <split-pane :min-percent='20' :default-percent='50' split="vertical">
       <template slot="paneL">

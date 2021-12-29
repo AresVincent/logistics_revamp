@@ -35,7 +35,7 @@
       },
       placeholder:{
         type: String,
-        default: '请选择',
+        default: '請選擇',
         required: false
       },
       parentCode:{

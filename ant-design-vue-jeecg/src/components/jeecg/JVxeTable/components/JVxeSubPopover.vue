@@ -26,7 +26,7 @@
     data() {
       return {
         visible: false,
-        // 当前行
+        // 當前行
         row: null,
         column: null,
 
@@ -43,13 +43,13 @@
 
       toggle(event) {
 
-        //update-begin-author:taoyan date:20200921 for: 弹出子表时，子表会闪一下，类似重新计算子表的位置
+        //update-begin-author:taoyan date:20200921 for: 彈齣子表時，子表會閃一下，類似重新計算子表的位置
         if(document.body.clientHeight - event.$event.clientY > 350){
           this.placement = 'bottom'
         }else{
           this.placement = 'top'
         }
-        //update-end-author:taoyan date:20200921 for: 弹出子表时，子表会闪一下，类似重新计算子表的位置
+        //update-end-author:taoyan date:20200921 for: 彈齣子表時，子表會閃一下，類似重新計算子表的位置
         if (this.row == null) {
           this.open(event)
         } else {
@@ -59,8 +59,8 @@
 
       open(event, level = 0) {
         if (level > 3) {
-          this.$message.error('打开子表失败')
-          console.warn('【JVxeSubPopover】打开子表失败')
+          this.$message.error('打開子表失敗')
+          console.warn('【JVxeSubPopover】打開子表失敗')
           return
         }
 
@@ -71,15 +71,15 @@
         let className = target.className || ''
         className = typeof className === 'string' ? className : className.toString()
 
-        // 点击的是expand，不做处理
+        // 點擊的是expand，不做處理
         if (className.includes('vxe-table--expand-btn')) {
           return
         }
-        // 点击的是checkbox，不做处理
+        // 點擊的是checkbox，不做處理
         if (className.includes('vxe-checkbox--icon') || className.includes('vxe-cell--checkbox')) {
           return
         }
-        // 点击的是radio，不做处理
+        // 點擊的是radio，不做處理
         if (className.includes('vxe-radio--icon') || className.includes('vxe-cell--radio')) {
           return
         }
@@ -92,7 +92,7 @@
           this.$refs.div.style.height = clientHeight + 'px'
           this.overlayStyle.width = Number.parseInt((clientWidth - clientWidth * 0.04)) + 'px'
           this.overlayStyle.maxWidth = this.overlayStyle.width
-          //update-begin-author:taoyan date:20200921 for: 子表弹出位置存在现实位置问题。
+          //update-begin-author:taoyan date:20200921 for: 子表彈出位置存在現實位置問題。
           //let realTable = getParentNodeByTagName(tr, 'table')
           //let left = realTable.parentNode.scrollLeft
           let h = event.$event.clientY
@@ -107,7 +107,7 @@
               alwaysByViewport: true
             },
           })
-          //update-end-author:taoyan date:20200921 for: 子表弹出位置存在现实位置问题。
+          //update-end-author:taoyan date:20200921 for: 子表彈出位置存在現實位置問題。
           this.$nextTick(() => {
             this.visible = true
             this.$nextTick(() => {
@@ -116,7 +116,7 @@
           })
         } else {
           let num = ++level
-          console.warn('【JVxeSubPopover】table or tr 获取失败，正在进行第 ' + num + '次重试', {event, table, tr})
+          console.warn('【JVxeSubPopover】table or tr 獲取失敗，正在進行第 ' + num + '次重試', {event, table, tr})
           window.setTimeout(() => this.open(event, num), 100)
         }
       },

@@ -60,12 +60,12 @@ export default {
     // select menu item
     onOpenChange (openKeys) {
 
-      // 在水平模式下时执行，并且不再执行后续
+      // 在水平模式下時執行，並且不再執行後續
       if (this.mode === 'horizontal') {
         this.openKeys = openKeys
         return
       }
-      // 非水平模式时
+      // 非水平模式時
       const latestOpenKey = openKeys.find(key => !this.openKeys.includes(key))
       if (!this.rootSubmenuKeys.includes(latestOpenKey)) {
         this.openKeys = openKeys
@@ -89,8 +89,8 @@ export default {
         })
       }
 
-      // update-begin-author:sunjianlei date:20210409 for: 修复动态功能测试菜单、带参数菜单标题错误、展开错误的问题
-      // 包含冒号的是动态菜单
+      // update-begin-author:sunjianlei date:20210409 for: 修復動態功能測試菜單、帶參數菜單標題錯誤、展開錯誤的問題
+      // 包含冒號的是動態菜單
       if (this.selectedKeys[0].includes(':')) {
         let selectedKey = this.$route.fullPath
         this.selectedKeys = [selectedKey]
@@ -100,16 +100,16 @@ export default {
           openKeys = newOpenKeys.reverse()
         }
       }
-      // update-end-author:sunjianlei date:20210409 for: 修复动态功能测试菜单、带参数菜单标题错误、展开错误的问题
+      // update-end-author:sunjianlei date:20210409 for: 修復動態功能測試菜單、帶參數菜單標題錯誤、展開錯誤的問題
 
-      //update-begin-author:taoyan date:20190510 for:online表单菜单点击展开的一级目录不对
+      //update-begin-author:taoyan date:20190510 for:online表單菜單點擊展開的一級目錄不對
       if(!this.selectedKeys || this.selectedKeys[0].indexOf(":")<0){
         this.collapsed ? (this.cachedOpenKeys = openKeys) : (this.openKeys = openKeys)
       }
-      //update-end-author:taoyan date:20190510 for:online表单菜单点击展开的一级目录不对
+      //update-end-author:taoyan date:20190510 for:online表單菜單點擊展開的一級目錄不對
     },
-    // update-begin-author:sunjianlei date:20210409 for: 修复动态功能测试菜单、带参数菜单标题错误、展开错误的问题
-    // 递归查找当前选中的菜单和父级菜单，填充openKeys
+    // update-begin-author:sunjianlei date:20210409 for: 修復動態功能測試菜單、帶參數菜單標題錯誤、展開錯誤的問題
+    // 遞歸查找當前選中的菜單和父級菜單，填充openKeys
     fullOpenKeys(menus, selectedKey, openKeys) {
       for (let item of menus) {
         if (item.path === selectedKey) {
@@ -124,7 +124,7 @@ export default {
         }
       }
     },
-    // update-end-author:sunjianlei date:20210409 for: 修复动态功能测试菜单、带参数菜单标题错误、展开错误的问题
+    // update-end-author:sunjianlei date:20210409 for: 修復動態功能測試菜單、帶參數菜單標題錯誤、展開錯誤的問題
 
     // render
     renderItem (menu) {
@@ -144,9 +144,9 @@ export default {
       const attrs = { href: menu.path, target: menu.meta.target }
 
       if (menu.children && menu.alwaysShow) {
-        // 把有子菜单的 并且 父菜单是要隐藏子菜单的
-        // 都给子菜单增加一个 hidden 属性
-        // 用来给刷新页面时， selectedKeys 做控制用
+        // 把有子菜單的 並且 父菜單是要隱藏子菜單的
+        // 都給子菜單增加一個 hidden 屬性
+        // 用來給刷新頁面時， selectedKeys 做控制用
         menu.children.forEach(item => {
           item.meta = Object.assign(item.meta, { hidden: true })
         })

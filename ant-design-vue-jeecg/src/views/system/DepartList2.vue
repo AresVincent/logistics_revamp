@@ -1,10 +1,10 @@
 <template>
   <a-card :bordered="false">
 
-    <!-- 查询区域 -->
+    <!-- 查詢區域 -->
     <!--
    -->
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
 
@@ -12,7 +12,7 @@
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel">
             <a-icon type="delete"/>
-            删除
+            刪除
           </a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作
@@ -21,10 +21,10 @@
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
       <a-table
@@ -40,18 +40,18 @@
         @change="handleTableChange">
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">編輯</a>
 
           <a-divider type="vertical"/>
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down"/></a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a href="javascript:;" @click="handleDetail(record)">详情</a>
+                <a href="javascript:;" @click="handleDetail(record)">詳情</a>
               </a-menu-item>
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+                  <a>刪除</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -60,9 +60,9 @@
 
       </a-table>
     </div>
-    <!-- table区域-end -->
+    <!-- table區域-end -->
 
-    <!-- 表单区域 -->
+    <!-- 表單區域 -->
     <sysDepart-modal ref="sysDepartModal" @ok="modalFormOk"></sysDepart-modal>
   </a-card>
 </template>
@@ -74,27 +74,27 @@
   import {queryDepartTreeList} from '@/api/api'
   import {deleteAction} from '@/api/manage'
 
-  // 表头
+  // 表頭
   const columns = [
     {
-      title: '机构名称',
+      title: '機構名稱',
       dataIndex: 'departName',
     },
     {
-      title: '机构类型',
+      title: '機構類型',
       align: "center",
       dataIndex: 'orgType'
     },
     {
-      title: '机构编码',
+      title: '機構編碼',
       dataIndex: 'orgCode'
     },
     {
-      title: '手机号',
+      title: '手機號',
       dataIndex: 'mobile'
     },
     {
-      title: '传真',
+      title: '傳真',
       dataIndex: 'fax'
     },
     {
@@ -121,20 +121,20 @@
     },
     data() {
       return {
-        description: 'jeecg 生成SysDepart代码管理页面',
-        // 查询条件
+        description: 'jeecg 生成SysDepart代碼管理頁面',
+        // 查詢條件
         queryParam: {},
-        //数据集
+        //數據集
         factories: '',
         dataSource: [],
         columns: columns,
-        // 分页参数
+        // 分頁參數
         /*        ipagination:{
                   current: 1,
                   pageSize: 5,
                   pageSizeOptions: ['5', '10', '20'],
                   showTotal: (total, range) => {
-                    return range[0] + "-" + range[1] + " 共" + total + "条"
+                    return range[0] + "-" + range[1] + " 共" + total + "條"
                   },
                   showQuickJumper: true,
                   showSizeChanger: true,
@@ -170,7 +170,7 @@
       },
 
       getQueryField() {
-        //TODO 字段权限控制
+        //TODO 字段權限控制
         var str = "id,";
         for (var a = 0; a < this.columns.length; a++) {
           str += "," + this.columns[a].dataIndex;
@@ -199,12 +199,12 @@
       },
       handleDetail(record) {
         this.$refs.sysDepartModal.edit(record);
-        this.$refs.sysDepartModal.title = "详情";
+        this.$refs.sysDepartModal.title = "詳情";
         this.$refs.sysDepartModal.disableSubmit = true;
       },
       batchDel: function () {
         if (this.selectedRowKeys.length <= 0) {
-          this.$message.warning('请选择一条记录！');
+          this.$message.warning('請選擇一條記錄！');
           return;
         } else {
           var ids = "";
@@ -213,8 +213,8 @@
           }
           var that = this;
           this.$confirm({
-            title: "确认删除",
-            content: "是否删除选中数据?",
+            title: "確認刪除",
+            content: "是否刪除選中數據?",
             onOk: function () {
               deleteAction(that.url.deleteBatch, {ids: ids}).then((res) => {
                 if (res.success) {
@@ -231,16 +231,16 @@
       },
       handleEdit: function (record) {
         this.$refs.sysDepartModal.edit(record);
-        this.$refs.sysDepartModal.title = "编辑";
+        this.$refs.sysDepartModal.title = "編輯";
       },
       handleAdd() {
         this.$refs.sysDepartModal.add();
         this.$refs.sysDepartModal.title = "新增";
       },
       handleTableChange(pagination, filters, sorter) {
-        //分页、排序、筛选变化时触发
+        //分頁、排序、篩選變化時觸發
         console.log(sorter);
-        //TODO 筛选
+        //TODO 篩選
         if (Object.keys(sorter).length > 0) {
           this.isorter.column = sorter.field;
           this.isorter.order = "ascend" == sorter.order ? "asc" : "desc"
@@ -249,7 +249,7 @@
         this.loadData();
       },
       modalFormOk() {
-        // 新增/修改 成功时，重载列表
+        // 新增/修改 成功時，重載列表
         this.loadData();
       }
     }

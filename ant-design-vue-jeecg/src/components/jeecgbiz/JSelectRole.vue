@@ -8,7 +8,7 @@
     :returnKeys="returnKeys"
     :listUrl="url.list"
     :columns="columns"
-    queryParamText="角色编码"
+    queryParamText="角色編碼"
 
     v-on="$listeners"
     v-bind="$attrs"
@@ -27,8 +27,8 @@
         returnKeys: ['id', 'roleCode'],
         url: { list: '/sys/role/list' },
         columns: [
-          { title: '角色名称', dataIndex: 'roleName', align: 'center', width: 120 },
-          { title: '角色编码', dataIndex: 'roleCode', align: 'center', width: 120 }
+          { title: '角色名稱', dataIndex: 'roleName', align: 'center', width: 120 },
+          { title: '角色編碼', dataIndex: 'roleCode', align: 'center', width: 120 }
         ]
       }
     }

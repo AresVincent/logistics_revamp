@@ -38,9 +38,9 @@
         type: String,
         required:false
       },
-      // 组件的类型，可选值：
-      // select 下拉样式
-      // cascader 级联样式（默认）
+      // 組件的類型，可選值：
+      // select 下拉樣式
+      // cascader 級聯樣式（默認）
       type: {
         type: String,
         default: 'cascader'
@@ -65,7 +65,7 @@
     computed: {
       _listeners() {
         let listeners = { ...this.$listeners }
-        // 去掉已使用的事件，防止冲突
+        // 去掉已使用的事件，防止衝突
         this.usedListeners.forEach(key => {
           delete listeners[key]
         })
@@ -75,7 +75,7 @@
         if (this.enums.type.includes(this.type)) {
           return this.type
         } else {
-          console.error(`JAreaLinkage的type属性只能接收指定的值（${this.enums.type.join('|')}）`)
+          console.error(`JAreaLinkage的type屬性只能接收指定的值（${this.enums.type.join('|')}）`)
           return this.enums.type[0]
         }
       },
@@ -93,13 +93,13 @@
     },
     methods: {
 
-      /** 重新加载组件 */
+      /** 重新加載組件 */
       reload() {
         this.reloading = true
         this.$nextTick(() => this.reloading = false)
       },
 
-      /** 通过 value 反推 options */
+      /** 通過 value 反推 options */
       loadDataByValue(value) {
         if (!value || value.length === 0) {
           this.innerValue = []
@@ -110,7 +110,7 @@
         }
         this.reload()
       },
-      /** 通过地区code获取子级 */
+      /** 通過地區code獲取子級 */
       loadDataByCode(value) {
         let options = []
         let data = this.pcaa[value]
@@ -125,7 +125,7 @@
           return []
         }
       },
-      /** 判断是否有子节点 */
+      /** 判斷是否有子節點 */
       hasChildren(options) {
         options.forEach(option => {
           let data = this.loadDataByCode(option.value)

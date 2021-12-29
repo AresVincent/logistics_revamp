@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false">
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator">
       <a-button @click="showModal(null)" type="primary" icon="plus">新增</a-button>
     </div>
@@ -22,15 +22,15 @@
             <a-tag color="#87d068" v-if="text==1" >正常</a-tag>
         </span>
         <span slot="action" slot-scope="text, record">
-          <a @click="showModal(record)">编辑</a>
+          <a @click="showModal(record)">編輯</a>
 
           <a-divider type="vertical"/>
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down"/></a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+                  <a>刪除</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -58,15 +58,15 @@
     },
     data() {
       return {
-        description: 'adad管理页面',
-        // 表头
+        description: 'adad管理頁面',
+        // 表頭
         columns: [
           {
             title: '路由ID',
             align: 'center',
             dataIndex: 'routerId'
           }, {
-            title: '路由名称',
+            title: '路由名稱',
             align: 'center',
             dataIndex: 'name'
           },
@@ -76,7 +76,7 @@
             dataIndex: 'uri'
           },
           {
-            title: '状态',
+            title: '狀態',
             align: 'center',
             dataIndex: 'status',
             scopedSlots: { customRender: 'status' }

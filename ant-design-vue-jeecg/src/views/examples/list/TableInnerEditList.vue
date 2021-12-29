@@ -4,55 +4,55 @@
       <a-form layout="inline">
         <a-row :gutter="48">
           <a-col :md="8" :sm="24">
-            <a-form-item label="规则编号">
+            <a-form-item label="規則編號">
               <a-input placeholder=""/>
             </a-form-item>
           </a-col>
           <a-col :md="8" :sm="24">
-            <a-form-item label="使用状态">
-              <a-select placeholder="请选择" default-value="0">
+            <a-form-item label="使用狀態">
+              <a-select placeholder="請選擇" default-value="0">
                 <a-select-option value="0">全部</a-select-option>
-                <a-select-option value="1">关闭</a-select-option>
-                <a-select-option value="2">运行中</a-select-option>
+                <a-select-option value="1">關閉</a-select-option>
+                <a-select-option value="2">運行中</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
           <template v-if="advanced">
             <a-col :md="8" :sm="24">
-              <a-form-item label="调用次数">
+              <a-form-item label="調用次數">
                 <a-input-number style="width: 100%"/>
               </a-form-item>
             </a-col>
             <a-col :md="8" :sm="24">
               <a-form-item label="更新日期">
-                <a-date-picker style="width: 100%" placeholder="请输入更新日期"/>
+                <a-date-picker style="width: 100%" placeholder="請輸入更新日期"/>
               </a-form-item>
             </a-col>
             <a-col :md="8" :sm="24">
-              <a-form-item label="使用状态">
-                <a-select placeholder="请选择" default-value="0">
+              <a-form-item label="使用狀態">
+                <a-select placeholder="請選擇" default-value="0">
                   <a-select-option value="0">全部</a-select-option>
-                  <a-select-option value="1">关闭</a-select-option>
-                  <a-select-option value="2">运行中</a-select-option>
+                  <a-select-option value="1">關閉</a-select-option>
+                  <a-select-option value="2">運行中</a-select-option>
                 </a-select>
               </a-form-item>
             </a-col>
             <a-col :md="8" :sm="24">
-              <a-form-item label="使用状态">
-                <a-select placeholder="请选择" default-value="0">
+              <a-form-item label="使用狀態">
+                <a-select placeholder="請選擇" default-value="0">
                   <a-select-option value="0">全部</a-select-option>
-                  <a-select-option value="1">关闭</a-select-option>
-                  <a-select-option value="2">运行中</a-select-option>
+                  <a-select-option value="1">關閉</a-select-option>
+                  <a-select-option value="2">運行中</a-select-option>
                 </a-select>
               </a-form-item>
             </a-col>
           </template>
           <a-col :md="!advanced && 8 || 24" :sm="24">
             <span class="table-page-search-submitButtons" :style="advanced && { float: 'right', overflow: 'hidden' } || {} ">
-              <a-button type="primary">查询</a-button>
+              <a-button type="primary">查詢</a-button>
               <a-button style="margin-left: 8px">重置</a-button>
               <a @click="toggleAdvanced" style="margin-left: 8px">
-                {{ advanced ? '收起' : '展开' }}
+                {{ advanced ? '收起' : '展開' }}
                 <a-icon :type="advanced ? 'up' : 'down'"/>
               </a>
             </span>
@@ -65,9 +65,9 @@
       <a-button type="primary" icon="plus" @click="() => this.handleModalVisible(true)">新建</a-button>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
-          <a-menu-item key="1"><a-icon type="delete" />删除</a-menu-item>
+          <a-menu-item key="1"><a-icon type="delete" />刪除</a-menu-item>
           <!-- lock | unlock -->
-          <a-menu-item key="2"><a-icon type="lock" />锁定</a-menu-item>
+          <a-menu-item key="2"><a-icon type="lock" />鎖定</a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px">
           批量操作 <a-icon type="down" />
@@ -99,23 +99,23 @@
           <span v-if="record.editable">
             <a @click="() => save(record)">保存</a>
             <a-divider type="vertical" />
-            <a-popconfirm title="真的放弃编辑吗?" @confirm="() => cancel(record)">
+            <a-popconfirm title="真的放棄編輯嗎?" @confirm="() => cancel(record)">
               <a>取消</a>
             </a-popconfirm>
           </span>
           <span v-else>
             <a class="edit" @click="() => edit(record)">修改</a>
             <a-divider type="vertical" />
-            <a class="delete" @click="() => del(record)">删除</a>
+            <a class="delete" @click="() => del(record)">刪除</a>
           </span>
         </div>
       </template>
     </s-table>
-    <a-modal title="新建规则" destroyOnClose :visible="visibleCreateModal" @ok="handleCreateModalOk" @cancel="handleCreateModalCancel">
+    <a-modal title="新建規則" destroyOnClose :visible="visibleCreateModal" @ok="handleCreateModalOk" @cancel="handleCreateModalCancel">
       <!---->
       <a-form style="margin-top: 8px" :autoFormCreate="(form)=>{this.createForm = form}">
-        <a-form-item :labelCol="{ span: 5 }" :wrapperCol="{ span: 15 }" label="描述" fieldDecoratorId="description" :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入至少五个字符的规则描述！', min: 5 }]}">
-          <a-input placeholder="请输入" />
+        <a-form-item :labelCol="{ span: 5 }" :wrapperCol="{ span: 15 }" label="描述" fieldDecoratorId="description" :fieldDecoratorOptions="{rules: [{ required: true, message: '請輸入至少五個字符的規則描述！', min: 5 }]}">
+          <a-input placeholder="請輸入" />
         </a-form-item>
       </a-form>
     </a-modal>
@@ -132,14 +132,14 @@
     },
     data () {
       return {
-        // 高级搜索 展开/关闭
+        // 高級搜索 展開/關閉
         advanced: false,
-        // 查询参数
+        // 查詢參數
         queryParam: {},
-        // 表头
+        // 表頭
         columns: [
           {
-            title: '规则编号',
+            title: '規則編號',
             dataIndex: 'no',
             width: 90
           },
@@ -149,7 +149,7 @@
             scopedSlots: { customRender: 'description' },
           },
           {
-            title: '服务调用次数',
+            title: '服務調用次數',
             dataIndex: 'callNo',
             width: '150px',
             sorter: true,
@@ -158,14 +158,14 @@
             // customRender: (text) => text + ' 次'
           },
           {
-            title: '状态',
+            title: '狀態',
             dataIndex: 'status',
             width: '100px',
             needTotal: true,
             scopedSlots: { customRender: 'status' },
           },
           {
-            title: '更新时间',
+            title: '更新時間',
             dataIndex: 'updatedAt',
             width: '150px',
             sorter: true,
@@ -178,7 +178,7 @@
             scopedSlots: { customRender: 'action' },
           }
         ],
-        // 加载数据方法 必须为 Promise 对象
+        // 加載數據方法 必須為 Promise 對象
         loadData: parameter => {
           return this.$http.get('/mock/api/service', {
             params: Object.assign(parameter, this.queryParam)
@@ -206,13 +206,13 @@
       del (row) {
         this.$confirm({
           title: '警告',
-          content: '真的要删除吗?',
-          okText: '删除',
+          content: '真的要刪除嗎?',
+          okText: '刪除',
           okType: 'danger',
           cancelText: '取消',
           onOk() {
             console.log('OK');
-            // 在这里调用删除接口
+            // 在這裏調用刪除接口
             return new Promise((resolve, reject) => {
               setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
             }).catch(() => console.log('Oops errors!'));
@@ -238,7 +238,7 @@
       toggleAdvanced () {
         this.advanced = !this.advanced
       },
-      //添加逻辑
+      //添加邏輯
       handleModalVisible(isVisible) {
         this.visibleCreateModal = isVisible;
       },

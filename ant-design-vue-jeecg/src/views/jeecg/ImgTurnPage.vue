@@ -1,7 +1,7 @@
 <template>
-  <a-card title="树形结构图片翻页查看" style="min-width: 800px;overflow-x:auto ">
+  <a-card title="樹形結構圖片翻頁查看" style="min-width: 800px;overflow-x:auto ">
     <a-row>
-      <!-- 左侧文件树 -->
+      <!-- 左側文件樹 -->
       <a-col :span="5">
         <a-tree
           showLine
@@ -15,12 +15,12 @@
         </a-tree>
       </a-col>
 
-      <!--右侧缩略图-->
+      <!--右側縮略圖-->
       <a-col :span="19">
         <a-row style="margin-top: 10px">
           <a-col :span="24" style="padding-left: 2%;margin-bottom: 10px">
-            <a-button @click="prev" type="primary"><a-icon type="left" />上一页</a-button>
-            <a-button @click="next" type="primary" style="margin-left: 8px">下一页<a-icon type="right" /></a-button>
+            <a-button @click="prev" type="primary"><a-icon type="left" />上一頁</a-button>
+            <a-button @click="next" type="primary" style="margin-left: 8px">下一頁<a-icon type="right" /></a-button>
             <span style="margin-left: 15%;font-weight: bolder">{{ navName }}</span>
           </a-col>
           <a-col :span="24" style="padding-left: 2%;">
@@ -42,37 +42,37 @@
     },
     data() {
       return {
-        description: '图片翻页',
-        //数据集
+        description: '圖片翻頁',
+        //數據集
         treeData: [{
-          title: '第一页',
+          title: '第一頁',
           key: '0-0',
           children: [{
-            title: '1页',
+            title: '1頁',
             key: '0-0-0',
             imgUrl:'https://static.jeecg.com/upload/test/1_1588149743473.jpg'
           }, {
-            title: '2页',
+            title: '2頁',
             key: '0-0-1',
             imgUrl:'https://static.jeecg.com/upload/test/u27356337152749454924fm27gp0_1588149731821.jpg'
           }]
         },{
-          title: '第二页',
+          title: '第二頁',
           key: '0-1',
           children: [{
-            title: '1页',
+            title: '1頁',
             key: '0-1-0',
             imgUrl:'https://static.jeecg.com/upload/test/u24454681402491956848fm27gp0_1588149712663.jpg'
           }, {
-            title: '2页',
+            title: '2頁',
             key: '0-1-1',
             imgUrl:'https://static.jeecg.com/upload/test/u8891206113801177793fm27gp0_1588149704459.jpg'
           }]
         },{
-          title: '第三页',
+          title: '第三頁',
           key: '0-2',
           children: [{
-            title: '1页',
+            title: '1頁',
             key: '0-2-0',
             imgUrl:'https://static.jeecg.com/upload/test/1374962_1587621329085.jpg'
           }]
@@ -130,7 +130,7 @@
         }
         this.setValue(this.imgList[this.sort]);
       },
-      // 设置受控节点值
+      // 設置受控節點值
       setValue(value){
         this.selectedKeys = [];
         this.imgUrl = value.imgUrl;

@@ -6,7 +6,7 @@
     :confirmLoading="confirmLoading"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭"
+    cancelText="關閉"
   >
     <a-spin :spinning="confirmLoading">
       <a-form-model ref="form" :model="model" :rules="validatorRules">
@@ -16,8 +16,8 @@
           :wrapperCol="wrapperCol"
           prop="dictName"
           required
-          label="字典名称">
-          <a-input placeholder="请输入字典名称" v-model="model.dictName"/>
+          label="字典名稱">
+          <a-input placeholder="請輸入字典名稱" v-model="model.dictName"/>
         </a-form-model-item>
 
         <a-form-model-item
@@ -25,8 +25,8 @@
           :wrapperCol="wrapperCol"
           prop="dictCode"
           required
-          label="字典编码">
-          <a-input placeholder="请输入字典编码" v-model="model.dictCode"/>
+          label="字典編碼">
+          <a-input placeholder="請輸入字典編碼" v-model="model.dictCode"/>
         </a-form-model-item>
 
         <a-form-model-item
@@ -63,9 +63,9 @@
         },
         confirmLoading: false,
         validatorRules: {
-          dictName: [{ required: true, message: '请输入字典名称!' }],
+          dictName: [{ required: true, message: '請輸入字典名稱!' }],
           dictCode: [
-            { required: true, message: '请输入字典编码!' },
+            { required: true, message: '請輸入字典編碼!' },
             { validator: this.validateDictCode }]
           }
       }
@@ -74,7 +74,7 @@
     },
     methods: {
       validateDictCode(rule, value, callback) {
-        // 重复校验
+        // 重複校驗
         var params = {
           tableName: 'sys_dict',
           fieldName: 'dict_code',
@@ -104,10 +104,10 @@
         this.model = Object.assign({}, record)
         this.visible = true
       },
-      // 确定
+      // 確定
       handleOk() {
         const that = this
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true
@@ -136,7 +136,7 @@
           }
         })
       },
-      // 关闭
+      // 關閉
       handleCancel() {
         this.close()
       },

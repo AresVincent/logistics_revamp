@@ -1,6 +1,6 @@
 <template>
   <div :class="boxClass">
-    <!-- 工具按钮 -->
+    <!-- 工具按鈕 -->
     <div class="j-vxe-tool-button div" :size="btnSize">
       <slot v-if="showPrefix" name="toolbarPrefix" :size="btnSize"/>
 
@@ -9,19 +9,19 @@
       <template v-if="selectedRowIds.length > 0">
         <a-popconfirm
           v-if="showRemove"
-          :title="`确定要删除这 ${selectedRowIds.length} 项吗?`"
+          :title="`確定要刪除這 ${selectedRowIds.length} 項嗎?`"
           @confirm="trigger('remove')"
         >
-          <a-button icon="minus" :disabled="disabled">删除</a-button>
+          <a-button icon="minus" :disabled="disabled">刪除</a-button>
         </a-popconfirm>
         <template v-if="showClearSelection">
-          <a-button icon="delete" @click="trigger('clearSelection')">清空选择</a-button>
+          <a-button icon="delete" @click="trigger('clearSelection')">清空選擇</a-button>
         </template>
       </template>
 
       <slot v-if="showSuffix" name="toolbarSuffix" :size="btnSize"/>
       <a v-if="showCollapse" @click="toggleCollapse" style="margin-left: 4px">
-        <span>{{ collapsed ? '展开' : '收起' }}</span>
+        <span>{{ collapsed ? '展開' : '收起' }}</span>
         <a-icon :type="collapsed ? 'down' : 'up'"/>
       </a>
     </div>
@@ -56,12 +56,12 @@
       btns() {
         let arr = this.toolbarConfig.btn || ['add', 'remove', 'clearSelection']
         let exclude = [...this.excludeCode]
-        // TODO 需要将remove替换batch_delete
-        // 系统默认的批量删除编码配置为 batch_delete 此处需要转化一下
+        // TODO 需要將remove替換batch_delete
+        // 系統默認的批量刪除編碼配置為 batch_delete 此處需要轉化一下
         if(exclude.indexOf('batch_delete')>=0){
           exclude.push('remove')
         }
-        // 按钮权限 需要去掉不被授权的按钮
+        // 按鈕權限 需要去掉不被授權的按鈕
         return arr.filter(item=>{
           return exclude.indexOf(item)<0
         })
@@ -86,8 +86,8 @@
       },
       showClearSelection() {
         if (this.btns.includes('clearSelection')) {
-          // 有禁用行时才显示清空选择按钮
-          // 因为禁用行会阻止选择行，导致无法取消全选
+          // 有禁用行時才显示清空選擇按鈕
+          // 因為禁用行會阻止選擇行，導致無法取消全選
           let length = Object.keys(this.disabledRows).length
           return length > 0
         }
@@ -102,11 +102,11 @@
       },
     },
     methods: {
-      /** 触发事件 */
+      /** 觸發事件 */
       trigger(name) {
         this.$emit(name)
       },
-      // 切换展开收起
+      // 切換展開收起
       toggleCollapse() {
         this.collapsed = !this.collapsed
       },

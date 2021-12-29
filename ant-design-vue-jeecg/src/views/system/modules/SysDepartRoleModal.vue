@@ -6,33 +6,33 @@
     :confirmLoading="confirmLoading"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭">
-    
+    cancelText="關閉">
+
     <a-spin :spinning="confirmLoading">
       <a-form-model  ref="form" :model="model" :rules="validatorRules">
-      
+
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           prop="roleName"
-          label="部门角色名称">
-          <a-input placeholder="请输入部门角色名称" v-model="model.roleName"/>
+          label="部門角色名稱">
+          <a-input placeholder="請輸入部門角色名稱" v-model="model.roleName"/>
         </a-form-model-item>
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           prop="roleCode"
-          label="部门角色编码">
-          <a-input placeholder="请输入部门角色编码" v-model="model.roleCode"/>
+          label="部門角色編碼">
+          <a-input placeholder="請輸入部門角色編碼" v-model="model.roleCode"/>
         </a-form-model-item>
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           prop="description"
           label="描述">
-          <a-input placeholder="请输入描述" v-model="model.description"/>
+          <a-input placeholder="請輸入描述" v-model="model.description"/>
         </a-form-model-item>
-		
+
       </a-form-model>
     </a-spin>
   </a-modal>
@@ -60,16 +60,16 @@
         confirmLoading: false,
         validatorRules:{
           roleName:[
-              { required: true, message: '请输入部门角色名称!' },
-              { min: 2, max: 30, message: '长度在 2 到 30 个字符', trigger: 'blur' }
+              { required: true, message: '請輸入部門角色名稱!' },
+              { min: 2, max: 30, message: '長度在 2 到 30 個字符', trigger: 'blur' }
             ],
           roleCode: [
-              { required: true, message: '请输入部门角色编码!'},
-              { min: 0, max: 64, message: '长度不超过 64 个字符', trigger: 'blur' },
+              { required: true, message: '請輸入部門角色編碼!'},
+              { min: 0, max: 64, message: '長度不超過 64 個字符', trigger: 'blur' },
               { validator: this.validateRoleCode}
             ],
           description: [
-              { min: 0, max: 126, message: '长度不超过 126 个字符', trigger: 'blur' }
+              { min: 0, max: 126, message: '長度不超過 126 個字符', trigger: 'blur' }
             ]
         },
         url: {
@@ -96,7 +96,7 @@
       },
       handleOk () {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;
@@ -131,7 +131,7 @@
       },
       validateRoleCode(rule, value, callback){
         if(/[\u4E00-\u9FA5]/g.test(value)){
-          callback("部门角色编码不可输入汉字!");
+          callback("部門角色編碼不可輸入漢字!");
         }else{
           var params = {
             tableName: "sys_depart_role",

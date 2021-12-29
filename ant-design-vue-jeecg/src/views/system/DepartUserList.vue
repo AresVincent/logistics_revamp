@@ -3,12 +3,12 @@
     <a-col :md="8" :sm="24">
       <a-card :bordered="false">
         <div style="background: #fff;padding-left:16px;height: 100%; margin-top: 5px">
-          <a-input-search @search="onSearch" style="width:100%;margin-top: 10px" placeholder="请输入部门名称"/>
-          <!-- 树-->
+          <a-input-search @search="onSearch" style="width:100%;margin-top: 10px" placeholder="請輸入部門名稱"/>
+          <!-- 樹-->
 
           <template v-if="userIdentity === '2' && departTree.length>0">
 
-            <!--组织机构-->
+            <!--組織機構-->
             <a-tree
               showLine
               :selectedKeys="selectedKeys"
@@ -23,9 +23,9 @@
 
           </template>
           <div style="margin-top: 24px;" v-else-if="userIdentity === '2' && departTree.length==0">
-            <h3><span>您的部门下暂无有效部门信息</span></h3>
+            <h3><span>您的部門下暫無有效部門信息</span></h3>
           </div>
-          <div style="margin-top: 24px;" v-else><h3>普通员工暂无此权限</h3></div>
+          <div style="margin-top: 24px;" v-else><h3>普通員工暫無此權限</h3></div>
         </div>
       </a-card>
     </a-col>
@@ -35,10 +35,10 @@
           <a-tab-pane tab="基本信息" key="1" forceRender>
             <Dept-Base-Info ref="DeptBaseInfo"></Dept-Base-Info>
           </a-tab-pane>
-          <a-tab-pane tab="用户信息" key="2">
+          <a-tab-pane tab="用戶信息" key="2">
             <Dept-User-Info ref="DeptUserInfo" @clearSelectedDepartKeys="clearSelectedDepartKeys"></Dept-User-Info>
           </a-tab-pane>
-          <a-tab-pane tab="部门角色" key="3" forceRender>
+          <a-tab-pane tab="部門角色" key="3" forceRender>
             <dept-role-info ref="DeptRoleInfo" @clearSelectedDepartKeys="clearSelectedDepartKeys"/>
           </a-tab-pane>
         </a-tabs>
@@ -132,10 +132,10 @@
         })
       },
       setThisExpandedKeys(node) {
-        //只展开一级目录
+        //只展開一級目錄
         if (node.children && node.children.length > 0) {
           this.iExpandedKeys.push(node.key)
-          //下方代码放开注释则默认展开所有节点
+          //下方代碼放開註釋則默認展開所有節點
           /**
           for (let a = 0; a < node.children.length; a++) {
             this.setThisExpandedKeys(node.children[a])

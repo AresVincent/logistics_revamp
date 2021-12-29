@@ -3,7 +3,7 @@
 
     <a-row :gutter="8">
       <a-col :span="6">
-        <!-- 加上 show-line 属性后，展开收起图标自动变成 +- 样式 -->
+        <!-- 加上 show-line 屬性后，展開收起圖標自動變成 +- 樣式 -->
         <a-tree
           class="template-5-tree"
           :tree-data="treeData"
@@ -14,7 +14,7 @@
           @expand="handleTreeExpand"
           @select="handleTreeSelect"
         >
-          <!-- 自定义子节点图标 -->
+          <!-- 自定義子節點圖標 -->
           <a-icon slot="myIcon" type="unordered-list" style="color:#0c8fcf;"/>
         </a-tree>
       </a-col>
@@ -40,109 +40,109 @@
   import { getAction } from '@api/manage'
   import { JVXETypes } from '@/components/jeecg/JVxeTable'
 
-  // 【多种布局模板】左侧为树，右侧为行编辑
+  // 【多種布局模板】左側為樹，右側為行編輯
   export default {
     name: 'Template5',
     data() {
       return {
-        // 是否正在加载
+        // 是否正在加載
         loading: false,
-        // 分页器参数
+        // 分頁器參數
         pagination: {
-          // 当前页码
+          // 當前頁碼
           current: 1,
-          // 每页的条数
+          // 每頁的條數
           pageSize: 50,
-          // 可切换的条数
+          // 可切換的條數
           pageSizeOptions: ['50'],
-          // 数据总数（目前并不知道真实的总数，所以先填写0，在后台查出来后再赋值）
+          // 數據總數（目前並不知道真實的總數，所以先填寫0，在後台查出來后再賦值）
           total: 0,
         },
-        // 选择的行
+        // 選擇的行
         selectedRows: [],
-        // 数据源，控制表格的数据
+        // 數據源，控製表格的數據
         dataSource: [],
-        // 列配置，控制表格显示的列
+        // 列配置，控製表格显示的列
         columns: [
-          {key: 'num', title: '序号', width: '80px'},
+          {key: 'num', title: '序號', width: '80px'},
           {
-            // 字段key，跟后台数据的字段名匹配
+            // 字段key，跟後台數據的字段名匹配
             key: 'ship_name',
-            // 列的标题
+            // 列的標題
             title: '船名',
-            // 列的宽度
+            // 列的寬度
             width: '180px',
-            // 如果加上了该属性，就代表当前单元格是可编辑的，type就是表单的类型，input就是简单的输入框
+            // 如果加上了該屬性，就代表當前單元格是可編輯的，type就是表單的類型，input就是簡單的輸入框
             type: JVXETypes.input
           },
           {key: 'call', title: '呼叫', width: '80px', type: JVXETypes.input},
-          {key: 'len', title: '长', width: '80px', type: JVXETypes.input},
-          {key: 'ton', title: '吨', width: '120px', type: JVXETypes.input},
+          {key: 'len', title: '長', width: '80px', type: JVXETypes.input},
+          {key: 'ton', title: '噸', width: '120px', type: JVXETypes.input},
           {key: 'payer', title: '付款方', width: '120px', type: JVXETypes.input},
-          {key: 'count', title: '数', width: '40px'},
+          {key: 'count', title: '數', width: '40px'},
           {
             key: 'company',
             title: '公司',
-            // 最小宽度，与宽度不同的是，这个不是固定的宽度，如果表格有多余的空间，会平均分配给设置了 minWidth 的列
-            // 如果要做占满表格的列可以这么写
+            // 最小寬度，與寬度不同的是，這個不是固定的寬度，如果表格有多餘的空間，會平均分配給設置了 minWidth 的列
+            // 如果要做佔滿表格的列可以這麼寫
             minWidth: '180px',
             type: JVXETypes.input
           },
-          {key: 'trend', title: '动向', width: '120px', type: JVXETypes.input},
+          {key: 'trend', title: '動向', width: '120px', type: JVXETypes.input},
         ],
-        // 树的数据，这里模拟分页固定数据，实际情况应该是后台查出来的数据
+        // 樹的數據，這裏模擬分頁固定數據，實際情況應該是後台查出來的數據
         treeData: [
-          // 第1级数据
+          // 第1級數據
           {
-            title: '1-10页',
+            title: '1-10頁',
             key: '1-10',
-            // 第2级数据
+            // 第2級數據
             children: [
-              {title: '第 1 页', key: 1, slots: {icon: 'myIcon'}},
-              {title: '第 2 页', key: 2, slots: {icon: 'myIcon'}},
+              {title: '第 1 頁', key: 1, slots: {icon: 'myIcon'}},
+              {title: '第 2 頁', key: 2, slots: {icon: 'myIcon'}},
               {
-                title: '第 3 页',
+                title: '第 3 頁',
                 key: 3,
                 slots: {icon: 'myIcon'},
-                // 第3级数据
+                // 第3級數據
                 children: [
-                  {title: '第 333 页', key: 333, slots: {icon: 'myIcon'}},
-                  {title: '第 444 页', key: 444, slots: {icon: 'myIcon'}},
-                  {title: '第 555 页', key: 555, slots: {icon: 'myIcon'}},
-                  // 第4第5级以此类推，加上 children 属性即可
+                  {title: '第 333 頁', key: 333, slots: {icon: 'myIcon'}},
+                  {title: '第 444 頁', key: 444, slots: {icon: 'myIcon'}},
+                  {title: '第 555 頁', key: 555, slots: {icon: 'myIcon'}},
+                  // 第4第5級以此類推，加上 children 屬性即可
                 ],
               },
-              {title: '第 4 页', key: 4, slots: {icon: 'myIcon'}},
-              {title: '第 5 页', key: 5, slots: {icon: 'myIcon'}},
-              {title: '第 6 页', key: 6, slots: {icon: 'myIcon'}},
-              {title: '第 7 页', key: 7, slots: {icon: 'myIcon'}},
-              {title: '第 8 页', key: 8, slots: {icon: 'myIcon'}},
-              {title: '第 9 页', key: 9, slots: {icon: 'myIcon'}},
-              {title: '第 10 页', key: 10, slots: {icon: 'myIcon'}},
+              {title: '第 4 頁', key: 4, slots: {icon: 'myIcon'}},
+              {title: '第 5 頁', key: 5, slots: {icon: 'myIcon'}},
+              {title: '第 6 頁', key: 6, slots: {icon: 'myIcon'}},
+              {title: '第 7 頁', key: 7, slots: {icon: 'myIcon'}},
+              {title: '第 8 頁', key: 8, slots: {icon: 'myIcon'}},
+              {title: '第 9 頁', key: 9, slots: {icon: 'myIcon'}},
+              {title: '第 10 頁', key: 10, slots: {icon: 'myIcon'}},
             ],
             slots: {icon: 'myIcon'},
           },
           {
-            title: '11-20页',
+            title: '11-20頁',
             key: '11-20',
             children: [
-              {title: '第 11 页', key: 11, slots: {icon: 'myIcon'}},
-              {title: '第 12 页', key: 12, slots: {icon: 'myIcon'}},
-              {title: '第 13 页', key: 13, slots: {icon: 'myIcon'}},
-              {title: '第 14 页', key: 14, slots: {icon: 'myIcon'}},
-              {title: '第 15 页', key: 15, slots: {icon: 'myIcon'}},
-              {title: '第 16 页', key: 16, slots: {icon: 'myIcon'}},
-              {title: '第 17 页', key: 17, slots: {icon: 'myIcon'}},
-              {title: '第 18 页', key: 18, slots: {icon: 'myIcon'}},
-              {title: '第 19 页', key: 19, slots: {icon: 'myIcon'}},
-              {title: '第 20 页', key: 20, slots: {icon: 'myIcon'}},
+              {title: '第 11 頁', key: 11, slots: {icon: 'myIcon'}},
+              {title: '第 12 頁', key: 12, slots: {icon: 'myIcon'}},
+              {title: '第 13 頁', key: 13, slots: {icon: 'myIcon'}},
+              {title: '第 14 頁', key: 14, slots: {icon: 'myIcon'}},
+              {title: '第 15 頁', key: 15, slots: {icon: 'myIcon'}},
+              {title: '第 16 頁', key: 16, slots: {icon: 'myIcon'}},
+              {title: '第 17 頁', key: 17, slots: {icon: 'myIcon'}},
+              {title: '第 18 頁', key: 18, slots: {icon: 'myIcon'}},
+              {title: '第 19 頁', key: 19, slots: {icon: 'myIcon'}},
+              {title: '第 20 頁', key: 20, slots: {icon: 'myIcon'}},
             ],
             slots: {icon: 'myIcon'},
           },
         ],
-        // 树展开的列，默认 1-10
+        // 樹展開的列，默認 1-10
         treeExpandedKeys: ['1-10'],
-        // 查询url地址
+        // 查詢url地址
         url: {
           getData: '/mock/vxe/getData',
         },
@@ -153,39 +153,39 @@
     },
     methods: {
 
-      // 加载行编辑的数据
+      // 加載行編輯的數據
       loadData() {
-        // 封装查询条件
+        // 封裝查詢條件
         let formData = {
           pageNo: this.pagination.current,
           pageSize: this.pagination.pageSize
         }
-        // 调用查询数据接口
+        // 調用查詢數據接口
         this.loading = true
         getAction(this.url.getData, formData).then(res => {
           if (res.success) {
-            // 后台查询回来的 total，数据总数量
+            // 後台查詢回來的 total，數據總數量
             this.pagination.total = res.result.total
-            // 将查询的数据赋值给 dataSource
+            // 將查詢的數據賦值給 dataSource
             this.dataSource = res.result.records
-            // 重置选择
+            // 重置選擇
             this.selectedRows = []
           } else {
-            this.$error({title: '主表查询失败', content: res.message})
+            this.$error({title: '主表查詢失敗', content: res.message})
           }
         }).finally(() => {
-          // 这里是无论成功或失败都会执行的方法，在这里关闭loading
+          // 這裡是無論成功或失敗都會執行的方法，在這裏關閉loading
           this.loading = false
         })
       },
 
       handleTablePageChange(event) {
-        // 重新赋值
+        // 重新賦值
         this.pagination.current = event.current
         this.pagination.pageSize = event.pageSize
-        // 查询数据
+        // 查詢數據
         this.loadData()
-        // 判断树展开的key
+        // 判斷樹展開的key
         if (event.current <= 10) {
           this.treeExpandedKeys = ['1-10']
         } else {
@@ -193,11 +193,11 @@
         }
       },
 
-      // 树被选择触发的事件
+      // 樹被選擇觸發的事件
       handleTreeSelect(selectedKeys) {
         let key = selectedKeys[0]
         if (typeof key === 'string') {
-          // 控制树展开为当前选择的列
+          // 控制樹展開為當前選擇的列
           this.treeExpandedKeys = selectedKeys
         } else {
           this.pagination.current = key
@@ -205,7 +205,7 @@
         }
       },
 
-      // 树被选择触发的事件
+      // 樹被選擇觸發的事件
       handleTreeExpand(expandedKeys) {
         this.treeExpandedKeys = expandedKeys
       },
@@ -215,7 +215,7 @@
 </script>
 
 <style lang="less">
-  /** 隐藏文件小图标 */
+  /** 隱藏文件小圖標 */
   .template-5-tree.ant-tree {
     li span.ant-tree-switcher.ant-tree-switcher-noop {
       display: none;

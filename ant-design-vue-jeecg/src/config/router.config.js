@@ -1,7 +1,7 @@
 import { UserLayout, TabLayout, RouteView, BlankLayout, PageView } from '@/components/layouts'
 
 /**
- * 走菜单，走权限控制
+ * 走菜單，走權限控制
  * @type {[null,null]}
  */
 export const asyncRouterMap = [
@@ -10,7 +10,7 @@ export const asyncRouterMap = [
     path: '/',
     name: 'dashboard',
     component: TabLayout,
-    meta: { title: '首页' },
+    meta: { title: '首頁' },
     redirect: '/dashboard/analysis',
     children: [
 
@@ -20,20 +20,20 @@ export const asyncRouterMap = [
       //   name: 'dashboard',
       //   redirect: '/dashboard/workplace',
       //   component: RouteView,
-      //   meta: { title: '仪表盘', icon: 'dashboard', permission: [ 'dashboard' ] },
+      //   meta: { title: '儀錶盤', icon: 'dashboard', permission: [ 'dashboard' ] },
       //   children: [
       //     {
       //       path: '/dashboard/analysis',
       //       name: 'Analysis',
       //       component: () => import('@/views/dashboard/Analysis'),
-      //       meta: { title: '分析页', permission: [ 'dashboard' ] }
+      //       meta: { title: '分析頁', permission: [ 'dashboard' ] }
       //     },
       //     {
       //       path: '/dashboard/monitor',
       //       name: 'Monitor',
       //       hidden: true,
       //       component: () => import('@/views/dashboard/Monitor'),
-      //       meta: { title: '监控页', permission: [ 'dashboard' ] }
+      //       meta: { title: '監控頁', permission: [ 'dashboard' ] }
       //     },
       //     {
       //       path: '/dashboard/workplace',
@@ -49,25 +49,25 @@ export const asyncRouterMap = [
       //   path: '/form',
       //   redirect: '/form/basic-form',
       //   component: PageView,
-      //   meta: { title: '表单页', icon: 'form', permission: [ 'form' ] },
+      //   meta: { title: '表單頁', icon: 'form', permission: [ 'form' ] },
       //   children: [
       //     {
       //       path: '/form/base-form',
       //       name: 'BaseForm',
       //       component: () => import('@/views/form/BasicForm'),
-      //       meta: { title: '基础表单', permission: [ 'form' ] }
+      //       meta: { title: '基礎表單', permission: [ 'form' ] }
       //     },
       //     {
       //       path: '/form/step-form',
       //       name: 'StepForm',
       //       component: () => import('@/views/form/stepForm/StepForm'),
-      //       meta: { title: '分步表单', permission: [ 'form' ] }
+      //       meta: { title: '分步表單', permission: [ 'form' ] }
       //     },
       //     {
       //       path: '/form/advanced-form',
       //       name: 'AdvanceForm',
       //       component: () => import('@/views/form/advancedForm/AdvancedForm'),
-      //       meta: { title: '高级表单', permission: [ 'form' ] }
+      //       meta: { title: '高級表單', permission: [ 'form' ] }
       //     }
       //   ]
       // },
@@ -78,25 +78,25 @@ export const asyncRouterMap = [
       //   name: 'list',
       //   component: PageView,
       //   redirect: '/list/query-list',
-      //   meta: { title: '列表页', icon: 'table', permission: [ 'table' ] },
+      //   meta: { title: '列表頁', icon: 'table', permission: [ 'table' ] },
       //   children: [
       //     {
       //       path: '/list/query-list',
       //       name: 'QueryList',
       //       component: () => import('@/views/list/TableList'),
-      //       meta: { title: '查询表格', permission: [ 'table' ] }
+      //       meta: { title: '查詢表格', permission: [ 'table' ] }
       //     },
       //     {
       //       path: '/list/edit-table',
       //       name: 'EditList',
       //       component: () => import('@/views/list/TableInnerEditList'),
-      //       meta: { title: '内联编辑表格', permission: [ 'table' ] }
+      //       meta: { title: '內聯編輯表格', permission: [ 'table' ] }
       //     },
       //     {
       //       path: '/list/user-list',
       //       name: 'UserList',
       //       component: () => import('@/views/list/UserList'),
-      //       meta: { title: '用户列表', permission: [ 'table' ] }
+      //       meta: { title: '用戶列表', permission: [ 'table' ] }
       //     },
       //     {
       //       path: '/list/role-list',
@@ -108,13 +108,13 @@ export const asyncRouterMap = [
       //       path: '/list/permission-list',
       //       name: 'PermissionList',
       //       component: () => import('@/views/list/PermissionList'),
-      //       meta: { title: '权限列表', permission: [ 'table' ] }
+      //       meta: { title: '權限列表', permission: [ 'table' ] }
       //     },
       //     {
       //       path: '/list/basic-list',
       //       name: 'BasicList',
       //       component: () => import('@/views/list/StandardList'),
-      //       meta: { title: '标准列表', permission: [ 'table' ] }
+      //       meta: { title: '標準列表', permission: [ 'table' ] }
       //     },
       //     {
       //       path: '/list/card',
@@ -139,13 +139,13 @@ export const asyncRouterMap = [
       //           path: '/list/search/project',
       //           name: 'SearchProjects',
       //           component: () => import('../views/list/TableList'),
-      //           meta: { title: '搜索列表（项目）', permission: [ 'table' ] }
+      //           meta: { title: '搜索列表（項目）', permission: [ 'table' ] }
       //         },
       //         {
       //           path: '/list/search/application',
       //           name: 'SearchApplications',
       //           component: () => import('../views/list/TableList'),
-      //           meta: { title: '搜索列表（应用）', permission: [ 'table' ] }
+      //           meta: { title: '搜索列表（應用）', permission: [ 'table' ] }
       //         },
       //       ]
       //     },
@@ -158,19 +158,19 @@ export const asyncRouterMap = [
       //   name: 'profile',
       //   component: RouteView,
       //   redirect: '/profile/basic',
-      //   meta: { title: '详情页', icon: 'profile', permission: [ 'profile' ] },
+      //   meta: { title: '詳情頁', icon: 'profile', permission: [ 'profile' ] },
       //   children: [
       //     {
       //       path: '/profile/basic',
       //       name: 'ProfileBasic',
       //       component: () => import('@/views/profile/basic/Index'),
-      //       meta: { title: '基础详情页', permission: [ 'profile' ] }
+      //       meta: { title: '基礎詳情頁', permission: [ 'profile' ] }
       //     },
       //     {
       //       path: '/profile/advanced',
       //       name: 'ProfileAdvanced',
       //       component: () => import('@/views/profile/advanced/Advanced'),
-      //       meta: { title: '高级详情页', permission: [ 'profile' ] }
+      //       meta: { title: '高級詳情頁', permission: [ 'profile' ] }
       //     }
       //   ]
       // },
@@ -181,7 +181,7 @@ export const asyncRouterMap = [
       //   name: 'result',
       //   component: PageView,
       //   redirect: '/result/success',
-      //   meta: { title: '结果页', icon: 'check-circle-o', permission: [ 'result' ] },
+      //   meta: { title: '結果頁', icon: 'check-circle-o', permission: [ 'result' ] },
       //   children: [
       //     {
       //       path: '/result/success',
@@ -193,7 +193,7 @@ export const asyncRouterMap = [
       //       path: '/result/fail',
       //       name: 'ResultFail',
       //       component: () => import(/* webpackChunkName: "result" */ '@/views/result/Error'),
-      //       meta: { title: '失败', hiddenHeaderContent: true, permission: [ 'result' ] }
+      //       meta: { title: '失敗', hiddenHeaderContent: true, permission: [ 'result' ] }
       //     }
       //   ]
       // },
@@ -204,7 +204,7 @@ export const asyncRouterMap = [
       //   name: 'exception',
       //   component: RouteView,
       //   redirect: '/exception/403',
-      //   meta: { title: '异常页', icon: 'warning', permission: [ 'exception' ] },
+      //   meta: { title: '異常頁', icon: 'warning', permission: [ 'exception' ] },
       //   children: [
       //     {
       //       path: '/exception/403',
@@ -232,19 +232,19 @@ export const asyncRouterMap = [
       //   path: '/account',
       //   component: RouteView,
       //   name: 'account',
-      //   meta: { title: '个人页', icon: 'user', keepAlive: true, permission: [ 'user' ] },
+      //   meta: { title: '個人頁', icon: 'user', keepAlive: true, permission: [ 'user' ] },
       //   children: [
       //     {
       //       path: '/account/center',
       //       name: 'center',
       //       component: () => import('@/views/account/center/Index'),
-      //       meta: { title: '个人中心', keepAlive: true, permission: [ 'user' ] }
+      //       meta: { title: '個人中心', keepAlive: true, permission: [ 'user' ] }
       //     },
       //     {
       //       path: '/account/settings',
       //       name: 'settings',
       //       component: () => import('@/views/account/settings/Index'),
-      //       meta: { title: '个人设置', hideHeader: true, keepAlive: true, permission: [ 'user' ]  },
+      //       meta: { title: '個人設置', hideHeader: true, keepAlive: true, permission: [ 'user' ]  },
       //       redirect: '/account/settings/base',
       //       alwaysShow: true,
       //       children: [
@@ -252,25 +252,25 @@ export const asyncRouterMap = [
       //           path: '/account/settings/base',
       //           name: 'BaseSettings',
       //           component: () => import('@/views/account/settings/BaseSetting'),
-      //           meta: { title: '基本设置', hidden: true, keepAlive: true, permission: [ 'user' ]  }
+      //           meta: { title: '基本設置', hidden: true, keepAlive: true, permission: [ 'user' ]  }
       //         },
       //         {
       //           path: '/account/settings/security',
       //           name: 'SecuritySettings',
       //           component: () => import('@/views/account/settings/Security'),
-      //           meta: { title: '安全设置', hidden: true, keepAlive: true, permission: [ 'user' ]  }
+      //           meta: { title: '安全設置', hidden: true, keepAlive: true, permission: [ 'user' ]  }
       //         },
       //         {
       //           path: '/account/settings/custom',
       //           name: 'CustomSettings',
       //           component: () => import('@/views/account/settings/Custom'),
-      //           meta: { title: '个性化设置', hidden: true, keepAlive: true, permission: [ 'user' ]  }
+      //           meta: { title: '個性化設置', hidden: true, keepAlive: true, permission: [ 'user' ]  }
       //         },
       //         {
       //           path: '/account/settings/binding',
       //           name: 'BindingSettings',
       //           component: () => import('@/views/account/settings/Binding'),
-      //           meta: { title: '账户绑定', hidden: true, keepAlive: true, permission: [ 'user' ]  }
+      //           meta: { title: '賬戶綁定', hidden: true, keepAlive: true, permission: [ 'user' ]  }
       //         },
       //         {
       //           path: '/account/settings/notification',
@@ -290,7 +290,7 @@ export const asyncRouterMap = [
 ]
 
 /**
- * 基础路由
+ * 基礎路由
  * @type { *[] }
  */
 export const constantRouterMap = [
@@ -327,7 +327,7 @@ export const constantRouterMap = [
   //   path: '/',
   //   name: 'index',
   //   component: TabLayout,
-  //   meta: {title: '首页'},
+  //   meta: {title: '首頁'},
   //   redirect: '/dashboard/workplace',
   //   children: [
   //     {
@@ -335,7 +335,7 @@ export const constantRouterMap = [
   //       name: 'online',
   //       redirect: '/online',
   //       component: RouteView,
-  //       meta: {title: '在线开发', icon: 'dashboard', permission: ['dashboard']},
+  //       meta: {title: '在線開發', icon: 'dashboard', permission: ['dashboard']},
   //       children: [
   //         {
   //           path: '/online/auto/:code',
@@ -348,13 +348,13 @@ export const constantRouterMap = [
   // },
 
   {
-    // OAuth2 APP页面路由
+    // OAuth2 APP頁面路由
     path: '/oauth2-app',
     component: BlankLayout,
     redirect: '/oauth2-app/login',
     children: [
       {
-        // OAuth2 登录路由
+        // OAuth2 登錄路由
         path: 'login',
         name: 'login',
         component: () => import(/* webpackChunkName: "oauth2-app.login" */ '@/views/user/oauth2/OAuth2Login')

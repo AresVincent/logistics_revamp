@@ -1,5 +1,5 @@
 /**
- *第三方登录
+ *第三方登錄
  */
 import { mapActions } from 'vuex'
 import { postAction } from '@api/manage'
@@ -8,7 +8,7 @@ import { timeFix } from '@/utils/util'
 export const JeecgThirdLoginMixin = {
   data() {
     return {
-      //第三方登录相关信息
+      //第三方登錄相關信息
       thirdLoginInfo: '',
       thirdPasswordShow: false,
       thirdLoginPassword: '',
@@ -16,16 +16,16 @@ export const JeecgThirdLoginMixin = {
       thirdConfirmShow: false,
       thirdCreateUserLoding: false,
       thirdLoginState: false,
-      //绑定手机号弹窗
+      //綁定手機號彈窗
       bindingPhoneModal: false,
       thirdPhone: '',
       thirdCaptcha: '',
-      //获取验证码按钮30s之内是否可点击
+      //獲取驗證碼按鈕30s之內是否可點擊
       thirdState: {
         time: 30,
         smsSendBtn: false
       },
-      //第三方用户UUID
+      //第三方用戶UUID
       thirdUserUuid: '',
       thirdType: '',
       url: {
@@ -37,7 +37,7 @@ export const JeecgThirdLoginMixin = {
   },
   methods: {
     ...mapActions(['ThirdLogin']),
-    //第三方登录
+    //第三方登錄
     onThirdLogin(source) {
       let url = window._CONFIG['domianURL'] + `/sys/thirdLogin/render/${source}`
       window.open(url, `login ${source}`, 'height=500, width=500, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no')
@@ -48,10 +48,10 @@ export const JeecgThirdLoginMixin = {
       let receiveMessage = function(event) {
         let token = event.data
         if (typeof token === 'string') {
-          //如果是字符串类型 说明是token信息
-          if (token === '登录失败') {
+          //如果是字符串類型 說明是token信息
+          if (token === '登錄失敗') {
             that.$message.warning(token)
-          } else if (token.includes('绑定手机号')) {
+          } else if (token.includes('綁定手機號')) {
             that.bindingPhoneModal = true
             let strings = token.split(',')
             that.thirdUserUuid = strings[1]
@@ -59,18 +59,18 @@ export const JeecgThirdLoginMixin = {
             that.doThirdLogin(token)
           }
         } else if (typeof token === 'object') {
-          //对象类型 说明需要提示是否绑定现有账号
+          //對象類型 說明需要提示是否綁定現有賬號
           if (token['isObj'] === true) {
             that.thirdConfirmShow = true
             that.thirdLoginInfo = { ...token }
           }
         } else {
-          that.$message.warning('不识别的信息传递')
+          that.$message.warning('不識別的信息傳遞')
         }
       }
       window.addEventListener('message', receiveMessage, false)
     },
-    // 根据token执行登录
+    // 根據token執行登錄
     doThirdLogin(token) {
       if (this.thirdLoginState === false) {
         this.thirdLoginState = true
@@ -86,19 +86,19 @@ export const JeecgThirdLoginMixin = {
         })
       }
     },
-    // 绑定已有账号 需要输入密码
+    // 綁定已有賬號 需要輸入密碼
     thirdLoginUserBind() {
       this.thirdLoginPassword = ''
       this.thirdLoginUser = this.thirdLoginInfo.uuid
       this.thirdConfirmShow = false
       this.thirdPasswordShow = true
     },
-    //创建新账号
+    //創建新賬號
     thirdLoginUserCreate() {
       this.thirdCreateUserLoding = true
-      // 账号名后面添加两位随机数
+      // 賬號名後面添加兩位隨機數
       this.thirdLoginInfo['suffix'] = parseInt(Math.random() * 98 + 1)
-      //this.thirdLoginInfo.operateCode = 123 //测试校验失败
+      //this.thirdLoginInfo.operateCode = 123 //測試校驗失敗
       postAction('/sys/third/user/create', this.thirdLoginInfo).then(res => {
         if (res.success) {
           let token = res.result
@@ -112,9 +112,9 @@ export const JeecgThirdLoginMixin = {
         this.thirdCreateUserLoding = false
       })
     },
-    // 核实密码
+    // 核實密碼
     thirdLoginCheckPassword() {
-      //this.thirdLoginInfo.operateCode = 123 //测试校验失败
+      //this.thirdLoginInfo.operateCode = 123 //測試校驗失敗
       let param = Object.assign({}, this.thirdLoginInfo, { password: this.thirdLoginPassword })
       postAction('/sys/third/user/checkPassword', param).then(res => {
         if (res.success) {
@@ -125,17 +125,17 @@ export const JeecgThirdLoginMixin = {
         }
       })
     },
-    // 没有密码 取消操作
+    // 沒有密碼 取消操作
     thirdLoginNoPassword() {
       this.thirdPasswordShow = false
       this.thirdLoginPassword = ''
       this.thirdLoginUser = ''
     },
-    //获取第三方验证码
+    //獲取第三方驗證碼
     getThirdCaptcha() {
       let that = this
       if (!this.thirdPhone) {
-        that.cmsFailed('请输入手机号')
+        that.cmsFailed('請輸入手機號')
       } else {
         this.thirdState.smsSendBtn = true
         let interval = window.setInterval(() => {
@@ -145,7 +145,7 @@ export const JeecgThirdLoginMixin = {
             window.clearInterval(interval)
           }
         }, 1000)
-        const hide = this.$message.loading('验证码发送中..', 0)
+        const hide = this.$message.loading('驗證碼發送中..', 0)
         let smsParams = {}
         smsParams.mobile = this.thirdPhone
         smsParams.smsmode = '0'
@@ -164,7 +164,7 @@ export const JeecgThirdLoginMixin = {
         })
       }
     },
-    //绑定手机号点击确定按钮
+    //綁定手機號點擊確定按鈕
     thirdHandleOk() {
       let bingingParams = {}
       bingingParams.mobile = this.thirdPhone
@@ -180,28 +180,28 @@ export const JeecgThirdLoginMixin = {
       })
     },
     loginSuccess () {
-      // update-begin- author:sunjianlei --- date:20190812 --- for: 登录成功后不解除禁用按钮，防止多次点击
+      // update-begin- author:sunjianlei --- date:20190812 --- for: 登錄成功后不解除禁用按鈕，防止多次點擊
       // this.loginBtn = false
-      // update-end- author:sunjianlei --- date:20190812 --- for: 登录成功后不解除禁用按钮，防止多次点击
+      // update-end- author:sunjianlei --- date:20190812 --- for: 登錄成功后不解除禁用按鈕，防止多次點擊
       this.$router.push({ path: "/dashboard/analysis" }).catch(()=>{
-        console.log('登录跳转首页出错,这个错误从哪里来的')
+        console.log('登錄跳轉首頁出錯,這個錯誤從哪裡來的')
       })
       this.$notification.success({
-        message: '欢迎',
-        description: `${timeFix()}，欢迎回来`,
+        message: '歡迎',
+        description: `${timeFix()}，歡迎回來`,
       });
     },
     cmsFailed(err){
       this.$notification[ 'error' ]({
-        message: "登录失败",
+        message: "登錄失敗",
         description:err,
         duration: 4,
       });
     },
     requestFailed (err) {
       this.$notification[ 'error' ]({
-        message: '登录失败',
-        description: ((err.response || {}).data || {}).message || err.message || "请求出现错误，请稍后再试",
+        message: '登錄失敗',
+        description: ((err.response || {}).data || {}).message || err.message || "請求出現錯誤，請稍後再試",
         duration: 4,
       });
       this.loginBtn = false;

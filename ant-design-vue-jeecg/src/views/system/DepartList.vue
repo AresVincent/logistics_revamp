@@ -3,26 +3,26 @@
     <a-col :md="12" :sm="24">
       <a-card :bordered="false">
 
-        <!-- 按钮操作区域 -->
+        <!-- 按鈕操作區域 -->
         <a-row style="margin-left: 14px">
-          <a-button @click="handleAdd(1)" type="primary">添加部门</a-button>
-          <a-button @click="handleAdd(2)" type="primary">添加下级</a-button>
-          <a-button type="primary" icon="download" @click="handleExportXls('部门信息')">导出</a-button>
+          <a-button @click="handleAdd(1)" type="primary">添加部門</a-button>
+          <a-button @click="handleAdd(2)" type="primary">添加下級</a-button>
+          <a-button type="primary" icon="download" @click="handleExportXls('部門信息')">導出</a-button>
           <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-            <a-button type="primary" icon="import">导入</a-button>
+            <a-button type="primary" icon="import">導入</a-button>
           </a-upload>
-          <a-button title="删除多条数据" @click="batchDel" type="default">批量删除</a-button>
+          <a-button title="刪除多條數據" @click="batchDel" type="default">批量刪除</a-button>
           <!--<a-button @click="refresh" type="default" icon="reload" :loading="loading">刷新</a-button>-->
         </a-row>
         <div style="background: #fff;padding-left:16px;height: 100%; margin-top: 5px">
           <a-alert type="info" :showIcon="true">
             <div slot="message">
-              当前选择：<span v-if="this.currSelected.title">{{ getCurrSelectedTitle() }}</span>
-              <a v-if="this.currSelected.title" style="margin-left: 10px" @click="onClearSelected">取消选择</a>
+              當前選擇：<span v-if="this.currSelected.title">{{ getCurrSelectedTitle() }}</span>
+              <a v-if="this.currSelected.title" style="margin-left: 10px" @click="onClearSelected">取消選擇</a>
             </div>
           </a-alert>
-          <a-input-search @search="onSearch" style="width:100%;margin-top: 10px" placeholder="请输入部门名称"/>
-          <!-- 树-->
+          <a-input-search @search="onSearch" style="width:100%;margin-top: 10px" placeholder="請輸入部門名稱"/>
+          <!-- 樹-->
           <a-col :md="10" :sm="24">
             <template>
               <a-dropdown :trigger="[this.dropTrigger]" @visibleChange="dropStatus">
@@ -41,10 +41,10 @@
               :autoExpandParent="autoExpandParent"
               @expand="onExpand"/>
                 </span>
-                <!--新增右键点击事件,和增加添加和删除功能-->
+                <!--新增右鍵點擊事件,和增加添加和刪除功能-->
                 <a-menu slot="overlay">
                   <a-menu-item @click="handleAdd(3)" key="1">添加</a-menu-item>
-                  <a-menu-item @click="handleDelete" key="2">删除</a-menu-item>
+                  <a-menu-item @click="handleDelete" key="2">刪除</a-menu-item>
                   <a-menu-item @click="closeDrop" key="3">取消</a-menu-item>
                 </a-menu>
               </a-dropdown>
@@ -52,60 +52,60 @@
           </a-col>
         </div>
       </a-card>
-      <!---- author:os_chengtgen -- date:20190827 --  for:切换父子勾选模式 =======------>
+      <!---- author:os_chengtgen -- date:20190827 --  for:切換父子勾選模式 =======------>
       <div class="drawer-bootom-button">
         <a-dropdown :trigger="['click']" placement="topCenter">
           <a-menu slot="overlay">
-            <a-menu-item key="1" @click="switchCheckStrictly(1)">父子关联</a-menu-item>
-            <a-menu-item key="2" @click="switchCheckStrictly(2)">取消关联</a-menu-item>
-            <a-menu-item key="3" @click="checkALL">全部勾选</a-menu-item>
-            <a-menu-item key="4" @click="cancelCheckALL">取消全选</a-menu-item>
-            <a-menu-item key="5" @click="expandAll">展开所有</a-menu-item>
-            <a-menu-item key="6" @click="closeAll">合并所有</a-menu-item>
+            <a-menu-item key="1" @click="switchCheckStrictly(1)">父子關聯</a-menu-item>
+            <a-menu-item key="2" @click="switchCheckStrictly(2)">取消關聯</a-menu-item>
+            <a-menu-item key="3" @click="checkALL">全部勾選</a-menu-item>
+            <a-menu-item key="4" @click="cancelCheckALL">取消全選</a-menu-item>
+            <a-menu-item key="5" @click="expandAll">展開所有</a-menu-item>
+            <a-menu-item key="6" @click="closeAll">合併所有</a-menu-item>
           </a-menu>
           <a-button>
-            树操作 <a-icon type="up" />
+            樹操作 <a-icon type="up" />
           </a-button>
         </a-dropdown>
       </div>
-      <!---- author:os_chengtgen -- date:20190827 --  for:切换父子勾选模式 =======------>
+      <!---- author:os_chengtgen -- date:20190827 --  for:切換父子勾選模式 =======------>
     </a-col>
     <a-col :md="12" :sm="24">
       <a-tabs defaultActiveKey="1">
         <a-tab-pane tab="基本信息" key="1" >
           <a-card :bordered="false" v-if="selectedKeys.length>0">
             <a-form-model ref="form" :model="model" :rules="validatorRules">
-              <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" prop="departName" label="机构名称">
-                <a-input placeholder="请输入机构/部门名称" v-model="model.departName" />
+              <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" prop="departName" label="機構名稱">
+                <a-input placeholder="請輸入機構/部門名稱" v-model="model.departName" />
               </a-form-model-item>
-              <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="上级部门">
+              <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="上級部門">
                 <a-tree-select
                   style="width:100%"
                   :dropdownStyle="{maxHeight:'200px',overflow:'auto'}"
                   :treeData="treeData"
                   :disabled="disable"
                   v-model="model.parentId"
-                  placeholder="无">
+                  placeholder="無">
                 </a-tree-select>
               </a-form-model-item>
-              <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orgCode" label="机构编码">
-                <a-input disabled placeholder="请输入机构编码" v-model="model.orgCode" />
+              <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orgCode" label="機構編碼">
+                <a-input disabled placeholder="請輸入機構編碼" v-model="model.orgCode" />
               </a-form-model-item>
-              <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orgCategory" label="机构类型">
+              <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orgCategory" label="機構類型">
                 <template v-if="orgCategoryDisabled">
-                  <a-radio-group v-model="model.orgCategory" placeholder="请选择机构类型">
+                  <a-radio-group v-model="model.orgCategory" placeholder="請選擇機構類型">
                     <a-radio value="1">
                       公司
                     </a-radio>
                   </a-radio-group>
                 </template>
                 <template v-else>
-                  <a-radio-group v-model="model.orgCategory" placeholder="请选择机构类型">
+                  <a-radio-group v-model="model.orgCategory" placeholder="請選擇機構類型">
                     <a-radio value="2">
-                      部门
+                      部門
                     </a-radio>
                     <a-radio value="3">
-                      岗位
+                      崗位
                     </a-radio>
                   </a-radio-group>
                 </template>
@@ -113,14 +113,14 @@
               <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="排序">
                 <a-input-number v-model="model.departOrder" />
               </a-form-model-item>
-              <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="手机号">
-                <a-input placeholder="请输入手机号" v-model="model.mobile" />
+              <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="手機號">
+                <a-input placeholder="請輸入手機號" v-model="model.mobile" />
               </a-form-model-item>
               <a-form-model-item  :labelCol="labelCol" :wrapperCol="wrapperCol"  label="地址">
-                <a-input placeholder="请输入地址" v-model="model.address"/>
+                <a-input placeholder="請輸入地址" v-model="model.address"/>
               </a-form-model-item>
-              <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="备注">
-                <a-textarea placeholder="请输入备注" v-model="model.memo"/>
+              <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="備註">
+                <a-textarea placeholder="請輸入備註" v-model="model.memo"/>
               </a-form-model-item>
             </a-form-model>
             <div class="anty-form-btn">
@@ -130,11 +130,11 @@
           </a-card>
           <a-card v-else >
             <a-empty>
-              <span slot="description"> 请先选择一个部门! </span>
+              <span slot="description"> 請先選擇一個部門! </span>
             </a-empty>
           </a-card>
         </a-tab-pane>
-        <a-tab-pane tab="部门权限" key="2" forceRender>
+        <a-tab-pane tab="部門權限" key="2" forceRender>
           <depart-auth-modal ref="departAuth"/>
         </a-tab-pane>
       </a-tabs>
@@ -149,27 +149,27 @@
   import {httpAction, deleteAction} from '@/api/manage'
   import {JeecgListMixin} from '@/mixins/JeecgListMixin'
   import DepartAuthModal from './modules/DepartAuthModal'
-  // 表头
+  // 表頭
   const columns = [
     {
-      title: '机构名称',
+      title: '機構名稱',
       dataIndex: 'departName'
     },
     {
-      title: '机构类型',
+      title: '機構類型',
       align: 'center',
       dataIndex: 'orgType'
     },
     {
-      title: '机构编码',
+      title: '機構編碼',
       dataIndex: 'orgCode',
     },
     {
-      title: '手机号',
+      title: '手機號',
       dataIndex: 'mobile'
     },
     {
-      title: '传真',
+      title: '傳真',
       dataIndex: 'fax'
     },
     {
@@ -233,9 +233,9 @@
           edges: []
         },
         validatorRules: {
-          departName: [{required: true, message: '请输入机构/部门名称!'}],
-          orgCode: [{required: true, message: '请输入机构编码!'}],
-          orgCategory:[{required: true, message: '请输入机构类型!'}],
+          departName: [{required: true, message: '請輸入機構/部門名稱!'}],
+          orgCode: [{required: true, message: '請輸入機構編碼!'}],
+          orgCategory:[{required: true, message: '請輸入機構類型!'}],
           mobile:[{validator: this.validateMobile}]
         },
         url: {
@@ -263,7 +263,7 @@
         that.departTree = []
         queryDepartTreeList().then((res) => {
           if (res.success) {
-            //部门全选后，再添加部门，选中数量增多
+            //部門全選后，再添加部門，選中數量增多
             this.allTreeKeys = [];
             for (let i = 0; i < res.result.length; i++) {
               let temp = res.result[i]
@@ -289,7 +289,7 @@
         this.loading = true
         this.loadTree()
       },
-      // 右键操作方法
+      // 右鍵操作方法
       rightHandle(node) {
         this.dropTrigger = 'contextmenu'
         console.log(node.node.eventKey)
@@ -304,13 +304,13 @@
       backFlowList() {
         this.$router.back(-1)
       },
-      // 右键点击下拉框改变事件
+      // 右鍵點擊下拉框改變事件
       dropStatus(visible) {
         if (visible == false) {
           this.dropTrigger = ''
         }
       },
-      // 右键下拉关闭下拉框
+      // 右鍵下拉關閉下拉框
       closeDrop() {
         this.dropTrigger = ''
       },
@@ -320,7 +320,7 @@
       batchDel: function () {
         console.log(this.checkedKeys)
         if (this.checkedKeys.length <= 0) {
-          this.$message.warning('请选择一条记录！')
+          this.$message.warning('請選擇一條記錄！')
         } else {
           var ids = ''
           for (var a = 0; a < this.checkedKeys.length; a++) {
@@ -328,8 +328,8 @@
           }
           var that = this
           this.$confirm({
-            title: '确认删除',
-            content: '确定要删除所选中的 ' + this.checkedKeys.length + ' 条数据，以及子节点数据吗?',
+            title: '確認刪除',
+            content: '確定要刪除所選中的 ' + this.checkedKeys.length + ' 條數據，以及子節點數據嗎?',
             onOk: function () {
               deleteAction(that.url.deleteBatch, {ids: ids}).then((res) => {
                 if (res.success) {
@@ -375,13 +375,13 @@
       onCheck(checkedKeys, info) {
         console.log('onCheck', checkedKeys, info)
         this.hiding = false
-        //---- author:os_chengtgen -- date:20190827 --  for:切换父子勾选模式 =======------
+        //---- author:os_chengtgen -- date:20190827 --  for:切換父子勾選模式 =======------
         if(this.checkStrictly){
           this.checkedKeys = checkedKeys.checked;
         }else{
           this.checkedKeys = checkedKeys
         }
-        //---- author:os_chengtgen -- date:20190827 --  for:切换父子勾选模式 =======------
+        //---- author:os_chengtgen -- date:20190827 --  for:切換父子勾選模式 =======------
       },
       onSelect(selectedKeys, e) {
         console.log('selected', selectedKeys, e)
@@ -396,7 +396,7 @@
         this.$refs.departAuth.show(record.id);
 
       },
-      // 触发onSelect事件时,为部门树右侧的form表单赋值
+      // 觸發onSelect事件時,為部門樹右側的form表單賦值
       setValuesToForm(record) {
         if(record.orgCategory == '1'){
           this.orgCategoryDisabled = true;
@@ -427,7 +427,7 @@
         this.$refs.form.validate(valid => {
           if (valid) {
             if (!this.currSelected.id) {
-              this.$message.warning('请点击选择要修改部门!')
+              this.$message.warning('請點擊選擇要修改部門!')
               return
             }
 
@@ -463,7 +463,7 @@
         } else if (num == 2) {
           let key = this.currSelected.key
           if (!key) {
-            this.$message.warning('请先点击选中上级部门！')
+            this.$message.warning('請先點擊選中上級部門！')
             return false
           }
           this.$refs.departModal.add(this.selectedKeys)
@@ -476,29 +476,29 @@
       handleDelete() {
         var that = this
         this.$confirm({
-          title: '确认删除',
-          content: '确定要删除此部门以及子节点数据吗?',
+          title: '確認刪除',
+          content: '確定要刪除此部門以及子節點數據嗎?',
           onOk: function () {
             deleteByDepartId({id: that.rightClickSelectedKey}).then((resp) => {
               if (resp.success) {
-                //删除成功后，去除已选中中的数据
+                //刪除成功后，去除已選中中的數據
                 that.checkedKeys.splice(that.checkedKeys.findIndex(key => key === that.rightClickSelectedKey), 1);
-                that.$message.success('删除成功!')
+                that.$message.success('刪除成功!')
                 that.loadTree()
-                //删除后同步清空右侧基本信息内容
+                //刪除后同步清空右側基本信息內容
                 let orgCode=that.model.orgCode;
                 if(orgCode && orgCode === that.rightClickSelectedOrgCode){
                   that.onClearSelected()
                 }
               } else {
-                that.$message.warning('删除失败!')
+                that.$message.warning('刪除失敗!')
               }
             })
           }
         })
       },
       selectDirectiveOk(record) {
-        console.log('选中指令数据', record)
+        console.log('選中指令數據', record)
         this.nodeSettingForm.setFieldsValue({directiveCode: record.directiveCode})
         this.currSelected.sysCode = record.sysCode
       },
@@ -518,7 +518,7 @@
           }
         }
       },
-     //---- author:os_chengtgen -- date:20190827 --  for:切换父子勾选模式 =======------
+     //---- author:os_chengtgen -- date:20190827 --  for:切換父子勾選模式 =======------
       expandAll () {
         this.iExpandedKeys = this.allTreeKeys
       },
@@ -549,8 +549,8 @@
           }
         }
       }
-      //---- author:os_chengtgen -- date:20190827 --  for:切换父子勾选模式 =======------
-      
+      //---- author:os_chengtgen -- date:20190827 --  for:切換父子勾選模式 =======------
+
     },
     created() {
       this.currFlowId = this.$route.params.id
@@ -604,7 +604,7 @@
     height: auto !important;
   }
 
-  /** Button按钮间距 */
+  /** Button按鈕間距 */
   .ant-btn {
     margin-left: 3px
   }

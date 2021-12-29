@@ -61,7 +61,7 @@
       }else{
         this.tagType = this.type
       }
-      //获取字典数据
+      //獲取字典數據
       //this.initDictData();
     },
     watch:{
@@ -87,13 +87,13 @@
         if(this.options && this.options.length>0){
           this.dictOptions = [...this.options]
         }else{
-          //优先从缓存中读取字典配置
+          //優先從緩存中讀取字典配置
           let cacheOption = getDictItemsFromCache(this.dictCode)
           if(cacheOption && cacheOption.length>0){
             this.dictOptions = cacheOption
             return
           }
-          //根据字典Code, 初始化字典数组
+          //根據字典Code, 初始化字典數組
           ajaxGetDictItems(this.dictCode, null).then((res) => {
             if (res.success) {
               this.dictOptions = res.result;
@@ -118,11 +118,11 @@
           return document.querySelector(this.popContainer)
         }
       },
-      // update--begin--autor:lvdandan-----date:20201120------for：LOWCOD-1086 下拉多选框,搜索时只字典code进行搜索不能通过字典text搜索
+      // update--begin--autor:lvdandan-----date:20201120------for：LOWCOD-1086 下拉多選框,搜索時隻字典code進行搜索不能通過字典text搜索
       filterOption(input, option) {
         return option.componentOptions.children[0].children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0
       }
-      // update--end--autor:lvdandan-----date:20201120------for：LOWCOD-1086 下拉多选框,搜索时只字典code进行搜索不能通过字典text搜索
+      // update--end--autor:lvdandan-----date:20201120------for：LOWCOD-1086 下拉多選框,搜索時隻字典code進行搜索不能通過字典text搜索
     },
     model: {
       prop: 'value',

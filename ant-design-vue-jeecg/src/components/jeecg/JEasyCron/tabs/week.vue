@@ -2,12 +2,12 @@
   <div class="config-list">
     <a-radio-group v-model="type">
       <div class="item">
-        <a-radio value="TYPE_NOT_SET" class="choice" :disabled="disableChoice">不设置</a-radio>
-        <span class="tip-info">日和周只能设置其中之一</span>
+        <a-radio value="TYPE_NOT_SET" class="choice" :disabled="disableChoice">不設置</a-radio>
+        <span class="tip-info">日和周只能設置其中之一</span>
       </div>
       <div class="item">
-        <a-radio value="TYPE_RANGE" class="choice" :disabled="disableChoice">区间</a-radio>
-        从
+        <a-radio value="TYPE_RANGE" class="choice" :disabled="disableChoice">區間</a-radio>
+        從
         <a-select v-model="valueRange.start" class="w80" :disabled="type!==TYPE_RANGE || disableChoice">
           <template v-for="(v, k) of WEEK_MAP">
             <a-select-option :value="v">{{k}}</a-select-option>
@@ -21,14 +21,14 @@
         </a-select>
       </div>
       <div class="item">
-        <a-radio value="TYPE_LOOP" class="choice" :disabled="disableChoice">循环</a-radio>
-        从
+        <a-radio value="TYPE_LOOP" class="choice" :disabled="disableChoice">循環</a-radio>
+        從
         <a-select v-model="valueLoop.start" class="w80" :disabled="type!==TYPE_LOOP || disableChoice">
           <template v-for="(v, k) of WEEK_MAP">
             <a-select-option :value="v">{{k}}</a-select-option>
           </template>
         </a-select>
-        开始，间隔
+        開始，間隔
         <a-input-number :disabled="type!==TYPE_LOOP || disableChoice" :max="maxValue" :min="minValue" :precision="0" class="w60" v-model="valueLoop.interval"/>
         天
       </div>
@@ -51,14 +51,14 @@ import mixin from './mixin'
 import { replaceWeekName, WEEK_MAP_EN } from './const.js'
 
 const WEEK_MAP = {
-  '周一': 1,
-  '周二': 2,
-  '周三': 3,
-  '周四': 4,
-  '周五': 5,
-  '周六': 6,
-  // 按照国人习惯，将周日放到每周的最后一天
-  '周日': 7,
+  '周一': 2,
+  '周二': 3,
+  '周三': 4,
+  '周四': 5,
+  '周五': 6,
+  '周六': 7,
+  // 按照國人習慣，將周日放到每周的最後一天
+  '周日': 1,
 }
 
 export default {
@@ -83,7 +83,7 @@ export default {
   },
   watch: {
     value_c(newVal, oldVal) {
-      // 如果设置日，那么星期就直接不设置
+      // 如果設置日，那麼星期就直接不設置
       this.updateValue()
     },
     day(newVal) {

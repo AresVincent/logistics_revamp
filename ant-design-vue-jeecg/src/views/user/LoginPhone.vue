@@ -2,14 +2,14 @@
   <div>
     <a-form-model ref="form" :model="model" :rules="validatorRules">
       <a-form-model-item required prop="mobile">
-        <a-input v-model="model.mobile" size="large" type="text" placeholder="请输入手机号">
+        <a-input v-model="model.mobile" size="large" type="text" placeholder="請輸入手機號">
           <a-icon slot="prefix" type="mobile" :style="{ color: 'rgba(0,0,0,.25)' }"/>
         </a-input>
       </a-form-model-item>
       <a-row :gutter="16">
         <a-col class="gutter-row" :span="16">
           <a-form-model-item required prop="captcha">
-            <a-input v-model="model.captcha" size="large" type="text" placeholder="请输入验证码">
+            <a-input v-model="model.captcha" size="large" type="text" placeholder="請輸入驗證碼">
               <a-icon slot="prefix" type="mail" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input>
           </a-form-model-item>
@@ -20,7 +20,7 @@
             tabindex="-1"
             :disabled="state.smsSendBtn"
             @click.stop.prevent="getCaptcha"
-            v-text="!state.smsSendBtn && '获取验证码' || (state.time+' s')"></a-button>
+            v-text="!state.smsSendBtn && '獲取驗證碼' || (state.time+' s')"></a-button>
         </a-col>
       </a-row>
     </a-form-model>
@@ -39,18 +39,18 @@
           mobile: '',
           captcha: ''
         },
-        //手机号登录用
+        //手機號登錄用
         state: {
           time: 60,
           smsSendBtn: false,
         },
         validatorRules:{
           mobile: [
-            { required: true, message: '请输入手机号码!' },
+            { required: true, message: '請輸入手機號碼!' },
             { validator: this.validateMobile }
           ],
           captcha: [{
-            required: true, message: '请输入验证码!'
+            required: true, message: '請輸入驗證碼!'
           }]
         }
 
@@ -66,7 +66,7 @@
               captcha: this.model.captcha,
               remember_me: rememberMe
             }
-            console.log("登录参数", loginParams)
+            console.log("登錄參數", loginParams)
             this.PhoneLogin(loginParams).then((res) => {
               this.$emit('success', res.result)
             }).catch((err) => {
@@ -77,15 +77,15 @@
           }
         })
       },
-      // 校验手机号
+      // 校驗手機號
       validateMobile(rule,value,callback){
         if (!value || new RegExp(/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/).test(value)){
           callback();
         }else{
-          callback("您的手机号码格式不正确!");
+          callback("您的手機號碼格式不正確!");
         }
       },
-      //获取验证码
+      //獲取驗證碼
       getCaptcha (e) {
         e.preventDefault();
         let that = this;
@@ -100,7 +100,7 @@
                 }
               }, 1000);
 
-              const hide = that.$message.loading('验证码发送中..', 0);
+              const hide = that.$message.loading('驗證碼發送中..', 0);
               let smsParams = {};
               smsParams.mobile=that.model.mobile;
               smsParams.smsmode="0";
@@ -126,13 +126,13 @@
       },
       cmsFailed(err){
         this.$notification[ 'error' ]({
-          message: '获取验证码失败',
+          message: '獲取驗證碼失敗',
           description:err,
           duration: 4,
         });
       },
       /**
-       * 验证字段
+       * 驗證字段
        * @param arr
        * @param callback
        */

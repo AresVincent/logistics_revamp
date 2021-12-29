@@ -1,6 +1,6 @@
 <template>
   <a-card :bordered="false">
-    <!-- 左侧文件树 -->
+    <!-- 左側文件樹 -->
     <a-col :span="4" class="clName">
       <a-tree
         :treeData="treeData"
@@ -10,15 +10,15 @@
       >
       </a-tree>
     </a-col>
-    <!-- 中间面板 -->
+    <!-- 中間面板 -->
     <a-col :span="2"/>
-    <!--右侧缩略图-->
+    <!--右側縮略圖-->
     <a-col :span="18">
       <a-spin tip="Loading..." :spinning="spinning">
         <div v-for="(file, key) in dataSource" :key="key">
           <a-row>
             <a-col :span="24"><p><a-divider orientation="left">{{ file.fileName }}</a-divider></p></a-col>
-            <!-- 预览区域 -->
+            <!-- 預覽區域 -->
             <a-col :span="24">
               <template v-if="file.filePdfPath">
                 <div style="float: left;width:104px;height:104px;margin-right: 10px;margin: 0 8px 8px 0;">
@@ -28,7 +28,7 @@
                 </div>
               </template>
               <template v-else>
-                (暂无材料，点击"选择文件"或"扫描上传"上传文件)
+                (暫無材料，點擊"選擇文件"或"掃描上傳"上傳文件)
               </template>
             </a-col>
           </a-row>
@@ -48,10 +48,10 @@
   const mockdata=[{
     "id": "1",
     "key": "1",
-    "title": "实例.pdf",
+    "title": "實例.pdf",
     "fileCode": "shili",
-    "fileName": "实例",
-    "filePdfPath": "实例"
+    "fileName": "實例",
+    "filePdfPath": "實例"
   }]
 
   export default {
@@ -61,18 +61,18 @@
     },
     data () {
       return {
-        description: 'PDF预览页面',
-        // 文件类型集
+        description: 'PDF預覽頁面',
+        // 文件類型集
         treeData:[{
-          title: '所有PDF电子档',
+          title: '所有PDF電子檔',
           key: '0-0',
           children: mockdata }],
-        // 文件数据集
+        // 文件數據集
         dataSource: mockdata,
         allData:mockdata,
-        // 上传文件集
+        // 上傳文件集
         defaultExpandAll: true,
-        // 加载中
+        // 加載中
         spinning:false,
         url: {
           pdfList: "/mock/api/pdfList",
@@ -99,7 +99,7 @@
         this.headers = {"X-Access-Token":token}
         this.$refs.pdfmodal.previewFiles(title,token);
       },
-      // 选择文件类型
+      // 選擇文件類型
       onSelect (selectedKeys, info) {
         this.dataSource = [];
         if(selectedKeys[0] === undefined || selectedKeys[0] === '0-0'){
@@ -109,7 +109,7 @@
         }
         console.log("SELECT-->dataSource",this.dataSource );
       },
-      // model回调
+      // model回調
       modalFormOk () {
         this.loadData();
       },

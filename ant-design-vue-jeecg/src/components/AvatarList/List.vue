@@ -34,22 +34,22 @@
         default: 'ant-pro-avatar-list'
       },
       /**
-       * 头像大小 类型: large、small 、mini, default
-       * 默认值: default
+       * 頭像大小 類型: large、small 、mini, default
+       * 默認值: default
        */
       size: {
         type: [String, Number],
         default: 'default'
       },
       /**
-       * 要显示的最大项目
+       * 要显示的最大項目
        */
       maxLength: {
         type: Number,
         default: 0
       },
       /**
-       * 多余的项目风格
+       * 多餘的項目風格
        */
       excessItemsStyle: {
         type: Object,

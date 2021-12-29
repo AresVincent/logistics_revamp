@@ -6,7 +6,7 @@
     :confirmLoading="confirmLoading"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
 
     <a-spin :spinning="confirmLoading">
       <a-form-model ref="form" :model="model" :rules="validatorRules">
@@ -15,39 +15,39 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           prop="ruleName"
-          label="规则名称">
-          <a-input placeholder="请输入规则名称" v-model="model.ruleName"/>
+          label="規則名稱">
+          <a-input placeholder="請輸入規則名稱" v-model="model.ruleName"/>
         </a-form-model-item>
         <a-form-model-item
           v-show="showRuleColumn"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           prop="ruleColumn"
-          label="规则字段">
-          <a-input placeholder="请输入规则字段" v-model.trim="model.ruleColumn"/>
+          label="規則字段">
+          <a-input placeholder="請輸入規則字段" v-model.trim="model.ruleColumn"/>
         </a-form-model-item>
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           prop="ruleConditions"
-          label="条件规则">
-          <j-dict-select-tag @input="handleChangeRuleCondition" v-model="model.ruleConditions" placeholder="请输入条件规则" dictCode="rule_conditions"/>
+          label="條件規則">
+          <j-dict-select-tag @input="handleChangeRuleCondition" v-model="model.ruleConditions" placeholder="請輸入條件規則" dictCode="rule_conditions"/>
         </a-form-model-item>
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           prop="ruleValue"
-          label="规则值">
-          <a-input placeholder="请输入规则值" v-model.trim="model.ruleValue"/>
+          label="規則值">
+          <a-input placeholder="請輸入規則值" v-model.trim="model.ruleValue"/>
         </a-form-model-item>
 
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="状态">
+          label="狀態">
           <a-radio-group buttonStyle="solid" v-model="model.status">
             <a-radio-button value="1">有效</a-radio-button>
-            <a-radio-button value="0">无效</a-radio-button>
+            <a-radio-button value="0">無效</a-radio-button>
           </a-radio-group>
         </a-form-model-item>
 
@@ -78,9 +78,9 @@
         confirmLoading: false,
         permissionId: '',
         validatorRules: {
-          ruleConditions:  [{required: true, message: '请选择条件!'}],
-          ruleName:[{required: true, message: '请输入规则名称!'}],
-          ruleValue:  [{required: true, message: '请输入规则值!'}],
+          ruleConditions:  [{required: true, message: '請選擇條件!'}],
+          ruleName:[{required: true, message: '請輸入規則名稱!'}],
+          ruleValue:  [{required: true, message: '請輸入規則值!'}],
           ruleColumn: []
         },
         url: {
@@ -96,7 +96,7 @@
     methods: {
       add(permId) {
         this.permissionId = permId
-        //初始化默认值
+        //初始化默認值
         this.edit({status:'1'})
       },
       edit(record) {
@@ -116,7 +116,7 @@
       },
       handleOk() {
         const that = this
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true

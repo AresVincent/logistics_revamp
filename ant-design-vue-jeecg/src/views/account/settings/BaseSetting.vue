@@ -5,9 +5,9 @@
 
         <a-form layout="vertical">
           <a-form-item
-            label="昵称"
+            label="昵稱"
           >
-            <a-input placeholder="给自己起个名字" />
+            <a-input placeholder="給自己起個名字" />
           </a-form-item>
           <a-form-item
             label="Bio"
@@ -16,7 +16,7 @@
           </a-form-item>
 
           <a-form-item
-            label="电子邮件"
+            label="電子郵件"
             :required="false"
           >
             <a-input placeholder="exp@admin.com"/>
@@ -32,16 +32,16 @@
             </a-select>
           </a-form-item>
           <a-form-item
-            label="连接密码"
+            label="連接密碼"
             :required="false"
           >
             <a-input placeholder="h3gSbecd"/>
           </a-form-item>
           <a-form-item
-            label="登录密码"
+            label="登錄密碼"
             :required="false"
           >
-            <a-input placeholder="密码"/>
+            <a-input placeholder="密碼"/>
           </a-form-item>
 
           <a-form-item>
@@ -87,11 +87,11 @@
           outputType: 'jpeg',
           canScale: false,
           autoCrop: true,
-          // 只有自动截图开启 宽度高度才生效
+          // 只有自動截圖開啟 寬度高度才生效
           autoCropWidth: 180,
           autoCropHeight: 180,
           fixedBox: true,
-          // 开启宽度和高度比例
+          // 開啟寬度和高度比例
           fixed: true,
           fixedNumber: [1, 1]
         }

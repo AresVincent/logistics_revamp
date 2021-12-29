@@ -1,6 +1,6 @@
 <template>
   <j-modal
-    title="选择部门"
+    title="選擇部門"
     :width="modalWidth"
     :visible="visible"
     :confirmLoading="confirmLoading"
@@ -9,9 +9,9 @@
     @update:fullscreen="isFullscreen"
     wrapClassName="j-depart-select-modal"
     switchFullscreen
-    cancelText="关闭">
+    cancelText="關閉">
     <a-spin tip="Loading..." :spinning="false">
-      <a-input-search style="margin-bottom: 1px" placeholder="请输入部门名称按回车进行搜索" @search="onSearch" />
+      <a-input-search style="margin-bottom: 1px" placeholder="請輸入部門名稱按回車進行搜索" @search="onSearch" />
       <a-tree
         checkable
         :class="treeScreenClass"
@@ -34,20 +34,20 @@
         </template>
       </a-tree>
     </a-spin>
-    <!--底部父子关联操作和确认取消按钮-->
+    <!--底部父子關聯操作和確認取消按鈕-->
     <template slot="footer" v-if="treeOpera && multi">
       <div class="drawer-bootom-button">
         <a-dropdown style="float: left" :trigger="['click']" placement="topCenter">
           <a-menu slot="overlay">
-            <a-menu-item key="1" @click="switchCheckStrictly(1)">父子关联</a-menu-item>
-            <a-menu-item key="2" @click="switchCheckStrictly(2)">取消关联</a-menu-item>
+            <a-menu-item key="1" @click="switchCheckStrictly(1)">父子關聯</a-menu-item>
+            <a-menu-item key="2" @click="switchCheckStrictly(2)">取消關聯</a-menu-item>
           </a-menu>
           <a-button>
-            树操作 <a-icon type="up" />
+            樹操作 <a-icon type="up" />
           </a-button>
         </a-dropdown>
-        <a-button @click="handleCancel" type="primary" style="margin-right: 0.8rem">关闭</a-button>
-        <a-button @click="handleSubmit" type="primary" >确认</a-button>
+        <a-button @click="handleCancel" type="primary" style="margin-right: 0.8rem">關閉</a-button>
+        <a-button @click="handleSubmit" type="primary" >確認</a-button>
       </div>
     </template>
   </j-modal>
@@ -101,7 +101,7 @@
         this.checkedKeys=[]
       },
       loadDepart(){
-        // 这个方法是找到所有的部门信息
+        // 這個方法是找到所有的部門信息
         queryDepartTreeList().then(res=>{
           if(res.success){
             let arr = [...res.result]
@@ -116,7 +116,7 @@
       },
       initDepartComponent(flag){
         let arr = []
-        //该方法两个地方用 1.visible改变事件重新设置选中项 2.组件编辑页面回显
+        //該方法兩個地方用 1.visible改變事件重新設置選中項 2.組件編輯頁面回顯
         let fieldName = flag==true?'key':this.text
         if(this.departId){
           let arr2 = this.departId.split(',')
@@ -176,7 +176,7 @@
         }
       },
       onSelect(selectedKeys,info) {
-        //取消关联的情况下才走onSelect的逻辑
+        //取消關聯的情況下才走onSelect的邏輯
         if(this.checkStrictly){
           let keys = []
           keys.push(selectedKeys[0])
@@ -245,7 +245,7 @@
 
 
       },
-      // 根据 checkedKeys 获取 rows
+      // 根據 checkedKeys 獲取 rows
       getCheckedRows(checkedKeys) {
         const forChildren = (list, key) => {
           for (let item of list) {
@@ -287,7 +287,7 @@
 </script>
 
 <style lang="less" scoped>
-  // 限制部门选择树高度，避免部门太多时点击确定不便
+  // 限制部門選擇樹高度，避免部門太多時點擊確定不便
   .my-dept-select-tree{
     height:350px;
     

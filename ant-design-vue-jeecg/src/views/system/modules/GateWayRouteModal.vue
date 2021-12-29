@@ -13,17 +13,17 @@
       <a-form-model-item label="路由ID">
         <a-input v-model="router.routerId" placeholder="路由唯一ID"/>
       </a-form-model-item>
-      <a-form-model-item label="路由名称">
-        <a-input v-model="router.name" placeholder="路由名称"/>
+      <a-form-model-item label="路由名稱">
+        <a-input v-model="router.name" placeholder="路由名稱"/>
       </a-form-model-item>
       <a-form-model-item label="路由URI">
         <a-input v-model="router.uri" placeholder="路由URL"/>
       </a-form-model-item>
-      <a-form-model-item label="路由状态" prop="status">
+      <a-form-model-item label="路由狀態" prop="status">
         <a-switch default-checked v-model="router.status"/>
       </a-form-model-item>
 
-      <a-form-model-item prop="predicates" label="路由条件">
+      <a-form-model-item prop="predicates" label="路由條件">
         <div v-for="(item,index) in router.predicates">
           <a-divider>{{item.name}}
             <a-icon type="delete" size="22" @click="removePredicate(router,index)"/>
@@ -55,25 +55,25 @@
             <a-menu slot="overlay" @click="predicatesHandleMenuClick">
               <a-menu-item :key="item" v-for="item in tagArray">{{item}}</a-menu-item>
             </a-menu>
-            <a-button type="dashed" style="margin-left: 8px;width:100%"> 添加路由条件
+            <a-button type="dashed" style="margin-left: 8px;width:100%"> 添加路由條件
               <a-icon type="down"/>
             </a-button>
           </a-dropdown>
         </p>
       </a-form-model-item>
-      <a-form-model-item prop="predicates" label="过滤器">
+      <a-form-model-item prop="predicates" label="過濾器">
         <div v-for="(item,index) in router.filters">
           <a-divider>{{item.name}}
             <a-icon type="delete" size="22" @click="removeFilter(router,index)"/>
           </a-divider>
           <div v-for="(tag, index) in item.args" :key="tag.key">
-            <a-input v-model="tag.key" placeholder="参数键" style="width: 45%; margin-right: 8px"/>
-            <a-input v-model="tag.value" placeholder="参数值" style="width: 40%; margin-right: 8px"/>
+            <a-input v-model="tag.key" placeholder="參數鍵" style="width: 45%; margin-right: 8px"/>
+            <a-input v-model="tag.value" placeholder="參數值" style="width: 40%; margin-right: 8px"/>
             <a-icon class="dynamic-delete-button" type="minus-circle-o" @click="removeFilterParams(item,index)"/>
           </div>
           <a-button type="dashed" style="margin-left:28%;width: 30%" size="small" @click="addFilterParams(item)">
             <a-icon type="plus"/>
-            添加参数
+            添加參數
           </a-button>
         </div>
         <p class="btn" style="padding-top: 10px">
@@ -81,7 +81,7 @@
             <a-menu slot="overlay" @click="filterHandleMenuClick">
               <a-menu-item :key="item.key" :name="item.name" v-for="item in filterArray">{{item.name}}</a-menu-item>
             </a-menu>
-            <a-button type="dashed" style="margin-left: 8px;width:100%"> 添加过滤器
+            <a-button type="dashed" style="margin-left: 8px;width:100%"> 添加過濾器
               <a-icon type="down"/>
             </a-button>
           </a-dropdown>
@@ -89,9 +89,9 @@
       </a-form-model-item>
       <a-row :style="{textAlign:'right'}" class="drawer-bootom-button">
         <a-button :style="{marginRight: '8px'}" @click="handleCancel">
-          关闭
+          關閉
         </a-button>
-        <a-button @click="handleSubmit" type="primary">确定</a-button>
+        <a-button @click="handleSubmit" type="primary">確定</a-button>
       </a-row>
     </a-form-model>
 
@@ -113,7 +113,7 @@
         currentNameIndex: 0,
         currentTagIndex:-1,
         predicates: {},
-        filterArray: [{ key: 0, name: '熔断器' }, { key: 1, name: '限流过滤器' }],
+        filterArray: [{ key: 0, name: '熔斷器' }, { key: 1, name: '限流過濾器' }],
         tagArray: ['Path', 'Host', 'Cookie', 'Header', 'Method', 'Query', 'After', 'Before', 'Between', 'RemoteAddr'],
         inputVisible: false,
         inputValue: '',
@@ -122,7 +122,7 @@
           clear: '/sys/gatewayRoute/clearRedis'
         },
         router: this.getRouter(),
-        title: '路由编辑',
+        title: '路由編輯',
         visible: false,
         loading: false
       }
@@ -155,12 +155,12 @@
         this.$refs['form'].resetFields()
         this.visible = false
       },
-      //删除路由条件配置项
+      //刪除路由條件配置項
       removeTag(item, removedTag) {
         const tags = item.args.filter(tag => tag !== removedTag)
         item.args = tags
       },
-      //添加路由选项
+      //添加路由選項
       predicatesHandleMenuClick(e) {
         this.router.predicates.push({
           args: [],
@@ -170,35 +170,35 @@
       editTag(tag,index){
         this.currentTagIndex=index
       },
-      //显示输入框
+      //显示輸入框
       showInput(item, index) {
         this.inputVisible = true
         this.currentNameIndex = index
       },
-      //路由选项输入框失去焦点事件
+      //路由選項輸入框失去焦點事件
       handleInputChange(e) {
         this.inputValue = e.target.value
       },
-      //删除路由条件
+      //刪除路由條件
       removePredicate(item, index) {
         item.predicates.splice(index, 1)
       },
-      //删除过滤器参数
+      //刪除過濾器參數
       removeFilterParams(item, index) {
         item.args.splice(index, 1)
       },
-      //删除过滤器
+      //刪除過濾器
       removeFilter(item, index) {
         item.filters.splice(index, 1)
       },
-      //添加过滤器参数
+      //添加過濾器參數
       addFilterParams(item) {
         item.args.push({
           key: 'key' + item.args.length + 1,
           value: ''
         })
       },
-      //过滤器添加事件
+      //過濾器添加事件
       filterHandleMenuClick(e) {
         if (e.key == 0) {
           this.router.filters.push({
@@ -230,7 +230,7 @@
           })
         }
       },
-      //输入框确认
+      //輸入框確認
       handleInputConfirm(item) {
         const inputValue = this.inputValue
         let tags = item.args
@@ -245,7 +245,7 @@
         })
         this.currentTagIndex=-1
       },
-      //输入框确认
+      //輸入框確認
       handleInputEditConfirm(item,tag,index) {
         if(this.inputValue)
         {
@@ -261,7 +261,7 @@
         this.defaultCheckedKeys = []
         this.loading = false
       },
-      //关闭弹窗
+      //關閉彈窗
       handleCancel() {
         this.close()
       },

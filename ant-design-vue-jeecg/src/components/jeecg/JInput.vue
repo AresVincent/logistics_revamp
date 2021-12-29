@@ -5,9 +5,9 @@
 <script>
   const JINPUT_QUERY_LIKE = 'like';
   const JINPUT_QUERY_NE = 'ne';
-  const JINPUT_QUERY_GE = 'ge'; //大于等于
-  const JINPUT_QUERY_LE = 'le'; //小于等于
-  
+  const JINPUT_QUERY_GE = 'ge'; //大於等於
+  const JINPUT_QUERY_LE = 'le'; //小於等於
+
   export default {
     name: 'JInput',
     props:{
@@ -38,11 +38,11 @@
           this.initVal();
         }
       },
-      // update-begin author:sunjianlei date:20200225 for:当 type 变化的时候重新计算值 ------
+      // update-begin author:sunjianlei date:20200225 for:當 type 變化的時候重新計算值 ------
       type() {
         this.backValue({ target: { value: this.inputVal } })
       },
-      // update-end author:sunjianlei date:20200225 for:当 type 变化的时候重新计算值 ------
+      // update-end author:sunjianlei date:20200225 for:當 type 變化的時候重新計算值 ------
     },
     model: {
       prop: 'value',
@@ -61,7 +61,7 @@
           let text = this.value
           switch (this.type) {
             case JINPUT_QUERY_LIKE:
-              //修复路由传参的值传送到jinput框被前后各截取了一位 #1336
+              //修復路由傳參的值傳送到jinput框被前後各截取了一位 #1336
               if(text.indexOf("*") != -1){
                 text = text.substring(1,text.length-1);
               }

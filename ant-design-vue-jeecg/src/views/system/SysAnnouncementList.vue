@@ -1,25 +1,25 @@
 <template>
   <a-card :bordered="false">
 
-    <!-- 查询区域 -->
+    <!-- 查詢區域 -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
 
           <a-col :span="6">
-            <a-form-item label="标题">
-              <a-input placeholder="请输入标题" v-model="queryParam.titile"></a-input>
+            <a-form-item label="標題">
+              <a-input placeholder="請輸入標題" v-model="queryParam.titile"></a-input>
             </a-form-item>
           </a-col>
           <!--<a-col :span="6">
-            <a-form-item label="内容">
-              <a-input placeholder="请输入内容" v-model="queryParam.msgContent"></a-input>
+            <a-form-item label="內容">
+              <a-input placeholder="請輸入內容" v-model="queryParam.msgContent"></a-input>
             </a-form-item>
           </a-col>-->
 
           <a-col :span="8">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
             </span>
           </a-col>
@@ -28,18 +28,18 @@
       </a-form>
     </div>
 
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('系统通告')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('系統通告')">導出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" icon="import">导入</a-button>
+        <a-button type="primary" icon="import">導入</a-button>
       </a-upload>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel">
             <a-icon type="delete"/>
-            删除
+            刪除
           </a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作
@@ -48,10 +48,10 @@
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -68,25 +68,25 @@
         @change="handleTableChange">
 
         <span slot="action" slot-scope="text, record">
-          <a  v-if="record.sendStatus == 0" @click="handleEdit(record)">编辑</a>
+          <a  v-if="record.sendStatus == 0" @click="handleEdit(record)">編輯</a>
 
           <a-divider type="vertical" v-if="record.sendStatus == 0"/>
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down"/></a>
             <a-menu slot="overlay">
               <a-menu-item v-if="record.sendStatus != 1">
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+                  <a>刪除</a>
                 </a-popconfirm>
               </a-menu-item>
               <a-menu-item v-if="record.sendStatus == 0">
-                <a-popconfirm title="确定发布吗?" @confirm="() => releaseData(record.id)">
-                  <a>发布</a>
+                <a-popconfirm title="確定發布嗎?" @confirm="() => releaseData(record.id)">
+                  <a>發布</a>
                 </a-popconfirm>
               </a-menu-item>
               <a-menu-item v-if="record.sendStatus == 1">
-                <a-popconfirm title="确定撤销吗?" @confirm="() => reovkeData(record.id)">
-                  <a>撤销</a>
+                <a-popconfirm title="確定撤銷嗎?" @confirm="() => reovkeData(record.id)">
+                  <a>撤銷</a>
                 </a-popconfirm>
               </a-menu-item>
               <a-menu-item>
@@ -98,12 +98,12 @@
 
       </a-table>
     </div>
-    <!-- table区域-end -->
+    <!-- table區域-end -->
 
-    <!-- 表单区域 -->
+    <!-- 表單區域 -->
     <sysAnnouncement-modal ref="modalForm" @ok="modalFormOk"></sysAnnouncement-modal>
-    <!-- 查看详情 -->
-    <j-modal class="detail-modal" title="查看详情" :visible.sync="detailModal.visible" :top="50" :width="600" switchFullscreen :footer="null">
+    <!-- 查看詳情 -->
+    <j-modal class="detail-modal" title="查看詳情" :visible.sync="detailModal.visible" :top="50" :width="600" switchFullscreen :footer="null">
       <iframe v-if="detailModal.url" class="detail-iframe" :src="detailModal.url"/>
     </j-modal>
 
@@ -125,10 +125,10 @@
     },
     data() {
       return {
-        description: '系统通告表管理页面',
-        // 查询条件
+        description: '系統通告表管理頁面',
+        // 查詢條件
         queryParam: {},
-        // 表头
+        // 表頭
         columns: [
           {
             title: '#',
@@ -142,41 +142,41 @@
           },
 
           {
-            title: '标题',
+            title: '標題',
             align: "center",
             dataIndex: 'titile'
           },
           {
-            title: '消息类型',
+            title: '消息類型',
             align: "center",
             dataIndex: 'msgCategory',
             customRender: function (text) {
               if (text == '1') {
                 return "通知公告";
               } else if (text == "2") {
-                return "系统消息";
+                return "系統消息";
               } else {
                 return text;
               }
             }
           },
           /*{
-            title: '开始时间',
+            title: '開始時間',
             align: "center",
             dataIndex: 'startTime'
           },
           {
-            title: '结束时间',
+            title: '結束時間',
             align: "center",
             dataIndex: 'endTime'
           },*/
           {
-            title: '发布人',
+            title: '發布人',
             align: "center",
             dataIndex: 'sender'
           },
           {
-            title: '优先级',
+            title: '優先級',
             align: "center",
             dataIndex: 'priority',
             customRender: function (text) {
@@ -192,47 +192,47 @@
             }
           },
           {
-            title: '通告对象',
+            title: '通告對象',
             align: "center",
             dataIndex: 'msgType',
             customRender: function (text) {
               if (text == 'USER') {
-                return "指定用户";
+                return "指定用戶";
               } else if (text == "ALL") {
-                return "全体用户";
+                return "全體用戶";
               } else {
                 return text;
               }
             }
           },
           {
-            title: '发布状态',
+            title: '發布狀態',
             align: "center",
             dataIndex: 'sendStatus',
             customRender: function (text) {
               if (text == 0) {
-                return "未发布";
+                return "未發布";
               } else if (text == 1) {
-                return "已发布";
+                return "已發布";
               } else if (text == 2) {
-                return "已撤销";
+                return "已撤銷";
               } else {
                 return text;
               }
             }
           },
           {
-            title: '发布时间',
+            title: '發布時間',
             align: "center",
             dataIndex: 'sendTime'
           },
           {
-            title: '撤销时间',
+            title: '撤銷時間',
             align: "center",
             dataIndex: 'cancelTime'
           },
           /*{
-                title: '删除状态（0，正常，1已删除）',
+                title: '刪除狀態（0，正常，1已刪除）',
                 align:"center",
                 dataIndex: 'delFlag'
               },*/
@@ -261,7 +261,7 @@
       }
     },
     methods: {
-      //执行发布操作
+      //執行發布操作
       releaseData: function (id) {
         console.log(id);
         var that = this;
@@ -274,7 +274,7 @@
           }
         });
       },
-      //执行撤销操作
+      //執行撤銷操作
       reovkeData: function (id) {
         var that = this;
         doReovkeData({id: id}).then((res) => {
@@ -302,7 +302,7 @@
 <style scoped lang="less">
   @import '~@assets/less/common.less';
 
-  /** 查看详情弹窗的样式 */
+  /** 查看詳情彈窗的樣式 */
   .detail-modal {
     .detail-iframe {
       border: 0;

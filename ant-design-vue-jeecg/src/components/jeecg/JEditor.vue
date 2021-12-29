@@ -103,38 +103,38 @@
       onClick(e) {
         this.$emit('onClick', e, tinymce)
       },
-      //可以添加一些自己的自定义事件，如清空内容
+      //可以添加一些自己的自定義事件，如清空內容
       clear() {
         this.myValue = ''
       },
 
       /**
-       * 自动判断父级是否是 <a-tabs/> 组件，然后添加事件监听，自动触发reload()
+       * 自動判斷父級是否是 <a-tabs/> 組件，然後添加事件監聽，自動觸發reload()
        *
-       * 由于 tabs 组件切换会导致 tinymce 无法输入，
-       * 只有重新加载才能使用（无论是vue版的还是jQuery版tinymce都有这个通病）
+       * 由於 tabs 組件切換會導致 tinymce 無法輸入，
+       * 只有重新加載才能使用（無論是vue版的還是jQuery版tinymce都有這個通病）
        */
       initATabsChangeAutoReload() {
-        // 获取父级
+        // 獲取父級
         let tabs = getVmParentByName(this, 'ATabs')
         let tabPane = getVmParentByName(this, 'ATabPane')
         if (tabs && tabPane) {
-          // 用户自定义的 key
+          // 用戶自定義的 key
           let currentKey = tabPane.$vnode.key
-          // 添加事件监听
+          // 添加事件監聽
           tabs.$on('change', (key) => {
-            // 切换到自己时执行reload
+            // 切換到自己時執行reload
             if (currentKey === key) {
               this.reload()
             }
           })
-          //update--begin--autor:liusq-----date:20210316------for：富文本编辑器tab父组件可能导致的赋值问题------
+          //update--begin--autor:liusq-----date:20210316------for：富文本編輯器tab父組件可能導致的賦值問題------
           this.reload()
-          //update--end--autor:liusq-----date:20210316------for：富文本编辑器tab父组件可能导致的赋值问题------
+          //update--end--autor:liusq-----date:20210316------for：富文本編輯器tab父組件可能導致的賦值問題------
         }else{
-          //update--begin--autor:wangshuai-----date:20200724------for：富文本编辑器切换tab无法修改------
+          //update--begin--autor:wangshuai-----date:20200724------for：富文本編輯器切換tab無法修改------
           let tabLayout = getVmParentByName(this, 'TabLayout')
-          //update--begin--autor:liusq-----date:20210713------for：处理特殊情况excuteCallback不能使用------
+          //update--begin--autor:liusq-----date:20210713------for：處理特殊情況excuteCallback不能使用------
           try {
             tabLayout.excuteCallback(() => {
               this.reload()
@@ -144,8 +144,8 @@
               this.reload()
             }
           }
-          //update--end--autor:liusq-----date:20210713------for：处理特殊情况excuteCallback不能使用------
-          //update--begin--autor:wangshuai-----date:20200724------for：文本编辑器切换tab无法修改------
+          //update--end--autor:liusq-----date:20210713------for：處理特殊情況excuteCallback不能使用------
+          //update--begin--autor:wangshuai-----date:20200724------for：文本編輯器切換tab無法修改------
         }
       },
 

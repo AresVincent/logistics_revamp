@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    title="用户列表"
+    title="用戶列表"
     :width="1000"
     :visible="visible"
     :confirmLoading="confirmLoading"
@@ -39,34 +39,34 @@
         },
         columns: [
           {
-            title: '用户账号',
+            title: '用戶賬號',
             align: "center",
             dataIndex: 'username',
             fixed: 'left',
             width: 200
           },
           {
-            title: '用户姓名',
+            title: '用戶姓名',
             align: "center",
             dataIndex: 'realname',
           },
           {
-            title: '性别',
+            title: '性別',
             align: "center",
             dataIndex: 'sex_dictText'
           },
           {
-            title: '手机号码',
+            title: '手機號碼',
             align: "center",
             dataIndex: 'phone'
           },
           {
-            title: '邮箱',
+            title: '郵箱',
             align: "center",
             dataIndex: 'email'
           },
           {
-            title: '状态',
+            title: '狀態',
             align: "center",
             dataIndex: 'status_dictText'
           }
@@ -74,7 +74,7 @@
       }
     },
     created() {
-      //Step.2 加载用户数据
+      //Step.2 加載用戶數據
       getUserList().then((res) => {
         if (res.success) {
           this.dataSource = res.result.records;
@@ -86,7 +86,7 @@
       open() {
         this.visible = true;
 
-        //Step.1 清空选中用户
+        //Step.1 清空選中用戶
         this.selectedRowKeys = []
         this.selectedRows = []
       },

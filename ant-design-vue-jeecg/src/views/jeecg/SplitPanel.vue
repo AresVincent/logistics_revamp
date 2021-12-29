@@ -1,6 +1,6 @@
 <template>
   <a-card>
-    <a-button @click="splitPane" type="primary" icon="desktop">点我分屏</a-button>
+    <a-button @click="splitPane" type="primary" icon="desktop">點我分屏</a-button>
 
     <split-panel-modal ref="splitPanelModal"></split-panel-modal>
   </a-card>

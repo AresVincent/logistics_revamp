@@ -21,10 +21,10 @@
 
         columns: [
           {
-            title: '输入框',
+            title: '輸入框',
             key: 'input',
             type: FormTypes.input,
-            placeholder: '清输入'
+            placeholder: '清輸入'
           },
           {
             title: '下拉框',
@@ -36,10 +36,10 @@
               { title: 'Double', value: 'double' },
               { title: 'Boolean', value: 'boolean' }
             ],
-            placeholder: '请选择'
+            placeholder: '請選擇'
           },
           {
-            title: '多选框',
+            title: '多選框',
             key: 'checkbox',
             type: FormTypes.checkbox,
             customValue: [true, false]

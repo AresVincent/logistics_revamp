@@ -18,7 +18,7 @@
 <script>
 
   /*
-  * 异步树加载组件 通过传入表名 显示字段 存储字段 加载一个树控件
+  * 異步樹加載組件 通過傳入表名 显示字段 存儲字段 加載一個樹控件
   * <j-tree-select dict="aa_tree_test,aad,id" pid-field="pid" ></j-tree-select>
   * */
   import { getAction } from '@/api/manage'
@@ -32,7 +32,7 @@
       },
       placeholder:{
         type: String,
-        default: '请选择',
+        default: '請選擇',
         required: false
       },
       dict:{
@@ -65,7 +65,7 @@
         default:'',
         required:false
       },
-      // 是否支持多选
+      // 是否支持多選
       multiple: {
         type: Boolean,
         default: false,
@@ -123,7 +123,7 @@
         }
       },
       onLoadTriggleChange(text){
-        //只有单选才会触发
+        //只有單選才會觸發
         if(!this.multiple && this.loadTriggleChange){
           this.$emit('change', this.value,text)
         }
@@ -205,7 +205,7 @@
             }
             this.treeData = [...res.result]
           }else{
-            console.log("数根节点查询结果-else",res)
+            console.log("數根節點查詢結果-else",res)
           }
         })
       },
@@ -239,18 +239,18 @@
               if(typeof test == 'object' && test){
                 resolve()
               }else{
-                this.$message.error("组件JTreeSelect-condition传值有误，需要一个json字符串!")
+                this.$message.error("組件JTreeSelect-condition傳值有誤，需要一個json字符串!")
                 reject()
               }
             } catch(e) {
-              this.$message.error("组件JTreeSelect-condition传值有误，需要一个json字符串!")
+              this.$message.error("組件JTreeSelect-condition傳值有誤，需要一個json字符串!")
               reject()
             }
           }
         })
       }
     },
-    //2.2新增 在组件内定义 指定父组件调用时候的传值属性和事件类型 这个牛逼
+    //2.2新增 在組件內定義 指定父組件調用時候的傳值屬性和事件類型 這個牛逼
     model: {
       prop: 'value',
       event: 'change'

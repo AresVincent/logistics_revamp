@@ -52,7 +52,7 @@
       onSearch (value) {
         let that = this
         if(!value){
-          that.$message.error("请填写路径")
+          that.$message.error("請填寫路徑")
           return false
         }
         this.resultJson = {};
@@ -64,7 +64,7 @@
             console.log(res)
             this.resultJson = res
           }).catch((err) => {
-            that.$message.error("请求异常："+err)
+            that.$message.error("請求異常："+err)
           })
       },
       changeVal(e){

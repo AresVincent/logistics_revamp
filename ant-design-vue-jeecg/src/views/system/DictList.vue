@@ -1,23 +1,23 @@
 <template>
   <a-card :bordered="false">
 
-    <!-- 左侧面板 -->
+    <!-- 左側面板 -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="12">
           <a-col :md="7" :sm="8">
-            <a-form-item label="字典名称" :labelCol="{span: 6}" :wrapperCol="{span: 14, offset: 1}">
-              <a-input placeholder="请输入字典名称" v-model="queryParam.dictName"></a-input>
+            <a-form-item label="字典名稱" :labelCol="{span: 6}" :wrapperCol="{span: 14, offset: 1}">
+              <a-input placeholder="請輸入字典名稱" v-model="queryParam.dictName"></a-input>
             </a-form-item>
           </a-col>
           <a-col :md="7" :sm="8">
-            <a-form-item label="字典编号" :labelCol="{span: 6}" :wrapperCol="{span: 14, offset: 1}">
-              <a-input placeholder="请输入字典编号" v-model="queryParam.dictCode"></a-input>
+            <a-form-item label="字典編號" :labelCol="{span: 6}" :wrapperCol="{span: 14, offset: 1}">
+              <a-input placeholder="請輸入字典編號" v-model="queryParam.dictCode"></a-input>
             </a-form-item>
           </a-col>
           <a-col :md="7" :sm="8">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
             </span>
           </a-col>
@@ -26,11 +26,11 @@
 
       <div class="table-operator" style="border-top: 5px">
         <a-button @click="handleAdd" type="primary" icon="plus">添加</a-button>
-        <a-button type="primary" icon="download" @click="handleExportXls('字典信息')">导出</a-button>
+        <a-button type="primary" icon="download" @click="handleExportXls('字典信息')">導出</a-button>
         <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-          <a-button type="primary" icon="import">导入</a-button>
+          <a-button type="primary" icon="import">導入</a-button>
         </a-upload>
-        <a-button type="primary" icon="sync" @click="refleshCache()">刷新缓存</a-button>
+        <a-button type="primary" icon="sync" @click="refleshCache()">刷新緩存</a-button>
 
         <a-button type="primary" icon="hdd" @click="openDeleteList">回收站</a-button>
       </div>
@@ -47,19 +47,19 @@
         <span slot="action" slot-scope="text, record">
           <a @click="handleEdit(record)">
             <a-icon type="edit"/>
-            编辑
+            編輯
           </a>
           <a-divider type="vertical"/>
           <a @click="editDictItem(record)"><a-icon type="setting"/> 字典配置</a>
           <a-divider type="vertical"/>
-          <a-popconfirm title="确定删除吗?" @confirm="() =>handleDelete(record.id)">
-            <a>删除</a>
+          <a-popconfirm title="確定刪除嗎?" @confirm="() =>handleDelete(record.id)">
+            <a>刪除</a>
           </a-popconfirm>
         </span>
       </a-table>
 
     </div>
-    <dict-modal ref="modalForm" @ok="modalFormOk"></dict-modal>  <!-- 字典类型 -->
+    <dict-modal ref="modalForm" @ok="modalFormOk"></dict-modal>  <!-- 字典類型 -->
     <dict-item-list ref="dictItemList"></dict-item-list>
     <dict-delete-list ref="dictDeleteList" @refresh="() =>loadData()"></dict-delete-list>
   </a-card>
@@ -81,14 +81,14 @@
     components: {DictModal, DictItemList,DictDeleteList},
     data() {
       return {
-        description: '这是数据字典页面',
+        description: '這是數據字典頁面',
         visible: false,
-        // 查询条件
+        // 查詢條件
         queryParam: {
           dictCode: "",
           dictName: "",
         },
-        // 表头
+        // 表頭
         columns: [
           {
             title: '#',
@@ -101,12 +101,12 @@
             }
           },
           {
-            title: '字典名称',
+            title: '字典名稱',
             align: "left",
             dataIndex: 'dictName',
           },
           {
-            title: '字典编号',
+            title: '字典編號',
             align: "left",
             dataIndex: 'dictCode',
           },
@@ -158,17 +158,17 @@
         }
         return filterObj(param);
       },
-      //取消选择
+      //取消選擇
       cancelDict() {
         this.dict = "";
         this.visible = false;
         this.loadData();
       },
-      //编辑字典数据
+      //編輯字典數據
       editDictItem(record) {
         this.$refs.dictItemList.edit(record);
       },
-      // 重置字典类型搜索框的内容
+      // 重置字典類型搜索框的內容
       searchReset() {
         var that = this;
         that.queryParam.dictName = "";
@@ -181,18 +181,18 @@
       refleshCache(){
         getAction(this.url.refleshCache).then((res) => {
           if (res.success) {
-            //重新加载缓存
+            //重新加載緩存
             getAction(this.url.queryAllDictItems).then((res) => {
               if (res.success) {
                 Vue.ls.remove(UI_CACHE_DB_DICT_DATA)
                 Vue.ls.set(UI_CACHE_DB_DICT_DATA, res.result, 7 * 24 * 60 * 60 * 1000)
               }
             })
-            this.$message.success("刷新缓存完成！");
+            this.$message.success("刷新緩存完成！");
           }
         }).catch(e=>{
-          this.$message.warn("刷新缓存失败！");
-          console.log("刷新失败",e)
+          this.$message.warn("刷新緩存失敗！");
+          console.log("刷新失敗",e)
         })
       }
     },

@@ -1,19 +1,19 @@
 <template>
   <a-card :bordered="false">
 
-    <!-- 查询区域 -->
+    <!-- 查詢區域 -->
     <div class="table-page-search-wrapper">
       <a-form-model layout="inline" :model="queryParam" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
 
           <a-col :md="6" :sm="10">
-            <a-form-model-item label="任务类名" prop="jobClassName">
-              <a-input placeholder="请输入任务类名" v-model="queryParam.jobClassName"></a-input>
+            <a-form-model-item label="任務類名" prop="jobClassName">
+              <a-input placeholder="請輸入任務類名" v-model="queryParam.jobClassName"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :md="6" :sm="10">
-            <a-form-model-item label="任务状态" prop="status">
-              <a-select style="width: 220px" v-model="queryParam.status" placeholder="请选择状态">
+            <a-form-model-item label="任務狀態" prop="status">
+              <a-select style="width: 220px" v-model="queryParam.status" placeholder="請選擇狀態">
                 <a-select-option value="">全部</a-select-option>
                 <a-select-option value="0">正常</a-select-option>
                 <a-select-option value="-1">停止</a-select-option>
@@ -23,7 +23,7 @@
 
           <a-col :md="6" :sm="10" >
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
             </span>
           </a-col>
@@ -32,25 +32,25 @@
       </a-form-model>
     </div>
 
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('定时任务信息')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('定時任務信息')">導出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" icon="import">导入</a-button>
+        <a-button type="primary" icon="import">導入</a-button>
       </a-upload>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
-          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
+          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>刪除</a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -66,7 +66,7 @@
         :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
         @change="handleTableChange">
 
-        <!-- 字符串超长截取省略号显示-->
+        <!-- 字符串超長截取省略號显示-->
         <span slot="description" slot-scope="text">
           <j-ellipsis :value="text" :length="20" />
         </span>
@@ -76,34 +76,34 @@
 
 
         <span slot="action" slot-scope="text, record">
-          <a @click="resumeJob(record)" v-if="record.status==-1">启动</a>
+          <a @click="resumeJob(record)" v-if="record.status==-1">啟動</a>
           <a @click="pauseJob(record)" v-if="record.status==0">停止</a>
 
           <a-divider type="vertical" />
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
-              <a-menu-item><a @click="executeImmediately(record)">立即执行</a></a-menu-item>
-              <a-menu-item><a @click="handleEdit(record)">编辑</a></a-menu-item>
+              <a-menu-item><a @click="executeImmediately(record)">立即執行</a></a-menu-item>
+              <a-menu-item><a @click="handleEdit(record)">編輯</a></a-menu-item>
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+                  <a>刪除</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
         </span>
 
-        <!-- 状态渲染模板 -->
+        <!-- 狀態渲染模板 -->
         <template slot="customRenderStatus" slot-scope="status">
-          <a-tag v-if="status==0" color="green">已启动</a-tag>
-          <a-tag v-if="status==-1" color="orange">已暂停</a-tag>
+          <a-tag v-if="status==0" color="green">已啟動</a-tag>
+          <a-tag v-if="status==-1" color="orange">已暫停</a-tag>
         </template>
       </a-table>
     </div>
-    <!-- table区域-end -->
+    <!-- table區域-end -->
 
-    <!-- 表单区域 -->
+    <!-- 表單區域 -->
     <quartzJob-modal ref="modalForm" @ok="modalFormOk"></quartzJob-modal>
   </a-card>
 </template>
@@ -123,10 +123,10 @@
     },
     data () {
       return {
-        description: '定时任务在线管理',
-        // 查询条件
+        description: '定時任務在線管理',
+        // 查詢條件
         queryParam: {},
-        // 表头
+        // 表頭
         columns: [
           {
             title: '#',
@@ -139,7 +139,7 @@
             }
           },
           {
-            title: '任务类名',
+            title: '任務類名',
             align:"center",
             dataIndex: 'jobClassName',
             sorter: true,
@@ -148,12 +148,12 @@
             }*/
           },
           {
-            title: 'cron表达式',
+            title: 'cron表達式',
             align:"center",
             dataIndex: 'cronExpression'
           },
           {
-            title: '参数',
+            title: '參數',
             align:"center",
             width: 150,
             dataIndex: 'parameter',
@@ -167,14 +167,14 @@
             scopedSlots: {customRender: 'description'},
           },
           {
-            title: '状态',
+            title: '狀態',
             align:"center",
             dataIndex: 'status',
             scopedSlots: { customRender: 'customRenderStatus' },
             filterMultiple: false,
             filters: [
-              { text: '已启动', value: '0' },
-              { text: '已暂停', value: '-1' },
+              { text: '已啟動', value: '0' },
+              { text: '已暫停', value: '-1' },
             ]
           },
           {
@@ -205,30 +205,30 @@
 
     methods: {
 
-      //筛选需要重写handleTableChange
+      //篩選需要重寫handleTableChange
       handleTableChange(pagination, filters, sorter) {
-        //分页、排序、筛选变化时触发
-        //TODO 筛选
+        //分頁、排序、篩選變化時觸發
+        //TODO 篩選
         if (Object.keys(sorter).length > 0) {
           this.isorter.column = sorter.field;
           this.isorter.order = "ascend" == sorter.order ? "asc" : "desc"
         }
-        //这种筛选方式只支持单选
-        
-        // update-begin-author:liusq date:20210624 for:前台定时任务无法翻页  #2666
+        //這種篩選方式只支持單選
+
+        // update-begin-author:liusq date:20210624 for:前台定時任務無法翻頁  #2666
         if(filters && Object.keys(filters).length>0 && filters.status){
           this.filters.status = filters.status[0];
         }
-        // update-end-author:liusq date:20210624 for:前台定时任务无法翻页  #2666
+        // update-end-author:liusq date:20210624 for:前台定時任務無法翻頁  #2666
         this.ipagination = pagination;
         this.loadData();
       },
       pauseJob: function(record){
         var that = this;
-        //暂停定时任务
+        //暫停定時任務
         this.$confirm({
-          title:"确认暂停",
-          content:"是否暂停选中任务?",
+          title:"確認暫停",
+          content:"是否暫停選中任務?",
           onOk: function(){
             getAction(that.url.pause,{id:record.id}).then((res)=>{
               if(res.success){
@@ -245,10 +245,10 @@
       },
       resumeJob: function(record){
         var that = this;
-        //恢复定时任务
+        //恢復定時任務
         this.$confirm({
-          title:"确认启动",
-          content:"是否启动选中任务?",
+          title:"確認啟動",
+          content:"是否啟動選中任務?",
           onOk: function(){
             getAction(that.url.resume,{id:record.id}).then((res)=>{
               if(res.success){
@@ -264,10 +264,10 @@
       },
       executeImmediately(record){
         var that = this;
-        //立即执行定时任务
+        //立即執行定時任務
         this.$confirm({
-          title:"确认提示",
-          content:"是否立即执行任务?",
+          title:"確認提示",
+          content:"是否立即執行任務?",
           onOk: function(){
             getAction(that.url.execute,{id:record.id}).then((res)=>{
               if(res.success){

@@ -8,11 +8,11 @@
       :tableProps="tableProps">
 
       <template v-slot:action="props">
-        <!-- 可使用的参数： -->
+        <!-- 可使用的參數： -->
         <!-- props.text -->
         <!-- props.record -->
         <!-- props.index -->
-        <a @click="()=>handleEdit(props.record)">编辑</a>
+        <a @click="()=>handleEdit(props.record)">編輯</a>
       </template>
 
     </j-tree-table>
@@ -30,11 +30,11 @@
         url: '/mock/api/asynTreeList',
         columns: [
           {
-            title: '菜单名称',
+            title: '菜單名稱',
             dataIndex: 'name'
           },
           {
-            title: '组件',
+            title: '組件',
             dataIndex: 'component'
           },
           {
@@ -54,7 +54,7 @@
       tableProps() {
         let _this = this
         return {
-          // 列表项是否可选择
+          // 列表項是否可選擇
           // https://vue.ant.design/components/table-cn/#rowSelection
           rowSelection: {
             selectedRowKeys: _this.selectedRowKeys,
@@ -67,9 +67,9 @@
       handleEdit(record) {
         this.$info({
           width: 600,
-          title: '编辑',
-          content: '编辑ID：' + record.id+"；名称："+record.name,
-          okText: '确定',
+          title: '編輯',
+          content: '編輯ID：' + record.id+"；名稱："+record.name,
+          okText: '確定',
           maskClosable: true
         })
       }

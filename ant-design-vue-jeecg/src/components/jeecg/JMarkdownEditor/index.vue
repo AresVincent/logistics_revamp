@@ -3,21 +3,21 @@
     <div class="j-markdown-editor" :id="id"/>
     <div v-if="isShow">
       <j-modal
-        title="图片上传"
+        title="圖片上傳"
         :visible.sync="dialogVisible"
         width="30%"
         :before-close="handleClose"
         @ok="handleOk">
         <a-tabs default-active-key="1" @change="handleChange">
-          <a-tab-pane tab="本地图片上传" key="1" :forceRender="true">
+          <a-tab-pane tab="本地圖片上傳" key="1" :forceRender="true">
             <j-upload v-model="fileList" :number="1"></j-upload>
             <div style="margin-top: 20px">
-              <a-input v-model="remark" placeholder="请填写备注"></a-input>
+              <a-input v-model="remark" placeholder="請填寫備註"></a-input>
             </div>
           </a-tab-pane>
-          <a-tab-pane tab="网络图片地址" key="2" :forceRender="true">
-            <a-input v-model="networkPic" placeholder="请填写网络图片地址"></a-input>
-            <a-input style="margin-top: 20px" v-model="remark" placeholder="请填写备注"></a-input>
+          <a-tab-pane tab="網絡圖片地址" key="2" :forceRender="true">
+            <a-input v-model="networkPic" placeholder="請填寫網絡圖片地址"></a-input>
+            <a-input style="margin-top: 20px" v-model="remark" placeholder="請填寫備註"></a-input>
           </a-tab-pane>
         </a-tabs>
       </j-modal>
@@ -131,40 +131,40 @@ export default {
       this.editor.on('change', () => {
         this.$emit('change', this.editor.getMarkdown())
       })
-      //--begin 添加自定义上传按钮
+      //--begin 添加自定義上傳按鈕
       /*
-       * 添加自定义按钮
+       * 添加自定義按鈕
        */
-      //获取编辑器上的功能条
+      //獲取編輯器上的功能條
       let toolbar = this.editor.getUI().getToolbar();
       let fileDom = this.$refs.files;
-      //添加图片点击事件
+      //添加圖片點擊事件
       this.editor.eventManager.addEventType('isShowClickEvent');
       this.editor.eventManager.listen('isShowClickEvent', () => {
         this.isShow = true
         this.dialogVisible = true
       });
-      //addImageBlobHook图片上传、剪切、拖拽都会走此方法
-      // 删除默认监听事件
+      //addImageBlobHook圖片上傳、剪切、拖拽都會走此方法
+      // 刪除默認監聽事件
       this.editor.eventManager.removeEventHandler('addImageBlobHook')
-      // 添加自定义监听事件
+      // 添加自定義監聽事件
       this.editor.eventManager.listen('addImageBlobHook', (blob, callback) => {
         this.upload(blob, url => {
           callback(url)
         })
       })
-      // 添加自定义按钮 第二个参数代表位置，不传默认放在最后
+      // 添加自定義按鈕 第二個參數代表位置，不傳默認放在最後
       toolbar.insertItem(15,{
         type: 'button',
         options:{
           name: 'customize',
           className: 'tui-image tui-toolbar-icons',
           event: 'isShowClickEvent',
-          tooltip: '上传图片',
+          tooltip: '上傳圖片',
         }
         //
       });
-      //--end 添加自定义上传按钮
+      //--end 添加自定義上傳按鈕
     },
     destroyEditor() {
       if (!this.editor) return
@@ -218,7 +218,7 @@ export default {
       this.networkPic=""
       this.index=val
     },
-    //添加图片到markdown
+    //添加圖片到markdown
     addImgToMd(data,name) {
       let editor = this.editor.getCodeMirror();
       let editorHtml = this.editor.getCurrentModeEditor();

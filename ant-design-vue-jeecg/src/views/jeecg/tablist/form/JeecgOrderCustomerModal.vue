@@ -7,26 +7,26 @@
     :okButtonProps="{ props: {disabled: disableSubmit} }"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
 
-    <!-- 编辑 -->
+    <!-- 編輯 -->
     <a-spin :spinning="confirmLoading" v-if="editStatus">
       <a-form-model ref="form" :model="model" :rules="validatorRules">
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="客户姓名"
+          label="客戶姓名"
           prop="name"
           required
           hasFeedback>
-          <a-input placeholder="请输入客户姓名" v-model="model.name" :readOnly="disableSubmit"/>
+          <a-input placeholder="請輸入客戶姓名" v-model="model.name" :readOnly="disableSubmit"/>
         </a-form-model-item>
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="性别"
+          label="性別"
           hasFeedback>
-          <a-select v-model="model.sex" placeholder="请选择性别">
+          <a-select v-model="model.sex" placeholder="請選擇性別">
             <a-select-option value="1">男性</a-select-option>
             <a-select-option value="2">女性</a-select-option>
           </a-select>
@@ -34,22 +34,22 @@
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="身份证号码"
+          label="身份證號碼"
           prop="idcard"
           hasFeedback>
-          <a-input placeholder="请输入身份证号码" v-model="model.idcard" :readOnly="disableSubmit"/>
+          <a-input placeholder="請輸入身份證號碼" v-model="model.idcard" :readOnly="disableSubmit"/>
         </a-form-model-item>
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="身份证扫描件"
+          label="身份證掃描件"
           hasFeedback>
-          <j-image-upload text="上传" v-model="fileList" :isMultiple="true"></j-image-upload>
+          <j-image-upload text="上傳" v-model="fileList" :isMultiple="true"></j-image-upload>
         </a-form-model-item>
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="联系方式"
+          label="聯繫方式"
           prop="telphone"
           hasFeedback>
           <a-input v-model="model.telphone" :readOnly="disableSubmit"/>
@@ -57,7 +57,7 @@
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="订单号码"
+          label="訂單號碼"
           :hidden="hiding"
           hasFeedback>
           <a-input v-model="model.orderId" disabled="disabled"/>
@@ -109,7 +109,7 @@
           getOrderCustomerList: "/test/order/listOrderCustomerByMainId",
         },
         validatorRules: {
-          name :[{required: true, message: '请输入客户姓名!'}],
+          name :[{required: true, message: '請輸入客戶姓名!'}],
           telphone: [{validator: this.validateMobile}],
           idcard: [{validator: this.validateIdCard}]
         },
@@ -130,7 +130,7 @@
         if (orderId) {
           this.edit({orderId}, '');
         } else {
-          this.$message.warning("请选择一个客户信息");
+          this.$message.warning("請選擇一個客戶信息");
         }
       },
       detail(record) {
@@ -147,7 +147,7 @@
           this.hiding = true;
           this.disableSubmit = false;
         }
-        
+
         this.model = Object.assign({}, record);
         if (record.id) {
           this.hiding = false;
@@ -171,7 +171,7 @@
       },
       handleOk() {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;
@@ -213,14 +213,14 @@
         if (!value || new RegExp(/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/).test(value)) {
           callback();
         } else {
-          callback("您的手机号码格式不正确!");
+          callback("您的手機號碼格式不正確!");
         }
       },
       validateIdCard(rule, value, callback) {
         if (!value || new RegExp(/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/).test(value)) {
           callback();
         } else {
-          callback("您的身份证号码格式不正确!");
+          callback("您的身份證號碼格式不正確!");
         }
       },
     }

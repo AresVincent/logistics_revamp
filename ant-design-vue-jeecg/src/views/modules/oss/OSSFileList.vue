@@ -1,22 +1,22 @@
 <template>
   <a-card :bordered="false">
-    <!-- 查询区域 -->
+    <!-- 查詢區域 -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :md="6" :sm="8">
-            <a-form-item label="文件名称">
-              <a-input placeholder="请输入文件名称" v-model="queryParam.fileName"></a-input>
+            <a-form-item label="文件名稱">
+              <a-input placeholder="請輸入文件名稱" v-model="queryParam.fileName"></a-input>
             </a-form-item>
           </a-col>
           <a-col :md="6" :sm="8">
             <a-form-item label="文件地址">
-              <a-input placeholder="请输入文件地址" v-model="queryParam.url"></a-input>
+              <a-input placeholder="請輸入文件地址" v-model="queryParam.url"></a-input>
             </a-form-item>
           </a-col>
           <a-col :md="6" :sm="8">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
             </span>
           </a-col>
@@ -24,9 +24,9 @@
       </a-form>
     </div>
 
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator">
-      <!--      <a-button type="primary" icon="download" @click="handleExportXls('文件列表')">导出</a-button>-->
+      <!--      <a-button type="primary" icon="download" @click="handleExportXls('文件列表')">導出</a-button>-->
       <a-upload
           name="file"
           :multiple="false"
@@ -37,7 +37,7 @@
           @change="handleChange">
         <a-button>
           <a-icon type="upload"/>
-          OSS文件上传
+          OSS文件上傳
         </a-button>
       </a-upload>
 
@@ -51,17 +51,17 @@
         @change="handleChange">
         <a-button>
           <a-icon type="upload"/>
-          MINIO文件上传
+          MINIO文件上傳
         </a-button>
       </a-upload>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a
           style="font-weight: 600">{{
-        selectedRowKeys.length }}</a>项
+        selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -78,14 +78,14 @@
           @change="handleTableChange">
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handlePreview(record)">预览</a>
+          <a @click="handlePreview(record)">預覽</a>
           <a-divider type="vertical"/>
-          <a @click="ossDelete(record.id)">删除</a>
+          <a @click="ossDelete(record.id)">刪除</a>
         </span>
 
       </a-table>
     </div>
-    <!-- table区域-end -->
+    <!-- table區域-end -->
   </a-card>
 </template>
 
@@ -98,7 +98,7 @@
     data() {
       return {
         description: '文件列表',
-        // 表头
+        // 表頭
         columns: [
           {
             title: '#',
@@ -111,7 +111,7 @@
             }
           },
           {
-            title: '文件名称',
+            title: '文件名稱',
             align: "center",
             dataIndex: 'fileName'
           },
@@ -148,12 +148,12 @@
         var fileType = file.type;
         if (fileType === 'image') {
           if (fileType.indexOf('image') < 0) {
-            this.$message.warning('请上传图片');
+            this.$message.warning('請上傳圖片');
             return false;
           }
         } else if (fileType === 'file') {
           if (fileType.indexOf('image') >= 0) {
-            this.$message.warning('请上传文件');
+            this.$message.warning('請上傳文件');
             return false;
           }
         }
@@ -163,7 +163,7 @@
         if (info.file.status === 'done') {
           if (info.file.response.success) {
             this.loadData()
-            this.$message.success(`${info.file.name} 上传成功!`);
+            this.$message.success(`${info.file.name} 上傳成功!`);
           } else {
             this.$message.error(`${info.file.response.message}`);
           }
@@ -174,8 +174,8 @@
       ossDelete(id) {
         var that = this;
         that.$confirm({
-          title: "确认删除",
-          content: "是否删除选中文件?",
+          title: "確認刪除",
+          content: "是否刪除選中文件?",
           onOk: function () {
             that.handleDelete(id)
           }

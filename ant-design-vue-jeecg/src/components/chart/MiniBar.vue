@@ -33,7 +33,7 @@
     min: 2
   }, {
     dataKey: 'y',
-    title: '时间',
+    title: '時間',
     min: 1,
     max: 30
   }]

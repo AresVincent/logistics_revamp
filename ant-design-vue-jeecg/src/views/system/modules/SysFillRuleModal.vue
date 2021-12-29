@@ -7,22 +7,22 @@
     :confirmLoading="confirmLoading"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
 
     <a-spin :spinning="confirmLoading">
       <a-form-model ref="form" :model="model" :rules="validatorRules">
 
-        <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="规则名称" prop="ruleName">
-          <a-input placeholder="请输入规则名称" v-model="model.ruleName"/>
+        <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="規則名稱" prop="ruleName">
+          <a-input placeholder="請輸入規則名稱" v-model="model.ruleName"/>
         </a-form-model-item>
-        <a-form-model-item :labelCol="labelCol"  :wrapperCol="wrapperCol" label="规则Code"  prop="ruleCode" >
-          <a-input placeholder="请输入规则Code" :disabled="disabledCode" v-model="model.ruleCode"/>
+        <a-form-model-item :labelCol="labelCol"  :wrapperCol="wrapperCol" label="規則Code"  prop="ruleCode" >
+          <a-input placeholder="請輸入規則Code" :disabled="disabledCode" v-model="model.ruleCode"/>
         </a-form-model-item>
-        <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="规则实现类" prop="ruleClass" >
-          <a-input placeholder="请输入规则实现类" v-model="model.ruleClass"/>
+        <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="規則實現類" prop="ruleClass" >
+          <a-input placeholder="請輸入規則實現類" v-model="model.ruleClass"/>
         </a-form-model-item>
-        <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="规则参数" prop="ruleParams">
-          <a-textarea placeholder="请输入规则参数" :rows="5" v-model="model.ruleParams"/>
+        <a-form-model-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="規則參數" prop="ruleParams">
+          <a-textarea placeholder="請輸入規則參數" :rows="5" v-model="model.ruleParams"/>
         </a-form-model-item>
 
       </a-form-model>
@@ -47,26 +47,26 @@
 
         confirmLoading: false,
         validatorRules: {
-          ruleName: [{ required: true, message: '规则名称不能为空' }],
+          ruleName: [{ required: true, message: '規則名稱不能為空' }],
           ruleCode: [
-            { required: true, message: '规则Code不能为空' },
+            { required: true, message: '規則Code不能為空' },
             { validator: (rule, value, callback) => validateDuplicateValue('sys_fill_rule', 'rule_code', value, this.model.id, callback) }
           ],
-          ruleClass: [{ required: true, message: '规则实现类不能为空' }],
+          ruleClass: [{ required: true, message: '規則實現類不能為空' }],
           ruleParams: [{
             validator: (rule, value, callback) => {
 
               try {
                 let json = JSON.parse(value)
                 if (json instanceof Array) {
-                  callback('只能传递JSON对象，不能传递JSON数组')
+                  callback('只能傳遞JSON對象，不能傳遞JSON數組')
                 } else if (json instanceof Object) {
                   callback()
                 } else {
-                  callback('请输入JSON字符串')
+                  callback('請輸入JSON字符串')
                 }
               } catch {
-                callback('请输入JSON字符串')
+                callback('請輸入JSON字符串')
               }
             }
           }],
@@ -101,7 +101,7 @@
       },
       handleOk() {
         const that = this
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate((ok, err) => {
           if (ok) {
             that.confirmLoading = true

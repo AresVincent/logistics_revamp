@@ -28,9 +28,9 @@ const VALIDATE_NO_PASSED = Symbol()
 export { FormTypes, VALIDATE_NO_PASSED }
 
 /**
- * 获取指定的 $refs 对象
- * 有时候可能会遇到组件未挂载到页面中的情况，导致无法获取 $refs 中的某个对象
- * 这个方法可以等待挂载完成之后再返回 $refs 的对象，避免报错
+ * 獲取指定的 $refs 對象
+ * 有時候可能會遇到組件未掛載到頁面中的情況，導致無法獲取 $refs 中的某個對象
+ * 這個方法可以等待掛載完成之後再返回 $refs 的對象，避免報錯
  * @author sunjianlei
  **/
 export function getRefPromise(vm, name) {
@@ -49,27 +49,27 @@ export function getRefPromise(vm, name) {
 }
 
 /**
- * 一次性验证主表单和所有的次表单
- * @param form 主表单 form 对象
- * @param cases 接收一个数组，每项都是一个JEditableTable实例
+ * 一次性驗證主表單和所有的次表單
+ * @param form 主表單 form 對象
+ * @param cases 接收一個數組，每項都是一個JEditableTable實例
  * @returns {Promise<any>}
  * @author sunjianlei
  */
 export function validateFormAndTables(form, cases) {
 
   if (!(form && typeof form.validateFields === 'function')) {
-    throw `form 参数需要的是一个form对象，而传入的却是${typeof form}`
+    throw `form 參數需要的是一個form對象，而傳入的卻是${typeof form}`
   }
 
   let options = {}
   return new Promise((resolve, reject) => {
-    // 验证主表表单
+    // 驗證主表表單
     form.validateFields((err, values) => {
       err ? reject({ error: VALIDATE_NO_PASSED }) : resolve(values)
     })
   }).then(values => {
     Object.assign(options, { formValue: values })
-    // 验证所有子表的表单
+    // 驗證所有子表的表單
     return validateTables(cases)
   }).then(all => {
     Object.assign(options, { tablesValue: all })
@@ -80,26 +80,26 @@ export function validateFormAndTables(form, cases) {
 
 }
 /**
- * 一次性验证主表单和所有的次表单(新版本)
- * @param form 主表单 form 对象
- * @param cases 接收一个数组，每项都是一个JEditableTable实例
+ * 一次性驗證主表單和所有的次表單(新版本)
+ * @param form 主表單 form 對象
+ * @param cases 接收一個數組，每項都是一個JEditableTable實例
  * @returns {Promise<any>}
  * @author sunjianlei
  */
 export function validateFormModelAndTables(form,values, cases) {
 
   if (!(form && typeof form.validate === 'function')) {
-    throw `form 参数需要的是一个form对象，而传入的却是${typeof form}`
+    throw `form 參數需要的是一個form對象，而傳入的卻是${typeof form}`
   }
   let options = {}
   return new Promise((resolve, reject) => {
-    // 验证主表表单
+    // 驗證主表表單
     form.validate((valid,obj) => {
       valid ?resolve(values):reject({ error: VALIDATE_NO_PASSED })
     })
   }).then(values => {
     Object.assign(options, { formValue: values })
-    // 验证所有子表的表单
+    // 驗證所有子表的表單
     return validateTables(cases)
   }).then(all => {
     Object.assign(options, { tablesValue: all })
@@ -111,14 +111,14 @@ export function validateFormModelAndTables(form,values, cases) {
 }
 
 /**
- * 验证并获取一个或多个表格的所有值
- * @param cases 接收一个数组，每项都是一个JEditableTable实例
- * @param deleteTempId 是否删除临时ID，如果设为true，行编辑就不返回新增行的ID，ID需要后台生成
+ * 驗證並獲取一個或多個表格的所有值
+ * @param cases 接收一個數組，每項都是一個JEditableTable實例
+ * @param deleteTempId 是否刪除臨時ID，如果設為true，行編輯就不返回新增行的ID，ID需要後台生成
  * @author sunjianlei
  */
 export function validateTables(cases, deleteTempId) {
   if (!(cases instanceof Array)) {
-    throw `'validateTables'函数的'cases'参数需要的是一个数组，而传入的却是${typeof cases}`
+    throw `'validateTables'函數的'cases'參數需要的是一個數組，而傳入的卻是${typeof cases}`
   }
   return new Promise((resolve, reject) => {
     let tables = []
@@ -130,16 +130,16 @@ export function validateTables(cases, deleteTempId) {
       let vm = cases[index]
       vm.getAll(true, deleteTempId).then(all => {
         tables[index] = all
-        // 判断校验是否全部完成，完成返回成功，否则继续进行下一步校验
+        // 判斷校驗是否全部完成，完成返回成功，否則繼續進行下一步校驗
         if (++index === cases.length) {
           resolve(tables)
         } else (
           next()
         )
       }, error => {
-        // 出现未验证通过的表单，不再进行下一步校验，直接返回失败并跳转到该表格
+        // 出現未驗證通過的表單，不再進行下一步校驗，直接返回失敗並跳轉到該表格
         if (error === VALIDATE_NO_PASSED) {
-          // 尝试获取tabKey，如果在ATab组件内即可获取
+          // 嘗試獲取tabKey，如果在ATab組件內即可獲取
           let paneKey;
           let tabPane = getVmParentByName(vm, 'ATabPane')
           if (tabPane) {

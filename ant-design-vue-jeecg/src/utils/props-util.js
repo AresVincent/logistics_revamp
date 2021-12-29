@@ -1,5 +1,5 @@
 /**
- * 该文件截取自 "ant-design-vue/es/_util/props-util.js" 文件，并对其做出特殊修改
+ * 該文件截取自 "ant-design-vue/es/_util/props-util.js" 文件，並對其做出特殊修改
  */
 function classNames() {
   let classes = []
@@ -107,7 +107,7 @@ export function getStyle(ele, camel) {
   if (typeof style === 'string') {
     style = parseStyleText(style, camel)
   } else if (camel && style) {
-    // 驼峰化
+    // 駝峰化
     style = objectCamelize(style)
   }
   return { ...staticStyle, ...style }

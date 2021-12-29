@@ -8,7 +8,7 @@
         <template v-if="index === 0">
           <a-button class="new-btn" type="dashed">
             <a-icon type="plus"/>
-            新增产品
+            新增產品
           </a-button>
         </template>
         <template v-else>
@@ -36,7 +36,7 @@
     dataSource.push({
       title: 'Alipay',
       avatar: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
-      content: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。'
+      content: '在中台產品的研發過程中，會出現不同的設計規範和實現方式，但其中往往存在很多類似的頁面和組件，這些類似的組件會被抽離成一套標準規範。'
     })
   }
 
@@ -45,11 +45,11 @@
     name: "CardList",
     data () {
       return {
-        description: '段落示意：蚂蚁金服务设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态， 提供跨越设计与开发的体验解决方案。',
+        description: '段落示意：螞蟻金服務設計平台 ant.design，用最小的工作量，無縫接入螞蟻金服生態， 提供跨越設計與開發的體驗解決方案。',
         linkList: [
-          { icon: 'rocket', href: '#', title: '快速开始' },
-          { icon: 'info-circle-o', href: '#', title: '产品简介' },
-          { icon: 'file-text', href: '#', title: '产品文档' }
+          { icon: 'rocket', href: '#', title: '快速開始' },
+          { icon: 'info-circle-o', href: '#', title: '產品簡介' },
+          { icon: 'file-text', href: '#', title: '產品文檔' }
         ],
         extraImage: 'https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png',
         dataSource

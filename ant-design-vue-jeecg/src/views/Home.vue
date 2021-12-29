@@ -7,14 +7,14 @@
 
     <br/>
 
-    <h2># Trend 组件 </h2>
+    <h2># Trend 組件 </h2>
 
     <a-divider> 正常 </a-divider>
 
     <a-card>
 
       <trend flag="up" style="margin-right: 16px;">
-        <span slot="term">工资</span>
+        <span slot="term">工資</span>
         5%
       </trend>
       <trend flag="up" style="margin-right: 16px;">
@@ -22,18 +22,18 @@
         50%
       </trend>
       <trend flag="down">
-        <span slot="term">身体状态</span>
+        <span slot="term">身體狀態</span>
         50%
       </trend>
 
     </a-card>
 
-    <a-divider> 颜色反转 </a-divider>
+    <a-divider> 顏色反轉 </a-divider>
 
     <a-card style="margin-bottom: 3rem">
 
       <trend flag="up" :reverse-color="true" style="margin-right: 16px;">
-        <span slot="term">工资</span>
+        <span slot="term">工資</span>
         5%
       </trend>
       <trend flag="down" :reverse-color="true" style="margin-right: 16px;">
@@ -43,7 +43,7 @@
 
     </a-card>
 
-    <h2># AvatarList 组件 </h2>
+    <h2># AvatarList 組件 </h2>
 
     <a-divider> AvatarList </a-divider>
     <a-card style="margin-bottom: 3rem">
@@ -67,7 +67,7 @@
       </avatar-list>
     </a-card>
 
-    <h2># CountDown 组件 </h2>
+    <h2># CountDown 組件 </h2>
 
     <a-divider> CountDown </a-divider>
     <a-card style="margin-bottom: 3rem">
@@ -86,7 +86,7 @@
       </count-down>
     </a-card>
 
-    <h2># Ellipsis 组件 </h2>
+    <h2># Ellipsis 組件 </h2>
 
     <a-divider> Ellipsis </a-divider>
     <a-card style="margin-bottom: 3rem">
@@ -96,7 +96,7 @@
       </ellipsis>
     </a-card>
 
-    <h2># NumberInfo 组件 </h2>
+    <h2># NumberInfo 組件 </h2>
 
     <a-divider> NumberInfo </a-divider>
     <a-card>

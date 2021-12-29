@@ -26,7 +26,7 @@
       },
       placeholder:{
         type: String,
-        default: '请选择',
+        default: '請選擇',
         required: false
       },
       disabled:{
@@ -39,7 +39,7 @@
         default:'',
         required:false
       },
-      // 是否支持多选
+      // 是否支持多選
       multiple: {
         type: Boolean,
         default: false,
@@ -92,7 +92,7 @@
       })
     },
     methods: {
-      /**加载一级节点 */
+      /**加載一級節點 */
       loadRoot(){
         let param = {
           pid:this.pid,
@@ -111,12 +111,12 @@
             }
             this.treeData = [...res.result]
           }else{
-            console.log("树一级节点查询结果-else",res)
+            console.log("樹一級節點查詢結果-else",res)
           }
         })
       },
 
-      /** 数据回显*/
+      /** 數據回顯*/
       loadItemByCode(){
         if(!this.value || this.value=="0"){
           this.treeValue = []
@@ -135,7 +135,7 @@
         }
       },
       onLoadTriggleChange(text){
-        //只有单选才会触发
+        //只有單選才會觸發
         if(!this.multiple && this.loadTriggleChange){
           this.backValue(this.value,text)
         }
@@ -223,18 +223,18 @@
               if(typeof test == 'object' && test){
                 resolve()
               }else{
-                this.$message.error("组件JTreeSelect-condition传值有误，需要一个json字符串!")
+                this.$message.error("組件JTreeSelect-condition傳值有誤，需要一個json字符串!")
                 reject()
               }
             } catch(e) {
-              this.$message.error("组件JTreeSelect-condition传值有误，需要一个json字符串!")
+              this.$message.error("組件JTreeSelect-condition傳值有誤，需要一個json字符串!")
               reject()
             }
           }
         })
       }
     },
-    //2.2新增 在组件内定义 指定父组件调用时候的传值属性和事件类型 这个牛逼
+    //2.2新增 在組件內定義 指定父組件調用時候的傳值屬性和事件類型 這個牛逼
     model: {
       prop: 'value',
       event: 'change'

@@ -32,7 +32,7 @@
       },
       boxStyle() {
         const style = {}
-        // 如果有边框且未设置align属性，就强制居中
+        // 如果有邊框且未設置align屬性，就強制居中
         if (this.bordered && !this.originColumn.align) {
           style['text-align'] = 'center'
         }
@@ -44,14 +44,14 @@
         this.handleChangeCommon(event.target.checked)
       },
     },
-    // 【组件增强】注释详见：JVxeCellMixins.js
+    // 【組件增強】註釋詳見：JVxeCellMixins.js
     enhanced: {
       switches: {
         visible: true,
       },
       getValue(value) {
         let {own: col} = this.column
-        // 处理 customValue
+        // 處理 customValue
         if (Array.isArray(col.customValue)) {
           let customValue = getCustomValue(col)
           if (typeof value === 'boolean') {
@@ -65,7 +65,7 @@
       },
       setValue(value) {
         let {own: col} = this.column
-        // 判断是否设定了customValue（自定义值）
+        // 判斷是否設定了customValue（自定義值）
         if (Array.isArray(col.customValue)) {
           let customValue = getCustomValue(col)
           return neverNull(value).toString() === customValue[0].toString()
@@ -93,7 +93,7 @@
 </script>
 
 <style lang="less">
-  // 关闭动画，防止滚动时动态赋值出现问题
+  // 關閉動畫，防止滾動時動態賦值出現問題
   .j-vxe-checkbox.no-animation {
     .ant-checkbox-inner,
     .ant-checkbox-inner::after {

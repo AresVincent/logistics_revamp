@@ -6,7 +6,7 @@
     :confirmLoading="confirmLoading"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭"
+    cancelText="關閉"
   >
     <a-spin :spinning="confirmLoading">
       <a-form-model  ref="form" :model="model" :rules="validatorRules">
@@ -15,16 +15,16 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           prop="itemText"
-          label="名称">
-          <a-input placeholder="请输入名称" v-model="model.itemText"/>
+          label="名稱">
+          <a-input placeholder="請輸入名稱" v-model="model.itemText"/>
         </a-form-model-item>
 
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           prop="itemValue"
-          label="数据值">
-          <a-input placeholder="请输入数据值" v-model="model.itemValue" />
+          label="數據值">
+          <a-input placeholder="請輸入數據值" v-model="model.itemValue" />
         </a-form-model-item>
 
         <a-form-model-item
@@ -45,9 +45,9 @@
         <a-form-model-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="是否启用"
+          label="是否啟用"
           hasFeedback>
-          <a-switch checkedChildren="启用" unCheckedChildren="禁用" @change="onChose" v-model="visibleCheck"/>
+          <a-switch checkedChildren="啟用" unCheckedChildren="禁用" @change="onChose" v-model="visibleCheck"/>
         </a-form-model-item>
 
       </a-form-model>
@@ -80,8 +80,8 @@
         },
         confirmLoading: false,
         validatorRules: {
-          itemText:  [{required: true, message: '请输入名称!'}],
-          itemValue:  [{required: true, message: '请输入数据值!'},{validator: this.validateItemValue}],
+          itemText:  [{required: true, message: '請輸入名稱!'}],
+          itemValue:  [{required: true, message: '請輸入數據值!'},{validator: this.validateItemValue}],
         },
       }
     },
@@ -90,7 +90,7 @@
     methods: {
       add(dictId) {
         this.dictId = dictId;
-        //初始化默认值
+        //初始化默認值
         this.edit({sortOrder:1,status:1});
       },
       edit(record) {
@@ -113,10 +113,10 @@
           this.visibleCheck = false;
         }
       },
-      // 确定
+      // 確定
       handleOk() {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;
@@ -146,7 +146,7 @@
           }
         })
       },
-      // 关闭
+      // 關閉
       handleCancel() {
         this.close();
       },
@@ -166,9 +166,9 @@
         if(value){
           let reg=new RegExp("[`_~!@#$^&*()=|{}'.<>《》/?！￥（）—【】‘；：”“。，、？]")
           if(reg.test(value)){
-            callback("数据值不能包含特殊字符！")
+            callback("數據值不能包含特殊字符！")
           }else{
-            //update--begin--autor:lvdandan-----date:20201203------for：JT-27【数据字典】字典 - 数据值可重复
+            //update--begin--autor:lvdandan-----date:20201203------for：JT-27【數據字典】字典 - 數據值可重複
             getAction("/sys/dictItem/dictItemCheck",param).then((res)=>{
               if(res.success){
                 callback()
@@ -176,7 +176,7 @@
                 callback(res.message);
               }
             });
-            //update--end--autor:lvdandan-----date:20201203------for：JT-27【数据字典】字典 - 数据值可重复
+            //update--end--autor:lvdandan-----date:20201203------for：JT-27【數據字典】字典 - 數據值可重複
           }
         }else{
           callback()

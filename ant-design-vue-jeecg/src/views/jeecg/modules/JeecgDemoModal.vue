@@ -6,39 +6,39 @@
     :confirmLoading="confirmLoading"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
     <a-spin :spinning="confirmLoading">
       <a-form-model ref="form"  :label-col="labelCol" :wrapper-col="wrapperCol"  :model="model" :rules="validatorRules">
         <a-form-model-item label="姓名" required prop="name" hasFeedback>
-          <a-input v-model="model.name"    placeholder="请输入姓名"/>
+          <a-input v-model="model.name"    placeholder="請輸入姓名"/>
         </a-form-model-item>
 
-        <a-form-model-item label="关键词"  prop="keyWord" hasFeedback>
-          <a-input v-model="model.keyWord"    placeholder="请输入关键词"/>
+        <a-form-model-item label="關鍵詞"  prop="keyWord" hasFeedback>
+          <a-input v-model="model.keyWord"    placeholder="請輸入關鍵詞"/>
         </a-form-model-item>
 
-        <a-form-model-item label="打卡时间"  prop="punchTime" hasFeedback>
+        <a-form-model-item label="打卡時間"  prop="punchTime" hasFeedback>
           <a-date-picker showTime valueFormat="YYYY-MM-DD HH:mm:ss" v-model="model.punchTime" />
         </a-form-model-item>
 
-        <a-form-model-item label="性别"  prop="sex" hasFeedback>
+        <a-form-model-item label="性別"  prop="sex" hasFeedback>
           <j-dict-select-tag type="radio" v-model="model.sex"  :trigger-change="true" dictCode="sex"/>
         </a-form-model-item>
 
-        <a-form-model-item label="年龄"  prop="age" hasFeedback>
-          <a-input placeholder="请输入年龄" v-model="model.age"/>
+        <a-form-model-item label="年齡"  prop="age" hasFeedback>
+          <a-input placeholder="請輸入年齡" v-model="model.age"/>
         </a-form-model-item>
 
         <a-form-model-item label="生日"  prop="age" hasFeedback>
           <a-date-picker valueFormat="YYYY-MM-DD"  v-model="model.birthday"/>
         </a-form-model-item>
 
-        <a-form-model-item label="邮箱"  prop="email" hasFeedback >
-          <a-input  placeholder="请输入邮箱"  v-model="model.email"/>
+        <a-form-model-item label="郵箱"  prop="email" hasFeedback >
+          <a-input  placeholder="請輸入郵箱"  v-model="model.email"/>
         </a-form-model-item>
 
-        <a-form-model-item label="个人简介"  prop="content" hasFeedback>
-          <a-input  type="textarea" placeholder="请输入个人简介"  v-model="model.content"/>
+        <a-form-model-item label="個人簡介"  prop="content" hasFeedback>
+          <a-input  type="textarea" placeholder="請輸入個人簡介"  v-model="model.content"/>
         </a-form-model-item>
 
       </a-form-model>
@@ -72,11 +72,11 @@
         form: this.$form.createForm(this),
         validatorRules:{
           name: [
-            { required: true, message: '请输入姓名!' },
-            { min: 2, max: 30, message: '长度在 2 到 30 个字符', trigger: 'blur' }
+            { required: true, message: '請輸入姓名!' },
+            { min: 2, max: 30, message: '長度在 2 到 30 個字符', trigger: 'blur' }
           ],
           email: [
-            { required: false, type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
+            { required: false, type: 'email', message: '郵箱格式不正確', trigger: 'blur' }
           ]
         },
         url: {
@@ -102,7 +102,7 @@
       },
       handleOk () {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;

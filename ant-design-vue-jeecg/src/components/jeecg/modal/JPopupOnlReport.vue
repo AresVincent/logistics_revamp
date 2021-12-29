@@ -8,7 +8,7 @@
     wrapClassName="j-popup-modal"
     @ok="handleSubmit"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
 
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchByquery">
@@ -28,10 +28,10 @@
 
           <a-col :md="8" :sm="8">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchByquery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchByquery" icon="search">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
               <a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
+                {{ toggleSearchStatus ? '收起' : '展開' }}
                 <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
               </a>
             </span>
@@ -43,7 +43,7 @@
 
     <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
       <i class="anticon anticon-info-circle ant-alert-icon"></i>
-      已选择&nbsp;<a style="font-weight: 600">{{ table.selectedRowKeys.length }}</a>项&nbsp;&nbsp;
+      已選擇&nbsp;<a style="font-weight: 600">{{ table.selectedRowKeys.length }}</a>項&nbsp;&nbsp;
       <a style="margin-left: 24px" @click="onClearSelected">清空</a>
 
       <a v-if="!showSearchFlag" style="margin-left: 24px" @click="onlyReload">刷新</a>
@@ -100,20 +100,20 @@
         },
         table: {
           loading: true,
-          // 表头
+          // 表頭
           columns: [],
-          //数据集
+          //數據集
           dataSource: [],
-          // 选择器
+          // 選擇器
           selectedRowKeys: [],
           selectionRows: [],
-          // 分页参数
+          // 分頁參數
           pagination: {
             current: 1,
             pageSize: 10,
             pageSizeOptions: ['10', '20', '30'],
             showTotal: (total, range) => {
-              return range[0] + '-' + range[1] + ' 共' + total + '条'
+              return range[0] + '-' + range[1] + ' 共' + total + '條'
             },
             showQuickJumper: true,
             showSizeChanger: true,
@@ -124,7 +124,7 @@
         modalWidth:MODAL_WIDTH,
         tableScroll:{x:true},
         dynamicParam:{},
-        // 排序字段，默认无排序
+        // 排序字段，默認無排序
         iSorter: null,
       }
     },
@@ -138,12 +138,12 @@
       param:{
         deep:true,
         handler(){
-          // update--begin--autor:liusq-----date:20210706------for：JPopup组件在modal中使用报错#2729------
+          // update--begin--autor:liusq-----date:20210706------for：JPopup組件在modal中使用報錯#2729------
           if(this.visible){
             this.dynamicParamHandler()
             this.loadData();
           }
-          // update--begin--autor:liusq-----date:20210706------for：JPopup组件在modal中使用报错#2729------
+          // update--begin--autor:liusq-----date:20210706------for：JPopup組件在modal中使用報錯#2729------
         },
       },
       sorter: {
@@ -162,7 +162,7 @@
                 }
               })
             } else {
-              console.warn('【JPopup】sorter参数不合法')
+              console.warn('【JPopup】sorter參數不合法')
             }
           }
         },
@@ -176,7 +176,7 @@
     methods:{
       loadColumnsInfo(){
         let url = `${this.url.getColumns}${this.code}`
-        //缓存key
+        //緩存key
         let groupIdKey
         if (this.groupId) {
           groupIdKey = this.groupId + url
@@ -206,27 +206,27 @@
       },
       initQueryInfo() {
         let url = `${this.url.getQueryInfo}${this.cgRpConfigId}`
-        //缓存key
+        //緩存key
         let groupIdKey
         if (this.groupId) {
           groupIdKey = this.groupId + url
         }
         httpGroupRequest(() => getAction(url), groupIdKey).then((res) => {
-          // console.log("获取查询条件", res);
+          // console.log("獲取查詢條件", res);
           if (res.success) {
             this.dynamicParamHandler(res.result)
             this.queryInfo = res.result
-            //查询条件加载后再请求数据
+            //查詢條件加載后再請求數據
             this.loadData(1)
           } else {
             this.$message.warning(res.message)
           }
         })
       },
-      //处理动态参数
+      //處理動態參數
       dynamicParamHandler(arr){
         if(arr && arr.length>0){
-          //第一次加载查询条件前 初始化queryParam为空对象
+          //第一次加載查詢條件前 初始化queryParam為空對象
           let queryTemp = {}
           for(let item of arr){
             if(item.mode==='single'){
@@ -243,7 +243,7 @@
               if(str && str.startsWith("'") && str.endsWith("'")){
                 str = str.substring(1,str.length-1)
               }
-              //如果查询条件包含参数 设置值
+              //如果查詢條件包含參數 設置值
               this.queryParam[key]=str
             }
             dynamicTemp[key] = this.param[key]
@@ -255,10 +255,10 @@
         if (arg == 1) {
           this.table.pagination.current = 1
         }
-        let params = this.getQueryParams();//查询条件
+        let params = this.getQueryParams();//查詢條件
         this.table.loading = true
         let url = `${this.url.getData}${this.cgRpConfigId}`
-        //缓存key
+        //緩存key
         let groupIdKey
         if (this.groupId) {
           groupIdKey = this.groupId + url + JSON.stringify(params)
@@ -279,7 +279,7 @@
       getQueryParams() {
         let paramTarget = {}
         if(this.dynamicParam){
-          //处理自定义参数
+          //處理自定義參數
          Object.keys(this.dynamicParam).map(key=>{
            paramTarget['self_'+key] = this.dynamicParam[key]
          })
@@ -290,34 +290,34 @@
         return filterObj(param);
       },
       handleChangeInTableSelect(selectedRowKeys, selectionRows) {
-        //update-begin-author:taoyan date:2020902 for:【issue】开源online的几个问题 LOWCOD-844
+        //update-begin-author:taoyan date:2020902 for:【issue】開源online的幾個問題 LOWCOD-844
         if(!selectedRowKeys || selectedRowKeys.length==0){
           this.table.selectionRows = []
         }else if(selectedRowKeys.length == selectionRows.length){
           this.table.selectionRows = selectionRows
         }else{
-          //当两者长度不一的时候 需要判断
+          //當兩者長度不一的時候 需要判斷
           let keys = this.table.selectedRowKeys
           let rows = this.table.selectionRows;
-          //这个循环 添加新的记录
+          //這個循環 添加新的記錄
           for(let i=0;i<selectionRows.length;i++){
             let combineKey = this.combineRowKey(selectionRows[i])
             if(keys.indexOf(combineKey)<0){
-              //如果 原来的key 不包含当前记录 push
+              //如果 原來的key 不包含當前記錄 push
               rows.push(selectionRows[i])
             }
           }
-          //这个循环 移除取消选中的数据
+          //這個循環 移除取消選中的數據
           this.table.selectionRows = rows.filter(item=>{
             let combineKey = this.combineRowKey(item)
             return selectedRowKeys.indexOf(combineKey)>=0
           })
         }
-        //update-end-author:taoyan date:2020902 for:【issue】开源online的几个问题 LOWCOD-844
+        //update-end-author:taoyan date:2020902 for:【issue】開源online的幾個問題 LOWCOD-844
         this.table.selectedRowKeys = selectedRowKeys
       },
       handleChangeInTable(pagination, filters, sorter) {
-        //分页、排序、筛选变化时触发
+        //分頁、排序、篩選變化時觸發
         if (Object.keys(sorter).length > 0) {
           this.iSorter = {
             column: sorter.field,
@@ -341,12 +341,12 @@
       handleSubmit() {
         if(!this.multi){
           if(this.table.selectionRows && this.table.selectionRows.length>1){
-            this.$message.warning("请选择一条记录")
+            this.$message.warning("請選擇一條記錄")
             return false
           }
         }
         if(!this.table.selectionRows || this.table.selectionRows.length==0){
-          this.$message.warning("请选择一条记录")
+          this.$message.warning("請選擇一條記錄")
           return false
         }
         this.$emit('ok', this.table.selectionRows);
@@ -383,20 +383,20 @@
       combineRowKey(record){
         let res = ''
          Object.keys(record).forEach(key=>{
-           //update-begin---author:liusq   Date:20210203  for：pop选择器列主键问题 issues/I29P9Q------------
+           //update-begin---author:liusq   Date:20210203  for：pop選擇器列主鍵問題 issues/I29P9Q------------
            if(key=='id'){
              res=record[key]+res
            }else{
              res+=record[key]
            }
-           //update-end---author:liusq     Date:20210203  for：pop选择器列主键问题 issues/I29P9Q------------
+           //update-end---author:liusq     Date:20210203  for：pop選擇器列主鍵問題 issues/I29P9Q------------
          })
-        // update-begin---author:taoyan   Date:20211025 for：jpopup 表格key重复BUG /issues/3121
+        // update-begin---author:taoyan   Date:20211025 for：jpopup 表格key重複BUG /issues/3121
         res = md5(res)
         /*if(res.length>50){
           res = res.substring(0,50)
         }*/
-        // update-end---author:taoyan   Date:20211025 for：jpopup 表格key重复BUG /issues/3121
+        // update-end---author:taoyan   Date:20211025 for：jpopup 表格key重複BUG /issues/3121
         return res
       },
 
@@ -425,7 +425,7 @@
           }
         }
       },
-      //防止字典中有垃圾数据
+      //防止字典中有垃圾數據
       initDictOptionData(dictOptions){
         let obj = { }
         Object.keys(dictOptions).map(k=>{

@@ -26,7 +26,7 @@
     name: 'JVxeDragSortCell',
     mixins: [JVxeCellMixins],
     computed: {
-      // 排序结果保存字段
+      // 排序結果保存字段
       dragSortKey() {
         return this.renderOptions.dragSortKey || 'orderNum'
       },
@@ -57,9 +57,9 @@
         this.trigger('rowInsertDown', this.rowIndex)
       },
     },
-    // 【组件增强】注释详见：JVxeCellMixins.js
+    // 【組件增強】註釋詳見：JVxeCellMixins.js
     enhanced: {
-      // 【功能开关】
+      // 【功能開關】
       switches: {
         editRender: false
       },

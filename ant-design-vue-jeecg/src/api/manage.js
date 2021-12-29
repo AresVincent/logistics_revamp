@@ -15,7 +15,7 @@ export default api
 //post
 export function postAction(url,parameter) {
   let sign = signMd5Utils.getSign(url, parameter);
-  //将签名和时间戳，添加在请求接口 Header
+  //將簽名和時間戳，添加在請求接口 Header
   let signHeader = {"X-Sign": sign,"X-TIMESTAMP": signMd5Utils.getDateTimeToString()};
 
   return axios({
@@ -29,7 +29,7 @@ export function postAction(url,parameter) {
 //post method= {post | put}
 export function httpAction(url,parameter,method) {
   let sign = signMd5Utils.getSign(url, parameter);
-  //将签名和时间戳，添加在请求接口 Header
+  //將簽名和時間戳，添加在請求接口 Header
   let signHeader = {"X-Sign": sign,"X-TIMESTAMP": signMd5Utils.getDateTimeToString()};
 
   return axios({
@@ -52,7 +52,7 @@ export function putAction(url,parameter) {
 //get
 export function getAction(url,parameter) {
   let sign = signMd5Utils.getSign(url, parameter);
-  //将签名和时间戳，添加在请求接口 Header
+  //將簽名和時間戳，添加在請求接口 Header
   let signHeader = {"X-Sign": sign,"X-TIMESTAMP": signMd5Utils.getDateTimeToString()};
 
   return axios({
@@ -115,7 +115,7 @@ export function saveService(parameter) {
 }
 
 /**
- * 下载文件 用于excel导出
+ * 下載文件 用於excel導出
  * @param url
  * @param parameter
  * @returns {*}
@@ -130,8 +130,8 @@ export function downFile(url,parameter){
 }
 
 /**
- * 下载文件
- * @param url 文件路径
+ * 下載文件
+ * @param url 文件路徑
  * @param fileName 文件名
  * @param parameter
  * @returns {*}
@@ -139,7 +139,7 @@ export function downFile(url,parameter){
 export function downloadFile(url, fileName, parameter) {
   return downFile(url, parameter).then((data) => {
     if (!data || data.size === 0) {
-      Vue.prototype['$message'].warning('文件下载失败')
+      Vue.prototype['$message'].warning('文件下載失敗')
       return
     }
     if (typeof window.navigator.msSaveBlob !== 'undefined') {
@@ -152,14 +152,14 @@ export function downloadFile(url, fileName, parameter) {
       link.setAttribute('download', fileName)
       document.body.appendChild(link)
       link.click()
-      document.body.removeChild(link) //下载完成移除元素
-      window.URL.revokeObjectURL(url) //释放掉blob对象
+      document.body.removeChild(link) //下載完成移除元素
+      window.URL.revokeObjectURL(url) //釋放掉blob對象
     }
   })
 }
 
 /**
- * 文件上传 用于富文本上传图片
+ * 文件上傳 用於富文本上傳圖片
  * @param url
  * @param parameter
  * @returns {*}
@@ -170,13 +170,13 @@ export function uploadAction(url,parameter){
     data: parameter,
     method:'post' ,
     headers: {
-      'Content-Type': 'multipart/form-data',  // 文件上传
+      'Content-Type': 'multipart/form-data',  // 文件上傳
     },
   })
 }
 
 /**
- * 获取文件服务访问路径
+ * 獲取文件服務訪問路徑
  * @param avatar
  * @param subStr
  * @returns {*}

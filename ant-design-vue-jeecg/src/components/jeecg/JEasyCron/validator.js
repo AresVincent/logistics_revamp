@@ -2,17 +2,17 @@ import CronParser from 'cron-parser'
 import { replaceWeekName } from './tabs/const'
 
 export default (rule, value, callback) => {
-  // 没填写就不校验
+  // 沒填寫就不校驗
   if (!value) {
     callback()
     return true
   }
   const values = value.split(' ').filter(item => !!item)
   if (values.length > 7) {
-    callback(new Error('Cron表达式最多7项！'))
+    callback(new Error('Cron表達式最多7項！'))
     return false
   }
-  // 检查第7项
+  // 檢查第7項
   let e = value
   if (values.length === 7) {
     const year = replaceWeekName(values[6])
@@ -26,25 +26,25 @@ export default (rule, value, callback) => {
         yearValues = [year]
       }
       // console.info(yearValues)
-      // 判断是否都是数字
+      // 判斷是否都是数字
       const checkYear = yearValues.some(item => isNaN(item))
       if (checkYear) {
-        callback(new Error('Cron表达式参数[年]错误：' + year))
+        callback(new Error('Cron表達式參數[年]錯誤：' + year))
         return false
       }
     }
-    // 取其中的前六项
+    // 取其中的前六項
     e = values.slice(0, 6).join(' ')
   }
-  // 6位 没有年
-  // 5位没有秒、年
+  // 6位 沒有年
+  // 5位沒有秒、年
   let result = true
   try {
     const iter = CronParser.parseExpression(e)
     iter.next()
     callback()
   } catch (e) {
-    callback(new Error('Cron表达式错误：' + e))
+    callback(new Error('Cron表達式錯誤：' + e))
     result = false
   }
   return result

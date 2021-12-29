@@ -5,7 +5,7 @@
     :title="email">
 
     <template slot="action">
-      <a-button size="large" style="margin-left: 8px" @click="goHomeHandle">返回首页</a-button>
+      <a-button size="large" style="margin-left: 8px" @click="goHomeHandle">返回首頁</a-button>
     </template>
 
   </result>
@@ -27,7 +27,7 @@
     computed: {
       email () {
         let v = this.model ? this.model.username || this.model.mobile : ' XXX '
-        let title = `你的账户：${v} 注册成功`
+        let title = `你的賬戶：${v} 註冊成功`
         this.username = v;
         return title
       }

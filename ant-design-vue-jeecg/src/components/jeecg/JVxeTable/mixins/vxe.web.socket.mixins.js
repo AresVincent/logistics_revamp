@@ -2,28 +2,28 @@ import store from '@/store/'
 import { randomUUID } from '@/utils/util'
 // vxe socket
 const vs = {
-  // 页面唯一 id，用于标识同一用户，不同页面的websocket
+  // 頁面唯一 id，用於標識同一用戶，不同頁面的websocket
   pageId: randomUUID(),
-  // webSocket 对象
+  // webSocket 對象
   ws: null,
   // 一些常量
   constants: {
-    // 消息类型
+    // 消息類型
     TYPE: 'type',
-    // 消息数据
+    // 消息數據
     DATA: 'data',
-    // 消息类型：心跳检测
+    // 消息類型：心跳檢測
     TYPE_HB: 'heart_beat',
-    // 消息类型：通用数据传递
+    // 消息類型：通用數據傳遞
     TYPE_CSD: 'common_send_date',
-    // 消息类型：更新vxe table数据
+    // 消息類型：更新vxe table數據
     TYPE_UVT: 'update_vxe_table',
   },
-  // 心跳检测
+  // 心跳檢測
   heartCheck: {
-    // 间隔时间，间隔多久发送一次心跳消息
+    // 間隔時間，間隔多久發送一次心跳消息
     interval: 10000,
-    // 心跳消息超时时间，心跳消息多久没有回复后重连
+    // 心跳消息超時時間，心跳消息多久沒有回復后重連
     timeout: 6000,
     timeoutTimer: null,
     clear() {
@@ -32,7 +32,7 @@ const vs = {
     },
     start() {
       vs.sendMessage(vs.constants.TYPE_HB, '')
-      // 如果超过一定时间还没重置，说明后端主动断开了
+      // 如果超過一定時間還沒重置，說明後端主動斷開了
       this.timeoutTimer = window.setTimeout(() => {
         vs.reconnect()
       }, this.timeout)
@@ -62,7 +62,7 @@ const vs = {
     }
   },
 
-  // 发送消息
+  // 發送消息
   sendMessage(type, message) {
     try {
       let ws = this.ws
@@ -73,14 +73,14 @@ const vs = {
         }))
       }
     } catch (err) {
-      console.warn('【VXEWebSocket】发送消息失败：(' + err.code + ')')
+      console.warn('【VXEWebSocket】發送消息失敗：(' + err.code + ')')
     }
   },
 
-  /** 绑定全局VXE表格 */
+  /** 綁定全局VXE表格 */
   tableMap: new Map(),
   CSDMap: new Map(),
-  /** 添加绑定 */
+  /** 添加綁定 */
   addBind(map, key, value) {
     let binds = map.get(key)
     if (Array.isArray(binds)) {
@@ -89,7 +89,7 @@ const vs = {
       map.set(key, [value])
     }
   },
-  /** 移除绑定 */
+  /** 移除綁定 */
   removeBind(map, key, value) {
     let binds = map.get(key)
     if (Array.isArray(binds)) {
@@ -107,7 +107,7 @@ const vs = {
       map.delete(key)
     }
   },
-  // 呼叫绑定的表单
+  // 呼叫綁定的表單
   callBind(map, key, callback) {
     let binds = map.get(key)
     if (Array.isArray(binds)) {
@@ -116,7 +116,7 @@ const vs = {
   },
 
   lockReconnect: false,
-  /** 尝试重连 */
+  /** 嘗試重連 */
   reconnect() {
     if (this.lockReconnect) return
     this.lockReconnect = true
@@ -125,7 +125,7 @@ const vs = {
         this.ws.close()
       }
       this.ws = null
-      console.info('【VXEWebSocket】尝试重连...')
+      console.info('【VXEWebSocket】嘗試重連...')
       this.initialWebSocket()
       this.lockReconnect = false
     }, 5000)
@@ -133,11 +133,11 @@ const vs = {
 
   on: {
     open() {
-      console.log('【VXEWebSocket】连接成功')
+      console.log('【VXEWebSocket】連接成功')
       this.heartCheck.start()
     },
     error(e) {
-      console.warn('【VXEWebSocket】连接发生错误:', e)
+      console.warn('【VXEWebSocket】連接發生錯誤:', e)
       this.reconnect()
     },
     message(e) {
@@ -146,31 +146,31 @@ const vs = {
       try {
         json = JSON.parse(e.data)
       } catch (e) {
-        console.warn('【VXEWebSocket】收到无法解析的消息:', e.data)
+        console.warn('【VXEWebSocket】收到無法解析的消息:', e.data)
         return
       }
       let type = json[this.constants.TYPE]
       let data = json[this.constants.DATA]
       switch (type) {
-        // 心跳检测
+        // 心跳檢測
         case this.constants.TYPE_HB:
           this.heartCheck.back()
           break
-        // 通用数据传递
+        // 通用數據傳遞
         case this.constants.TYPE_CSD:
           this.callBind(this.CSDMap, data.key, (fn) => fn.apply(this, data.args))
           break
-        // 更新form数据
+        // 更新form數據
         case this.constants.TYPE_UVT:
           this.callBind(this.tableMap, data.socketKey, (vm) => this.onVM['onUpdateTable'].apply(vm, data.args))
           break
         default:
-          console.warn('【VXEWebSocket】收到不识别的消息类型:' + type)
+          console.warn('【VXEWebSocket】收到不識別的消息類型:' + type)
           break
       }
     },
     close(e) {
-      console.log('【VXEWebSocket】连接被关闭:', e)
+      console.log('【VXEWebSocket】連接被關閉:', e)
       this.reconnect()
     },
   },
@@ -178,16 +178,16 @@ const vs = {
   onVM: {
     /** 收到更新表格的消息 */
     onUpdateTable(row, caseId) {
-      // 判断是不是自己发的消息
+      // 判斷是不是自己發的消息
       if (this.caseId !== caseId) {
         const tableRow = this.getIfRowById(row.id).row
-        // 局部保更新数据
+        // 局部保更新數據
         if (tableRow) {
-          // 特殊处理拖轮状态
+          // 特殊處理拖輪狀態
           if (row['tug_status'] && tableRow['tug_status']) {
             row['tug_status'] = Object.assign({}, tableRow['tug_status'], row['tug_status'])
           }
-          // 判断是否启用重载特效
+          // 判斷是否啟用重載特效
           if (this.reloadEffect) {
             this.$set(this.reloadEffectRowKeysMap, row.id, true)
           }
@@ -206,7 +206,7 @@ const vs = {
 
 export default {
   props: {
-    // 是否开启使用 webSocket 无痕刷新
+    // 是否開啟使用 webSocket 無痕刷新
     socketReload: {
       type: Boolean,
       default: false
@@ -227,7 +227,7 @@ export default {
   },
   methods: {
 
-    /** 发送socket消息更新行 */
+    /** 發送socket消息更新行 */
     socketSendUpdateRow(row) {
       vs.sendMessage(vs.constants.TYPE_UVT, {
         socketKey: this.socketKey,
@@ -242,9 +242,9 @@ export default {
 }
 
 /**
- * 添加WebSocket通用数据传递绑定，相同的key可以添加多个方法绑定
+ * 添加WebSocket通用數據傳遞綁定，相同的key可以添加多個方法綁定
  * @param key 唯一key
- * @param fn 当消息来的时候触发的回调方法
+ * @param fn 當消息來的時候觸發的回調方法
  */
 export function addBindSocketCSD(key, fn) {
   if (typeof fn === 'function') {
@@ -253,9 +253,9 @@ export function addBindSocketCSD(key, fn) {
 }
 
 /**
- * 移除WebSocket通用数据传递绑定
+ * 移除WebSocket通用數據傳遞綁定
  * @param key 唯一key
- * @param fn 要移除的方法，必须和添加时的方法内存层面上保持一致才可以正确移除
+ * @param fn 要移除的方法，必須和添加時的方法內存層面上保持一致才可以正確移除
  */
 export function removeBindSocketCSD(key, fn) {
   if (typeof fn === 'function') {

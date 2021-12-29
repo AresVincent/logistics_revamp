@@ -52,7 +52,7 @@
       async: Boolean,
       placeholder:{
         type:String,
-        default:"请选择",
+        default:"請選擇",
         required:false
       },
       dict:{
@@ -122,7 +122,7 @@
       initSelectValue(){
         if(this.async){
           if(!this.selectedAsyncValue || !this.selectedAsyncValue.key || this.selectedAsyncValue.key!=this.value){
-            console.log("这才请求后台")
+            console.log("這才請求後台")
             getAction(`/sys/dict/loadDictItem/${this.dict}`,{key:this.value}).then(res=>{
               if(res.success){
                 let obj = {
@@ -138,7 +138,7 @@
         }
       },
       loadData(value){
-        console.log("数据加载",value)
+        console.log("數據加載",value)
         this.lastLoad +=1
         const currentLoad = this.lastLoad
         this.options = []
@@ -151,7 +151,7 @@
               return
             }
             this.options = res.result
-            console.log("我是第一个",res)
+            console.log("我是第一個",res)
           }else{
             this.$message.warning(res.message)
           }
@@ -161,11 +161,11 @@
       },
       initDictData(){
         if(!this.async){
-          //如果字典项集合有数据
+          //如果字典項集合有數據
           if(this.dictOptions && this.dictOptions.length>0){
             this.options = [...this.dictOptions]
           }else{
-            //根据字典Code, 初始化字典数组
+            //根據字典Code, 初始化字典數組
             let dictStr = ''
             if(this.dict){
                 let arr = this.dict.split(',')
@@ -176,7 +176,7 @@
                   dictStr = this.dict
                 }
                 if (this.dict.indexOf(",") == -1) {
-                  //优先从缓存中读取字典配置
+                  //優先從緩存中讀取字典配置
                   if (getDictItemsFromCache(this.dictCode)) {
                     this.options = getDictItemsFromCache(this.dictCode);
                     return
@@ -191,9 +191,9 @@
           }
         }else{
           if(!this.dict){
-            console.error('搜索组件未配置字典项')
+            console.error('搜索組件未配置字典項')
           }else{
-            //异步一开始也加载一点数据
+            //異步一開始也加載一點數據
             this.loading=true
             getAction(`/sys/dict/loadDict/${this.dict}`,{pageSize: this.pageSize, keyword:''}).then(res=>{
               this.loading=false
@@ -215,7 +215,7 @@
         this.callback()
       },
       handleAsyncChange(selectedObj){
-        //update-begin-author:scott date:20201222 for:【搜索】搜索查询组件，删除条件，默认下拉还是上次的缓存数据，不好 JT-191
+        //update-begin-author:scott date:20201222 for:【搜索】搜索查詢組件，刪除條件，默認下拉還是上次的緩存數據，不好 JT-191
         if(selectedObj){
           this.selectedAsyncValue = selectedObj
           this.selectedValue = selectedObj.key
@@ -226,7 +226,7 @@
           this.loadData("")
         }
         this.callback()
-        //update-end-author:scott date:20201222 for:【搜索】搜索查询组件，删除条件，默认下拉还是上次的缓存数据，不好 JT-191
+        //update-end-author:scott date:20201222 for:【搜索】搜索查詢組件，刪除條件，默認下拉還是上次的緩存數據，不好 JT-191
       },
       callback(){
         this.$emit('change', this.selectedValue);

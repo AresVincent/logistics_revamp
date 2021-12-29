@@ -1,245 +1,245 @@
-# JEditableTable 帮助文档
+# JEditableTable 幫助文檔
 
-## 参数配置
+## 參數配置
 
-| 参数         | 类型    | 必填 | 说明                                                                            |
+| 參數         | 類型    | 必填 | 說明                                                                            |
 |--------------|---------|------|---------------------------------------------------------------------------------|
-| columns      | array   | ✔️    | 表格列的配置描述，具体项见下表                                                  |
-| dataSource   | array   | ✔️    | 表格数据                                                                        |
-| loading      | boolean |      | 是否正在加载，加载中不会显示任何行，默认false                                   |
-| actionButton | boolean |      | 是否显示操作按钮，包括"新增"、"删除"，默认false                                 |
-| rowNumber    | boolean |      | 是否显示行号，默认false                                                         |
-| rowSelection | boolean |      | 是否可选择行，默认false                                                         |
-| dragSort     | boolean |      | 是否可拖动排序，默认false                                                       |
-| dragSortKey  | string  |      | 拖动排序存储的Key，无需定义在columns内也能在getValues()时获取到值，默认orderNum |
-| maxHeight    | number  |      | 设定最大高度(px)，默认400                                                       |
-| disabledRows | object  |      | 设定禁用的行，被禁用的行无法被选择和编辑，配置方法可以查看示例                  |
-| disabled     | boolean |      | 是否禁用所有行，默认false                                                       |
+| columns      | array   | ✔️    | 表格列的配置描述，具體項見下錶                                                  |
+| dataSource   | array   | ✔️    | 表格數據                                                                        |
+| loading      | boolean |      | 是否正在加載，加載中不會显示任何行，默認false                                   |
+| actionButton | boolean |      | 是否显示操作按鈕，包括"新增"、"刪除"，默認false                                 |
+| rowNumber    | boolean |      | 是否显示行號，默認false                                                         |
+| rowSelection | boolean |      | 是否可選擇行，默認false                                                         |
+| dragSort     | boolean |      | 是否可拖動排序，默認false                                                       |
+| dragSortKey  | string  |      | 拖動排序存儲的Key，無需定義在columns內也能在getValues()時獲取到值，默認orderNum |
+| maxHeight    | number  |      | 設定最大高度(px)，默認400                                                       |
+| disabledRows | object  |      | 設定禁用的行，被禁用的行無法被選擇和編輯，配置方法可以查看示例                  |
+| disabled     | boolean |      | 是否禁用所有行，默認false                                                       |
 
-### columns 参数详解
+### columns 參數詳解
 
-| 参数          | 类型    | 必填 | 说明                                                                                                                                                   |
+| 參數          | 類型    | 必填 | 說明                                                                                                                                                   |
 |---------------|---------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-| title         | string  | ✔️    | 表格列头显示的问题                                                                                                                                     |
-| key           | string  | ✔️    | 列数据在数据项中对应的 key，必须是唯一的                                                                                                               |
-| type          | string  | ✔️    | 表单的类型，可以通过`JEditableTableUtil.FormTypes`赋值                                                                                                 |
-| width         | string  |      | 列的宽度，可以是百分比，也可以是`px`或其他单位，建议设置为百分比，且每一列的宽度加起来不应超过100%，否则可能会不能达到预期的效果。留空会自动计算百分比 |
-| placeholder   | string  |      | 表单预期值的提示信息，可以使用`${...}`变量替换文本（详见`${...} 变量使用方式`）                                                                        |
-| defaultValue  | string  |      | 默认值，在新增一行时生效                                                                                                                               |
-| validateRules | array   |      | 表单验证规则，配置方式见[validateRules 配置规则](#validaterules-配置规则)                                                                              |
-| props         | object  |      | 设置添加给表单元素的自定义属性，例如:`props:{title: 'show title'}`                                                                                     |
-| disabled      | boolean |      | 是否禁用当前列，默认false                                                                                                                              |
+| title         | string  | ✔️    | 表格列頭显示的問題                                                                                                                                     |
+| key           | string  | ✔️    | 列數據在數據項中對應的 key，必須是唯一的                                                                                                               |
+| type          | string  | ✔️    | 表單的類型，可以通過`JEditableTableUtil.FormTypes`賦值                                                                                                 |
+| width         | string  |      | 列的寬度，可以是百分比，也可以是`px`或其他單位，建議設置為百分比，且每一列的寬度加起來不應超過100%，否則可能會不能達到預期的效果。留空會自動計算百分比 |
+| placeholder   | string  |      | 表單預期值的提示信息，可以使用`${...}`變量替換文本（詳見`${...} 變量使用方式`）                                                                        |
+| defaultValue  | string  |      | 默認值，在新增一行時生效                                                                                                                               |
+| validateRules | array   |      | 表單驗證規則，配置方式見[validateRules 配置規則](#validaterules-配置規則)                                                                              |
+| props         | object  |      | 設置添加給表單元素的自定義屬性，例如:`props:{title: 'show title'}`                                                                                     |
+| disabled      | boolean |      | 是否禁用當前列，默認false                                                                                                                              |
 
-#### 当 type=checkbox 时所需的参数
+#### 當 type=checkbox 時所需的參數
 
-| 参数           | 类型    | 必填 | 说明                                                                                                                                                                                                   |
+| 參數           | 類型    | 必填 | 說明                                                                                                                                                                                                   |
 |----------------|---------|------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| defaultChecked | boolean |      | 默认值是否选中                                                                                                                                                                                         |
-| customValue    | array   |      | 自定义值，checkbox需要的是boolean值，如果数据是其他值（例如`'Y' or 'N'`）时，就会导致错误，所以提供了该属性进行转换，例：`customValue: ['Y','N']`，会将`true`转换为`'Y'`，`false`转换为`'N'`，反之亦然 |
+| defaultChecked | boolean |      | 默認值是否選中                                                                                                                                                                                         |
+| customValue    | array   |      | 自定義值，checkbox需要的是boolean值，如果數據是其他值（例如`'Y' or 'N'`）時，就會導致錯誤，所以提供了該屬性進行轉換，例：`customValue: ['Y','N']`，會將`true`轉換為`'Y'`，`false`轉換為`'N'`，反之亦然 |
 
-#### 当 type=select 时所需的参数
+#### 當 type=select 時所需的參數
 
-| 参数       | 类型    | 必填 | 说明                                               |
+| 參數       | 類型    | 必填 | 說明                                               |
 |------------|---------|------|----------------------------------------------------|
-| options    | array   | ✔️    | 下拉选项列表，详见下表                             |
-| allowInput | boolean |      | 是否允许用户输入内容，并创建新的内容               |
-| dictCode   | String  |      | 数据字典Code，若options也有值，则拼接在options后面 |
+| options    | array   | ✔️    | 下拉選項列表，詳見下錶                             |
+| allowInput | boolean |      | 是否允許用戶輸入內容，並創建新的內容               |
+| dictCode   | String  |      | 數據字典Code，若options也有值，則拼接在options後面 |
 
-##### options 所需参数
+##### options 所需參數
 
-| 参数      | 类型       | 必填 | 说明                                                                 |
+| 參數      | 類型       | 必填 | 說明                                                                 |
 |-----------|------------|------|----------------------------------------------------------------------|
-| text      | string     | ✔️    | 显示标题                                                             |
-| value     | string     | ✔️    | 真实值                                                               |
-| ~~title~~ | ~~string~~ |      | ~~显示标题（已废弃，若同时填写了 title 和 text 那么优先使用 text）~~ |
+| text      | string     | ✔️    | 显示標題                                                             |
+| value     | string     | ✔️    | 真實值                                                               |
+| ~~title~~ | ~~string~~ |      | ~~显示標題（已廢棄，若同時填寫了 title 和 text 那麼優先使用 text）~~ |
 
-#### 当 type=upload 时所需的参数
+#### 當 type=upload 時所需的參數
 
-| 参数         | 类型    | 必填 | 说明                                                                                 |
+| 參數         | 類型    | 必填 | 說明                                                                                 |
 |--------------|---------|------|--------------------------------------------------------------------------------------|
-| action       | string  | ✔️    | 上传文件路径                                                                         |
-| token        | boolean |      | 上传的时候是否传递token                                                              |
-| responseName | string  | ✔️    | 若要从上传成功后从response中取出返回的文件名，那么这里填后台返回的包含文件名的字段名 |
+| action       | string  | ✔️    | 上傳文件路徑                                                                         |
+| token        | boolean |      | 上傳的時候是否傳遞token                                                              |
+| responseName | string  | ✔️    | 若要從上傳成功后從response中取出返回的文件名，那麼這裏填後台返回的包含文件名的字段名 |
 
-#### 当 type=slot 时所需的参数
+#### 當 type=slot 時所需的參數
 
-| 参数     | 类型   | 必填 | 说明       |
+| 參數     | 類型   | 必填 | 說明       |
 |----------|--------|------|------------|
-| slotName | string | ✔️    | slot的名称 |
+| slotName | string | ✔️    | slot的名稱 |
 
-### validateRules 配置规则
+### validateRules 配置規則
 
-`validateRules` 需要的是一个数组，数组里每项都是一个规则，规则是object类型，规则的各个参数如下
+`validateRules` 需要的是一個數組，數組裡每項都是一個規則，規則是object類型，規則的各個參數如下
 
-- `required` 是否必填，可选值为`true`or`false`
-- `pattern` 正则表达式验证，只有成功匹配该正则的值才能成功通过验证
-- `handler` 自定义函数校验，使用方法请见[示例五](#示例五)
-- `message` 当验证未通过时显示的提示文本，可以使用`${...}`变量替换文本（详见`${...} 变量使用方式`）
-- 配置示例请看[示例二](#示例二)
+- `required` 是否必填，可選值為`true`or`false`
+- `pattern` 正則表達式驗證，只有成功匹配該正則的值才能成功通過驗證
+- `handler` 自定義函數校驗，使用方法請見[示例五](#示例五)
+- `message` 當驗證未通過時显示的提示文本，可以使用`${...}`變量替換文本（詳見`${...} 變量使用方式`）
+- 配置示例請看[示例二](#示例二)
 
 ## 事件
 
-| 事件名          | 触发时机                                           | 参数                                             |
+| 事件名          | 觸發時機                                           | 參數                                             |
 |-----------------|----------------------------------------------------|--------------------------------------------------|
-| added           | 当添加行操作完成后触发                             |                                                  |
-| deleted         | 当删除行操作完成后触发（批量删除操作只会触发一次） | `deleteIds` 被逻辑删除的id                       |
-| selectRowChange | 当行被选中或取消选中时触发                         | `selectedRowIds` 被选中行的id                    |
-| valueChange     | 当数据发生改变的时候触发的事件                     | `{ type, row, column, value, target }` Event对象 |
+| added           | 當添加行操作完成后觸發                             |                                                  |
+| deleted         | 當刪除行操作完成后觸發（批量刪除操作只會觸發一次） | `deleteIds` 被邏輯刪除的id                       |
+| selectRowChange | 當行被選中或取消選中時觸發                         | `selectedRowIds` 被選中行的id                    |
+| valueChange     | 當數據發生改變的時候觸發的事件                     | `{ type, row, column, value, target }` Event對象 |
 
 ## 方法
 
-关于方法的如何调用的问题，请在**FAQ**中查看[方法如何调用](#方法如何调用)
+關於方法的如何調用的問題，請在**FAQ**中查看[方法如何調用](#方法如何調用)
 
 ### initialize
 
-用于初始化表格（清空表格）
+用於初始化表格（清空表格）
 
-- `参数:` 无
-- `返回值:` 无
+- `參數:` 無
+- `返回值:` 無
 
 ### resetScrollTop
 
-重置滚动条Top位置
+重置滾動條Top位置
 
-- `参数:`
+- `參數:`
 
-| 参数名 | 类型   | 必填 | 说明                                                                                                   |
+| 參數名 | 類型   | 必填 | 說明                                                                                                   |
 |--------|--------|------|--------------------------------------------------------------------------------------------------------|
-| top    | number |      | 新top位置，留空则滚动到上次记录的位置，用于解决切换tab选项卡时导致白屏以及自动将滚动条滚动到顶部的问题 |
+| top    | number |      | 新top位置，留空則滾動到上次記錄的位置，用於解決切換tab選項卡時導致白屏以及自動將滾動條滾動到頂部的問題 |
 
-- `返回值:` 无
+- `返回值:` 無
 
 ### add
 
-主动添加行，默认情况下，当用户的滚动条已经在底部的时候，会将滚动条固定在底部，即添加后无需用户手动滚动，而会自动滚动到底部
+主動添加行，默認情況下，當用戶的滾動條已經在底部的時候，會將滾動條固定在底部，即添加后無需用戶手動滾動，而會自動滾動到底部
 
-- `参数:`
+- `參數:`
 
-| 参数名              | 类型    | 必填 | 说明                                                                |
+| 參數名              | 類型    | 必填 | 說明                                                                |
 |---------------------|---------|------|---------------------------------------------------------------------|
-| num                 | number  |      | 添加几行，默认为1                                                   |
-| forceScrollToBottom | boolean |      | 是否在添加后无论用户的滚动条在什么位置都强制滚动到底部，默认为false |
+| num                 | number  |      | 添加幾行，默認為1                                                   |
+| forceScrollToBottom | boolean |      | 是否在添加后無論用戶的滾動條在什麼位置都強制滾動到底部，默認為false |
 
-- `返回值:` 无
+- `返回值:` 無
 
 ### removeRows
 
-主动删除一行或多行
+主動刪除一行或多行
 
-- `参数:`
+- `參數:`
 
-| 参数名 | 类型            | 必填 | 说明                                                                                       |
+| 參數名 | 類型            | 必填 | 說明                                                                                       |
 |--------|-----------------|------|--------------------------------------------------------------------------------------------|
-| id     | string 或 array | ✔️    | 被删除行的id。如果要删除一个，可以直接传id，如果要删除多个，需要将多个id封装成一个数组传入 |
+| id     | string 或 array | ✔️    | 被刪除行的id。如果要刪除一個，可以直接傳id，如果要刪除多個，需要將多個id封裝成一個數組傳入 |
 
-- `返回值:` 无
+- `返回值:` 無
 
 ### removeSelectedRows
 
-主动删除被选中的行
+主動刪除被選中的行
 
-- `参数:` 无
-- `返回值:` 无
+- `參數:` 無
+- `返回值:` 無
 
 ### getValues
 
-用于获取表格里所有表单的值，可进行表单验证
+用於獲取表格里所有表單的值，可進行表單驗證
 
-- `参数:`
+- `參數:`
 
-| 参数名   | 类型     | 必填 | 说明                                                                                                                                                      |
+| 參數名   | 類型     | 必填 | 說明                                                                                                                                                      |
 |----------|----------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| callback | function | ✔️    | 获取值的回调方法，会传入`error`和`values`两个参数。`error`：未通过验证的数量，当等于`0`时代表验证通过；`values`：获取的值（即使未通过验证该字段也有数据） |
-| validate | boolean  |      | 是否进行表单验证，默认为`true`，设为`false`则代表忽略表单验证                                                                                             |
-| rowIds   | array    |      | 默认返回所有行的数据，如果传入了`rowIds`，那么就会只返回与该`rowIds`相匹配的数据，如果没有匹配的数据，就会返回空数组                                      |
+| callback | function | ✔️    | 獲取值的回調方法，會傳入`error`和`values`兩個參數。`error`：未通過驗證的數量，當等於`0`時代表驗證通過；`values`：獲取的值（即使未通過驗證該字段也有數據） |
+| validate | boolean  |      | 是否進行表單驗證，默認為`true`，設為`false`則代表忽略表單驗證                                                                                             |
+| rowIds   | array    |      | 默認返回所有行的數據，如果傳入了`rowIds`，那麼就會只返回與該`rowIds`相匹配的數據，如果沒有匹配的數據，就會返回空數組                                      |
 
-- `返回值:` 无
+- `返回值:` 無
 
 
 ### getValuesSync
 
-`getValues`的同步版，会直接将获取到的数据返回
+`getValues`的同步版，會直接將獲取到的數據返回
 
-- `参数:` 
+- `參數:` 
 
-| 参数名  | 类型   | 必填 | 说明                   |
+| 參數名  | 類型   | 必填 | 說明                   |
 |---------|--------|------|------------------------|
-| options | object |      | 选项，详见下方所需参数 |
+| options | object |      | 選項，詳見下方所需參數 |
 
-- - `options` 所需参数
+- - `options` 所需參數
 
-| 参数名   | 类型    | 必填 | 说明                                                                                                                 |
+| 參數名   | 類型    | 必填 | 說明                                                                                                                 |
 |----------|---------|------|----------------------------------------------------------------------------------------------------------------------|
-| validate | boolean |      | 是否进行表单验证，默认为`true`，设为`false`则代表忽略表单验证                                                        |
-| rowIds   | array   |      | 默认返回所有行的数据，如果传入了`rowIds`，那么就会只返回与该`rowIds`相匹配的数据，如果没有匹配的数据，就会返回空数组 |
+| validate | boolean |      | 是否進行表單驗證，默認為`true`，設為`false`則代表忽略表單驗證                                                        |
+| rowIds   | array   |      | 默認返回所有行的數據，如果傳入了`rowIds`，那麼就會只返回與該`rowIds`相匹配的數據，如果沒有匹配的數據，就會返回空數組 |
 
 - `返回值:` object
-    - `error` 未通过验证的数量，当等于`0`时代表验证通过
-    - `values` 获取的值（即使未通过验证该字段也有数据）
+    - `error` 未通過驗證的數量，當等於`0`時代表驗證通過
+    - `values` 獲取的值（即使未通過驗證該字段也有數據）
 
 - `使用示例`
 
 ```js
 let { error, values } = this.$refs.editableTable.getValuesSync({ validate: true, rowIds: ['rowId1', 'rowId2'] })
 if (error === 0) {
-    console.log('表单验证通过，数据：', values);
+    console.log('表單驗證通過，數據：', values);
 } else {
-    console.log('未通过表单验证，数据：', values);
+    console.log('未通過表單驗證，數據：', values);
 }
 ```
 
 ### getValuesPromise
 
-`getValues`的promise版，会在`resolve`中传入获取到的值，会在`reject`中传入失败原因，例如`VALIDATE_NO_PASSED`
+`getValues`的promise版，會在`resolve`中傳入獲取到的值，會在`reject`中傳入失敗原因，例如`VALIDATE_NO_PASSED`
 
-- `参数:`
+- `參數:`
 
-| 参数名   | 类型    | 必填 | 说明                                                                                                                 |
+| 參數名   | 類型    | 必填 | 說明                                                                                                                 |
 |----------|---------|------|----------------------------------------------------------------------------------------------------------------------|
-| validate | boolean |      | 同`getValues`的`validate`参数                                                                                        |
-| rowIds   | array   |      | 默认返回所有行的数据，如果传入了`rowIds`，那么就会只返回与该`rowIds`相匹配的数据，如果没有匹配的数据，就会返回空数组 |
+| validate | boolean |      | 同`getValues`的`validate`參數                                                                                        |
+| rowIds   | array   |      | 默認返回所有行的數據，如果傳入了`rowIds`，那麼就會只返回與該`rowIds`相匹配的數據，如果沒有匹配的數據，就會返回空數組 |
 
 - `返回值:` Promise
 
 ### getDeleteIds
 
-用于获取被逻辑删除的行的id，返回一个数组，用户可将该数组传入后台，并进行批量删除
+用於獲取被邏輯刪除的行的id，返回一個數組，用戶可將該數組傳入後台，並進行批量刪除
 
-- `参数:` 无
+- `參數:` 無
 - `返回值:` array
 
 ### getAll
 
-获取所有的数据，包括values、deleteIds
-会在`resolve`中传入获取到的值：`{values, deleteIds}`
-会在`reject`中传入失败原因，例如`VALIDATE_NO_PASSED`
+獲取所有的數據，包括values、deleteIds
+會在`resolve`中傳入獲取到的值：`{values, deleteIds}`
+會在`reject`中傳入失敗原因，例如`VALIDATE_NO_PASSED`
 
-- `参数:`
+- `參數:`
 
-| 参数名   | 类型    | 必填 | 说明                          |
+| 參數名   | 類型    | 必填 | 說明                          |
 |----------|---------|------|-------------------------------|
-| validate | boolean |      | 同`getValues`的`validate`参数 |
+| validate | boolean |      | 同`getValues`的`validate`參數 |
 
 - `返回值:` Promise
 
 ### setValues
 
-主动设置表格中某行某列的值
+主動設置表格中某行某列的值
 
-- `参数:`
+- `參數:`
 
-| 参数名 | 类型  | 必填 | 说明                                                       |
+| 參數名 | 類型  | 必填 | 說明                                                       |
 |--------|-------|------|------------------------------------------------------------|
-| values | array |      | 传入一个数组，数组中的每项都是一行的新值，具体见下面的示例 |
+| values | array |      | 傳入一個數組，數組中的每項都是一行的新值，具體見下面的示例 |
 
-- `返回值:` 无
+- `返回值:` 無
 - `示例：`
 
 ```js
 setValues([
     {
         rowKey: id1, // 行的id
-        values: { // 在这里 values 中的 name 是你 columns 中配置的 key
+        values: { // 在這裏 values 中的 name 是你 columns 中配置的 key
             'name': 'zhangsan',
             'age': '20'
         }
@@ -255,109 +255,109 @@ setValues([
 ```
 ### clearSelection
 
-主动清空选择的行
+主動清空選擇的行
 
-- `参数:` 无
-- `返回值:` 无
+- `參數:` 無
+- `返回值:` 無
 
-## 内置插槽
+## 內置插槽
 
-| 插槽名       | 说明                                                 |
+| 插槽名       | 說明                                                 |
 |--------------|------------------------------------------------------|
-| buttonBefore | 在操作按钮的**前面**插入插槽，不受`actionButton`属性的影响 |
-| buttonAfter  | 在操作按钮的**后面**插入插槽，不受`actionButton`属性的影响 |
+| buttonBefore | 在操作按鈕的**前面**插入插槽，不受`actionButton`屬性的影響 |
+| buttonAfter  | 在操作按鈕的**後面**插入插槽，不受`actionButton`屬性的影響 |
 
-## ${...} 变量使用方式
+## ${...} 變量使用方式
 
-在`placeholder`和`message`这两个属性中可以使用`${...}`变量来替换文本
-在[示例二](#示例二)中，配置了`title`为`名称`的一列，而`placeholder`配置成了`请输入${title}`，那么最终显示效果为`请输入名称`
-这就是`${...}`变量的使用方式，在`${}`中可以使用的变量有`title`、`key`、`defaultValue`这三个属性的值
+在`placeholder`和`message`這兩個屬性中可以使用`${...}`變量來替換文本
+在[示例二](#示例二)中，配置了`title`為`名稱`的一列，而`placeholder`配置成了`請輸入${title}`，那麼最終显示效果為`請輸入名稱`
+這就是`${...}`變量的使用方式，在`${}`中可以使用的變量有`title`、`key`、`defaultValue`這三個屬性的值
 
-## JEditableTableUtil 使用说明
+## JEditableTableUtil 使用說明
 
-在之前配置`columns`时提到过`JEditableTableUtil`这个工具类，那么如果想要知道详细的使用说明就请看这里
+在之前配置`columns`時提到過`JEditableTableUtil`這個工具類，那麼如果想要知道詳細的使用說明就請看這裏
 
 ### export 的常量
 
 #### FormTypes
 
-这是配置`columns.type`时用到的常量值，其中包括
+這是配置`columns.type`時用到的常量值，其中包括
 
-- `normal` 默认，直接显示值，不渲染表单
-- `input` 显示输入框
-- `inputNumber` 显示数字输入框
-- `checkbox` 显示多选框
-- `select` 显示选择器（下拉框）
-- `date` 日期选择器
-- `datetime` 日期时间选择器
-- `upload` 上传组件（文件域）
-- `slot` 自定义插槽
+- `normal` 默認，直接显示值，不渲染表單
+- `input` 显示輸入框
+- `inputNumber` 显示数字輸入框
+- `checkbox` 显示多選框
+- `select` 显示選擇器（下拉框）
+- `date` 日期選擇器
+- `datetime` 日期時間選擇器
+- `upload` 上傳組件（文件域）
+- `slot` 自定義插槽
 
 ### VALIDATE_NO_PASSED
 
-在判断表单验证是否通过时使用，如果 reject 的值 === VALIDATE_NO_PASSED 则代表表单验证未通过，你可以做相应的其他处理，反之则可能是发生了报错，可以使用 `console.error` 输出
+在判斷表單驗證是否通過時使用，如果 reject 的值 === VALIDATE_NO_PASSED 則代表表單驗證未通過，你可以做相應的其他處理，反之則可能是發生了報錯，可以使用 `console.error` 輸出
 
-### 封装的方法
+### 封裝的方法
 
 #### validateTables
 
-当你的页面中存在多个JEditableTable实例的时候，如果要获取每个实例的值、判断表单验证是否通过，就会让代码变得极其冗余、繁琐，于是我们就将该操作封装成了一个函数供你调用，它可以同时获取并验证多个JEditableTable实例的值，只有当所有实例的表单验证都通过后才会返回值，否则将会告诉你具体哪个实例没有通过验证。具体使用方法请看下面的示例
+當你的頁面中存在多個JEditableTable實例的時候，如果要獲取每個實例的值、判斷表單驗證是否通過，就會讓代碼變得極其冗餘、繁瑣，於是我們就將該操作封裝成了一個函數供你調用，它可以同時獲取並驗證多個JEditableTable實例的值，只有當所有實例的表單驗證都通過後才會返回值，否則將會告訴你具體哪個實例沒有通過驗證。具體使用方法請看下面的示例
 
-- `参数:`
+- `參數:`
 
-| 参数名 | 类型  | 必填 | 说明                                                   |
+| 參數名 | 類型  | 必填 | 說明                                                   |
 |--------|-------|------|--------------------------------------------------------|
-| cases  | array |      | 传入一个数组，数组中的每项都是一个JEditableTable的实例 |
+| cases  | array |      | 傳入一個數組，數組中的每項都是一個JEditableTable的實例 |
 
 - `返回值:` Promise
 - `示例：`
 
 ```js
 import { validateTables, VALIDATE_NO_PASSED } from '@/utils/JEditableTableUtil'
-// 封装cases
+// 封裝cases
 let cases = []
 cases.push(this.$refs.editableTable1)
 cases.push(this.$refs.editableTable2)
 cases.push(this.$refs.editableTable3)
 cases.push(this.$refs.editableTable4)
 cases.push(this.$refs.editableTable5)
-// 同时验证并获取多个实例的值
+// 同時驗證並獲取多個實例的值
 validateTables(cases).then((all) => {
-    // all 是一个数组，每项都对应传入cases的下标，包含values和deleteIds
-    console.log('所有实例的值：', all)
+    // all 是一個數組，每項都對應傳入cases的下標，包含values和deleteIds
+    console.log('所有實例的值：', all)
 }).catch((e = {}) => {
-    // 判断表单验证是否未通过
+    // 判斷表單驗證是否未通過
     if (e.error === VALIDATE_NO_PASSED) {
-        console.log('未通过验证的实例下标:', e.index)
+        console.log('未通過驗證的實例下標:', e.index)
     } else {
-        console.error('发生异常:', e)
+        console.error('發生異常:', e)
     }
 })
 ```
 
 ## FAQ
 
-### 方法如何调用？
+### 方法如何調用？
 
-在[示例一](#示例一)中，设定了一个 `ref="editableTable"` 的属性，那么在vue中就可以使用`this.$refs.editableTable`获取到该表格的实例，并调取其中的方法。
-假如我要调取`initialize`方法，就可以这么写：`this.$refs.editableTable.initialize()`
+在[示例一](#示例一)中，設定了一個 `ref="editableTable"` 的屬性，那麼在vue中就可以使用`this.$refs.editableTable`獲取到該表格的實例，並調取其中的方法。
+假如我要調取`initialize`方法，就可以這麼寫：`this.$refs.editableTable.initialize()`
 
-### 如何获取表单的值？
+### 如何獲取表單的值？
 
-使用`getValue`方法进行获取，详见[示例三](#示例三)
+使用`getValue`方法進行獲取，詳見[示例三](#示例三)
 
-### 如何进行表单验证？
+### 如何進行表單驗證？
 
-在获取值的时候默认会进行表单验证操作，用户在输入的时候也会对正在输入的表单进行验证，只要配置好规则就可以了
+在獲取值的時候默認會進行表單驗證操作，用戶在輸入的時候也會對正在輸入的表單進行驗證，只要配置好規則就可以了
 
-### 如何添加或删除一行？
+### 如何添加或刪除一行？
 
-该功能已封装到组件中，你只需要将 `actionButton` 设置为 `true` 即可，当然你也可以在代码中主动调用新增方法或修改，具体见上方的方法介绍。
+該功能已封裝到組件中，你只需要將 `actionButton` 設置為 `true` 即可，當然你也可以在代碼中主動調用新增方法或修改，具體見上方的方法介紹。
 
-### 为什么使用了ATab组件后，切换选项卡会导致白屏或滚动条位置会归零？
+### 為什麼使用了ATab組件后，切換選項卡會導致白屏或滾動條位置會歸零？
 
-在ATab组件中确实会导致滚动条位置归零，且不会触发`onscroll`方法，所以无法动态加载行，导致白屏的问题出现。
-解决方法是在ATab组件的`onChange`事件触发时执行实例提供的`resetScrollTop()`方法即可，但是需要注意的是：代码主动改变ATab的`activeKey`不会触发`onChange`事件，还需要你手动调用下。
+在ATab組件中確實會導致滾動條位置歸零，且不會觸發`onscroll`方法，所以無法動態加載行，導致白屏的問題出現。
+解決方法是在ATab組件的`onChange`事件觸發時執行實例提供的`resetScrollTop()`方法即可，但是需要注意的是：代碼主動改變ATab的`activeKey`不會觸發`onChange`事件，還需要你手動調用下。
 
 - `示例`
 
@@ -383,21 +383,21 @@ validateTables(cases).then((all) => {
 ```
 
 ```js
-/*--- 忽略部分代码片段 ---*/
+/*--- 忽略部分代碼片段 ---*/
 methods: {
 
-      /** 切换tab选项卡的时候重置editableTable的滚动条状态 */
+      /** 切換tab選項卡的時候重置editableTable的滾動條狀態 */
       handleChangeTab(key) {
         this.$refs[`editableTable${key}`].resetScrollTop()
       }
 
 }
-/*--- 忽略部分代码片段 ---*/
+/*--- 忽略部分代碼片段 ---*/
 ```
 
-### slot(自定义插槽)如何使用？
+### slot(自定義插槽)如何使用？
 
-代码示例请看：[示例四(slot)](#示例四(slot))
+代碼示例請看：[示例四(slot)](#示例四(slot))
 
 ----------------------------------------------------------------------------------------
 
@@ -422,52 +422,52 @@ methods: {
 
 import { FormTypes } from '@/utils/JEditableTableUtil'
 
-/*--- 忽略部分代码片断 ---*/
+/*--- 忽略部分代碼片斷 ---*/
 columns: [
     {
-        title: '名称',
+        title: '名稱',
         key: 'name',
         type: FormTypes.input,
-        placeholder: '请输入${title}',
-        defaultValue: '称名',
-        // 表单验证规则
+        placeholder: '請輸入${title}',
+        defaultValue: '稱名',
+        // 表單驗證規則
         validateRules: [
             {
                 required: true, // 必填
-                message: '${title}不能为空' // 提示的文本
+                message: '${title}不能為空' // 提示的文本
             },
             {
-                pattern: /^[a-z|A-Z][a-z|A-Z\d_-]{0,}$/, // 正则
-                message: '${title}必须以字母开头，可包含数字、下划线、横杠'
+                pattern: /^[a-z|A-Z][a-z|A-Z\d_-]{0,}$/, // 正則
+                message: '${title}必須以字母開頭，可包含数字、下劃線、橫杠'
             }
         ]
     },
     {
-        title: '年龄',
+        title: '年齡',
         key: 'age',
         type: FormTypes.inputNumber,
-        placeholder: '请输入${title}',
+        placeholder: '請輸入${title}',
         defaultValue: 18,
-        validateRules: [{required: true, message: '${title}不能为空'}]
+        validateRules: [{required: true, message: '${title}不能為空'}]
     }
 ]
-/*--- 忽略部分代码片断 ---*/
+/*--- 忽略部分代碼片斷 ---*/
 ```
 
 ## 示例三
 
 ```js
-// 获取被逻辑删除的字段id
+// 獲取被邏輯刪除的字段id
 let deleteIds = this.$refs.editableTable.getDeleteIds();
-// 获取所有表单的值，并进行验证
+// 獲取所有表單的值，並進行驗證
 this.$refs.editableTable.getValues((error, values) => {
-    // 错误数 = 0 则代表验证通过
+    // 錯誤數 = 0 則代表驗證通過
     if (error === 0) {
-        this.$message.success('验证通过')
-        // 将通过后的数组提交到后台或自行进行其他处理
+        this.$message.success('驗證通過')
+        // 將通過後的數組提交到後台或自行進行其他處理
         console.log(deleteIds, values)
     } else {
-        this.$message.error('验证未通过')
+        this.$message.error('驗證未通過')
     }
 })
 ```
@@ -477,11 +477,11 @@ this.$refs.editableTable.getValues((error, values) => {
 ```html
 <template>
     <j-editable-table :columns="columns" :dataSource="dataSource">
-        <!-- 定义插槽 -->
-        <!-- 这种定义插槽的写法是vue推荐的新版写法（https://cn.vuejs.org/v2/guide/components-slots.html#具名插槽），旧版已被废弃的写法不再支持 -->
-        <!-- 若webstorm这样写报错，请看这篇文章：https://blog.csdn.net/lxq_9532/article/details/81870651 -->
+        <!-- 定義插槽 -->
+        <!-- 這種定義插槽的寫法是vue推薦的新版寫法（https://cn.vuejs.org/v2/guide/components-slots.html#具名插槽），舊版已被廢棄的寫法不再支持 -->
+        <!-- 若webstorm這樣寫報錯，請看這篇文章：https://blog.csdn.net/lxq_9532/article/details/81870651 -->
         <template v-slot:action="props">
-            <a @click="handleDelete(props)">删除</a>
+            <a @click="handleDelete(props)">刪除</a>
         </template>
     </j-editable-table>
 </template>
@@ -498,26 +498,26 @@ this.$refs.editableTable.getValues((error, values) => {
                         title: '操作',
                         key: 'action',
                         width: '8%',
-                        type: FormTypes.slot, // 定义该列为 自定义插值列 
-                        slotName: 'action' // slot 的名称，对应 v-slot 冒号后面和等号前面的内容
+                        type: FormTypes.slot, // 定義該列為 自定義插值列 
+                        slotName: 'action' // slot 的名稱，對應 v-slot 冒號後面和等號前面的內容
                     }
                 ]
             }
         },
         methods: {
-            /* a 标签的点击事件，删除当前选中的行 */
+            /* a 標籤的點擊事件，刪除當前選中的行 */
             handleDelete(props) {
-                // 参数解释
-                // props.index ：当前行的下标
-                // props.text ：当前值，可能是defaultValue定义的值，也可能是从dataSource中取出的值
-                // props.rowId ：当前选中行的id，如果是新增行则是临时id
-                // props.column ：当前操作的列
-                // props.getValue ：这是一个function，执行后可以获取当前行的所有值（禁止在template中使用）
+                // 參數解釋
+                // props.index ：當前行的下標
+                // props.text ：當前值，可能是defaultValue定義的值，也可能是從dataSource中取出的值
+                // props.rowId ：當前選中行的id，如果是新增行則是臨時id
+                // props.column ：當前操作的列
+                // props.getValue ：這是一個function，執行后可以獲取當前行的所有值（禁止在template中使用）
                 //                  例：const value = props.getValue()
-                // props.target ：触发当前事件的实例，可直接调用该实例内的方法（禁止在template中使用）
+                // props.target ：觸發當前事件的實例，可直接調用該實例內的方法（禁止在template中使用）
                 //                  例：target.add()
 
-                // 使用实例：删除当前操作的行
+                // 使用實例：刪除當前操作的行
                 let { rowId, target } = props
                 target.removeRows(rowId)
             }
@@ -529,28 +529,28 @@ this.$refs.editableTable.getValues((error, values) => {
 ## 示例五
 
 ```js
-// 该示例是自定义函数校验
+// 該示例是自定義函數校驗
 columns: [
     {
-        title: '字段名称',
+        title: '字段名稱',
         key: 'dbFieldName',
         type: FormTypes.input,
         defaultValue: '',
         validateRules: [
             {
-                // 自定义函数校验 handler
+                // 自定義函數校驗 handler
                 handler(type, value, row, column, callback, target) {
-                    // type 触发校验的类型（input、change、blur）
-                    // value 当前校验的值
-                    // callback(flag, message) 方法必须执行且只能执行一次
-                    //          flag = 是否通过了校验，不填写或者填写 null 代表不进行任何操作
-                    //          message = 提示的类型，默认使用配置的 message
-                    // target 行编辑的实例对象
+                    // type 觸發校驗的類型（input、change、blur）
+                    // value 當前校驗的值
+                    // callback(flag, message) 方法必須執行且只能執行一次
+                    //          flag = 是否通過了校驗，不填寫或者填寫 null 代表不進行任何操作
+                    //          message = 提示的類型，默認使用配置的 message
+                    // target 行編輯的實例對象
 
                     if (type === 'blur') {
 
                         if (value === 'abc') {
-                            callback(false, '${title}不能是abc') // false = 未通过，可以跟自定义提示
+                            callback(false, '${title}不能是abc') // false = 未通過，可以跟自定義提示
                             return
                         }
 
@@ -559,17 +559,17 @@ columns: [
                         for (let val of values) {
                             if (val['dbFieldName'] === value) {
                                 if (++count >= 2) {
-                                    callback(false, '${title}不能重复')
+                                    callback(false, '${title}不能重複')
                                     return
                                 }
                             }
                         }
-                        callback(true) // true = 通过验证
+                        callback(true) // true = 通過驗證
                     } else {
-                        callback() // 不填写或者填写 null 代表不进行任何操作
+                        callback() // 不填寫或者填寫 null 代表不進行任何操作
                     }
                 },
-                message: '${title}默认提示'
+                message: '${title}默認提示'
             }
         ]
     },

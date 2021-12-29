@@ -8,37 +8,37 @@ import {ajaxGetDictItems,getDictItemsFromCache} from '@/api/api'
 import {getAction} from '@/api/manage'
 
 /**
- * 获取字典数组
+ * 獲取字典數組
  * @param dictCode 字典Code
  * @return List<Map>
  */
 export async function initDictOptions(dictCode) {
   if (!dictCode) {
-    return '字典Code不能为空!';
+    return '字典Code不能為空!';
   }
-  //优先从缓存中读取字典配置
+  //優先從緩存中讀取字典配置
   if(getDictItemsFromCache(dictCode)){
     let res = {}
     res.result = getDictItemsFromCache(dictCode);
     res.success = true;
     return res;
   }
-  //获取字典数组
+  //獲取字典數組
   let res = await ajaxGetDictItems(dictCode);
   return res;
 }
 
 /**
- * 字典值替换文本通用方法
- * @param dictOptions  字典数组
+ * 字典值替換文本通用方法
+ * @param dictOptions  字典數組
  * @param text  字典值
  * @return String
  */
 export function filterDictText(dictOptions, text) {
-  // --update-begin----author:sunjianlei---date:20200323------for: 字典翻译 text 允许逗号分隔 ---
+  // --update-begin----author:sunjianlei---date:20200323------for: 字典翻譯 text 允許逗號分隔 ---
   if (text != null && Array.isArray(dictOptions)) {
     let result = []
-    // 允许多个逗号分隔，允许传数组对象
+    // 允許多個逗號分隔，允許傳數組對象
     let splitText
     if (Array.isArray(text)) {
       splitText = text
@@ -58,17 +58,17 @@ export function filterDictText(dictOptions, text) {
     return result.join(',')
   }
   return text
-  // --update-end----author:sunjianlei---date:20200323------for: 字典翻译 text 允许逗号分隔 ---
+  // --update-end----author:sunjianlei---date:20200323------for: 字典翻譯 text 允許逗號分隔 ---
 }
 
 /**
- * 字典值替换文本通用方法(多选)
- * @param dictOptions  字典数组
+ * 字典值替換文本通用方法(多選)
+ * @param dictOptions  字典數組
  * @param text  字典值
  * @return String
  */
 export function filterMultiDictText(dictOptions, text) {
-  //js “!text” 认为0为空，所以做提前处理
+  //js “!text” 認為0為空，所以做提前處理
   if(text === 0 || text === '0'){
     if(dictOptions){
       for (let dictItem of dictOptions) {
@@ -102,7 +102,7 @@ export function filterMultiDictText(dictOptions, text) {
 }
 
 /**
- * 翻译字段值对应的文本
+ * 翻譯字段值對應的文本
  * @param children
  * @returns string
  */
@@ -111,9 +111,9 @@ export function filterDictTextByCache(dictCode, key) {
     return;
   }
   if (!dictCode) {
-    return '字典Code不能为空!';
+    return '字典Code不能為空!';
   }
-   //优先从缓存中读取字典配置
+   //優先從緩存中讀取字典配置
   if(getDictItemsFromCache(dictCode)){
     let item = getDictItemsFromCache(dictCode).filter(t => t["value"] == key)
     if(item && item.length>0){
@@ -122,19 +122,19 @@ export function filterDictTextByCache(dictCode, key) {
   }
 }
 
-/** 通过code获取字典数组 */
+/** 通過code獲取字典數組 */
 export async function getDictItems(dictCode, params) {
-    //优先从缓存中读取字典配置
+    //優先從緩存中讀取字典配置
     if(getDictItemsFromCache(dictCode)){
       let desformDictItems = getDictItemsFromCache(dictCode).map(item => ({...item, label: item.text}))
       return desformDictItems;
     }
 
-    //缓存中没有，就请求后台
+    //緩存中沒有，就請求後台
     return await ajaxGetDictItems(dictCode, params).then(({success, result}) => {
       if (success) {
         let res = result.map(item => ({...item, label: item.text}))
-        console.log('------- 从DB中获取到了字典-------dictCode : ', dictCode, res)
+        console.log('------- 從DB中獲取到了字典-------dictCode : ', dictCode, res)
         return Promise.resolve(res)
       } else {
         console.error('getDictItems error: : ', res)

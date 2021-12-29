@@ -58,7 +58,7 @@ export function logout(logoutToken) {
 }
 
 /**
- * 第三方登录
+ * 第三方登錄
  * @param token
  * @param thirdType
  * @returns {*}
@@ -74,7 +74,7 @@ export function thirdLogin(token,thirdType) {
 }
 
 /**
- * 强退其他账号
+ * 強退其他賬號
  * @param token
  * @returns {*}
  */

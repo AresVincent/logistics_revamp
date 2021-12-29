@@ -3,12 +3,12 @@
       <a-input
         v-show="!departIds"
         @click="openSelect"
-        placeholder="请点击选择部门"
+        placeholder="請點擊選擇部門"
         v-model="departNames"
         readOnly
         :disabled="componentDisabled"
         class="jvxe-select-input">
-        <a-icon slot="prefix" type="cluster" title="部门选择控件"/>
+        <a-icon slot="prefix" type="cluster" title="部門選擇控件"/>
       </a-input>
       <j-select-depart-modal
         ref="innerDepartSelectModal"

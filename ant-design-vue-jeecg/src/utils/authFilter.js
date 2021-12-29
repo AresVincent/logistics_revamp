@@ -9,10 +9,10 @@ export function disabledAuthFilter(code,formData) {
 }
 
 function nodeDisabledAuth(code,formData){
-  //console.log("页面权限禁用--NODE--开始");
+  //console.log("頁面權限禁用--NODE--開始");
   let permissionList = [];
   try {
-    //console.log("页面权限禁用--NODE--开始",formData);
+    //console.log("頁面權限禁用--NODE--開始",formData);
     if (formData) {
       let bpmList = formData.permissionList;
       permissionList = bpmList.filter(item=>item.type=='2')
@@ -25,26 +25,26 @@ function nodeDisabledAuth(code,formData){
       return false;
     }
   } catch (e) {
-    //console.log("页面权限异常----", e);
+    //console.log("頁面權限異常----", e);
   }
   if (permissionList.length ==  0) {
     return false;
   }
 
-  console.log("流程节点页面权限禁用--NODE--开始");
+  console.log("流程節點頁面權限禁用--NODE--開始");
   let permissions = [];
   for (let item of permissionList) {
     if(item.type == '2') {
       permissions.push(item.action);
     }
   }
-  //console.log("页面权限----"+code);
+  //console.log("頁面權限----"+code);
   if (!permissions.includes(code)) {
     return false;
   }else{
     for (let item2 of permissionList) {
       if(code === item2.action){
-        console.log("流程节点页面权限禁用--NODE--生效");
+        console.log("流程節點頁面權限禁用--NODE--生效");
         return true;
       }
     }
@@ -53,7 +53,7 @@ function nodeDisabledAuth(code,formData){
 }
 
 function globalDisabledAuth(code){
-  //console.log("全局页面禁用权限--Global--开始");
+  //console.log("全局頁面禁用權限--Global--開始");
 
   let permissionList = [];
   let allPermissionList = [];
@@ -65,16 +65,16 @@ function globalDisabledAuth(code){
       permissionList.push(auth);
     }
   }
-  //console.log("页面禁用权限--Global--",sessionStorage.getItem(SYS_BUTTON_AUTH));
+  //console.log("頁面禁用權限--Global--",sessionStorage.getItem(SYS_BUTTON_AUTH));
   let allAuthList = JSON.parse(sessionStorage.getItem(SYS_BUTTON_AUTH) || "[]");
   for (let gauth of allAuthList) {
     if(gauth.type == '2') {
       allPermissionList.push(gauth);
     }
   }
-  //设置全局配置是否有命中
+  //設置全局配置是否有命中
   let  gFlag = false;//禁用命中
-  let invalidFlag = false;//无效命中
+  let invalidFlag = false;//無效命中
   if(allPermissionList != null && allPermissionList != "" && allPermissionList != undefined && allPermissionList.length > 0){
     for (let itemG of allPermissionList) {
       if(code === itemG.action){
@@ -100,13 +100,13 @@ function globalDisabledAuth(code){
       permissions.push(item.action);
     }
   }
-  //console.log("页面禁用权限----"+code);
+  //console.log("頁面禁用權限----"+code);
   if (!permissions.includes(code)) {
     return gFlag;
   }else{
     for (let item2 of permissionList) {
       if(code === item2.action){
-        //console.log("全局页面权限解除禁用--Global--生效");
+        //console.log("全局頁面權限解除禁用--Global--生效");
         gFlag = false;
       }
     }
@@ -128,9 +128,9 @@ export function colAuthFilter(columns,pre) {
 }
 
 /**
- * 【子表行编辑】实现两个功能：
- * 1、隐藏JEditableTable无权限的字段
- * 2、禁用JEditableTable无权限的字段
+ * 【子錶行編輯】實現兩個功能：
+ * 1、隱藏JEditableTable無權限的字段
+ * 2、禁用JEditableTable無權限的字段
  * @param columns
  * @param pre
  * @returns {*}
@@ -145,17 +145,17 @@ export function colAuthFilterJEditableTable(columns,pre) {
       return true
     }
 
-    //代码严谨处理，防止一个授权标识，配置多次
+    //代碼嚴謹處理，防止一個授權標識，配置多次
     if(oneAuth instanceof Array){
       oneAuth = oneAuth[0]
     }
 
-    //禁用逻辑
+    //禁用邏輯
     if (oneAuth.type == '2' && !oneAuth.isAuth) {
       item["disabled"] = true
       return true
     }
-    //隐藏逻辑逻辑
+    //隱藏邏輯邏輯
     if (oneAuth.type == '1' && !oneAuth.isAuth) {
       return false
     }
@@ -172,8 +172,8 @@ function hasColoum(item,authList){
   return true
 }
 
-//权限无效时不做控制，有效时控制，只能控制 显示不显示
-//根据授权码前缀获取未授权的列信息
+//權限無效時不做控制，有效時控制，只能控制 显示不显示
+//根據授權碼前綴獲取未授權的列信息
 export function getNoAuthCols(pre){
   if(!pre || pre.length==0){
     return []
@@ -184,15 +184,15 @@ export function getNoAuthCols(pre){
   //let authList = Vue.ls.get(USER_AUTH);
   let authList = JSON.parse(sessionStorage.getItem(USER_AUTH) || "[]");
   for (let auth of authList) {
-    //显示策略，有效状态
+    //显示策略，有效狀態
     if(auth.type == '1'&&startWith(auth.action,pre)) {
       permissionList.push(substrPre(auth.action,pre));
     }
   }
-  //console.log("页面禁用权限--Global--",sessionStorage.getItem(SYS_BUTTON_AUTH));
+  //console.log("頁面禁用權限--Global--",sessionStorage.getItem(SYS_BUTTON_AUTH));
   let allAuthList = JSON.parse(sessionStorage.getItem(SYS_BUTTON_AUTH) || "[]");
   for (let gauth of allAuthList) {
-    //显示策略，有效状态
+    //显示策略，有效狀態
     if(gauth.type == '1'&&gauth.status == '1'&&startWith(gauth.action,pre)) {
       allPermissionList.push(substrPre(gauth.action,pre));
     }
@@ -207,7 +207,7 @@ export function getNoAuthCols(pre){
 }
 
 /**
- * 将Online的行编辑按钮权限，添加至本地存储
+ * 將Online的行編輯按鈕權限，添加至本地存儲
  */
 export function addOnlineBtAuth2Storage(pre, authList){
   let allAuthList = JSON.parse(sessionStorage.getItem(SYS_BUTTON_AUTH) || "[]");
@@ -240,16 +240,16 @@ export function addOnlineBtAuth2Storage(pre, authList){
 
 
 /**
- * 额外增加方法【用于行编辑组件】
+ * 額外增加方法【用於行編輯組件】
  * date: 2020-04-05
  * author: scott
  * @param pre
  * @returns {*[]}
  */
 function getAllShowAndDisabledAuthCols(pre){
-  //用户拥有的权限
+  //用戶擁有的權限
   let userAuthList = JSON.parse(sessionStorage.getItem(USER_AUTH) || "[]");
-  //全部权限配置
+  //全部權限配置
   let allAuthList = JSON.parse(sessionStorage.getItem(SYS_BUTTON_AUTH) || "[]");
 
   let newAllAuthList = allAuthList.map(function (item, index) {

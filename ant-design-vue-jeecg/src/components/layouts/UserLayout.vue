@@ -4,25 +4,27 @@
       <div class="top">
         <div class="header">
           <a href="/">
-            <img src="~@/assets/logo.svg" class="logo" alt="logo">
-            <span class="title">Jeecg Boot</span>
+            <img src="~@/assets/KINGS logo - colour.svg" class="logo" alt="logo">
+<!--            <span class="title">Jeecg Boot</span>-->
           </a>
         </div>
         <div class="desc">
-          Jeecg Boot 是中国最具影响力的 企业级 低代码平台
+          King's Cargo Logistics Limtied 後台管理系統
+<!--          Jeecg Boot 是中國最具影響力的 企業級 低代碼平台-->
         </div>
       </div>
 
       <route-view></route-view>
 
       <div class="footer">
-        <div class="links">
-          <a href="http://doc.jeecg.com" target="_blank">帮助</a>
-          <a href="https://github.com/zhangdaiscott/jeecg-boot" target="_blank">隐私</a>
-          <a href="https://github.com/zhangdaiscott/jeecg-boot/blob/master/LICENSE" target="_blank">条款</a>
-        </div>
+<!--        <div class="links">-->
+<!--          <a href="http://doc.jeecg.com" target="_blank">幫助</a>-->
+<!--          <a href="https://github.com/zhangdaiscott/jeecg-boot" target="_blank">隱私</a>-->
+<!--          <a href="https://github.com/zhangdaiscott/jeecg-boot/blob/master/LICENSE" target="_blank">條款</a>-->
+<!--        </div>-->
         <div class="copyright">
-          Copyright &copy; 2019 <a href="http://www.jeecg.com" target="_blank">JEECG开源社区</a> 出品
+          Copyright &copy; 2021 <a href="https://www.kings-hk.com" target="_blank">King's Cargo Logistics Limtied</a>
+<!--          出品-->
         </div>
       </div>
     </div>
@@ -92,9 +94,9 @@
           }
 
           .logo {
-            height: 44px;
+            height: 100px;
             vertical-align: top;
-            margin-right: 16px;
+            margin-right: 0px;
             border-style: none;
           }
 
@@ -110,8 +112,8 @@
         .desc {
           font-size: 14px;
           color: rgba(0, 0, 0, 0.45);
-          margin-top: 12px;
-          margin-bottom: 40px;
+          margin-top: 80px;
+          margin-bottom: 10px;
         }
       }
 

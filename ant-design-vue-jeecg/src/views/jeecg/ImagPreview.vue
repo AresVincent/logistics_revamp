@@ -6,11 +6,11 @@
           <a-row>
             <a-col :span="18">
               <p>
-                <a-divider orientation="left">组一</a-divider>
+                <a-divider orientation="left">組一</a-divider>
               </p>
             </a-col>
             <a-col :span="6"></a-col>
-            <!-- 预览区域 -->
+            <!-- 預覽區域 -->
             <a-col :span="12">
               <template>
                 <div v-for="(fileDetail,index) in dataSource[0].fileDetails" :key="index">
@@ -29,11 +29,11 @@
           <a-row>
             <a-col :span="18">
               <p>
-                <a-divider orientation="left">组二</a-divider>
+                <a-divider orientation="left">組二</a-divider>
               </p>
             </a-col>
             <a-col :span="6"></a-col>
-            <!-- 预览区域 -->
+            <!-- 預覽區域 -->
             <a-col :span="12">
               <template>
                 <div v-for="(fileDetail,index) in dataSource[1].fileDetails" :key="index">
@@ -65,9 +65,9 @@
     },
     data() {
       return {
-        description: '图片预览页面',
+        description: '圖片預覽頁面',
         spinning:false,
-        //数据集
+        //數據集
         dataSource: [{
           key:0,
           fileDetails:[
@@ -75,7 +75,7 @@
               imgUrl:"https://static.jeecg.com/upload/test/3a4490d5d1cd495b826e528537a47cc1.jpg"
             },
             {
-              imgUrl:"https://static.jeecg.com/temp/国炬软件logo_1606575029126.png"
+              imgUrl:"https://static.jeecg.com/temp/國炬軟件logo_1606575029126.png"
             }
           ]
         },{

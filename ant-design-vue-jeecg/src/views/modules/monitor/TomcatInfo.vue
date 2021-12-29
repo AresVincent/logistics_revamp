@@ -4,7 +4,7 @@
 
       <a-alert type="info" :showIcon="true">
         <div slot="message">
-          上次更新时间：{{ this.time }}
+          上次更新時間：{{ this.time }}
           <a-divider type="vertical"/>
           <a @click="handleClickUpdate">立即更新</a>
         </div>
@@ -49,7 +49,7 @@
         loading: true,
         tableLoading: true,
         columns: [{
-          title: '参数',
+          title: '參數',
           width: '30%',
           dataIndex: 'param',
           scopedSlots: { customRender: 'param' }
@@ -59,33 +59,33 @@
           dataIndex: 'text',
           scopedSlots: { customRender: 'text' }
         }, {
-          title: '当前值',
+          title: '當前值',
           width: '30%',
           dataIndex: 'value',
           scopedSlots: { customRender: 'value' }
         }],
         dataSource: [],
-        // 列表通过 textInfo 渲染出颜色、描述和单位
+        // 列表通過 textInfo 渲染出顏色、描述和單位
         textInfo: {
-          'tomcat.sessions.created': { color: 'green', text: 'tomcat 已创建 session 数', unit: '个' },
-          'tomcat.sessions.expired': { color: 'green', text: 'tomcat 已过期 session 数', unit: '个' },
-          'tomcat.sessions.active.current': { color: 'green', text: 'tomcat 当前活跃 session 数', unit: '个' },
-          'tomcat.sessions.active.max': { color: 'green', text: 'tomcat 活跃 session 数峰值', unit: '个' },
-          'tomcat.sessions.rejected': { color: 'green', text: '超过session 最大配置后，拒绝的 session 个数', unit: '个' },
+          'tomcat.sessions.created': { color: 'green', text: 'tomcat 已創建 session 數', unit: '個' },
+          'tomcat.sessions.expired': { color: 'green', text: 'tomcat 已過期 session 數', unit: '個' },
+          'tomcat.sessions.active.current': { color: 'green', text: 'tomcat 當前活躍 session 數', unit: '個' },
+          'tomcat.sessions.active.max': { color: 'green', text: 'tomcat 活躍 session 數峰值', unit: '個' },
+          'tomcat.sessions.rejected': { color: 'green', text: '超過session 最大配置后，拒絕的 session 個數', unit: '個' },
 
-          'tomcat.global.sent': { color: 'purple', text: '发送的字节数', unit: 'bytes' },
-          'tomcat.global.request.max': { color: 'purple', text: 'request 请求最长耗时', unit: '秒' },
-          'tomcat.global.request.count': { color: 'purple', text: '全局 request 请求次数', unit: '次' },
-          'tomcat.global.request.totalTime': { color: 'purple', text: '全局 request 请求总耗时', unit: '秒' },
+          'tomcat.global.sent': { color: 'purple', text: '發送的字節數', unit: 'bytes' },
+          'tomcat.global.request.max': { color: 'purple', text: 'request 請求最長耗時', unit: '秒' },
+          'tomcat.global.request.count': { color: 'purple', text: '全局 request 請求次數', unit: '次' },
+          'tomcat.global.request.totalTime': { color: 'purple', text: '全局 request 請求總耗時', unit: '秒' },
 
-          'tomcat.servlet.request.max': { color: 'cyan', text: 'servlet 请求最长耗时', unit: '秒' },
-          'tomcat.servlet.request.count': { color: 'cyan', text: 'servlet 总请求次数', unit: '次' },
-          'tomcat.servlet.request.totalTime': { color: 'cyan', text: 'servlet 请求总耗时', unit: '秒' },
+          'tomcat.servlet.request.max': { color: 'cyan', text: 'servlet 請求最長耗時', unit: '秒' },
+          'tomcat.servlet.request.count': { color: 'cyan', text: 'servlet 總請求次數', unit: '次' },
+          'tomcat.servlet.request.totalTime': { color: 'cyan', text: 'servlet 請求總耗時', unit: '秒' },
 
-          'tomcat.threads.current': { color: 'pink', text: 'tomcat 当前线程数（包括守护线程）', unit: '个' },
-          'tomcat.threads.config.max': { color: 'pink', text: 'tomcat 配置的线程最大数', unit: '个' }
+          'tomcat.threads.current': { color: 'pink', text: 'tomcat 當前線程數（包括守護線程）', unit: '個' },
+          'tomcat.threads.config.max': { color: 'pink', text: 'tomcat 配置的線程最大數', unit: '個' }
         },
-        // 当一条记录中需要取出多条数据的时候需要配置该字段
+        // 當一條記錄中需要取出多條數據的時候需要配置該字段
         moreInfo: {
           'tomcat.global.request': ['.count', '.totalTime'],
           'tomcat.servlet.request': ['.count', '.totalTime']
@@ -103,20 +103,20 @@
 
       loadTomcatInfo() {
         this.tableLoading = true
-        this.time = moment().format('YYYY年MM月DD日 HH时mm分ss秒')
+        this.time = moment().format('YYYY年MM月DD日 HH時mm分ss秒')
         Promise.all([
           getAction('actuator/metrics/tomcat.sessions.created'),
           getAction('actuator/metrics/tomcat.sessions.expired'),
           getAction('actuator/metrics/tomcat.sessions.active.current'),
           getAction('actuator/metrics/tomcat.sessions.active.max'),
           getAction('actuator/metrics/tomcat.sessions.rejected'),
-          // 2.3.5.RELEASE 无此API
+          // 2.3.5.RELEASE 無此API
           // getAction('actuator/metrics/tomcat.global.sent'),
           // getAction('actuator/metrics/tomcat.global.request.max'),
           // getAction('actuator/metrics/tomcat.global.request'),
           // getAction('actuator/metrics/tomcat.threads.current'),
           // getAction('actuator/metrics/tomcat.threads.config.max')
-          // 2.1.3.RELEASE 无此API
+          // 2.1.3.RELEASE 無此API
           //getAction('actuator/metrics/tomcat.servlet.request'),
           // getAction('actuator/metrics/tomcat.servlet.request.max'),
         ]).then((res) => {
@@ -138,7 +138,7 @@
           this.dataSource = tomcatInfo
         }).catch((e) => {
           console.error(e)
-          this.$message.error('获取Tomcat信息失败')
+          this.$message.error('獲取Tomcat信息失敗')
         }).finally(() => {
           this.loading = false
           this.tableLoading = false

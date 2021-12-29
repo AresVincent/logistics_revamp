@@ -47,9 +47,9 @@
         <AList itemLayout="horizontal">
           <AListItem>
             <Meta>
-              <a slot="title">风格配色</a>
+              <a slot="title">風格配色</a>
               <span slot="description">
-                整体风格配色设置
+                整體風格配色設置
               </span>
             </Meta>
             <div slot="actions">
@@ -58,9 +58,9 @@
           </AListItem>
           <AListItem>
             <Meta>
-              <a slot="title">主题色</a>
+              <a slot="title">主題色</a>
               <span slot="description">
-                页面风格配色： <a domPropsInnerHTML={ this.colorFilter(this.primaryColor) }/>
+                頁面風格配色： <a domPropsInnerHTML={ this.colorFilter(this.primaryColor) }/>
               </span>
             </Meta>
           </AListItem>

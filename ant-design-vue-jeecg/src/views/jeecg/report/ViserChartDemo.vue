@@ -1,46 +1,46 @@
 <template>
   <a-card :bordered="false">
     <a-tabs defaultActiveKey="1">
-      <!-- 柱状图 -->
-      <a-tab-pane tab="柱状图" key="1">
-        <bar title="销售额排行" :dataSource="barData" :height="height"/>
+      <!-- 柱狀圖 -->
+      <a-tab-pane tab="柱狀圖" key="1">
+        <bar title="銷售額排行" :dataSource="barData" :height="height"/>
       </a-tab-pane>
-      <!-- 多列柱状图 -->
-      <a-tab-pane tab="多列柱状图" key="2">
-        <bar-multid title="多列柱状图" :height="height"/>
+      <!-- 多列柱狀圖 -->
+      <a-tab-pane tab="多列柱狀圖" key="2">
+        <bar-multid title="多列柱狀圖" :height="height"/>
       </a-tab-pane>
-      <!-- 迷你柱状图 -->
-      <a-tab-pane tab="迷你柱状图" key="3">
+      <!-- 迷你柱狀圖 -->
+      <a-tab-pane tab="迷你柱狀圖" key="3">
         <mini-bar :dataSource="barData" :width="400" :height="200"/>
       </a-tab-pane>
-      <!-- 面积图 -->
-      <a-tab-pane tab="面积图" key="4">
-        <area-chart-ty title="销售额排行" :dataSource="areaData" x="月份" y="销售额" :height="height"/>
+      <!-- 面積圖 -->
+      <a-tab-pane tab="面積圖" key="4">
+        <area-chart-ty title="銷售額排行" :dataSource="areaData" x="月份" y="銷售額" :height="height"/>
       </a-tab-pane>
-      <!-- 迷你面积图 -->
-      <a-tab-pane tab="迷你面积图" key="5">
+      <!-- 迷你面積圖 -->
+      <a-tab-pane tab="迷你面積圖" key="5">
         <div style="padding-top: 100px;width:600px;height:200px">
-          <mini-area :dataSource="areaData" x="月份" y="销售额" :height="height"/>
+          <mini-area :dataSource="areaData" x="月份" y="銷售額" :height="height"/>
         </div>
       </a-tab-pane>
-      <!-- 多行折线图 -->
-      <a-tab-pane tab="多行折线图" key="6">
-        <line-chart-multid title="多行折线图" :height="height"/>
+      <!-- 多行折線圖 -->
+      <a-tab-pane tab="多行折線圖" key="6">
+        <line-chart-multid title="多行折線圖" :height="height"/>
       </a-tab-pane>
-      <!-- 饼图 -->
-      <a-tab-pane tab="饼图" key="7">
-        <pie title="饼图" :height="height"/>
+      <!-- 餅圖 -->
+      <a-tab-pane tab="餅圖" key="7">
+        <pie title="餅圖" :height="height"/>
       </a-tab-pane>
-      <!-- 雷达图 -->
-      <a-tab-pane tab="雷达图" key="8">
-        <radar title="雷达图" :height="height"/>
+      <!-- 雷達圖 -->
+      <a-tab-pane tab="雷達圖" key="8">
+        <radar title="雷達圖" :height="height"/>
       </a-tab-pane>
-      <!-- 仪表盘 -->
-      <a-tab-pane tab="仪表盘" key="9">
-        <dash-chart-demo title="仪表盘" :value="9" :height="height"/>
+      <!-- 儀錶盤 -->
+      <a-tab-pane tab="儀錶盤" key="9">
+        <dash-chart-demo title="儀錶盤" :value="9" :height="height"/>
       </a-tab-pane>
-      <!-- 进度条 -->
-      <a-tab-pane tab="进度条" key="10">
+      <!-- 進度條 -->
+      <a-tab-pane tab="進度條" key="10">
         <mini-progress :percentage="30" :target="40" :height="30"/>
         <mini-progress :percentage="51" :target="60" :height="30" color="#FFA500"/>
         <mini-progress :percentage="66" :target="80" :height="30" color="#1E90FF"/>
@@ -49,11 +49,11 @@
       </a-tab-pane>
       <!-- 排名列表 -->
       <a-tab-pane tab="排名列表" key="11">
-        <rank-list title="门店销售排行榜" :list="rankList" style="width: 600px;margin: 0 auto;"/>
+        <rank-list title="門店銷售排行榜" :list="rankList" style="width: 600px;margin: 0 auto;"/>
       </a-tab-pane>
       <!-- TransferBar -->
       <a-tab-pane tab="TransferBar" key="12">
-        <transfer-bar title="年度消耗流量一览表" :data="barData" x="月份" y="流量(Mb)" :height="height"/>
+        <transfer-bar title="年度消耗流量一覽表" :data="barData" x="月份" y="流量(Mb)" :height="height"/>
       </a-tab-pane>
       <!-- Trend -->
       <a-tab-pane tab="Trend" key="13">
@@ -121,16 +121,16 @@
         }
         return data
       },
-      // 加载柱状图数据
+      // 加載柱狀圖數據
       loadBarData() {
         this.barData = this.loadData('x', 'y', 1000, 200)
       },
-      // 加载AreaChartTy的数据
+      // 加載AreaChartTy的數據
       loadAreaData() {
         this.areaData = this.loadData('x', 'y', 500, 100)
       },
       loadRankListData() {
-        this.rankList = this.loadData('name', 'total', 2000, 100, '北京朝阳 ', ' 号店')
+        this.rankList = this.loadData('name', 'total', 2000, 100, '北京朝陽 ', ' 號店')
       }
     }
   }

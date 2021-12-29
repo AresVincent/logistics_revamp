@@ -3,7 +3,7 @@
     <template v-if="this.departId">
       <a-spin :spinning="loading">
         <a-form>
-          <a-form-item label='所拥有的权限'>
+          <a-form-item label='所擁有的權限'>
             <a-tree
               checkable
               @check="onCheck"
@@ -26,17 +26,17 @@
       <div class="anty-form-btn">
         <a-dropdown style="float: left" :trigger="['click']" placement="topCenter">
           <a-menu slot="overlay">
-            <!-- 简化Tree逻辑，使用默认checkStrictly为false的行为，即默认父子关联
-            <a-menu-item key="1" @click="switchCheckStrictly(1)">父子关联</a-menu-item>
-            <a-menu-item key="2" @click="switchCheckStrictly(2)">取消关联</a-menu-item>
+            <!-- 簡化Tree邏輯，使用默認checkStrictly為false的行為，即默認父子關聯
+            <a-menu-item key="1" @click="switchCheckStrictly(1)">父子關聯</a-menu-item>
+            <a-menu-item key="2" @click="switchCheckStrictly(2)">取消關聯</a-menu-item>
             -->
-            <a-menu-item key="3" @click="checkALL">全部勾选</a-menu-item>
-            <a-menu-item key="4" @click="cancelCheckALL">取消全选</a-menu-item>
-            <a-menu-item key="5" @click="expandAll">展开所有</a-menu-item>
-            <a-menu-item key="6" @click="closeAll">合并所有</a-menu-item>
+            <a-menu-item key="3" @click="checkALL">全部勾選</a-menu-item>
+            <a-menu-item key="4" @click="cancelCheckALL">取消全選</a-menu-item>
+            <a-menu-item key="5" @click="expandAll">展開所有</a-menu-item>
+            <a-menu-item key="6" @click="closeAll">合併所有</a-menu-item>
           </a-menu>
           <a-button>
-            树操作 <a-icon type="up" />
+            樹操作 <a-icon type="up" />
           </a-button>
         </a-dropdown>
         <a-button style="float: right" @click="handleSubmit" type="primary" htmlType="button" icon="form">保存</a-button>
@@ -44,7 +44,7 @@
     </template>
     <a-card v-else :bordered="false" style="height:200px">
       <a-empty>
-        <span slot="description"> 请先选择一个部门! </span>
+        <span slot="description"> 請先選擇一個部門! </span>
       </a-empty>
     </a-card>
     <depart-datarule-modal ref="datarule"/>
@@ -69,7 +69,7 @@
         allTreeKeys:[],
         autoExpandParent: true,
         checkStrictly: false,
-        title:"部门权限配置",
+        title:"部門權限配置",
         visible: false,
         loading: false,
         selectedKeys:[]
@@ -83,7 +83,7 @@
         this.$refs.datarule.show(this.selectedKeys[0],this.departId)
       },
       onCheck (checkedKeys, { halfCheckedKeys }) {
-        // 保存选中的和半选中的，后面保存的时候合并提交
+        // 保存選中的和半選中的，後面保存的時候合併提交
         this.checkedKeys = checkedKeys
         this.halfCheckedKeys = halfCheckedKeys
       },
@@ -124,7 +124,7 @@
       handleSubmit() {
         let that = this;
         if(!that.departId){
-          this.$message.warning('请点击选择一个部门!')
+          this.$message.warning('請點擊選擇一個部門!')
         }
         let checkedKeys = [...that.checkedKeys, ...that.halfCheckedKeys]
         const permissionIds = checkedKeys.join(",")
@@ -164,9 +164,9 @@
           this.allTreeKeys = res.result.ids
           const keyLeafPairs = this.convertTreeListToKeyLeafPairs(this.treeData)
           queryDepartPermission({departId:this.departId}).then((res)=>{
-            // 过滤出 leaf node 即可，即选中的
-            // Tree组件中checkStrictly默认为false的时候，选中子节点，父节点会自动设置选中或半选中
-            // 保存 checkedKeys 以及 halfCheckedKeys 以便于未做任何操作时提交表单数据
+            // 過濾出 leaf node 即可，即選中的
+            // Tree組件中checkStrictly默認為false的時候，選中子節點，父節點會自動設置選中或半選中
+            // 保存 checkedKeys 以及 halfCheckedKeys 以便於未做任何操作時提交表單數據
             const checkedKeys = [...res.result].filter(key => {
               const keyLeafPair = keyLeafPairs.filter(item => item.key === key)[0]
               return keyLeafPair && keyLeafPair.isLeaf

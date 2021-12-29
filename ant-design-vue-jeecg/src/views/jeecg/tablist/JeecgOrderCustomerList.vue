@@ -1,7 +1,7 @@
 <template>
   <a-card :bordered="false">
 
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator" :md="24" :sm="24" style="margin: -25px 0px 10px 0px">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
 
@@ -9,7 +9,7 @@
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel">
             <a-icon type="delete"/>
-            删除
+            刪除
           </a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作
@@ -18,10 +18,10 @@
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -38,7 +38,7 @@
         @change="handleTableChange">
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">編輯</a>
           <a-divider type="vertical"/>
           <a-dropdown>
             <a class="ant-dropdown-link">
@@ -46,11 +46,11 @@
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a href="javascript:;" @click="handleDetail(record)">详情</a>
+                <a href="javascript:;" @click="handleDetail(record)">詳情</a>
               </a-menu-item>
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+                  <a>刪除</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -58,8 +58,8 @@
         </span>
       </a-table>
     </div>
-    <!-- table区域-end -->
-    <!-- 表单区域 -->
+    <!-- table區域-end -->
+    <!-- 表單區域 -->
     <jeecgOrderCustomer-modal ref="modalForm" @ok="modalFormOk"></jeecgOrderCustomer-modal>
   </a-card>
 </template>
@@ -79,18 +79,18 @@
     },
     data() {
       return {
-        description: '订单客户信息',
-        // 表头
+        description: '訂單客戶信息',
+        // 表頭
         columns: [
           {
-            title: '客户名',
+            title: '客戶名',
             align: "center",
             width: 100,
             dataIndex: 'name',
             key: 'name',
           },
           {
-            title: '性别',
+            title: '性別',
             align: "center",
             dataIndex: 'sex',
             customRender: function (text) {
@@ -104,12 +104,12 @@
             }
           },
           {
-            title: '身份证号码',
+            title: '身份證號碼',
             align: "center",
             dataIndex: 'idcard',
           },
           {
-            title: '电话',
+            title: '電話',
             dataIndex: 'telphone',
             align: "center",
           },
@@ -133,7 +133,7 @@
         if (arg === 1) {
           this.ipagination.current = 1;
         }
-        //update-begin--Author:kangxiaolin  Date:20190905 for：[442]主子表分开维护，生成的代码子表的分页改为真实的分页--------------------
+        //update-begin--Author:kangxiaolin  Date:20190905 for：[442]主子表分開維護，生成的代碼子表的分頁改為真實的分頁--------------------
         var params = this.getQueryParams();
         getAction(this.url.list, {orderId: params.mainId, pageNo : this.ipagination.current,
           pageSize :this.ipagination.pageSize}).then((res) => {
@@ -144,7 +144,7 @@
             this.dataSource = null;
           }
         })
-        //update-end--Author:kangxiaolin  Date:20190905 for：[442]主子表分开维护，生成的代码子表的分页改为真实的分页--------------------
+        //update-end--Author:kangxiaolin  Date:20190905 for：[442]主子表分開維護，生成的代碼子表的分頁改為真實的分頁--------------------
 
       },
       getOrderMain(orderId) {
@@ -153,7 +153,7 @@
       },
       handleAdd: function () {
         this.$refs.modalForm.add(this.queryParam.mainId);
-        this.$refs.modalForm.title = "添加客户信息";
+        this.$refs.modalForm.title = "添加客戶信息";
       },
     }
   }

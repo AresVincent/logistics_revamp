@@ -1,14 +1,14 @@
 <template>
   <a-modal
-    title="功能测试"
+    title="功能測試"
     :width="800"
     :visible="visible"
     @ok="visible=false"
     @cancel="visible=false"
   >
     <a-form :form="form">
-      <a-form-item label="功能测试">
-        <a-input placeholder="请输入" v-decorator="['test', validatorRules.test]" @change="e=>testValue=e.target.value"/>
+      <a-form-item label="功能測試">
+        <a-input placeholder="請輸入" v-decorator="['test', validatorRules.test]" @change="e=>testValue=e.target.value"/>
       </a-form-item>
     </a-form>
     <a-row type="flex" :gutter="8">

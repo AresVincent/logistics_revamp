@@ -3,9 +3,9 @@
     <div class="alert">
       <a-alert type="info" :show-icon="true">
         <div slot="message">
-          已选择&nbsp;<a style="font-weight: 600">{{ selectedRows.length }}</a>&nbsp;&nbsp;
+          已選擇&nbsp;<a style="font-weight: 600">{{ selectedRows.length }}</a>&nbsp;&nbsp;
           <template v-for="(item, index) in needTotalList" v-if="item.needTotal">
-            {{ item.title }} 总计&nbsp;
+            {{ item.title }} 總計&nbsp;
             <a :key="index" style="font-weight: 600">
               {{ item.customRender ? item.customRender(item.total) : item.total }}
             </a>&nbsp;&nbsp;
@@ -35,12 +35,12 @@
     props: {
 
       /**
-       * 数据加载函数，返回值必须是 Promise
-       * 默认情况下必须传递 data 参数；
-       *    如果使用本地数据渲染表格，业务代码中将获取本地数据包装为 Promise 即可。
+       * 數據加載函數，返回值必須是 Promise
+       * 默認情況下必須傳遞 data 參數；
+       *    如果使用本地數據渲染表格，業務代碼中將獲取本地數據包裝為 Promise 即可。
        *
-       * currentData 用于向外暴露表格当前渲染的数据，
-       * 业务开发中也可以直接修改 currentData，从而重新渲染表格（仅推荐用于客户端排序、数据过滤等场景）
+       * currentData 用於向外暴露表格當前渲染的數據，
+       * 業務開發中也可以直接修改 currentData，從而重新渲染表格（僅推薦用於客戶端排序、數據過濾等場景）
        */
       data: {
         type: Function,
@@ -87,7 +87,7 @@
         default: false
       },
       /**
-       * 表格大小风格，default, middle, small
+       * 表格大小風格，default, middle, small
        */
       size: {
         type: String,
@@ -121,7 +121,7 @@
       }
     },
     created () {
-      //数据请求参数配置
+      //數據請求參數配置
       this.paramsName = Object.assign(
         {},
         {
@@ -220,7 +220,7 @@
       pager () {
         return {
           total: this.total,
-          showTotal: total => `共有 ${total} 条`,
+          showTotal: total => `共有 ${total} 條`,
           showSizeChanger: true,
           pageSizeOptions: this.pageSizeOptions,
           pageSize: this.pageSize,

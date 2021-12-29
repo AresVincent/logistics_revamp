@@ -17,12 +17,12 @@ import JVxeDragSortCell from './components/cells/JVxeDragSortCell'
 import JVxeDepartSelectCell from './components/cells/JVxeDepartSelectCell'
 import JVxeUserSelectCell from './components/cells/JVxeUserSelectCell'
 
-//update--begin--autor:lvdandan-----date:20201216------for：JVxeTable--JVXETypes 【online】代码结构调整，便于online打包
-// 组件类型
+//update--begin--autor:lvdandan-----date:20201216------for：JVxeTable--JVXETypes 【online】代碼結構調整，便於online打包
+// 組件類型
 export const JVXETypes = jvxeTypes.JVXETypes
-//update--end--autor:lvdandan-----date:20201216------for：JVxeTable--JVXETypes 【online】代码结构调整，便于online打包
+//update--end--autor:lvdandan-----date:20201216------for：JVxeTable--JVXETypes 【online】代碼結構調整，便於online打包
 
-// 注册自定义组件
+// 註冊自定義組件
 export const AllCells = {
   ...mapCell(JVXETypes.normal, JVxeNormalCell),
   ...mapCell(JVXETypes.input, JVxeInputCell),
@@ -30,7 +30,7 @@ export const AllCells = {
   ...mapCell(JVXETypes.checkbox, JVxeCheckboxCell),
   ...mapCell(JVXETypes.select, JVxeSelectCell),
   ...mapCell(JVXETypes.selectSearch, JVxeSelectCell),  // 下拉搜索
-  ...mapCell(JVXETypes.selectMultiple, JVxeSelectCell),  // 下拉多选
+  ...mapCell(JVXETypes.selectMultiple, JVxeSelectCell),  // 下拉多選
   ...mapCell(JVXETypes.date, JVxeDateCell),
   ...mapCell(JVXETypes.datetime, JVxeDateCell),
   ...mapCell(JVXETypes.time, JVxeTimeCell),
@@ -45,7 +45,7 @@ export const AllCells = {
   ...mapCell(JVXETypes.departSelect, JVxeDepartSelectCell),
   ...mapCell(JVXETypes.userSelect, JVxeUserSelectCell)
 
-  /* hidden 是特殊的组件，不在这里注册 */
+  /* hidden 是特殊的組件，不在這裏註冊 */
 }
 
 export { installCell, mapCell }

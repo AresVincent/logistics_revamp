@@ -36,7 +36,7 @@
     },
     methods: {
       handleScanFileMessage (event) {
-        // 根据上面制定的结构来解析iframe内部发回来的数据
+        // 根據上面制定的結構來解析iframe內部發回來的數據
         const data = event.data;
          console.log(data);
       },

@@ -1,61 +1,61 @@
 <template>
   <a-card :bordered="false">
     <a-tabs defaultActiveKey="1" @change="callback">
-      <a-tab-pane tab="柱状图" key="1">
+      <a-tab-pane tab="柱狀圖" key="1">
         <a-row>
           <a-col :span="10">
             <a-radio-group :value="barType" @change="statisticst">
-              <a-radio-button value="year">按年统计</a-radio-button>
-              <a-radio-button value="month">按月统计</a-radio-button>
-              <a-radio-button value="category">按类别统计</a-radio-button>
-              <a-radio-button value="cabinet">按柜号统计</a-radio-button>
+              <a-radio-button value="year">按年統計</a-radio-button>
+              <a-radio-button value="month">按月統計</a-radio-button>
+              <a-radio-button value="category">按類別統計</a-radio-button>
+              <a-radio-button value="cabinet">按櫃號統計</a-radio-button>
             </a-radio-group>
           </a-col>
           <a-col :span="14">
             <a-form v-if="barType === 'month' && false" layout="inline" style="margin-top: -4px">
-              <a-form-item label="月份区间">
+              <a-form-item label="月份區間">
                 <a-range-picker
-                  :placeholder="['开始月份', '结束月份']"
+                  :placeholder="['開始月份', '結束月份']"
                   format="YYYY-MM"
                   :value="barValue"
                   :mode="barDate"
                   @panelChange="handleBarDate"/>
               </a-form-item>
-              <a-button style="margin-top: 2px" type="primary" icon="search" @click="queryDatebar">查询</a-button>
+              <a-button style="margin-top: 2px" type="primary" icon="search" @click="queryDatebar">查詢</a-button>
               <a-button style="margin-top: 2px;margin-left: 8px" type="primary" icon="reload" @click="searchReset">重置</a-button>
             </a-form>
           </a-col>
-          <bar class="statistic" title="档案统计" :dataSource="countSource" :height="400"/>
+          <bar class="statistic" title="檔案統計" :dataSource="countSource" :height="400"/>
         </a-row>
       </a-tab-pane>
 
-      <a-tab-pane tab="饼状图" key="2">
+      <a-tab-pane tab="餅狀圖" key="2">
         <a-row :gutter="24">
           <a-col :span="10">
             <a-radio-group :value="pieType" @change="statisticst">
-              <a-radio-button value="year">按年统计</a-radio-button>
-              <a-radio-button value="month">按月统计</a-radio-button>
-              <a-radio-button value="category">按类别统计</a-radio-button>
-              <a-radio-button value="cabinet">按柜号统计</a-radio-button>
+              <a-radio-button value="year">按年統計</a-radio-button>
+              <a-radio-button value="month">按月統計</a-radio-button>
+              <a-radio-button value="category">按類別統計</a-radio-button>
+              <a-radio-button value="cabinet">按櫃號統計</a-radio-button>
             </a-radio-group>
           </a-col>
           <a-col :span="14">
             <a-form v-if="pieType === 'month' && false" layout="inline" style="margin-top: -4px">
               <a-row :gutter="24">
-                <a-form-item label="月份区间">
+                <a-form-item label="月份區間">
                   <a-range-picker
-                    :placeholder="['开始月份', '结束月份']"
+                    :placeholder="['開始月份', '結束月份']"
                     format="YYYY-MM"
                     :value="pieValue"
                     :mode="pieDate"
                     @panelChange="handlePieDate"/>
                 </a-form-item>
-                <a-button style="margin-top: 2px" type="primary" icon="search" @click="queryDatepie">查询</a-button>
+                <a-button style="margin-top: 2px" type="primary" icon="search" @click="queryDatepie">查詢</a-button>
                 <a-button style="margin-top: 2px;margin-left: 8px" type="primary" icon="reload" @click="searchReset">重置</a-button>
               </a-row>
             </a-form>
           </a-col>
-          <pie class="statistic" title="档案统计" :dataSource="countSource" :height="450"/>
+          <pie class="statistic" title="檔案統計" :dataSource="countSource" :height="450"/>
         </a-row>
       </a-tab-pane>
     </a-tabs>
@@ -77,20 +77,20 @@
     },
     data() {
       return {
-        description: '档案统计页面',
-        // 查询条件
+        description: '檔案統計頁面',
+        // 查詢條件
         queryParam: {},
-        // 数据集
+        // 數據集
         countSource: [],
-        // 柱状图
+        // 柱狀圖
         barType: 'year',
         barDate: ['month', 'month'],
         barValue: [],
-        // 饼状图
+        // 餅狀圖
         pieType: 'year',
         pieDate: ['month', 'month'],
         pieValue: [],
-        // 统计图类型
+        // 統計圖類型
         tabStatus:"bar",
         url: {
           getYearCountInfo: "/mock/api/report/getYearCountInfo",
@@ -187,7 +187,7 @@
           }
         }
       },
-      // 选择统计图类别
+      // 選擇統計圖類別
       callback(key) {
         if(key === "1"){
           this.tabStatus = "bar";
@@ -197,7 +197,7 @@
           this.queryDatepie();
         }
       },
-      // 选择统计类别
+      // 選擇統計類別
       statisticst(e) {
         if(this.tabStatus === "pie"){
           this.pieType = e.target.value;
@@ -207,7 +207,7 @@
           this.queryDatebar();
         }
       },
-      // 按月份查询
+      // 按月份查詢
       queryDatebar(){
         if(this.barValue.length>0){
           this.getUrl(this.barType,{startTime:this.barValue[0]._d,endTime:this.barValue[1]._d});
@@ -231,7 +231,7 @@
         }
         this.getUrl(this.barType,{});
       },
-      // 选择请求url
+      // 選擇請求url
       getUrl(type,param){
         let url = "";
         if(type === 'year'){
@@ -248,7 +248,7 @@
         }
         this.loadDate(url,type,param);
       },
-      // 选择月份日期
+      // 選擇月份日期
       handleBarDate(value, mode) {
         this.barValue = value
         this.barDate = [

@@ -2,47 +2,47 @@
   <a-row :gutter="10">
     <a-col :md="leftColMd" :sm="24" style="margin-bottom: 20px">
       <a-card :bordered="false">
-        <!-- 查询区域 -->
+        <!-- 查詢區域 -->
         <div class="table-page-search-wrapper">
-          <!-- 搜索区域 -->
+          <!-- 搜索區域 -->
           <a-form layout="inline" @keyup.enter.native="searchQuery">
             <a-row :gutter="24">
               <a-col :md="12" :sm="8">
-                <a-form-item label="角色名称" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
+                <a-form-item label="角色名稱" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
                   <a-input placeholder="" v-model="queryParam.roleName"></a-input>
                 </a-form-item>
               </a-col>
               <!--
               <a-col :md="11" :sm="12">
-                <a-form-item label="创建时间" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
-                  <j-date v-model="queryParam.createTime_begin" :showTime="true" date-format="YYYY-MM-DD HH:mm:ss" style="width:45%" placeholder="请选择开始时间" ></j-date>
+                <a-form-item label="創建時間" :labelCol="{span: 5}" :wrapperCol="{span: 18, offset: 1}">
+                  <j-date v-model="queryParam.createTime_begin" :showTime="true" date-format="YYYY-MM-DD HH:mm:ss" style="width:45%" placeholder="請選擇開始時間" ></j-date>
                   <span style="width: 10px;">~</span>
-                  <j-date v-model="queryParam.createTime_end" :showTime="true" date-format="YYYY-MM-DD HH:mm:ss" style="width:45%" placeholder="请选择结束时间"></j-date>
+                  <j-date v-model="queryParam.createTime_end" :showTime="true" date-format="YYYY-MM-DD HH:mm:ss" style="width:45%" placeholder="請選擇結束時間"></j-date>
                 </a-form-item>
               </a-col>
               -->
               <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
             <a-col :md="12" :sm="24">
-               <a-button type="primary" @click="searchQuery" icon="search" style="margin-left: 21px">查询</a-button>
+               <a-button type="primary" @click="searchQuery" icon="search" style="margin-left: 21px">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
             </a-col>
           </span>
             </a-row>
           </a-form>
         </div>
-        <!-- 操作按钮区域 -->
+        <!-- 操作按鈕區域 -->
         <div class="table-operator" style="margin: 5px 0 10px 2px">
           <a-button @click="handleAdd" type="primary" icon="plus">新建角色</a-button>
-          <!--<a-button @click="handleEdit(model1)" type="primary" icon="plus">角色编辑</a-button>-->
+          <!--<a-button @click="handleEdit(model1)" type="primary" icon="plus">角色編輯</a-button>-->
           <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-            <a-button type="primary" icon="import">导入</a-button>
+            <a-button type="primary" icon="import">導入</a-button>
           </a-upload>
-          <a-button type="primary" icon="download" @click="handleExportXls('角色管理')">导出</a-button>
+          <a-button type="primary" icon="download" @click="handleExportXls('角色管理')">導出</a-button>
         </div>
 
         <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
           <i class="anticon anticon-info-circle ant-alert-icon">
-          </i> 已选择 <a><b>{{ selectedRowKeys1.length }}</b></a>项
+          </i> 已選擇 <a><b>{{ selectedRowKeys1.length }}</b></a>項
           <a style="margin-left: 24px" @click="onClearSelected1">清空</a>
         </div>
 
@@ -60,7 +60,7 @@
             :rowSelection="{selectedRowKeys: selectedRowKeys1, onChange: onSelectChange1, type:'radio'}"
             @change="handleTableChange">
           <span slot="action" slot-scope="text, record">
-            <a @click="handleOpen(record)">用户</a>
+            <a @click="handleOpen(record)">用戶</a>
             <a-divider type="vertical"/>
 
             <a-dropdown>
@@ -69,14 +69,14 @@
               </a>
               <a-menu slot="overlay">
                 <a-menu-item>
-                  <a @click="handlePerssion(record.id)">授权</a>
+                  <a @click="handlePerssion(record.id)">授權</a>
                 </a-menu-item>
                 <a-menu-item>
-                  <a @click="handleEdit(record)">编辑</a>
+                  <a @click="handleEdit(record)">編輯</a>
                 </a-menu-item>
                 <a-menu-item>
-                  <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete1(record.id)">
-                    <a>删除</a>
+                  <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete1(record.id)">
+                    <a>刪除</a>
                   </a-popconfirm>
                 </a-menu-item>
               </a-menu>
@@ -84,7 +84,7 @@
         </span>
           </a-table>
         </div>
-        <!-- 右侧的角色权限配置 -->
+        <!-- 右側的角色權限配置 -->
         <user-role-modal ref="modalUserRole"></user-role-modal>
         <role-modal ref="modalForm" @ok="modalFormOk"></role-modal>
       </a-card>
@@ -94,19 +94,19 @@
         <div style="text-align: right;">
           <a-icon type="close-circle" @click="hideUserList" />
         </div>
-        <!-- 查询区域 -->
+        <!-- 查詢區域 -->
         <div class="table-page-search-wrapper">
           <a-form layout="inline">
             <a-row :gutter="24">
 
               <a-col :md="12" :sm="12">
-                <a-form-item label="用户账号">
+                <a-form-item label="用戶賬號">
                   <a-input placeholder="" v-model="queryParam2.username"></a-input>
                 </a-form-item>
               </a-col>
               <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
             <a-col :md="9" :sm="24">
-             <a-button type="primary" @click="searchQuery2" icon="search" style="margin-left: 21px">查询</a-button>
+             <a-button type="primary" @click="searchQuery2" icon="search" style="margin-left: 21px">查詢</a-button>
               <a-button type="primary" @click="searchReset2" icon="reload" style="margin-left: 8px">重置</a-button>
 
             </a-col>
@@ -114,17 +114,17 @@
             </a-row>
           </a-form>
         </div>
-        <!-- 操作按钮区域 -->
+        <!-- 操作按鈕區域 -->
         <div class="table-operator" :md="24" :sm="24">
-          <a-button @click="handleAdd2" type="primary" icon="plus" style="margin-top: 16px">新增用户</a-button>
-          <!--<a-button @click="handleEdit2" type="primary" icon="edit" style="margin-top: 16px">用户编辑</a-button>-->
-          <a-button @click="handleAddUserRole" type="primary" icon="plus" style="margin-top: 16px">已有用户</a-button>
+          <a-button @click="handleAdd2" type="primary" icon="plus" style="margin-top: 16px">新增用戶</a-button>
+          <!--<a-button @click="handleEdit2" type="primary" icon="edit" style="margin-top: 16px">用戶編輯</a-button>-->
+          <a-button @click="handleAddUserRole" type="primary" icon="plus" style="margin-top: 16px">已有用戶</a-button>
 
           <a-dropdown v-if="selectedRowKeys2.length > 0">
             <a-menu slot="overlay">
               <a-menu-item key="1" @click="batchDel2">
                 <a-icon type="delete"/>
-                删除
+                刪除
               </a-menu-item>
             </a-menu>
             <a-button style="margin-left: 8px"> 批量操作
@@ -132,11 +132,11 @@
             </a-button>
           </a-dropdown>
         </div>
-        <!-- table区域-begin -->
+        <!-- table區域-begin -->
         <div>
           <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-            <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{
-            selectedRowKeys2.length }}</a>项
+            <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{
+            selectedRowKeys2.length }}</a>項
             <a style="margin-left: 24px" @click="onClearSelected2">清空</a>
           </div>
           <a-table
@@ -152,7 +152,7 @@
             :rowSelection="{selectedRowKeys: selectedRowKeys2, onChange: onSelectChange2}"
             @change="handleTableChange2">
            <span slot="action" slot-scope="text, record">
-           <a @click="handleEdit2(record)">编辑</a>
+           <a @click="handleEdit2(record)">編輯</a>
           <a-divider type="vertical"/>
           <a-dropdown>
             <a class="ant-dropdown-link">
@@ -160,8 +160,8 @@
             </a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete2(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete2(record.id)">
+                  <a>刪除</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -169,7 +169,7 @@
         </span>
           </a-table>
         </div>
-        <!-- 表单区域 -->
+        <!-- 表單區域 -->
         <role-modal ref="modalForm" @ok="modalFormOk"></role-modal>
         <user-modal ref="modalForm2" @ok="modalFormOk2"></user-modal>
         <Select-User-Modal ref="selectUserModal" @selectFinished="selectOK"></Select-User-Modal>
@@ -211,7 +211,7 @@
           pageSize: 10,
           pageSizeOptions: ['10', '20', '30'],
           showTotal: (total, range) => {
-            return range[0] + '-' + range[1] + ' 共' + total + '条'
+            return range[0] + '-' + range[1] + ' 共' + total + '條'
           },
           showQuickJumper: true,
           showSizeChanger: true,
@@ -222,7 +222,7 @@
           pageSize: 10,
           pageSizeOptions: ['10', '20', '30'],
           showTotal: (total, range) => {
-            return range[0] + '-' + range[1] + ' 共' + total + '条'
+            return range[0] + '-' + range[1] + ' 共' + total + '條'
           },
           showQuickJumper: true,
           showSizeChanger: true,
@@ -249,17 +249,17 @@
         columns:
           [
             {
-              title: '角色编码',
+              title: '角色編碼',
               align: 'center',
               dataIndex: 'roleCode'
             },
             {
-              title: '角色名称',
+              title: '角色名稱',
               align: 'center',
               dataIndex: 'roleName'
             },
             {
-              title: '创建时间',
+              title: '創建時間',
               dataIndex: 'createTime',
               align:"center",
               sorter: true,
@@ -275,19 +275,19 @@
             }
           ],
         columns2: [{
-          title: '用户账号',
+          title: '用戶賬號',
           align: 'center',
           dataIndex: 'username',
           width: 120
         },
           {
-            title: '用户名称',
+            title: '用戶名稱',
             align: 'center',
             width: 100,
             dataIndex: 'realname'
           },
           {
-            title: '状态',
+            title: '狀態',
             align: 'center',
             width: 80,
             dataIndex: 'status_dictText'
@@ -301,9 +301,9 @@
             width: 120
           }],
 
-        // 高级查询参数
+        // 高級查詢參數
         superQueryParams2: '',
-        // 高级查询拼接条件
+        // 高級查詢拼接條件
         superQueryMatchType2: 'and',
         url: {
           list: '/sys/role/list',
@@ -354,7 +354,7 @@
       },
 
       getQueryParams2() {
-        //获取查询条件
+        //獲取查詢條件
         let sqp = {}
         if (this.superQueryParams2) {
           sqp['superQueryParams'] = encodeURI(this.superQueryParams2)
@@ -367,7 +367,7 @@
         return filterObj(param)
       },
       getQueryField2() {
-        //TODO 字段权限控制
+        //TODO 字段權限控制
         var str = 'id,'
         this.columns2.forEach(function(value) {
           str += ',' + value.dataIndex
@@ -375,13 +375,13 @@
         return str
       },
       handleEdit2: function(record) {
-        this.$refs.modalForm2.title = '编辑'
+        this.$refs.modalForm2.title = '編輯'
         this.$refs.modalForm2.roleDisabled = true
         this.$refs.modalForm2.edit(record)
       },
       handleAdd2: function() {
         if (this.currentRoleId == '') {
-          this.$message.error('请选择一个角色!')
+          this.$message.error('請選擇一個角色!')
         } else {
           this.$refs.modalForm2.roleDisabled = true
           this.$refs.modalForm2.title = '新增'
@@ -389,20 +389,20 @@
         }
       },
       modalFormOk2() {
-        // 新增/修改 成功时，重载列表
+        // 新增/修改 成功時，重載列表
         this.loadData2()
       },
       loadData2(arg) {
         if (!this.url.list2) {
-          this.$message.error('请设置url.list2属性!')
+          this.$message.error('請設置url.list2屬性!')
           return
         }
-        //加载数据 若传入参数1则加载第一页的内容
+        //加載數據 若傳入參數1則加載第一頁的內容
         if (arg === 1) {
           this.ipagination2.current = 1
         }
         if (this.currentRoleId === '') return
-        let params = this.getQueryParams2()//查询条件
+        let params = this.getQueryParams2()//查詢條件
         params.roleId = this.currentRoleId
         this.loading2 = true
         getAction(this.url.list2, params).then((res) => {
@@ -422,7 +422,7 @@
       },
       handleDelete2: function(id) {
         if (!this.url.delete2) {
-          this.$message.error('请设置url.delete2属性!')
+          this.$message.error('請設置url.delete2屬性!')
           return
         }
         var that = this
@@ -438,11 +438,11 @@
       batchDel2: function() {
 
         if (!this.url.deleteBatch2) {
-          this.$message.error('请设置url.deleteBatch2属性!')
+          this.$message.error('請設置url.deleteBatch2屬性!')
           return
         }
         if (this.selectedRowKeys2.length <= 0) {
-          this.$message.warning('请选择一条记录！')
+          this.$message.warning('請選擇一條記錄！')
           return
         } else {
           var ids = ''
@@ -452,8 +452,8 @@
           var that = this
           console.log(this.currentDeptId)
           this.$confirm({
-            title: '确认删除',
-            content: '是否删除选中数据?',
+            title: '確認刪除',
+            content: '是否刪除選中數據?',
             onOk: function() {
               deleteAction(that.url.deleteBatch2, { roleId: that.currentRoleId, userIds: ids }).then((res) => {
                 if (res.success) {
@@ -488,7 +488,7 @@
 
       handleAddUserRole() {
         if (this.currentRoleId == '') {
-          this.$message.error('请选择一个角色!')
+          this.$message.error('請選擇一個角色!')
         } else {
           this.$refs.selectUserModal.visible = true
         }
@@ -503,10 +503,10 @@
       },
       /*handleEdit: function(record) {
         if (this.currentRoleId == '') {
-          this.$message.error('请选择一个角色!')
+          this.$message.error('請選擇一個角色!')
         } else {
           this.$refs.modalForm.edit(record)
-          this.$refs.modalForm.title = '编辑'
+          this.$refs.modalForm.title = '編輯'
         }
       },*/
       searchQuery2() {
@@ -517,8 +517,8 @@
         this.loadData2(1)
       },
       handleTableChange2(pagination, filters, sorter) {
-        //分页、排序、筛选变化时触发
-        //TODO 筛选
+        //分頁、排序、篩選變化時觸發
+        //TODO 篩選
         if (Object.keys(sorter).length > 0) {
           this.isorter2.column = sorter.field
           this.isorter2.order = 'ascend' == sorter.order ? 'asc' : 'desc'
@@ -537,7 +537,7 @@
   }
 </script>
 <style scoped>
-  /** Button按钮间距 */
+  /** Button按鈕間距 */
   .ant-btn {
     margin-left: 8px
   }

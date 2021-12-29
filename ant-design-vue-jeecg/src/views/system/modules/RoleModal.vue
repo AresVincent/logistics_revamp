@@ -6,20 +6,20 @@
     :confirmLoading="confirmLoading"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭"
+    cancelText="關閉"
     wrapClassName="ant-modal-cust-warp"
     style="top:5%;height: 85%;overflow-y: hidden">
 
     <a-spin :spinning="confirmLoading">
       <a-form-model ref="form"  v-bind="layout"  :model="model" :rules="validatorRules">
-        <a-form-model-item label="角色编码" required prop="roleCode">
-          <a-input v-model="model.roleCode" :disabled="roleDisabled"  placeholder="请输入角色编码"/>
+        <a-form-model-item label="角色編碼" required prop="roleCode">
+          <a-input v-model="model.roleCode" :disabled="roleDisabled"  placeholder="請輸入角色編碼"/>
         </a-form-model-item>
-        <a-form-model-item label="角色名称" required prop="roleName">
-          <a-input v-model="model.roleName" placeholder="请输入角色名称"/>
+        <a-form-model-item label="角色名稱" required prop="roleName">
+          <a-input v-model="model.roleName" placeholder="請輸入角色名稱"/>
         </a-form-model-item>
         <a-form-model-item label="描述" prop="description">
-          <a-textarea :rows="5" v-model="model.description" placeholder="请输入角色描述"/>
+          <a-textarea :rows="5" v-model="model.description" placeholder="請輸入角色描述"/>
         </a-form-model-item>
       </a-form-model>
     </a-spin>
@@ -43,22 +43,22 @@
         confirmLoading: false,
         validatorRules:{
           roleName: [
-            { required: true, message: '请输入角色名称!' },
-            { min: 2, max: 30, message: '长度在 2 到 30 个字符', trigger: 'blur' }
+            { required: true, message: '請輸入角色名稱!' },
+            { min: 2, max: 30, message: '長度在 2 到 30 個字符', trigger: 'blur' }
           ],
           roleCode: [
-            { required: true, message: '请输入角色名称!'},
-            { min: 0, max: 64, message: '长度不超过 64 个字符', trigger: 'blur' },
+            { required: true, message: '請輸入角色名稱!'},
+            { min: 0, max: 64, message: '長度不超過 64 個字符', trigger: 'blur' },
             { validator: this.validateRoleCode}
           ],
           description: [
-            { min: 0, max: 126, message: '长度不超过 126 个字符', trigger: 'blur' }
+            { min: 0, max: 126, message: '長度不超過 126 個字符', trigger: 'blur' }
           ]
         },
       }
     },
     created () {
-      //备份model原始值
+      //備份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
     },
     methods: {
@@ -68,7 +68,7 @@
       edit (record) {
         this.model = Object.assign({}, record);
         this.visible = true;
-        //编辑页面禁止修改角色编码
+        //編輯頁面禁止修改角色編碼
         if(this.model.id){
           this.roleDisabled = true;
         }else{
@@ -82,7 +82,7 @@
       },
       handleOk () {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;
@@ -113,7 +113,7 @@
       },
       validateRoleCode(rule, value, callback){
         if(/[\u4E00-\u9FA5]/g.test(value)){
-          callback("角色编码不可输入汉字!");
+          callback("角色編碼不可輸入漢字!");
         }else{
           let params = {
             tableName: "sys_role",

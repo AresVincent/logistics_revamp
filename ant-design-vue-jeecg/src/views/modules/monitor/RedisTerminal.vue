@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>Redis终端</div>
+    <div>Redis終端</div>
   </div>
 </template>
 <script>

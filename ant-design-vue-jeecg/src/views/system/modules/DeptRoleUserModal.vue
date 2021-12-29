@@ -28,19 +28,19 @@
           </a-col>
         </a-form-item>
       </a-form>
-      <div v-else><h3>无可配置角色!</h3></div>
+      <div v-else><h3>無可配置角色!</h3></div>
     </a-spin>
     <div class="drawer-bootom-button">
       <a-dropdown style="float: left" :trigger="['click']" placement="topCenter">
         <a-menu slot="overlay">
-          <a-menu-item key="1" @click="checkALL">全部勾选</a-menu-item>
-          <a-menu-item key="2" @click="cancelCheckALL">取消全选</a-menu-item>
+          <a-menu-item key="1" @click="checkALL">全部勾選</a-menu-item>
+          <a-menu-item key="2" @click="cancelCheckALL">取消全選</a-menu-item>
         </a-menu>
         <a-button>
           操作 <a-icon type="up" />
         </a-button>
       </a-dropdown>
-      <a-popconfirm  title="确定放弃编辑？" @confirm="close" okText="确定" cancelText="取消">
+      <a-popconfirm  title="確定放棄編輯？" @confirm="close" okText="確定" cancelText="取消">
         <a-button style="margin-right: .8rem">取消</a-button>
       </a-popconfirm>
       <a-button @click="handleSubmit(true)" type="primary">保存</a-button>
@@ -61,7 +61,7 @@
     data() {
       return {
         currentDeptId:"",
-        title: "部门角色分配",
+        title: "部門角色分配",
         visible: false,
         model: {},
         labelCol: {
@@ -120,12 +120,12 @@
       },
       handleSubmit() {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         that.confirmLoading = true;
         let  httpurl = this.url.add;
         let  method = 'post';
         let formData = Object.assign(this.model, {});
-        //时间格式化
+        //時間格式化
         formData.userId = this.userId;
         formData.newRoleId=this.newRoleId;
         formData.oldRoleId=this.oldRoleId;
@@ -164,7 +164,7 @@
         this.designNameValue=[];
         this.newRoleId="";
       },
-      /** 加载desform */
+      /** 加載desform */
       loadDesformList() {
         getAction(this.url.getDeptRoleList, { departId: this.currentDeptId, userId:this.userId }).then((res) => {
           if (res.success) {

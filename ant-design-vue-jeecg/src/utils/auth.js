@@ -1,5 +1,5 @@
 /**
- * 弃用
+ * 棄用
  */
 import { setStore, getStore, clearStore } from "@/utils/storage"
 

@@ -1,29 +1,29 @@
 <template>
   <j-modal
     centered
-    :title="name + '选择'"
+    :title="name + '選擇'"
     :width="width"
     :visible="visible"
     switchFullscreen
     @ok="handleOk"
     @cancel="close"
-    cancelText="关闭">
+    cancelText="關閉">
 
     <a-row :gutter="18">
       <a-col :span="16">
-        <!-- 查询区域 -->
+        <!-- 查詢區域 -->
         <a-form layout="inline" class="j-inline-form">
-          <!-- 固定条件 -->
+          <!-- 固定條件 -->
           <a-form-item :label="(queryParamText||name)">
-            <a-input v-model="queryParam[queryParamCode||valueKey]" :placeholder="'请输入' + (queryParamText||name)" @pressEnter="searchQuery"/>
+            <a-input v-model="queryParam[queryParamCode||valueKey]" :placeholder="'請輸入' + (queryParamText||name)" @pressEnter="searchQuery"/>
           </a-form-item>
-          <!-- 动态生成的查询条件 -->
+          <!-- 動態生成的查詢條件 -->
           <j-select-biz-query-item v-if="queryConfig.length>0" v-show="showMoreQueryItems" :queryParam="queryParam" :queryConfig="queryConfig" @pressEnter="searchQuery"/>
-          <!-- 按钮 -->
-          <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+          <!-- 按鈕 -->
+          <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
           <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
           <a v-if="queryConfig.length>0" @click="showMoreQueryItems=!showMoreQueryItems" style="margin-left: 8px">
-            {{ showMoreQueryItems ? '收起' : '展开' }}
+            {{ showMoreQueryItems ? '收起' : '展開' }}
             <a-icon :type="showMoreQueryItems ? 'up' : 'down'"/>
           </a>
         </a-form>
@@ -44,11 +44,11 @@
 
       </a-col>
       <a-col :span="8">
-        <a-card :title="'已选' + name" :bordered="false" :head-style="{padding:0}" :body-style="{padding:0}">
+        <a-card :title="'已選' + name" :bordered="false" :head-style="{padding:0}" :body-style="{padding:0}">
 
           <a-table size="middle" :rowKey="rowKey" bordered v-bind="selectedTable">
               <span slot="action" slot-scope="text, record, index">
-                <a @click="handleDeleteSelected(record, index)">删除</a>
+                <a @click="handleDeleteSelected(record, index)">刪除</a>
               </span>
           </a-table>
 
@@ -62,8 +62,9 @@
   import { getAction } from '@/api/manage'
   import Ellipsis from '@/components/Ellipsis'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
-  import { cloneObject, pushIfNotExist } from '@/utils/util'
+  import { pushIfNotExist } from '@/utils/util'
   import JSelectBizQueryItem from './JSelectBizQueryItem'
+  import {cloneDeep} from 'lodash'
 
   export default {
     name: 'JSelectBizComponentModal',
@@ -100,7 +101,7 @@
         required: true,
         default: ''
       },
-      // 根据 value 获取显示文本的地址，例如存的是 username，可以通过该地址获取到 realname
+      // 根據 value 獲取显示文本的地址，例如存的是 username，可以通過該地址獲取到 realname
       valueUrl: {
         type: String,
         default: ''
@@ -114,17 +115,17 @@
         required: true,
         default: () => []
       },
-      // 查询条件Code
+      // 查詢條件Code
       queryParamCode: {
         type: String,
         default: null
       },
-      // 查询条件文字
+      // 查詢條件文字
       queryParamText: {
         type: String,
         default: null
       },
-      // 查询配置
+      // 查詢配置
       queryConfig: {
         type: Array,
         default: () => []
@@ -133,7 +134,7 @@
         type: String,
         default: 'id'
       },
-      // 过长裁剪长度，设置为 -1 代表不裁剪
+      // 過長裁剪長度，設置為 -1 代表不裁剪
       ellipsisLength: {
         type: Number,
         default: 12
@@ -142,7 +143,7 @@
     data() {
       return {
         innerValue: [],
-        // 已选择列表
+        // 已選擇列表
         selectedTable: {
           pagination: false,
           scroll: { y: 240 },
@@ -157,13 +158,13 @@
         },
         renderEllipsis: (value) => (<ellipsis length={this.ellipsisLength}>{value}</ellipsis>),
         url: { list: this.listUrl },
-        /* 分页参数 */
+        /* 分頁參數 */
         ipagination: {
           current: 1,
           pageSize: 5,
           pageSizeOptions: ['5', '10', '20', '30'],
           showTotal: (total, range) => {
-            return range[0] + '-' + range[1] + ' 共' + total + '条'
+            return range[0] + '-' + range[1] + ' 共' + total + '條'
           },
           showQuickJumper: true,
           showSizeChanger: true,
@@ -175,13 +176,26 @@
       }
     },
     computed: {
-      // 表头
+      // 表頭
       innerColumns() {
-        let columns = cloneObject(this.columns)
+        let columns = cloneDeep(this.columns)
         columns.forEach(column => {
-          // 给所有的列加上过长裁剪
+          // 給所有的列加上過長裁剪
           if (this.ellipsisLength !== -1) {
-            column.customRender = (text) => this.renderEllipsis(text)
+            // JSelectBizComponent columns 建議開放customRender等方法類配置
+            // https://github.com/jeecgboot/jeecg-boot/issues/3203
+            let myCustomRender = column.customRender
+            column.customRender = (text, record, index) => {
+              let value = text
+              if (typeof myCustomRender === 'function') {
+                // noinspection JSVoidFunctionReturnValueUsed
+                value = myCustomRender(text, record, index)
+              }
+              if (typeof value === 'string') {
+                return this.renderEllipsis(value)
+              }
+              return value
+            }
           }
         })
         return columns
@@ -192,7 +206,7 @@
         deep: true,
         immediate: true,
         handler(val) {
-          this.innerValue = cloneObject(val)
+          this.innerValue = cloneDeep(val)
           this.selectedRowKeys = []
           this.valueWatchHandler(val)
           this.queryOptionsByValue(val)
@@ -209,11 +223,11 @@
         immediate: true,
         deep: true,
         handler(val) {
-          //update--begin--autor:scott-----date:20200927------for：选取职务名称出现全选 #1753-----
+          //update--begin--autor:scott-----date:20200927------for：選取職務名稱出現全選 #1753-----
           if(this.innerValue){
             this.innerValue.length=0;
           }
-          //update--end--autor:scott-----date:20200927------for：选取职务名称出现全选 #1753-----
+          //update--end--autor:scott-----date:20200927------for：選取職務名稱出現全選 #1753-----
           this.selectedTable.dataSource = val.map(key => {
             for (let data of this.dataSource) {
               if (data[this.rowKey] === key) {
@@ -227,7 +241,7 @@
                 return data
               }
             }
-            console.warn('未找到选择的行信息，key：' + key)
+            console.warn('未找到選擇的行信息，key：' + key)
             return {}
           })
         },
@@ -236,7 +250,7 @@
 
     methods: {
 
-      /** 关闭弹窗 */
+      /** 關閉彈窗 */
       close() {
         this.$emit('update:visible', false)
       },
@@ -255,7 +269,7 @@
         if (!value || value.length === 0) {
           return
         }
-        // 判断options是否存在value，如果已存在数据就不再请求后台了
+        // 判斷options是否存在value，如果已存在數據就不再請求後台了
         let notExist = false
         for (let val of value) {
           let find = false
@@ -272,7 +286,7 @@
         }
         if (!notExist) return
         getAction(this.valueUrl || this.listUrl, {
-          // 这里最后加一个 , 的原因是因为无论如何都要使用 in 查询，防止后台进行了模糊匹配，导致查询结果不准确
+          // 這裏最後加一個 , 的原因是因為無論如何都要使用 in 查詢，防止後台進行了模糊匹配，導致查詢結果不準確
           [this.valueKey]: value.join(',') + ',',
           pageNo: 1,
           pageSize: value.length
@@ -301,21 +315,21 @@
         this.$emit('options', this.options, this.dataSourceMap)
       },
 
-      /** 完成选择 */
+      /** 完成選擇 */
       handleOk() {
         let value = this.selectedTable.dataSource.map(data => data[this.valueKey])
         this.$emit('input', value)
         this.close()
       },
-      /** 删除已选择的 */
+      /** 刪除已選擇的 */
       handleDeleteSelected(record, index) {
         this.selectedRowKeys.splice(this.selectedRowKeys.indexOf(record[this.rowKey]), 1)
-        //update--begin--autor:wangshuai-----date:20200722------for：JSelectBizComponent组件切换页数值问题------
+        //update--begin--autor:wangshuai-----date:20200722------for：JSelectBizComponent組件切換頁數值問題------
         this.selectedTable.dataSource.splice(this.selectedTable.dataSource.indexOf(record), 1)
         this.innerValue.splice(this.innerValue.indexOf(record[this.valueKey]), 1)
         console.log("this.selectedRowKeys:",this.selectedRowKeys)
         console.log("this.selectedTable.dataSource:",this.selectedTable.dataSource)
-        //update--begin--autor:wangshuai-----date:20200722------for：JSelectBizComponent组件切换页数值问题------
+        //update--begin--autor:wangshuai-----date:20200722------for：JSelectBizComponent組件切換頁數值問題------
       },
 
       customRowFn(record) {

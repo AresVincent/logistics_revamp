@@ -2,15 +2,15 @@
   <a-card :bordered="false">
 
     <a-tabs>
-      <a-tab-pane tab="基础示例" key="1" forceRender>
+      <a-tab-pane tab="基礎示例" key="1" forceRender>
         <j-vxe-demo1/>
       </a-tab-pane>
 
-      <a-tab-pane tab="高级示例" key="2" forceRender>
+      <a-tab-pane tab="高級示例" key="2" forceRender>
         <j-vxe-demo2/>
-      </a-tab-pane> 
-      
-      <a-tab-pane tab="联动示例" key="3" forceRender>
+      </a-tab-pane>
+
+      <a-tab-pane tab="聯動示例" key="3" forceRender>
         <j-vxe-demo3/>
       </a-tab-pane>
 

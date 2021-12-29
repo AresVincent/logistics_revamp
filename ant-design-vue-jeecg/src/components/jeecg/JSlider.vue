@@ -11,11 +11,11 @@
     name:"JSlider",
     data(){
       return {
-        beginClientX:0,           /*距离屏幕左端距离*/
-        mouseMoveStata:false,     /*触发拖动状态  判断*/
-        maxwidth:'',               /*拖动最大宽度，依据滑块宽度算出来的*/
-        confirmWords:'拖动滑块验证',   /*滑块文字*/
-        confirmSuccess:false           /*验证成功判断*/
+        beginClientX:0,           /*距離屏幕左端距離*/
+        mouseMoveStata:false,     /*觸發拖動狀態  判斷*/
+        maxwidth:'',               /*拖動最大寬度，依據滑塊寬度算出來的*/
+        confirmWords:'拖動滑塊驗證',   /*滑塊文字*/
+        confirmSuccess:false           /*驗證成功判斷*/
       }
     },
     methods: {
@@ -24,14 +24,14 @@
       },
       mousedownFn:function (e) {
         if(!this.confirmSuccess){
-          e.preventDefault && e.preventDefault();   //阻止文字选中等 浏览器默认事件
+          e.preventDefault && e.preventDefault();   //阻止文字選中等 瀏覽器默認事件
           this.mouseMoveStata = true;
           this.beginClientX = e.clientX;
         }
       },        //mousedoen 事件
       successFunction(){
         this.confirmSuccess = true
-        this.confirmWords = '验证通过';
+        this.confirmWords = '驗證通過';
         if(window.addEventListener){
           document.getElementsByTagName('html')[0].removeEventListener('mousemove',this.mouseMoveFn);
           document.getElementsByTagName('html')[0].removeEventListener('mouseup',this.moseUpFn);
@@ -43,7 +43,7 @@
         document.getElementsByClassName('drag_bg')[0].style.width = this.maxwidth + 'px';
 
         this.$emit("onSuccess",true)
-      },                //验证成功函数
+      },                //驗證成功函數
       mouseMoveFn(e){
         if(this.mouseMoveStata){
           let width = e.clientX - this.beginClientX;
@@ -59,13 +59,13 @@
         this.mouseMoveStata = false;
         var width = e.clientX - this.beginClientX;
         if(width<this.maxwidth){
-          // ---- update-begin- author:sunjianlei --- date:20191009 --- for: 修复获取不到 handler 的时候报错 ----
+          // ---- update-begin- author:sunjianlei --- date:20191009 --- for: 修復獲取不到 handler 的時候報錯 ----
           let handler = document.getElementsByClassName('handler')[0]
           if (handler) {
             handler.style.left = 0 + 'px'
             document.getElementsByClassName('drag_bg')[0].style.width = 0 + 'px'
           }
-          // ---- update-end- author:sunjianlei --- date:20191009 --- for: 修复获取不到 handler 的时候报错 ----
+          // ---- update-end- author:sunjianlei --- date:20191009 --- for: 修復獲取不到 handler 的時候報錯 ----
         }
       }                       //mouseup事件
     },

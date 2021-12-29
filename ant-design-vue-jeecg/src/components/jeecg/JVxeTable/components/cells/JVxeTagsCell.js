@@ -1,6 +1,6 @@
 import JVxeCellMixins from '@/components/jeecg/JVxeTable/mixins/JVxeCellMixins'
 
-// tags 组件的显示组件
+// tags 組件的显示組件
 export const TagsSpanCell = {
   name: 'JVxeTagsCell',
   mixins: [JVxeCellMixins],
@@ -31,15 +31,15 @@ export const TagsSpanCell = {
           let setTagColor = this.originColumn.setTagColor
           if (typeof setTagColor === 'function') {
             /**
-             * 设置 tag 颜色
+             * 設置 tag 顏色
              *
              * @param event 包含的字段：
-             * event.tagValue 当前tag的值
-             * event.value 当前原始值
-             * event.row 当前行的所有值
-             * event.column 当前列的配置
-             * event.column.own 当前列的原始配置
-             * @return Array | String 可以返回一个数组，数据第一项是tag背景颜色，第二项是字体颜色。也可以返回一个字符串，即tag背景颜色
+             * event.tagValue 當前tag的值
+             * event.value 當前原始值
+             * event.row 當前行的所有值
+             * event.column 當前列的配置
+             * event.column.own 當前列的原始配置
+             * @return Array | String 可以返回一個數組，數據第一項是tag背景顏色，第二項是字體顏色。也可以返回一個字符串，即tag背景顏色
              */
             let color = setTagColor({
               tagValue: tag,
@@ -70,7 +70,7 @@ export const TagsSpanCell = {
   },
 }
 
-// tags 组件的输入框
+// tags 組件的輸入框
 export const TagsInputCell = {
   name: 'JVxeTagsInputCell',
   mixins: [JVxeCellMixins],
@@ -117,12 +117,12 @@ export const TagsInputCell = {
   },
 }
 
-// 将值每隔两位加上一个分号
+// 將值每隔兩位加上一個分號
 function replaceValue(value, event) {
   if (value) {
-    // 首先去掉现有的分号
+    // 首先去掉現有的分號
     value = value.replace(/;/g, '')
-    // 然后再遍历添加分号
+    // 然後再遍歷添加分號
     let rv = ''
     let splitArr = value.split('')
     let count = 0

@@ -8,13 +8,13 @@
     @cancel="handleCancel"
    >
     <template slot="footer">
-      <a-button key="back" @click="handleCancel">关闭</a-button>
-      <a-button v-if="record.openType==='url'" type="primary" @click="toHandle">去处理</a-button>
+      <a-button key="back" @click="handleCancel">關閉</a-button>
+      <a-button v-if="record.openType==='url'" type="primary" @click="toHandle">去處理</a-button>
     </template>
     <a-card class="daily-article" :loading="loading">
       <a-card-meta
         :title="record.titile"
-        :description="'发布人：'+record.sender + ' 发布时间： ' + record.sendTime">
+        :description="'發布人：'+record.sender + ' 發布時間： ' + record.sendTime">
       </a-card-meta>
       <a-divider />
       <span v-html="record.msgContent" class="article-content"></span>
@@ -65,7 +65,7 @@
       handleCancel () {
         this.visible = false;
       },
-      /** 切换全屏显示 */
+      /** 切換全屏显示 */
       handleClickToggleFullScreen() {
         let mode = !this.modelStyle.fullScreen
         if (mode) {
@@ -80,7 +80,7 @@
       toHandle(){
         if(this.record.openType==='url'){
           this.visible = false;
-          //链接跳转
+          //鏈接跳轉
           this.$router.push({path: this.record.openPage})
         }
       },

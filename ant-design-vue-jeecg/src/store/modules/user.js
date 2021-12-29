@@ -15,7 +15,7 @@ const user = {
     avatar: '',
     permissionList: [],
     info: {},
-    // 系统安全模式
+    // 系統安全模式
     sysSafeMode: null,
   },
 
@@ -50,11 +50,11 @@ const user = {
   },
 
   actions: {
-    // CAS验证登录
+    // CAS驗證登錄
     ValidateLogin({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         getAction("/sys/cas/client/validateLogin",userInfo).then(response => {
-          console.log("----cas 登录--------",response);
+          console.log("----cas 登錄--------",response);
           if(response.success){
             const result = response.result
             const userInfo = result.userInfo
@@ -74,7 +74,7 @@ const user = {
         })
       })
     },
-    // 登录
+    // 登錄
     Login({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo).then(response => {
@@ -98,7 +98,7 @@ const user = {
         })
       })
     },
-    //手机号登录
+    //手機號登錄
     PhoneLogin({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
           phoneLogin(userInfo).then(response => {
@@ -122,7 +122,7 @@ const user = {
       })
     })
     },
-    // 获取用户信息
+    // 獲取用戶信息
     GetPermissionList({ commit }) {
       return new Promise((resolve, reject) => {
         queryPermissionsByUser().then(response => {
@@ -133,7 +133,7 @@ const user = {
           sessionStorage.setItem(USER_AUTH,JSON.stringify(authData));
           sessionStorage.setItem(SYS_BUTTON_AUTH,JSON.stringify(allAuthData));
           if (menuData && menuData.length > 0) {
-            // //update--begin--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
+            // //update--begin--autor:qinfeng-----date:20200109------for：JEECG-63 一級菜單的子菜單全部是隱藏路由，則一級菜單不显示------
             // menuData.forEach((item, index) => {
             //   if (item["children"]) {
             //     let hasChildrenMenu = item["children"].filter((i) => {
@@ -145,9 +145,9 @@ const user = {
             //   }
             // })
             // //console.log(" menu show json ", menuData)
-            // //update--end--autor:qinfeng-----date:20200109------for：JEECG-63 一级菜单的子菜单全部是隐藏路由，则一级菜单不显示------
+            // //update--end--autor:qinfeng-----date:20200109------for：JEECG-63 一級菜單的子菜單全部是隱藏路由，則一級菜單不显示------
             commit('SET_PERMISSIONLIST', menuData)
-            // 设置系统安全模式
+            // 設置系統安全模式
             commit('SET_SYS_SAFE_MODE', response.result.sysSafeMode)
           } else {
             reject('getPermissionList: permissions must be a non-null array !')
@@ -184,7 +184,7 @@ const user = {
         })
       })
     },
-    // 第三方登录
+    // 第三方登錄
     ThirdLogin({ commit }, param) {
       return new Promise((resolve, reject) => {
         thirdLogin(param.token,param.thirdType).then(response => {

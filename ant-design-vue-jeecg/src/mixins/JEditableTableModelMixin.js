@@ -24,7 +24,7 @@ export const JEditableTableModelMixin = {
   },
   methods: {
 
-    /** 获取所有的editableTable实例 */
+    /** 獲取所有的editableTable實例 */
     getAllTable() {
       if (!(this.refKeys instanceof Array)) {
         throw this.throwNotArray('refKeys')
@@ -33,9 +33,9 @@ export const JEditableTableModelMixin = {
       return Promise.all(values)
     },
 
-    /** 遍历所有的JEditableTable实例 */
+    /** 遍歷所有的JEditableTable實例 */
     eachAllTable(callback) {
-      // 开始遍历
+      // 開始遍歷
       this.getAllTable().then(tables => {
         tables.forEach((item, index) => {
           if (typeof callback === 'function') {
@@ -44,19 +44,19 @@ export const JEditableTableModelMixin = {
         })
       })
     },
-    /** 当点击新增按钮时调用此方法 */
+    /** 當點擊新增按鈕時調用此方法 */
     add() {
-      //update-begin-author:lvdandan date:20201113 for:LOWCOD-1049 JEditaTable,子表默认添加一条数据，addDefaultRowNum设置无效 #1930
+      //update-begin-author:lvdandan date:20201113 for:LOWCOD-1049 JEditaTable,子表默認添加一條數據，addDefaultRowNum設置無效 #1930
       return new Promise((resolve) => {
         this.tableReset();
         resolve();
       }).then(() => {
         if (typeof this.addBefore === 'function') this.addBefore()
-        // 默认新增空数据
+        // 默認新增空數據
         let rowNum = this.addDefaultRowNum
         if (typeof rowNum !== 'number') {
           rowNum = 1
-          console.warn('由于你没有在 data 中定义 addDefaultRowNum 或 addDefaultRowNum 不是数字，所以默认添加一条空数据，如果不想默认添加空数据，请将定义 addDefaultRowNum 为 0')
+          console.warn('由於你沒有在 data 中定義 addDefaultRowNum 或 addDefaultRowNum 不是数字，所以默認添加一條空數據，如果不想默認添加空數據，請將定義 addDefaultRowNum 為 0')
         }
         this.eachAllTable((item) => {
           item.add(rowNum)
@@ -64,9 +64,9 @@ export const JEditableTableModelMixin = {
         if (typeof this.addAfter === 'function') this.addAfter(this.model)
         this.edit(this.model)
       })
-      //update-end-author:lvdandan date:20201113 for:LOWCOD-1049 JEditaTable,子表默认添加一条数据，addDefaultRowNum设置无效 #1930
+      //update-end-author:lvdandan date:20201113 for:LOWCOD-1049 JEditaTable,子表默認添加一條數據，addDefaultRowNum設置無效 #1930
     },
-    /** 当点击了编辑（修改）按钮时调用此方法 */
+    /** 當點擊了編輯（修改）按鈕時調用此方法 */
     edit(record) {
       if(record && '{}'!=JSON.stringify(record)&&record.id){
         this.tableReset();
@@ -78,18 +78,18 @@ export const JEditableTableModelMixin = {
       this.model = Object.assign({}, record)
       if (typeof this.editAfter === 'function') this.editAfter(this.model)
     },
-    /** 关闭弹窗，并将所有JEditableTable实例回归到初始状态 */
+    /** 關閉彈窗，並將所有JEditableTable實例回歸到初始狀態 */
     close() {
       this.visible = false
       this.$emit('close')
     },
-    //清空子表table的数据
+    //清空子表table的數據
     tableReset(){
       this.eachAllTable((item) => {
         item.clearRow()
       })
     },
-    /** 查询某个tab的数据 */
+    /** 查詢某個tab的數據 */
     requestSubTableData(url, params, tab, success) {
       tab.loading = true
       getAction(url, params).then(res => {
@@ -108,7 +108,7 @@ export const JEditableTableModelMixin = {
         tab.loading = false
       })
     },
-    /** 发起请求，自动判断是执行新增还是修改操作 */
+    /** 發起請求，自動判斷是執行新增還是修改操作 */
     request(formData) {
       let url = this.url.add, method = 'post'
       if (this.model.id) {
@@ -131,45 +131,45 @@ export const JEditableTableModelMixin = {
 
     /* --- handle 事件 --- */
 
-    /** ATab 选项卡切换事件 */
+    /** ATab 選項卡切換事件 */
     handleChangeTabs(key) {
-      // 自动重置scrollTop状态，防止出现白屏
+      // 自動重置scrollTop狀態，防止出現白屏
       getRefPromise(this, key).then(editableTable => {
         editableTable.resetScrollTop()
       })
     },
-    /** 关闭按钮点击事件 */
+    /** 關閉按鈕點擊事件 */
     handleCancel() {
       this.close()
     },
-    /** 确定按钮点击事件 */
+    /** 確定按鈕點擊事件 */
     handleOk() {
-      /** 触发表单验证 */
+      /** 觸發表單驗證 */
       this.getAllTable().then(tables => {
-        /** 一次性验证主表和所有的次表 */
+        /** 一次性驗證主表和所有的次表 */
         return validateFormModelAndTables(this.$refs.form,this.model, tables)
       }).then(allValues => {
-        /** 一次性验证一对一的所有子表 */
+        /** 一次性驗證一對一的所有子表 */
         return this.validateSubForm(allValues)
       }).then(allValues => {
         if (typeof this.classifyIntoFormData !== 'function') {
           throw this.throwNotFunction('classifyIntoFormData')
         }
         let formData = this.classifyIntoFormData(allValues)
-        // 发起请求
+        // 發起請求
         return this.request(formData)
       }).catch(e => {
         if (e.error === VALIDATE_NO_PASSED) {
-          // 如果有未通过表单验证的子表，就自动跳转到它所在的tab
-          //update--begin--autor:liusq-----date:20210316------for：未通过表单验证跳转tab问题------
+          // 如果有未通過表單驗證的子表，就自動跳轉到它所在的tab
+          //update--begin--autor:liusq-----date:20210316------for：未通過表單驗證跳轉tab問題------
           this.activeKey = e.index == null ? this.activeKey : (e.paneKey?e.paneKey:this.refKeys[e.index])
-          //update--end--autor:liusq-----date:20210316------for：未通过表单验证跳转tab问题------
+          //update--end--autor:liusq-----date:20210316------for：未通過表單驗證跳轉tab問題------
         } else {
           console.error(e)
         }
       })
     },
-    //校验所有子表表单
+    //校驗所有子表表單
     validateSubForm(allValues){
       return new Promise((resolve) => {
         resolve(allValues)
@@ -179,12 +179,12 @@ export const JEditableTableModelMixin = {
 
     /** not a function */
     throwNotFunction(name) {
-      return `${name} 未定义或不是一个函数`
+      return `${name} 未定義或不是一個函數`
     },
 
     /** not a array */
     throwNotArray(name) {
-      return `${name} 未定义或不是一个数组`
+      return `${name} 未定義或不是一個數組`
     }
 
   }

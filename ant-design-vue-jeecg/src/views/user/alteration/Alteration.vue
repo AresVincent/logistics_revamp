@@ -1,8 +1,8 @@
 <template>
   <a-card :bordered="false" style="width: 130%;text-align: center;margin-left:-10%">
     <a-steps class="steps" :current="currentTab">
-      <a-step title="手机验证"/>
-      <a-step title="更改密码"/>
+      <a-step title="手機驗證"/>
+      <a-step title="更改密碼"/>
       <a-step title="完成"/>
     </a-steps>
     <div class="content">
@@ -27,7 +27,7 @@
     },
     data() {
       return {
-        description: '将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。',
+        description: '將一個冗長或用戶不熟悉的表單任務分成多個步驟，指導用戶完成。',
         currentTab: 0,
         userList: {},
         // form

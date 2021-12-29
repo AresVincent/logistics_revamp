@@ -6,7 +6,7 @@
           <a-card>
             <div slot="title" class="index-md-title">
               <img src="../../assets/daiban.png"/>
-              我的待办【{{ dataSource1.length }}】
+              我的待辦【{{ dataSource1.length }}】
             </div>
             <div slot="extra">
               <a v-if="dataSource1 && dataSource1.length>0" slot="footer" @click="goPage">更多 <a-icon type="double-right" /></a>
@@ -28,7 +28,7 @@
               </template>
 
               <span slot="action" slot-scope="text, record">
-                <a @click="handleData">办理</a>
+                <a @click="handleData">辦理</a>
               </span>
 
             </a-table>
@@ -39,7 +39,7 @@
           <a-card>
             <div slot="title" class="index-md-title">
               <img src="../../assets/zaiban.png"/>
-              我的在办【{{ dataSource2.length }}】
+              我的在辦【{{ dataSource2.length }}】
             </div>
             <div slot="extra">
               <a v-if="dataSource2 && dataSource2.length>0" slot="footer" @click="goPage">更多 <a-icon type="double-right" /></a>
@@ -61,7 +61,7 @@
               </template>
 
               <span slot="action" slot-scope="text, record">
-                <a @click="handleData">办理</a>
+                <a @click="handleData">辦理</a>
               </span>
 
             </a-table>
@@ -76,7 +76,7 @@
           <a-card>
             <div slot="title" class="index-md-title">
               <img src="../../assets/guaz.png"/>
-              我的挂账【{{ dataSource4.length }}】
+              我的掛賬【{{ dataSource4.length }}】
             </div>
             <a-table
               :class="'my-index-table tytable4'"
@@ -95,7 +95,7 @@
               </template>
 
               <span slot="action" slot-scope="text, record">
-                <a @click="handleData">办理</a>
+                <a @click="handleData">辦理</a>
               </span>
 
             </a-table>
@@ -106,7 +106,7 @@
           <a-card>
             <div slot="title" class="index-md-title">
               <img src="../../assets/duban.png"/>
-              我的督办【{{ dataSource3.length }}】
+              我的督辦【{{ dataSource3.length }}】
             </div>
             <a-table
               :class="'my-index-table tytable3'"
@@ -125,7 +125,7 @@
               </template>
 
               <span slot="action" slot-scope="text, record">
-                <a @click="handleData">办理</a>
+                <a @click="handleData">辦理</a>
               </span>
 
             </a-table>
@@ -144,55 +144,55 @@
 
   const tempSs1=[{
     id:"001",
-    orderNo:"电[1]1267102",
-    orderTitle:"药品出问题了",
+    orderNo:"電[1]1267102",
+    orderTitle:"藥品出問題了",
     restDay:1
   },{
     id:"002",
-    orderNo:"电[4]5967102",
-    orderTitle:"吃了xxx医院的药，病情越来越严重",
+    orderNo:"電[4]5967102",
+    orderTitle:"吃了xxx醫院的葯，病情越來越嚴重",
     restDay:0
   },{
     id:"003",
-    orderNo:"电[3]5988987",
-    orderTitle:"今天去超市买鸡蛋，鸡蛋都是坏的",
+    orderNo:"電[3]5988987",
+    orderTitle:"今天去超市買雞蛋，雞蛋都是壞的",
     restDay:7
   },{
     id:"004",
-    orderNo:"电[2]5213491",
-    orderTitle:"xx宝实体店高价售卖xx",
+    orderNo:"電[2]5213491",
+    orderTitle:"xx寶實體店高價售賣xx",
     restDay:5
   },{
     id:"005",
-    orderNo:"电[1]1603491",
-    orderTitle:"以红利相诱，答应退保后扣一年费用",
+    orderNo:"電[1]1603491",
+    orderTitle:"以紅利相誘，答應退保后扣一年費用",
     restDay:0
   }]
 
   const tempSs2=[{
     id:"001",
-    orderTitle:"我要投诉这个大超市",
-    orderNo:"电[1]10299456",
+    orderTitle:"我要投訴這個大超市",
+    orderNo:"電[1]10299456",
     restDay:6
   },{
     id:"002",
-    orderTitle:"xxx医院乱开药方,售卖假药",
-    orderNo:"电[2]20235691",
+    orderTitle:"xxx醫院亂開藥方,售賣假藥",
+    orderNo:"電[2]20235691",
     restDay:0
   },{
     id:"003",
-    orderTitle:"我想问问这家店是干啥的",
-    orderNo:"电[3]495867322",
+    orderTitle:"我想問問這家店是幹啥的",
+    orderNo:"電[3]495867322",
     restDay:7
   },{
     id:"004",
-    orderTitle:"我要举报朝阳区奥森公园酒店",
-    orderNo:"电[2]1193849",
+    orderTitle:"我要舉報朝陽區奧森公園酒店",
+    orderNo:"電[2]1193849",
     restDay:3
   },{
     id:"005",
-    orderTitle:"我今天吃饭吃到一个石头子",
-    orderNo:"电[4]56782344",
+    orderTitle:"我今天吃飯吃到一個石頭子",
+    orderNo:"電[4]56782344",
     restDay:9
   }]
 
@@ -225,19 +225,19 @@
             scopedSlots: {customRender: "dayWarnning"}
           },
           {
-            title:'剩余天数',
+            title:'剩餘天數',
             align:"center",
             dataIndex: 'restDay',
             width:80
           },
           {
-            title:'工单标题',
+            title:'工單標題',
             align:"center",
             dataIndex: 'orderTitle',
             scopedSlots: {customRender: "ellipsisText"}
           },
           {
-            title:'工单编号',
+            title:'工單編號',
             align:"center",
             dataIndex: 'orderNo',
           },
@@ -269,7 +269,7 @@
         }
       },
       goPage(){
-        this.$message.success("请根据具体业务跳转页面")
+        this.$message.success("請根據具體業務跳轉頁面")
         //this.$router.push({ path: '/comp/mytask' })
       },
       mock(){
@@ -293,7 +293,7 @@
         })
       },
       handleData(){
-        this.$message.success("办理完成")
+        this.$message.success("辦理完成")
       }
 
 

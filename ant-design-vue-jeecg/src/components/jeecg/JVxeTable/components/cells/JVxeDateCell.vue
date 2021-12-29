@@ -52,7 +52,7 @@
         this.handleChangeCommon(dateStr)
       }
     },
-    // 【组件增强】注释详见：JVxeCellMixins.js
+    // 【組件增強】註釋詳見：JVxeCellMixins.js
     enhanced: {
       aopEvents: {
         editActived(event) {

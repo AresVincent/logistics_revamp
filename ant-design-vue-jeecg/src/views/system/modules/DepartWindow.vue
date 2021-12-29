@@ -2,17 +2,17 @@
   <a-modal
     :width="modalWidth"
     :visible="visible"
-    title="部门搜索"
+    title="部門搜索"
     :confirmLoading="confirmLoading"
     @ok="handleSubmit"
     @cancel="handleCancel"
-    cancelText="关闭"
+    cancelText="關閉"
     wrapClassName="ant-modal-cust-warp"
     >
-    <!--部门树-->
+    <!--部門樹-->
     <template>
       <a-form :form="form">
-      <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="上级部门">
+      <a-form-item :labelCol="labelCol" :wrapperCol="wrapperCol" label="上級部門">
       <a-tree
         multiple
         treeCheckable="tree"
@@ -25,7 +25,7 @@
         @check="onCheck"
         :dropdownStyle="{maxHeight:'200px',overflow:'auto'}"
         :treeData="departTree"
-        placeholder="请选择上级部门"
+        placeholder="請選擇上級部門"
         >
       </a-tree>
       </a-form-item>
@@ -44,12 +44,12 @@
     },
     data () {
       return {
-        checkedKeys:[], // 存储选中的部门id
-        expandedKeysss:[],//展开的节点
-        userId:"", // 存储用户id
-        model:{}, // 存储SysUserDepartsVO表
-        userDepartModel:{userId:'',departIdList:[]}, // 存储用户id一对多部门信息的对象
-        departList:[], // 存储部门信息
+        checkedKeys:[], // 存儲選中的部門id
+        expandedKeysss:[],//展開的節點
+        userId:"", // 存儲用戶id
+        model:{}, // 存儲SysUserDepartsVO表
+        userDepartModel:{userId:'',departIdList:[]}, // 存儲用戶id一對多部門信息的對象
+        departList:[], // 存儲部門信息
         modalWidth:400,
         departTree:[],
         title:"操作",
@@ -66,7 +66,7 @@
         headers:{},
         form:this.$form.createForm(this),
         url: {
-          userId:"/sys/user/generateUserId", // 引入生成添加用户情况下的url
+          userId:"/sys/user/generateUserId", // 引入生成添加用戶情況下的url
         },
       }
     },
@@ -95,7 +95,7 @@
       },
       handleSubmit () {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.form.validateFields((err) => {
           if (!err) {
             that.confirmLoading = true;
@@ -128,7 +128,7 @@
         this.close()
       },
 
-      // 选择部门时作用的API
+      // 選擇部門時作用的API
       onCheck(checkedKeys, info){
         this.departList = [];
         this.checkedKeys = checkedKeys.checked;

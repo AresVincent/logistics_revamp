@@ -4,21 +4,21 @@
     :title="title"
     :visible="innerVisible"
     @cancel="handleCancel"
-    cancelText="关闭"
+    cancelText="關閉"
     :okButtonProps="{style:{display:'none'}}"
   >
     <a-alert type="info" showIcon style="margin-bottom: 16px;">
       <template slot="message">
-        <span>已选择</span>
+        <span>已選擇</span>
         <a style="font-weight: 600;padding: 0 4px;">{{ selectedRowKeys.length }}</a>
-        <span>项</span>
+        <span>項</span>
         <template v-if="selectedRowKeys.length>0">
           <a-divider type="vertical"/>
-          <a @click="handleClearSelection">清空选择</a>
+          <a @click="handleClearSelection">清空選擇</a>
           <a-divider type="vertical"/>
-          <a @click="handleRevertBatch">批量还原</a>
+          <a @click="handleRevertBatch">批量還原</a>
           <a-divider type="vertical"/>
-          <a @click="handleDeleteBatch">批量删除</a>
+          <a @click="handleDeleteBatch">批量刪除</a>
         </template>
       </template>
     </a-alert>
@@ -35,7 +35,7 @@
       :rowSelection="{selectedRowKeys, onChange: handleTableSelectChange}"
     >
 
-      <!-- 显示头像 -->
+      <!-- 显示頭像 -->
       <template slot="avatarslot" slot-scope="text, record, index">
         <div class="anty-img-wrap">
           <a-avatar shape="square" :src="url.getAvatar(record.avatar)" icon="user"/>
@@ -43,9 +43,9 @@
       </template>
 
       <span slot="action" slot-scope="text, record">
-        <a @click="handleRevert([record.id])"><a-icon type="redo"/> 还原用户</a>
+        <a @click="handleRevert([record.id])"><a-icon type="redo"/> 還原用戶</a>
         <a-divider type="vertical"/>
-        <a @click="handleDelete([record.id])"><a-icon type="delete"/> 彻底删除</a>
+        <a @click="handleDelete([record.id])"><a-icon type="delete"/> 徹底刪除</a>
       </span>
     </a-table>
 
@@ -55,7 +55,7 @@
 <script>
   import { putAction,deleteAction,getFileAccessHttpUrl } from "@/api/manage"
 
-  // 高度封装的请求，请务必使用 superRequest.call(this,{}) 的方式调用
+  // 高度封裝的請求，請務必使用 superRequest.call(this,{}) 的方式調用
   function superRequest(options) {
     this.loading = !!options.loading
     options.promise.then(res => {
@@ -65,8 +65,8 @@
         throw new Error(res.message)
       }
     }).catch(e => {
-      console.error('查询已删除的用户失败：', e)
-      this.$message.warning('查询已删除的用户失败：' + (e.message || e))
+      console.error('查詢已刪除的用戶失敗：', e)
+      this.$message.warning('查詢已刪除的用戶失敗：' + (e.message || e))
     }).finally(() => {
       this.loading = false
     })
@@ -82,22 +82,22 @@
     },
     data() {
       return {
-        title: '用户回收站',
+        title: '用戶回收站',
         loading: false,
         innerVisible: false,
         selectedRowKeys: [],
         dataSource: [],
         columns: [
           { title: '#', align: 'center', key: 'rowIndex', width: 80, customRender: (t, r, i) => i + 1 },
-          { title: '账号', align: 'center', dataIndex: 'username' },
+          { title: '賬號', align: 'center', dataIndex: 'username' },
           { title: '姓名', align: 'center', dataIndex: 'realname', },
-          { title: '头像', align: 'center', dataIndex: 'avatar', scopedSlots: { customRender: 'avatarslot' } },
-          { title: '部门', align: 'center', dataIndex: 'orgCode' },
+          { title: '頭像', align: 'center', dataIndex: 'avatar', scopedSlots: { customRender: 'avatarslot' } },
+          { title: '部門', align: 'center', dataIndex: 'orgCode' },
           { title: '操作', align: 'center', dataIndex: 'action', width: 200, scopedSlots: { customRender: 'action' } }
         ],
         url: {
           getAvatar: (path) => getFileAccessHttpUrl(`${path}`),
-          // 回收站操作，get = 获取列表；put = 取回；delete = 彻底删除
+          // 回收站操作，get = 獲取列表；put = 取回；delete = 徹底刪除
           recycleBin: '/sys/user/recycleBin',
           putRecycleBin: '/sys/user/putRecycleBin',
           deleteRecycleBin: '/sys/user/deleteRecycleBin',
@@ -133,30 +133,30 @@
       handleCancel() {
         this.innerVisible = false
       },
-      // 还原用户
+      // 還原用戶
       handleRevert(userIds) {
         this.$confirm({
-          title: '恢复用户',
-          content: `您确定要恢复这 ${userIds.length} 个用户吗？`,
+          title: '恢復用戶',
+          content: `您確定要恢復這 ${userIds.length} 個用戶嗎？`,
           centered: true,
           onOk: () => {
             putAction(this.url.putRecycleBin,{userIds:userIds.join(',')}).then((res)=>{
               if(res.success){
                 this.handleOk()
                 this.handleClearSelection()
-                this.$message.success(`还原 ${userIds.length} 个用户成功！`)
+                this.$message.success(`還原 ${userIds.length} 個用戶成功！`)
               }
             })
           }
         })
       },
-      // 彻底删除用户
+      // 徹底刪除用戶
       handleDelete(userIds) {
         this.$confirm({
-          title: '彻底删除用户',
+          title: '徹底刪除用戶',
           content: (<div>
-            <p>您确定要彻底删除这 {userIds.length} 个用户吗？</p>
-            <p style="color:red;">注意：彻底删除后将无法恢复，请谨慎操作！</p>
+            <p>您確定要徹底刪除這 {userIds.length} 個用戶嗎？</p>
+            <p style="color:red;">注意：徹底刪除后將無法恢復，請謹慎操作！</p>
           </div>),
           centered: true,
           onOk: () => {
@@ -165,7 +165,7 @@
               if (res.success) {
                 this.loadData()
                 this.handleClearSelection()
-                this.$message.success(`彻底删除 ${userIds.length} 个用户成功！`)
+                this.$message.success(`徹底刪除 ${userIds.length} 個用戶成功！`)
               } else {
                 that.$message.warning(res.message);
               }

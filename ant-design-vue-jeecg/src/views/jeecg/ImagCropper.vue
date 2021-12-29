@@ -48,7 +48,7 @@
           <button @click="rotateRight" class="btn">rotateRight</button>
           <button @click="finish('base64')" class="btn">preview(base64)</button>
           <button @click="finish('blob')" class="btn">preview(blob)</button>
-          <button @click="() => option.img = ''" class="btn">清除图片</button>
+          <button @click="() => option.img = ''" class="btn">清除圖片</button>
           <a @click="down('base64')" class="btn">download(base64)</a>
           <a @click="down('blob')" class="btn">download(blob)</a>
           <a :href="downImg" download="demo.png" ref="downloadDom"></a>
@@ -56,7 +56,7 @@
 
         <div class="pre">
           <section class="pre-item">
-            <p>截图框大小</p>
+            <p>截圖框大小</p>
             <div class="show-preview" :style="{'width': previews.w + 'px', 'height': previews.h + 'px',  'overflow': 'hidden',
 							'margin': '5px'}">
               <div :style="previews.div">
@@ -84,7 +84,7 @@
           </section>
 
           <section class="pre-item" title="zoom: (100 / previews.w)">
-            <p>固定为100宽度</p>
+            <p>固定為100寬度</p>
             <div :style="previewStyle3">
               <div :style="previews.div">
                 <img :src="previews.url" :style="previews.img">
@@ -93,7 +93,7 @@
           </section>
 
           <section class="pre-item" title="zoom: (100 / previews.h)">
-            <p>固定为100高度</p>
+            <p>固定為100高度</p>
             <div :style="previewStyle4">
               <div :style="previews.div">
                 <img :src="previews.url" :style="previews.img">
@@ -104,7 +104,7 @@
 
         <div style="display:block; width: 100%;">
           <label class="c-item">
-            <span>图片默认渲染方式</span>
+            <span>圖片默認渲染方式</span>
             <select v-model="option.mode">
               <option value="contain">contain</option>
               <option value="cover">cover</option>
@@ -114,68 +114,68 @@
               <option value="auto 50%">auto 50%</option>
             </select>
             <section>
-              类似css background属性设置  设置不符合规范不生效， 参照文档说明
+              類似css background屬性設置  設置不符合規範不生效， 參照文檔說明
             </section>
           </label>
           <label class="c-item">
-            <span>上传时图片最大大小(默认会压缩尺寸到这个大小)</span>
+            <span>上傳時圖片最大大小(默認會壓縮尺寸到這個大小)</span>
             <input type="nubmer" v-model="option.maxImgSize">
           </label>
           <label class="c-item">
-            <span>上传图片是否显示原始宽高 (针对大图 可以铺满)</span>
+            <span>上傳圖片是否显示原始寬高 (針對大圖 可以鋪滿)</span>
             <input type="checkbox" v-model="option.original">
             <span>original: {{ option.original}}</span>
           </label>
           <label class="c-item">
-            <span>是否根据dpr生成适合屏幕的高清图片</span>
+            <span>是否根據dpr生成適合屏幕的高清圖片</span>
             <input type="checkbox" v-model="option.high">
             <span>high: {{ option.high}}</span>
           </label>
           <label class="c-item">
-            <span>是否输出原图比例的截图</span>
+            <span>是否輸出原圖比例的截圖</span>
             <input type="checkbox" v-model="option.full">
             <span>full: {{ option.full}}</span>
           </label>
           <label class="c-item">
-            <span>截图信息展示是否是真实的输出宽高</span>
+            <span>截圖信息展示是否是真實的輸出寬高</span>
             <input type="checkbox" v-model="option.infoTrue">
             <span>infoTrue: {{ option.infoTrue}}</span>
           </label>
           <label class="c-item">
-            <span>能否拖动图片</span>
+            <span>能否拖動圖片</span>
             <input type="checkbox" v-model="option.canMove">
             <span>canMove: {{ option.canMove}}</span>
           </label>
           <label class="c-item">
-            <span>能否拖动截图框</span>
+            <span>能否拖動截圖框</span>
             <input type="checkbox" v-model="option.canMoveBox">
             <span>canMoveBox: {{ option.canMoveBox}}</span>
           </label>
           <label class="c-item">
-            <span>截图框固定大小</span>
+            <span>截圖框固定大小</span>
             <input type="checkbox" v-model="option.fixedBox">
             <span>fixedBox: {{ option.fixedBox}}</span>
           </label>
           <label class="c-item">
-            <span>是否自动生成截图框</span>
+            <span>是否自動生成截圖框</span>
             <input type="checkbox" v-model="option.autoCrop">
             <span>autoCrop: {{ option.autoCrop}}</span>
           </label>
           <label class="c-item">
-            <span>自动生成截图框的宽高</span>
-            <span>宽度:  </span><input type="number" v-model="option.autoCropWidth">
+            <span>自動生成截圖框的寬高</span>
+            <span>寬度:  </span><input type="number" v-model="option.autoCropWidth">
             <span>高度:  </span><input type="number" v-model="option.autoCropHeight">
           </label>
           <label class="c-item">
-            <span>截图框是否限制在图片里(只有在自动生成截图框时才能生效)</span>
+            <span>截圖框是否限制在圖片里(只有在自動生成截圖框時才能生效)</span>
             <input type="checkbox" v-model="option.centerBox">
             <span>centerBox: {{ option.centerBox}}</span>
           </label>
           <label class="c-item">
-            <span>是否按照截图框比例输出 默认为1 </span>
+            <span>是否按照截圖框比例輸出 默認為1 </span>
             <input type="number" v-model="option.enlarge">
           </label>
-          <p>输出图片格式</p>
+          <p>輸出圖片格式</p>
           <label class="c-item">
             <label>jpg  <input type="radio" name="type" value="jpeg" v-model="option.outputType"></label>
             <label>png  <input type="radio" name="type" value="png" v-model="option.outputType"></label>
@@ -220,7 +220,7 @@
           original: false,
           canMoveBox: true,
           autoCrop: true,
-          // 只有自动截图开启 宽度高度才生效
+          // 只有自動截圖開啟 寬度高度才生效
           autoCropWidth: 200,
           autoCropHeight: 150,
           centerBox: false,
@@ -238,11 +238,11 @@
           outputType: "jpeg",
           canScale: true,
           autoCrop: true,
-          // 只有自动截图开启 宽度高度才生效
+          // 只有自動截圖開啟 寬度高度才生效
           autoCropWidth: 300,
           autoCropHeight: 250,
           fixed: true,
-          // 真实的输出宽高
+          // 真實的輸出寬高
           infoTrue: true,
           fixedNumber: [4, 3]
         },
@@ -311,7 +311,7 @@
           });
         }
       },
-      // 实时预览函数
+      // 實時預覽函數
       realTime(data) {
         var previews = data;
         var h = 0.5;
@@ -365,7 +365,7 @@
         });
       },
       down(type) {
-        // 输出
+        // 輸出
         if (type === "blob") {
           this.$refs.cropper.getCropBlob(data => {
             this.downImg = window.URL.createObjectURL(data);
@@ -394,18 +394,18 @@
       },
 
       uploadImg(e, num) {
-        //上传图片
+        //上傳圖片
         // this.option.img
         var file = e.target.files[0];
         if (!/\.(gif|jpg|jpeg|png|bmp|GIF|JPG|PNG)$/.test(e.target.value)) {
-          alert("图片类型必须是.gif,jpeg,jpg,png,bmp中的一种");
+          alert("圖片類型必須是.gif,jpeg,jpg,png,bmp中的一種");
           return false;
         }
         var reader = new FileReader();
         reader.onload = e => {
           let data;
           if (typeof e.target.result === "object") {
-            // 把Array Buffer转化为blob 如果是base64不需要
+            // 把Array Buffer轉化為blob 如果是base64不需要
             data = window.URL.createObjectURL(new Blob([e.target.result]));
           } else {
             data = e.target.result;
@@ -417,7 +417,7 @@
           }
           this.$refs.uploadImg.value = ''
         };
-        // 转化为blob
+        // 轉化為blob
         reader.readAsArrayBuffer(file);
       },
       imgLoad(msg) {

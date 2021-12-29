@@ -106,16 +106,16 @@ export default {
       if (result instanceof Promise) {
         result.then(r => {
           this.localPagination = Object.assign({}, this.localPagination, {
-            current: r.pageNo,  // 返回结果中的当前分页数
-            total: r.totalCount, // 返回结果中的总记录数
+            current: r.pageNo,  // 返回結果中的當前分頁數
+            total: r.totalCount, // 返回結果中的總記錄數
             showSizeChanger: this.showSizeChanger,
             pageSize: (pagination && pagination.pageSize) ||
               this.localPagination.pageSize
           });
-          //update--begin--autor:wangshuai-----date:20200724------for：判断showPagination是否为false------
+          //update--begin--autor:wangshuai-----date:20200724------for：判斷showPagination是否為false------
           (!this.showPagination || !r.totalCount && this.showPagination === 'auto') && (this.localPagination = false)
-          //update--end--autor:wangshuai-----date:20200724------for：判断showPagination是否为false-----
-          this.localDataSource = r.data; // 返回结果中的数组数据
+          //update--end--autor:wangshuai-----date:20200724------for：判斷showPagination是否為false-----
+          this.localDataSource = r.data; // 返回結果中的數組數據
           this.localLoading = false
         });
       }
@@ -150,7 +150,7 @@ export default {
       this.selectedRows = []
     },
     onClearSelected() {
-      // 【TESTA-262】页面清空后还能才做所选行，增加  this.$emit('clearAll')
+      // 【TESTA-262】頁面清空后還能才做所選行，增加  this.$emit('clearAll')
       this.selectedRowKeys = []
       this.selectedRows = []
       this.updateSelect([], [])
@@ -159,20 +159,20 @@ export default {
     renderMsg(h) {
       const _vm = this
       let d = []
-      // 构建 已选择
+      // 構建 已選擇
       d.push(
         h('span', {
           style: {
             marginRight: '12px'
           }
-        }, ['已选择 ', h('a', {
+        }, ['已選擇 ', h('a', {
           style: {
             fontWeight: 600
           }
         }, this.selectedRows.length)])
       );
 
-      // 构建 列统计
+      // 構建 列統計
       this.needTotalList.map(item => {
         d.push(h('span', {
             style: {
@@ -180,7 +180,7 @@ export default {
             }
           },
           [
-            `${ item.title }总计 `,
+            `${ item.title }總計 `,
             h('a', {
               style: {
                 fontWeight: 600
@@ -189,7 +189,7 @@ export default {
           ]))
       });
 
-      // 构建 清空选择
+      // 構建 清空選擇
       d.push(h('a', {
         style: {
           marginLeft: '24px'

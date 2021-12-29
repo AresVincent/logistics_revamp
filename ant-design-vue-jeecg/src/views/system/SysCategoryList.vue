@@ -1,25 +1,25 @@
 <template>
   <a-card :bordered="false">
     
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('分类字典')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('分類字典')">導出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader"  :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" icon="import">导入</a-button>
+        <a-button type="primary" icon="import">導入</a-button>
       </a-upload>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
-          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
+          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>刪除</a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -35,15 +35,15 @@
         @change="handleTableChange"
         @expand="handleExpand"
         v-bind="tableProps">
-        
+
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">編輯</a>
           <a-divider type="vertical" />
-          <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record)">
-            <a>删除</a>
+          <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record)">
+            <a>刪除</a>
           </a-popconfirm>
           <a-divider type="vertical" />
-          <a @click="handleAddSub(record)">添加下级</a>
+          <a @click="handleAddSub(record)">添加下級</a>
         </span>
 
       </a-table>
@@ -59,7 +59,7 @@
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import SysCategoryModal from './modules/SysCategoryModal'
   import { deleteAction } from '@/api/manage'
-  
+
   export default {
     name: "SysCategoryList",
     mixins:[JeecgListMixin],
@@ -68,16 +68,16 @@
     },
     data () {
       return {
-        description: '分类字典管理页面',
-        // 表头
+        description: '分類字典管理頁面',
+        // 表頭
         columns: [
           {
-            title:'分类名称',
+            title:'分類名稱',
             align:"left",
             dataIndex: 'name'
           },
           {
-            title:'分类编码',
+            title:'分類編碼',
             align:"left",
             dataIndex: 'code'
           },
@@ -112,7 +112,7 @@
       tableProps() {
         let _this = this
         return {
-          // 列表项是否可选择
+          // 列表項是否可選擇
           rowSelection: {
             selectedRowKeys: _this.selectedRowKeys,
             onChange: (selectedRowKeys) => _this.selectedRowKeys = selectedRowKeys
@@ -134,9 +134,9 @@
               if(Number(result.total)>0){
                 this.ipagination.total = Number(result.total)
                 this.dataSource = this.getDataByResult(res.result.records)
-                //update--begin--autor:lvdandan-----date:20201204------for：JT-31 删除成功后默认展开已展开信息
+                //update--begin--autor:lvdandan-----date:20201204------for：JT-31 刪除成功后默認展開已展開信息
                 return this.loadDataByExpandedRows(this.dataSource)
-                //update--end--autor:lvdandan-----date:20201204------for：JT-31 删除成功后默认展开已展开信息
+                //update--end--autor:lvdandan-----date:20201204------for：JT-31 刪除成功后默認展開已展開信息
               }else{
                 this.ipagination.total=0
                 this.dataSource=[]
@@ -152,7 +152,7 @@
       getDataByResult(result){
         if(result && result.length>0){
           return result.map(item=>{
-            //判断是否标记了带有子节点
+            //判斷是否標記了帶有子節點
             if(item[this.hasChildrenField]=='1'){
               let loadChild = { id: item.id+'_loadChild', name: 'loading...', isLoading: true }
               item.children = [loadChild]
@@ -162,11 +162,11 @@
         }
       },
       handleExpand(expanded, record){
-        // 判断是否是展开状态
+        // 判斷是否是展開狀態
         if (expanded) {
           this.expandedRowKeys.push(record.id)
           if (record.children.length>0 && record.children[0].isLoading === true) {
-            let params = this.getQueryParams();//查询条件
+            let params = this.getQueryParams();//查詢條件
             params[this.pidField] = record.id
             getAction(this.url.childList,params).then((res)=>{
               if(res.success){
@@ -227,7 +227,7 @@
           this.getFormDataById(nodeId,this.dataSource)
           let row = this.parentFormData
           this.expandedRowKeys.push(nodeId)
-          let params = this.getQueryParams();//查询条件
+          let params = this.getQueryParams();//查詢條件
           params[this.pidField] = nodeId
           getAction(this.url.childList,params).then((res)=>{
             console.log("11111",res)
@@ -262,7 +262,7 @@
         this.subExpandedKeys = [];
         this.getExpandKeysByPid(record.id,this.dataSource,this.dataSource)
         this.$refs.modalForm.subExpandedKeys = this.subExpandedKeys;
-        this.$refs.modalForm.title = "添加子分类";
+        this.$refs.modalForm.title = "添加子分類";
         this.$refs.modalForm.edit({'pid':record.id});
         this.$refs.modalForm.disableSubmit = false;
       },
@@ -270,15 +270,15 @@
         let that = this;
         deleteAction(that.url.delete, {id: record.id}).then((res) => {
           if (res.success) {
-            //update--begin--autor:lvdandan-----date:20201204------for：JT-31 删除成功后默认展开已展开信息
+            //update--begin--autor:lvdandan-----date:20201204------for：JT-31 刪除成功后默認展開已展開信息
             that.loadData();
-            //update--end--autor:lvdandan-----date:20201204------for：JT-31 删除成功后默认展开已展开信息
+            //update--end--autor:lvdandan-----date:20201204------for：JT-31 刪除成功后默認展開已展開信息
           } else {
             that.$message.warning(res.message);
           }
         });
       },
-      // 添加子分类时获取所有父级id
+      // 添加子分類時獲取所有父級id
       getExpandKeysByPid(pid,arr,all){
         if(pid && arr && arr.length>0){
           for(let i=0;i<arr.length;i++){
@@ -291,12 +291,12 @@
           }
         }
       },
-      // 根据已展开的行查询数据（用于保存后刷新时异步加载子级的数据）
+      // 根據已展開的行查詢數據（用於保存后刷新時異步加載子級的數據）
       loadDataByExpandedRows(dataList) {
         if (this.expandedRowKeys.length > 0) {
           return getAction(this.url.getChildListBatch,{ parentIds: this.expandedRowKeys.join(',') }).then(res=>{
             if (res.success && res.result.records.length>0) {
-              //已展开的数据批量子节点
+              //已展開的數據批量子節點
               let records = res.result.records
               const listMap = new Map();
               for (let item of records) {

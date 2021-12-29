@@ -6,7 +6,7 @@
     :confirmLoading="confirmLoading"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
 
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
@@ -20,7 +20,7 @@
             >
               <a-input
                 :disabled="disable"
-                placeholder="请输入模板编码"
+                placeholder="請輸入模板編碼"
                 v-decorator="['templateCode', validatorRules.templateCode ]"
               />
             </a-form-item>
@@ -29,8 +29,8 @@
             <a-form-item
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
-              label="模板类型">
-              <j-dict-select-tag  @change="handleChangeTemplateType" :triggerChange="true" dictCode="msgType" v-decorator="['templateType', validatorRules.templateType ]" placeholder="请选择模板类型">
+              label="模板類型">
+              <j-dict-select-tag  @change="handleChangeTemplateType" :triggerChange="true" dictCode="msgType" v-decorator="['templateType', validatorRules.templateType ]" placeholder="請選擇模板類型">
               </j-dict-select-tag>
             </a-form-item>
           </a-col>
@@ -40,10 +40,10 @@
             <a-form-item
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
-              label="模板标题"
+              label="模板標題"
               style="margin-left: -15px">
               <a-input
-                placeholder="请输入模板标题"
+                placeholder="請輸入模板標題"
                 v-decorator="['templateName', validatorRules.templateName]"
                 style="width: 122%"
               />
@@ -56,9 +56,9 @@
               v-show="!useEditor"
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
-              label="模板内容"
+              label="模板內容"
               style="margin-left: 4px;width: 126%">
-              <a-textarea placeholder="请输入模板内容" v-decorator="['templateContent', validatorRules.templateContent ]" :autosize="{ minRows: 8, maxRows: 8 }"/>
+              <a-textarea placeholder="請輸入模板內容" v-decorator="['templateContent', validatorRules.templateContent ]" :autosize="{ minRows: 8, maxRows: 8 }"/>
             </a-form-item>
           </a-col>
         </a-row>
@@ -68,7 +68,7 @@
               v-show="useEditor"
               :labelCol="labelCol"
               :wrapperCol="wrapperCol"
-              label="模板内容"
+              label="模板內容"
               style="margin-left: 4px;width: 126%">
               <j-editor  v-model="templateEditorContent"></j-editor>
             </a-form-item>
@@ -108,10 +108,10 @@
         confirmLoading: false,
         form: this.$form.createForm(this),
         validatorRules: {
-        templateCode: {rules: [{required: true, message: '请输入模板CODE!' },{validator: this.validateTemplateCode}]},
-        templateName: {rules: [{required: true, message: '请输入模板标题!'}]},
+        templateCode: {rules: [{required: true, message: '請輸入模板CODE!' },{validator: this.validateTemplateCode}]},
+        templateName: {rules: [{required: true, message: '請輸入模板標題!'}]},
         templateContent: {rules: []},
-        templateType: {rules: [{required: true, message: '请输入模板类型!'}]},
+        templateType: {rules: [{required: true, message: '請輸入模板類型!'}]},
         },
         url: {
           add: "/sys/message/sysMessageTemplate/add",
@@ -154,7 +154,7 @@
       handleOk() {
         this.model.templateType = this.templateType;
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.form.validateFields((err, values) => {
           if (!err) {
             that.confirmLoading = true;
@@ -168,7 +168,7 @@
               method = 'put';
             }
             let formData = Object.assign(this.model, values);
-            //时间格式化
+            //時間格式化
 
             if(this.useEditor){
               formData.templateContent=this.templateEditorContent
@@ -210,7 +210,7 @@
         this.close()
       },
       handleChangeTemplateType(value){
-        //如果是邮件类型那么则改变模板内容是富文本编辑器
+        //如果是郵件類型那麼則改變模板內容是富文本編輯器
         this.useEditor = (value==2 || value==4)
       }
 

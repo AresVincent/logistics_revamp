@@ -29,11 +29,11 @@
     render() {
       const { tooltip, length } = this.$props
       let text = ''
-      // 处理没有default插槽时的特殊情况
+      // 處理沒有default插槽時的特殊情況
       if (this.$slots.default) {
         text = this.$slots.default.map(vNode => vNode.text).join('')
       }
-      // 判断是否显示 tooltip
+      // 判斷是否显示 tooltip
       if (tooltip && getStrFullLength(text) > length) {
         return (
           <a-tooltip>

@@ -26,7 +26,7 @@
         type: String,
         default: 'id'
       },
-      // 根据什么查询，如果传递 id 就根据 id 查询
+      // 根據什麼查詢，如果傳遞 id 就根據 id 查詢
       queryKey: {
         type: String,
         default: 'parentId'
@@ -35,7 +35,7 @@
         type: Object,
         default: () => ({})
       },
-      // 查询顶级时的值，如果顶级为0，则传0
+      // 查詢頂級時的值，如果頂級為0，則傳0
       topValue: {
         type: String,
         default: null
@@ -56,7 +56,7 @@
         type: Object,
         default: () => ({})
       },
-      /** 是否在创建组件的时候就查询数据 */
+      /** 是否在創建組件的時候就查詢數據 */
       immediateRequest: {
         type: Boolean,
         default: true
@@ -107,7 +107,7 @@
     },
     methods: {
 
-      /** 加载数据*/
+      /** 加載數據*/
       loadData(id = this.topValue, first = true, url = this.url) {
         this.$emit('requestBefore', { first })
 
@@ -128,18 +128,18 @@
           } else if (res.result.records instanceof Array) {
             list = res.result.records
           } else {
-            throw '返回数据类型不识别'
+            throw '返回數據類型不識別'
           }
           let dataSource = list.map(item => {
-            // 判断是否标记了带有子级
+            // 判斷是否標記了帶有子級
             if (item.hasChildren === true) {
-              // 查找第一个带有dataIndex的值的列
+              // 查找第一個帶有dataIndex的值的列
               let firstColumn
               for (let column of this.columns) {
                 firstColumn = column.dataIndex
                 if (firstColumn) break
               }
-              // 定义默认展开时显示的loading子级，实际子级数据只在展开时加载
+              // 定義默認展開時显示的loading子級，實際子級數據只在展開時加載
               let loadChild = { id: `${item.id}_loadChild`, [firstColumn]: 'loading...', isLoading: true }
               item.children = [loadChild]
             }
@@ -153,14 +153,14 @@
         }).finally(() => this.$emit('requestFinally', { first }))
       },
 
-      /** 点击展开图标时触发 */
+      /** 點擊展開圖標時觸發 */
       handleExpand(expanded, record) {
-        // 判断是否是展开状态
+        // 判斷是否是展開狀態
         if (expanded) {
-          // 判断子级的首个项的标记是否是“正在加载中”，如果是就加载数据
+          // 判斷子級的首個項的標記是否是“正在加載中”，如果是就加載數據
           if (record.children[0].isLoading === true) {
             this.loadData(record.id, false, this.getChildrenUrl).then(dataSource => {
-              // 处理好的数据可直接赋值给children
+              // 處理好的數據可直接賦值給children
               if (dataSource.length === 0) {
                 record.children = null
               } else {

@@ -5,12 +5,12 @@
         <a-row :gutter="48">
           <a-col :md="8" :sm="24">
             <a-form-item label="角色ID">
-              <a-input placeholder="请输入"/>
+              <a-input placeholder="請輸入"/>
             </a-form-item>
           </a-col>
           <a-col :md="8" :sm="24">
-            <a-form-item label="状态">
-              <a-select placeholder="请选择" default-value="0">
+            <a-form-item label="狀態">
+              <a-select placeholder="請選擇" default-value="0">
                 <a-select-option value="0">全部</a-select-option>
                 <a-select-option value="1">正常</a-select-option>
                 <a-select-option value="2">禁用</a-select-option>
@@ -19,7 +19,7 @@
           </a-col>
           <a-col :md="8" :sm="24">
             <span class="table-page-search-submitButtons">
-              <a-button type="primary">查询</a-button>
+              <a-button type="primary">查詢</a-button>
               <a-button style="margin-left: 8px">重置</a-button>
             </span>
           </a-col>
@@ -52,7 +52,7 @@
         </a-row>
       </div>
       <span slot="action" slot-scope="text, record">
-        <a @click="$refs.modal.edit(record)">编辑</a>
+        <a @click="$refs.modal.edit(record)">編輯</a>
         <a-divider type="vertical" />
         <a-dropdown>
           <a class="ant-dropdown-link">
@@ -60,13 +60,13 @@
           </a>
           <a-menu slot="overlay">
             <a-menu-item>
-              <a href="javascript:;">详情</a>
+              <a href="javascript:;">詳情</a>
             </a-menu-item>
             <a-menu-item>
               <a href="javascript:;">禁用</a>
             </a-menu-item>
             <a-menu-item>
-              <a href="javascript:;">删除</a>
+              <a href="javascript:;">刪除</a>
             </a-menu-item>
           </a-menu>
         </a-dropdown>
@@ -90,33 +90,33 @@
     },
     data () {
       return {
-        description: '列表使用场景：后台管理中的权限管理以及角色管理，可用于基于 RBAC 设计的角色权限控制，颗粒度细到每一个操作类型。',
+        description: '列表使用場景：後台管理中的權限管理以及角色管理，可用於基於 RBAC 設計的角色權限控制，顆粒度細到每一個操作類型。',
 
         visible: false,
 
         form: null,
         mdl: {},
 
-        // 高级搜索 展开/关闭
+        // 高級搜索 展開/關閉
         advanced: false,
-        // 查询参数
+        // 查詢參數
         queryParam: {},
-        // 表头
+        // 表頭
         columns: [
           {
-            title: '唯一识别码',
+            title: '唯一識別碼',
             dataIndex: 'id'
           },
           {
-            title: '角色名称',
+            title: '角色名稱',
             dataIndex: 'name',
           },
           {
-            title: '状态',
+            title: '狀態',
             dataIndex: 'status'
           },
           {
-            title: '创建时间',
+            title: '創建時間',
             dataIndex: 'createTime',
             sorter: true
           }, {
@@ -126,7 +126,7 @@
             scopedSlots: { customRender: 'action' },
           }
         ],
-        // 加载数据方法 必须为 Promise 对象
+        // 加載數據方法 必須為 Promise 對象
         loadData: parameter => {
           return this.$http.get('/mock/api/role', {
             params: Object.assign(parameter, this.queryParam)
@@ -153,7 +153,7 @@
         this.visible = true
       },
       handleOk () {
-        // 新增/修改 成功时，重载列表
+        // 新增/修改 成功時，重載列表
         this.$refs.table.refresh()
       },
       onChange (selectedRowKeys, selectedRows) {

@@ -35,14 +35,14 @@
     methods: {
       handleRadioClick(item) {
         if (this.originColumn.allowClear === true) {
-          // 取消选择
+          // 取消選擇
           if (item.value === this.innerValue) {
             this.handleChangeCommon(null)
           }
         }
       },
     },
-    // 【组件增强】注释详见：JVxeCellMixins.js
+    // 【組件增強】註釋詳見：JVxeCellMixins.js
     enhanced: {
       switches: {visible: true},
     }
@@ -50,7 +50,7 @@
 </script>
 
 <style lang="less">
-  // 关闭动画，防止滚动时动态赋值出现问题
+  // 關閉動畫，防止滾動時動態賦值出現問題
   .j-vxe-radio.no-animation {
     .ant-radio-inner,
     .ant-radio-inner::after {

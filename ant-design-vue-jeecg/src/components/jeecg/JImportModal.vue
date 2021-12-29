@@ -1,13 +1,13 @@
 <template>
   <a-modal
-    title="导入EXCEL"
+    title="導入EXCEL"
     :width="600"
     :visible="visible"
     :confirmLoading="uploading"
     @cancel="handleClose">
 
     <div style="margin: 0px 0px 5px 1px" v-if="online">
-      <span style="display: inline-block;height: 32px;line-height: 32px;vertical-align: middle;">是否开启校验:</span>
+      <span style="display: inline-block;height: 32px;line-height: 32px;vertical-align: middle;">是否開啟校驗:</span>
       <span style="display: inline-block;height: 32px;margin-left: 6px">
          <a-switch :checked="validateStatus==1" @change="handleChangeValidateStatus" checked-children="是" un-checked-children="否" size="small"/>
       </span>
@@ -22,18 +22,18 @@
       :beforeUpload="beforeUpload">
       <a-button>
         <a-icon type="upload" />
-        选择导入文件
+        選擇導入文件
       </a-button>
     </a-upload>
 
     <template slot="footer">
-      <a-button @click="handleClose">关闭</a-button>
+      <a-button @click="handleClose">關閉</a-button>
       <a-button
         type="primary"
         @click="handleImport"
         :disabled="fileList.length === 0"
         :loading="uploading">
-        {{ uploading ? '上传中...' : '开始上传' }}
+        {{ uploading ? '上傳中...' : '開始上傳' }}
       </a-button>
     </template>
 
@@ -55,7 +55,7 @@
         default: '',
         required: false
       },
-      //是否online导入
+      //是否online導入
       online:{
         type: Boolean,
         default: false,
@@ -135,25 +135,25 @@
           }
         })
       },
-      // 是否开启校验 开关改变事件
+      // 是否開啟校驗 開關改變事件
       handleChangeValidateStatus(checked){
         this.validateStatus = checked==true?1:0
       },
-      // 错误信息提示
+      // 錯誤信息提示
       errorTip(tipMessage, fileUrl) {
         const h = this.$createElement;
         let href = window._CONFIG['domianURL'] + fileUrl
         this.$warning({
-          title: '导入成功,但是有错误数据!',
+          title: '導入成功,但是有錯誤數據!',
           content: h('div', {}, [
             h('div', tipMessage),
-            h('span', '具体详情请 '),
+            h('span', '具體詳情請 '),
             h('a', {
               attrs: {
                 href: href,
                 target: '_blank'
               },
-            },'点击下载'),
+            },'點擊下載'),
           ]),
           onOk() {},
         });

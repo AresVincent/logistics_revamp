@@ -1,27 +1,27 @@
 <template>
   <a-modal
-    title="重新设定密码"
+    title="重新設定密碼"
     :width="800"
     :visible="visible"
     :confirmLoading="confirmLoading"
     @ok="handleSubmit"
     @cancel="handleCancel"
-    cancelText="关闭"
+    cancelText="關閉"
     style="top:20px;"
   >
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
 
-        <a-form-item label="用户账号" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input placeholder="请输入用户账号" v-decorator="[ 'username', {}]" :readOnly="true"/>
+        <a-form-item label="用戶賬號" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input placeholder="請輸入用戶賬號" v-decorator="[ 'username', {}]" :readOnly="true"/>
         </a-form-item>
 
-        <a-form-item label="登录密码" :labelCol="labelCol" :wrapperCol="wrapperCol" hasFeedback >
-          <a-input type="password" placeholder="请输入登录密码" v-decorator="[ 'password', validatorRules.password]" />
+        <a-form-item label="登錄密碼" :labelCol="labelCol" :wrapperCol="wrapperCol" hasFeedback >
+          <a-input type="password" placeholder="請輸入登錄密碼" v-decorator="[ 'password', validatorRules.password]" />
         </a-form-item>
 
-        <a-form-item label="确认密码" :labelCol="labelCol" :wrapperCol="wrapperCol" hasFeedback >
-          <a-input type="password" @blur="handleConfirmBlur" placeholder="请重新输入登录密码" v-decorator="[ 'confirmpassword', validatorRules.confirmpassword]"/>
+        <a-form-item label="確認密碼" :labelCol="labelCol" :wrapperCol="wrapperCol" hasFeedback >
+          <a-input type="password" @blur="handleConfirmBlur" placeholder="請重新輸入登錄密碼" v-decorator="[ 'confirmpassword', validatorRules.confirmpassword]"/>
         </a-form-item>
 
       </a-form>
@@ -44,14 +44,14 @@
             rules: [{
               required: true,
               pattern:/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,./]).{8,}$/,
-              message: '密码由8位数字、大小写字母和特殊符号组成!'
+              message: '密碼由8位数字、大小寫字母和特殊符號組成!'
             }, {
               validator: this.validateToNextPassword,
             }],
           },
           confirmpassword:{
             rules: [{
-              required: true, message: '请重新输入登录密码!',
+              required: true, message: '請重新輸入登錄密碼!',
             }, {
               validator: this.compareToFirstPassword,
             }],
@@ -91,7 +91,7 @@
         this.selectedRole = [];
       },
       handleSubmit () {
-        // 触发表单验证
+        // 觸發表單驗證
         this.form.validateFields((err, values) => {
           if (!err) {
             this.confirmLoading = true;
@@ -118,7 +118,7 @@
         const confirmpassword=form.getFieldValue('confirmpassword');
         console.log("confirmpassword==>",confirmpassword);
         if (value && confirmpassword && value !== confirmpassword) {
-          callback('两次输入的密码不一样！');
+          callback('兩次輸入的密碼不一樣！');
         }
         if (value && this.confirmDirty) {
           form.validateFields(['confirm'], { force: true })
@@ -128,7 +128,7 @@
       compareToFirstPassword  (rule, value, callback) {
         const form = this.form;
         if (value && value !== form.getFieldValue('password')) {
-          callback('两次输入的密码不一样！');
+          callback('兩次輸入的密碼不一樣！');
         } else {
           callback()
         }

@@ -4,7 +4,7 @@
 
       <a-alert type="info" :showIcon="true">
         <div slot="message">
-          上次更新时间：{{ this.time }}
+          上次更新時間：{{ this.time }}
           <a-divider type="vertical"/>
           <a @click="handleClickUpdate">立即更新</a>
         </div>
@@ -48,7 +48,7 @@
         loading: true,
         tableLoading: true,
         columns: [{
-          title: '参数',
+          title: '參數',
           width: '30%',
           dataIndex: 'param',
           scopedSlots: { customRender: 'param' }
@@ -58,21 +58,21 @@
           dataIndex: 'text',
           scopedSlots: { customRender: 'text' }
         }, {
-          title: '当前值',
+          title: '當前值',
           width: '30%',
           dataIndex: 'value',
           scopedSlots: { customRender: 'value' }
         }],
         dataSource: [],
-        // 列表通过 textInfo 渲染出颜色、描述和单位
+        // 列表通過 textInfo 渲染出顏色、描述和單位
         textInfo: {
-          'system.cpu.count': { color: 'green', text: 'CPU 数量', unit: '核' },
-          'system.cpu.usage': { color: 'green', text: '系统 CPU 使用率', unit: '%' },
-          'process.start.time': { color: 'purple', text: '应用启动时间点', unit: '' },
-          'process.uptime': { color: 'purple', text: '应用已运行时间', unit: '秒' },
-          'process.cpu.usage': { color: 'purple', text: '当前应用 CPU 使用率', unit: '%' }
+          'system.cpu.count': { color: 'green', text: 'CPU 數量', unit: '核' },
+          'system.cpu.usage': { color: 'green', text: '系統 CPU 使用率', unit: '%' },
+          'process.start.time': { color: 'purple', text: '應用啟動時間點', unit: '' },
+          'process.uptime': { color: 'purple', text: '應用已運行時間', unit: '秒' },
+          'process.cpu.usage': { color: 'purple', text: '當前應用 CPU 使用率', unit: '%' }
         },
-        // 当一条记录中需要取出多条数据的时候需要配置该字段
+        // 當一條記錄中需要取出多條數據的時候需要配置該字段
         moreInfo: {}
       }
     },
@@ -87,7 +87,7 @@
 
       loadTomcatInfo() {
         this.tableLoading = true
-        this.time = moment().format('YYYY年MM月DD日 HH时mm分ss秒')
+        this.time = moment().format('YYYY年MM月DD日 HH時mm分ss秒')
         Promise.all([
           getAction('actuator/metrics/system.cpu.count'),
           getAction('actuator/metrics/system.cpu.usage'),
@@ -116,7 +116,7 @@
           this.dataSource = info
         }).catch((e) => {
           console.error(e)
-          this.$message.error('获取服务器信息失败')
+          this.$message.error('獲取服務器信息失敗')
         }).finally(() => {
           this.loading = false
           this.tableLoading = false

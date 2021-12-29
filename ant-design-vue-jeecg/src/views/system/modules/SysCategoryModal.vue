@@ -7,14 +7,14 @@
     @ok="handleOk"
     @cancel="handleCancel"
     :destroyOnClose="true"
-    cancelText="关闭">
+    cancelText="關閉">
     <a-spin :spinning="confirmLoading">
       <a-form-model ref="form" :model="model" :rules="validatorRules">
 
-        <a-form-model-item label="父级节点" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="pid">
+        <a-form-model-item label="父級節點" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="pid">
           <j-tree-select
             ref="treeSelect"
-            placeholder="请选择父级节点"
+            placeholder="請選擇父級節點"
             v-model="model.pid"
             dict="sys_category,name,id"
             pidField="pid"
@@ -23,8 +23,8 @@
           </j-tree-select>
         </a-form-model-item>
 
-        <a-form-model-item label="分类名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="name">
-          <a-input v-model="model.name" placeholder="请输入分类名称"></a-input>
+        <a-form-model-item label="分類名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="name">
+          <a-input v-model="model.name" placeholder="請輸入分類名稱"></a-input>
         </a-form-model-item>
 
       </a-form-model>
@@ -60,7 +60,7 @@
         confirmLoading: false,
         validatorRules:{
           pid:{},
-          name: [{ required: true, message: '请输入类型名称!' }]
+          name: [{ required: true, message: '請輸入類型名稱!' }]
         },
         url: {
           add: "/sys/category/add",
@@ -95,7 +95,7 @@
       },
       handleOk () {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;
@@ -111,7 +111,7 @@
             httpAction(httpurl,this.model,method).then((res)=>{
               if(res.success){
                 that.$message.success(res.message);
-                // close的时候清空了表单的值 导致model为空 修改值在列表页没有变 此处需要复制一下model
+                // close的時候清空了表單的值 導致model為空 修改值在列表頁沒有變 此處需要複製一下model
                 that.submitSuccess({...this.model})
               }else{
                 that.$message.warning(res.message);

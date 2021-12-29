@@ -5,9 +5,9 @@ import { filterDictText } from '@/components/dict/JDictSelectUtil'
 import { ajaxGetDictItems, getDictItemsFromCache } from '@/api/api'
 import JVxeCellMixins, { dispatchEvent } from '@/components/jeecg/JVxeTable/mixins/JVxeCellMixins'
 
-/** 公共资源 */
+/** 公共資源 */
 const common = {
-  /** value - label map，防止重复查询（刷新清空缓存） */
+  /** value - label map，防止重複查詢（刷新清空緩存） */
   labelMap: new Map(),
 
   /** 公共data */
@@ -18,7 +18,7 @@ const common = {
       innerOptions: [],
     }
   },
-  /** 公共计算属性 */
+  /** 公共計算屬性 */
   computed: {
     dict() {
       return this.originColumn.dict
@@ -30,13 +30,13 @@ const common = {
         return this.originColumn.options || []
       }
     },
-    // 是否是异步模式
+    // 是否是異步模式
     isAsync() {
       let isAsync = this.originColumn.async
       return (isAsync != null && isAsync !== '') ? !!isAsync : true
     },
   },
-  /** 公共属性监听 */
+  /** 公共屬性監聽 */
   watch: {
     innerValue: {
       immediate: true,
@@ -55,7 +55,7 @@ const common = {
   /** 公共方法 */
   methods: {
 
-    // 根据 value 查询数据，用于回显
+    // 根據 value 查詢數據，用於回顯
     async loadDataByValue(value) {
       if (this.isAsync) {
         if (this.innerSelectValue !== value) {
@@ -76,9 +76,9 @@ const common = {
     // 初始化字典
     async loadDataByDict() {
       if (!this.isAsync) {
-        // 如果字典项集合有数据
+        // 如果字典項集合有數據
         if (!this.originColumn.options || this.originColumn.options.length === 0) {
-          // 根据字典Code, 初始化字典数组
+          // 根據字典Code, 初始化字典數組
           let dictStr = ''
           if (this.dict) {
             let arr = this.dict.split(',')
@@ -89,7 +89,7 @@ const common = {
               dictStr = this.dict
             }
             if (this.dict.indexOf(',') === -1) {
-              //优先从缓存中读取字典配置
+              //優先從緩存中讀取字典配置
               let cache = getDictItemsFromCache(this.dict)
               if (cache) {
                 this.innerOptions = cache
@@ -109,7 +109,7 @@ const common = {
 
 }
 
-// 显示组件，自带翻译
+// 显示組件，自帶翻譯
 export const DictSearchSpanCell = {
   name: 'JVxeSelectSearchSpanCell',
   mixins: [JVxeCellMixins],
@@ -134,10 +134,10 @@ export const DictSearchSpanCell = {
   },
 }
 
-// 请求id
+// 請求id
 let requestId = 0
 
-// 输入选择组件
+// 輸入選擇組件
 export const DictSearchInputCell = {
   name: 'JVxeSelectSearchInputCell',
   mixins: [JVxeCellMixins],
@@ -151,7 +151,7 @@ export const DictSearchInputCell = {
           if (this.loading) {
             return <a-spin size="small"/>
           } else if (this.hasRequest) {
-            return <div>没有查询到任何数据</div>
+            return <div>沒有查詢到任何數據</div>
           } else {
             return <div>{this.tipsContent}</div>
           }
@@ -162,7 +162,7 @@ export const DictSearchInputCell = {
   computed: {
     ...common.computed,
     tipsContent() {
-      return this.originColumn.tipsContent || '请输入搜索内容'
+      return this.originColumn.tipsContent || '請輸入搜索內容'
     },
     filterOption() {
       if (this.isAsync) {
@@ -215,7 +215,7 @@ export const DictSearchInputCell = {
     },
     handleSearch(value) {
       if (this.isAsync) {
-        // 在输入时也应该开启加载，因为loadData加了消抖，所以会有800ms的用户主观上认为的卡顿时间
+        // 在輸入時也應該開啟加載，因為loadData加了消抖，所以會有800ms的用戶主觀上認為的卡頓時間
         this.loading = true
         if (this.innerOptions.length > 0) {
           this.innerOptions = []
@@ -251,7 +251,7 @@ export const DictSearchInputCell = {
       </a-select>
     )
   },
-  // 【组件增强】注释详见：JVxeCellMixins.js
+  // 【組件增強】註釋詳見：JVxeCellMixins.js
   enhanced: {
     aopEvents: {
       editActived(event) {

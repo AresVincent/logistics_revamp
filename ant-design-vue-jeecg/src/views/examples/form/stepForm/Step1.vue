@@ -2,7 +2,7 @@
   <div>
     <a-form style="max-width: 500px; margin: 40px auto 0;">
       <a-form-item
-        label="付款账户"
+        label="付款賬戶"
         :labelCol="{span: 5}"
         :wrapperCol="{span: 19}"
       >
@@ -11,13 +11,13 @@
         </a-select>
       </a-form-item>
       <a-form-item
-        label="收款账户"
+        label="收款賬戶"
         :labelCol="{span: 5}"
         :wrapperCol="{span: 19}"
       >
         <a-input-group :compact="true" style="display: inline-block; vertical-align: middle">
           <a-select defaultValue="alipay" style="width: 100px">
-            <a-select-option value="alipay">支付宝</a-select-option>
+            <a-select-option value="alipay">支付寶</a-select-option>
             <a-select-option value="wexinpay">微信</a-select-option>
           </a-select>
           <a-input :style="{width: 'calc(100% - 100px)'}" value="test@example.com"/>
@@ -31,7 +31,7 @@
         <a-input value="Alex" />
       </a-form-item>
       <a-form-item
-        label="转账金额"
+        label="轉賬金額"
         :labelCol="{span: 5}"
         :wrapperCol="{span: 19}"
       >

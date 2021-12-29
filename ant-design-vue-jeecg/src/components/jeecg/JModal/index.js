@@ -7,10 +7,10 @@ export default {
 
     const JPromptExtend = Vue.extend(JPrompt)
     Vue.prototype.$JPrompt = function (options = {}) {
-      // 创建prompt实例
+      // 創建prompt實例
       const vm = new JPromptExtend().$mount()
       vm.show(options)
-      // 关闭后销毁
+      // 關閉后銷毀
       vm.$on('after-close', () => vm.$destroy())
       return vm
     }

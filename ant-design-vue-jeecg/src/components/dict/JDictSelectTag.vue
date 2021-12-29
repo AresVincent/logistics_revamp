@@ -8,7 +8,7 @@
   </a-radio-group>
 
   <a-select v-else-if="tagType=='select'" :getPopupContainer = "getPopupContainer" :placeholder="placeholder" :disabled="disabled" :value="getValueSting" @change="handleInput">
-    <a-select-option :value="undefined">请选择</a-select-option>
+    <a-select-option :value="undefined">請選擇</a-select-option>
     <a-select-option v-for="(item, key) in dictOptions" :key="key" :value="item.value">
       <span style="display: inline-block;width: 100%" :title=" item.text || item.label ">
         {{ item.text || item.label }}
@@ -54,26 +54,26 @@
       }else{
         this.tagType = this.type
       }
-      //获取字典数据
+      //獲取字典數據
       // this.initDictData();
     },
     computed: {
       getValueSting(){
         // update-begin author:wangshuai date:20200601 for: 不显示placeholder的文字 ------
-        // 当有null或“” placeholder不显示
+        // 當有null或“” placeholder不显示
         return this.value != null ? this.value.toString() : undefined;
         // update-end author:wangshuai date:20200601 for: 不显示placeholder的文字 ------
       },
     },
     methods: {
       initDictData() {
-        //优先从缓存中读取字典配置
+        //優先從緩存中讀取字典配置
         if(getDictItemsFromCache(this.dictCode)){
           this.dictOptions = getDictItemsFromCache(this.dictCode);
           return
         }
 
-        //根据字典Code, 初始化字典数组
+        //根據字典Code, 初始化字典數組
         ajaxGetDictItems(this.dictCode, null).then((res) => {
           if (res.success) {
 //                console.log(res.result);
@@ -90,7 +90,7 @@
         }
         console.log(val);
         this.$emit('change', val);
-        //LOWCOD-2146 【菜单】数据规则，选择自定义SQL 规则值无法输入空格
+        //LOWCOD-2146 【菜單】數據規則，選擇自定義SQL 規則值無法輸入空格
         this.$emit('input', val);
       },
       setCurrentDictOptions(dictOptions){

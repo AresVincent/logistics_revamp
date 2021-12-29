@@ -17,11 +17,11 @@
             },
             {
               key: '2',
-              title: '项目'
+              title: '項目'
             },
             {
               key: '3',
-              title: '应用'
+              title: '應用'
             },
           ],
           active: () => {

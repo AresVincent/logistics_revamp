@@ -6,42 +6,42 @@
     :confirmLoading="confirmLoading"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
 
     <a-spin :spinning="confirmLoading">
       <a-form>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="模板标题">
+          label="模板標題">
           <a-input disabled v-model="templateName"/>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="模板内容">
+          label="模板內容">
           <a-textarea disabled v-model="templateContent" :autosize="{ minRows: 5, maxRows: 8 }"/>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="测试数据">
-          <a-textarea placeholder="请输入json格式测试数据" v-model="testData" :autosize="{ minRows: 5, maxRows: 8 }"/>
+          label="測試數據">
+          <a-textarea placeholder="請輸入json格式測試數據" v-model="testData" :autosize="{ minRows: 5, maxRows: 8 }"/>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
-          label="消息类型">
+          label="消息類型">
           <j-dict-select-tag
             v-model="msgType"
-            placeholder="请选择消息类型"
+            placeholder="請選擇消息類型"
             dictCode="msgType"/>
         </a-form-item>
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           label="消息接收方">
-          <a-input placeholder="请输入消息接收方" v-model="receiver"/>
+          <a-input placeholder="請輸入消息接收方" v-model="receiver"/>
         </a-form-item>
       </a-form>
     </a-spin>

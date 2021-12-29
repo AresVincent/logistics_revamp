@@ -1,10 +1,10 @@
 <template>
-  <a-card title="即时保存示例" :bordered="false">
+  <a-card title="即時保存示例" :bordered="false">
     <!--
-      【即时保存大体思路】：
-      1. JVxeTable 上必须加 keep-source 属性
-      2. 监听 edit-closed事件，这个事件是在编辑完成后触发
-      3. 在这个事件里面判断数据是否更改，如果更改了就调用接口进行保存操作
+      【即時保存大體思路】：
+      1. JVxeTable 上必須加 keep-source 屬性
+      2. 監聽 edit-closed事件，這個事件是在編輯完成后觸發
+      3. 在這個事件裏面判斷數據是否更改，如果更改了就調用接口進行保存操作
     -->
     <j-vxe-table
       toolbar
@@ -34,67 +34,67 @@
   import { getAction, postAction, putAction } from '@api/manage'
   import { JVXETypes } from '@/components/jeecg/JVxeTable'
 
-  // 即时保存示例
+  // 即時保存示例
   export default {
     name: 'JSBCDemo',
     data() {
       return {
-        // 工具栏的按钮配置
+        // 工具欄的按鈕配置
         toolbarConfig: {
-          // add 新增按钮；remove 删除按钮；clearSelection 清空选择按钮
+          // add 新增按鈕；remove 刪除按鈕；clearSelection 清空選擇按鈕
           btn: ['add', 'save', 'remove', 'clearSelection']
         },
-        // 是否正在加载
+        // 是否正在加載
         loading: false,
-        // 分页器参数
+        // 分頁器參數
         pagination: {
-          // 当前页码
+          // 當前頁碼
           current: 1,
-          // 每页的条数
+          // 每頁的條數
           pageSize: 200,
-          // 可切换的条数
+          // 可切換的條數
           pageSizeOptions: ['10', '20', '30', '100', '200'],
-          // 数据总数（目前并不知道真实的总数，所以先填写0，在后台查出来后再赋值）
+          // 數據總數（目前並不知道真實的總數，所以先填寫0，在後台查出來后再賦值）
           total: 0,
         },
-        // 选择的行
+        // 選擇的行
         selectedRows: [],
-        // 数据源，控制表格的数据
+        // 數據源，控製表格的數據
         dataSource: [],
-        // 列配置，控制表格显示的列
+        // 列配置，控製表格显示的列
         columns: [
-          {key: 'num', title: '序号', width: '80px'},
+          {key: 'num', title: '序號', width: '80px'},
           {
-            // 字段key，跟后台数据的字段名匹配
+            // 字段key，跟後台數據的字段名匹配
             key: 'ship_name',
-            // 列的标题
+            // 列的標題
             title: '船名',
-            // 列的宽度
+            // 列的寬度
             width: '180px',
-            // 如果加上了该属性，就代表当前单元格是可编辑的，type就是表单的类型，input就是简单的输入框
+            // 如果加上了該屬性，就代表當前單元格是可編輯的，type就是表單的類型，input就是簡單的輸入框
             type: JVXETypes.input
           },
           {key: 'call', title: '呼叫', width: '80px', type: JVXETypes.input},
-          {key: 'len', title: '长', width: '80px', type: JVXETypes.input},
-          {key: 'ton', title: '吨', width: '120px', defaultValue: 233, type: JVXETypes.input},
-          {key: 'payer', title: '付款方', width: '120px', defaultValue: '张三', type: JVXETypes.input},
-          {key: 'count', title: '数', width: '40px'},
+          {key: 'len', title: '長', width: '80px', type: JVXETypes.input},
+          {key: 'ton', title: '噸', width: '120px', defaultValue: 233, type: JVXETypes.input},
+          {key: 'payer', title: '付款方', width: '120px', defaultValue: '張三', type: JVXETypes.input},
+          {key: 'count', title: '數', width: '40px'},
           {
             key: 'company',
             title: '公司',
-            // 最小宽度，与宽度不同的是，这个不是固定的宽度，如果表格有多余的空间，会平均分配给设置了 minWidth 的列
-            // 如果要做占满表格的列可以这么写
+            // 最小寬度，與寬度不同的是，這個不是固定的寬度，如果表格有多餘的空間，會平均分配給設置了 minWidth 的列
+            // 如果要做佔滿表格的列可以這麼寫
             minWidth: '180px',
             type: JVXETypes.input
           },
-          {key: 'trend', title: '动向', width: '120px', type: JVXETypes.input},
+          {key: 'trend', title: '動向', width: '120px', type: JVXETypes.input},
         ],
-        // 查询url地址
+        // 查詢url地址
         url: {
           getData: '/mock/vxe/getData',
-          // 模拟保存单行数据（即时保存）
+          // 模擬保存單行數據（即時保存）
           saveRow: '/mock/vxe/immediateSaveRow',
-          // 模拟保存整个表格的数据
+          // 模擬保存整個表格的數據
           saveAll: '/mock/vxe/immediateSaveAll',
         },
       }
@@ -104,55 +104,55 @@
     },
     methods: {
 
-      // 加载数据
+      // 加載數據
       loadData() {
-        // 封装查询条件
+        // 封裝查詢條件
         let formData = {
           pageNo: this.pagination.current,
           pageSize: this.pagination.pageSize
         }
-        // 调用查询数据接口
+        // 調用查詢數據接口
         this.loading = true
         getAction(this.url.getData, formData).then(res => {
           if (res.success) {
-            // 后台查询回来的 total，数据总数量
+            // 後台查詢回來的 total，數據總數量
             this.pagination.total = res.result.total
-            // 将查询的数据赋值给 dataSource
+            // 將查詢的數據賦值給 dataSource
             this.dataSource = res.result.records
-            // 重置选择
+            // 重置選擇
             this.selectedRows = []
           } else {
-            this.$error({title: '主表查询失败', content: res.message})
+            this.$error({title: '主表查詢失敗', content: res.message})
           }
         }).finally(() => {
-          // 这里是无论成功或失败都会执行的方法，在这里关闭loading
+          // 這裡是無論成功或失敗都會執行的方法，在這裏關閉loading
           this.loading = false
         })
       },
 
-      // 【整体保存】点击保存按钮时触发的事件
+      // 【整體保存】點擊保存按鈕時觸發的事件
       handleTableSave({$table, target}) {
-        // 校验整个表格
+        // 校驗整個表格
         $table.validate().then((errMap) => {
-          // 校验通过
+          // 校驗通過
           if (!errMap) {
-            // 获取所有数据
+            // 獲取所有數據
             let tableData = target.getTableData()
-            console.log('当前保存的数据是：', tableData)
-            // 获取新增的数据
+            console.log('當前保存的數據是：', tableData)
+            // 獲取新增的數據
             let newData = target.getNewData()
-            console.log('-- 新增的数据：', newData)
-            // 获取删除的数据
+            console.log('-- 新增的數據：', newData)
+            // 獲取刪除的數據
             let deleteData = target.getDeleteData()
-            console.log('-- 删除的数据：', deleteData)
+            console.log('-- 刪除的數據：', deleteData)
 
-            // 【模拟保存】
+            // 【模擬保存】
             this.loading = true
             postAction(this.url.saveAll, tableData).then(res => {
               if (res.success) {
                 this.$message.success(`保存成功！`)
               } else {
-                this.$message.warn(`保存失败：` + res.message)
+                this.$message.warn(`保存失敗：` + res.message)
               }
             }).finally(() => {
               this.loading = false
@@ -161,47 +161,47 @@
         })
       },
 
-      // 触发单元格删除事件
+      // 觸發單元格刪除事件
       handleTableRemove(event) {
 
-        // 把 event.deleteRows 传给后台进行删除（注意：这里不会传递前端逻辑新增的数据，因为不需要请求后台删除）
-        console.log('待删除的数据: ', event.deleteRows)
-        // 也可以只传ID，因为可以根据ID删除
+        // 把 event.deleteRows 傳給後台進行刪除（注意：這裏不會傳遞前端邏輯新增的數據，因為不需要請求後台刪除）
+        console.log('待刪除的數據: ', event.deleteRows)
+        // 也可以只傳ID，因為可以根據ID刪除
         let deleteIds = event.deleteRows.map(row => row.id)
-        console.log('待删除的数据ids: ', deleteIds)
+        console.log('待刪除的數據ids: ', deleteIds)
 
-        // 模拟请求后台删除
+        // 模擬請求後台刪除
         this.loading = true
         window.setTimeout(() => {
           this.loading = false
-          this.$message.success('删除成功')
-          // 假设后台返回删除成功，必须要调用 confirmRemove() 方法，才会真正在表格里移除（会同时删除选中的逻辑新增的数据）
+          this.$message.success('刪除成功')
+          // 假設後台返回刪除成功，必須要調用 confirmRemove() 方法，才會真正在表格里移除（會同時刪除選中的邏輯新增的數據）
           event.confirmRemove()
         }, 1000)
       },
 
-      // 单元格编辑完成之后触发的事件
+      // 單元格編輯完成之後觸發的事件
       handleEditClosed(event) {
         let {$table, row, column} = event
 
         let field = column.property
         let cellValue = row[field]
-        // 判断单元格值是否被修改
+        // 判斷單元格值是否被修改
         if ($table.isUpdateByRow(row, field)) {
-          // 校验当前行
+          // 校驗當前行
           $table.validate(row).then((errMap) => {
-            // 校验通过
+            // 校驗通過
             if (!errMap) {
-              // 【模拟保存】
+              // 【模擬保存】
               let hideLoading = this.$message.loading(`正在保存"${column.title}"`, 0)
-              console.log('即时保存数据：', row)
+              console.log('即時保存數據：', row)
               putAction(this.url.saveRow, row).then(res => {
                 if (res.success) {
                   this.$message.success(`"${column.title}"保存成功！`)
-                  // 局部更新单元格为已保存状态
+                  // 局部更新單元格為已保存狀態
                   $table.reloadRow(row, null, field)
                 } else {
-                  this.$message.warn(`"${column.title}"保存失败：` + res.message)
+                  this.$message.warn(`"${column.title}"保存失敗：` + res.message)
                 }
               }).finally(() => {
                 hideLoading()
@@ -211,16 +211,16 @@
         }
       },
 
-      // 当分页参数变化时触发的事件
+      // 當分頁參數變化時觸發的事件
       handlePageChange(event) {
-        // 重新赋值
+        // 重新賦值
         this.pagination.current = event.current
         this.pagination.pageSize = event.pageSize
-        // 查询数据
+        // 查詢數據
         this.loadData()
       },
 
-      // 当选择的行变化时触发的事件
+      // 當選擇的行變化時觸發的事件
       handleSelectRowChange(event) {
         this.selectedRows = event.selectedRows
       },

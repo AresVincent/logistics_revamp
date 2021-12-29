@@ -1,13 +1,13 @@
 <template>
   <a-card :bordered="false">
-    <!-- 抽屉 -->
+    <!-- 抽屜 -->
     <a-drawer
       title="字典列表"
       :width="screenWidth"
       @close="onClose"
       :visible="visible"
     >
-      <!-- 抽屉内容的border -->
+      <!-- 抽屜內容的border -->
       <div
         :style="{
           padding:'10px',
@@ -19,14 +19,14 @@
           <a-form layout="inline" :form="form" @keyup.enter.native="searchQuery">
             <a-row :gutter="10">
               <a-col :md="8" :sm="12">
-                <a-form-item label="名称">
-                  <a-input style="width: 120px;" placeholder="请输入名称" v-model="queryParam.itemText"></a-input>
+                <a-form-item label="名稱">
+                  <a-input style="width: 120px;" placeholder="請輸入名稱" v-model="queryParam.itemText"></a-input>
                 </a-form-item>
               </a-col>
               <a-col :md="9" :sm="24">
-                <a-form-item label="状态" style="width: 170px" :labelCol="labelCol" :wrapperCol="wrapperCol">
+                <a-form-item label="狀態" style="width: 170px" :labelCol="labelCol" :wrapperCol="wrapperCol">
                   <a-select
-                    placeholder="请选择"
+                    placeholder="請選擇"
                     v-model="queryParam.status"
                   >
                     <a-select-option value="1">正常</a-select-option>
@@ -62,10 +62,10 @@
           >
 
           <span slot="action" slot-scope="text, record">
-            <a @click="handleEdit(record)">编辑</a>
+            <a @click="handleEdit(record)">編輯</a>
             <a-divider type="vertical"/>
-            <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-              <a>删除</a>
+            <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+              <a>刪除</a>
             </a-popconfirm>
           </span>
 
@@ -73,7 +73,7 @@
         </div>
       </div>
     </a-drawer>
-    <dict-item-modal ref="modalForm" @ok="modalFormOk"></dict-item-modal> <!-- 字典数据 -->
+    <dict-item-modal ref="modalForm" @ok="modalFormOk"></dict-item-modal> <!-- 字典數據 -->
   </a-card>
 </template>
 
@@ -91,12 +91,12 @@
       return {
         columns: [
           {
-            title: '名称',
+            title: '名稱',
             align: "center",
             dataIndex: 'itemText',
           },
           {
-            title: '数据值',
+            title: '數據值',
             align: "center",
             dataIndex: 'itemValue',
           },
@@ -130,8 +130,8 @@
         },
         form: this.$form.createForm(this),
         validatorRules: {
-          itemText: {rules: [{required: true, message: '请输入名称!'}]},
-          itemValue: {rules: [{required: true, message: '请输入数据值!'}]},
+          itemText: {rules: [{required: true, message: '請輸入名稱!'}]},
+          itemValue: {rules: [{required: true, message: '請輸入數據值!'}]},
         },
         url: {
           list: "/sys/dictItem/list",
@@ -141,7 +141,7 @@
       }
     },
     created() {
-      // 当页面初始化时,根据屏幕大小来给抽屉设置宽度
+      // 當頁面初始化時,根據屏幕大小來給抽屜設置寬度
       this.resetScreenSize();
     },
     methods: {
@@ -162,14 +162,14 @@
         this.$nextTick(() => {
           this.form.setFieldsValue(pick(this.model, 'itemText', 'itemValue'))
         });
-        // 当其它模块调用该模块时,调用此方法加载字典数据
+        // 當其它模塊調用該模塊時,調用此方法加載字典數據
         this.loadData();
       },
 
       getQueryParams() {
-        //update--begin--autor:wangshuai-----date:20191204------for：清空总条数 teambition JT-113------
+        //update--begin--autor:wangshuai-----date:20191204------for：清空總條數 teambition JT-113------
         this.ipagination.total=0;
-        //update--end--autor:wangshuai-----date:20191204------for：清空总条数 teambition JT-113------
+        //update--end--autor:wangshuai-----date:20191204------for：清空總條數 teambition JT-113------
         var param = Object.assign({}, this.queryParam);
         param.dictId = this.dictId;
         param.field = this.getQueryField();
@@ -182,7 +182,7 @@
         return filterObj(param);
       },
 
-      // 添加字典数据
+      // 添加字典數據
       handleAdd() {
         this.$refs.modalForm.add(this.dictId);
         this.$refs.modalForm.title = "新增";
@@ -195,7 +195,7 @@
         this.form.resetFields();
         this.dataSource = [];
       },
-      // 抽屉的宽度随着屏幕大小来改变
+      // 抽屜的寬度隨着屏幕大小來改變
       resetScreenSize() {
         let screenWidth = document.body.clientWidth;
         if (screenWidth < 600) {
@@ -204,22 +204,22 @@
           this.screenWidth = 600;
         }
       },
-      //update--begin--autor:wangshuai-----date:20191204------for：系统管理 数据字典禁用和正常区别开，添加背景颜色 teambition JT-22------
-      //增加样式方法返回值
+      //update--begin--autor:wangshuai-----date:20191204------for：系統管理 數據字典禁用和正常區別開，添加背景顏色 teambition JT-22------
+      //增加樣式方法返回值
       getRowClassname(record){
         if(record.status==0){
           return "data-rule-invalid"
         }
       }
-      //update--end--autor:wangshuai-----date:20191204------for：系统管理 数据字典禁用和正常区别开，添加背景颜色 teambition JT-22------
+      //update--end--autor:wangshuai-----date:20191204------for：系統管理 數據字典禁用和正常區別開，添加背景顏色 teambition JT-22------
     }
   }
 </script>
 <style lang="less" scoped>
-//update--begin--autor:wangshuai-----date:20191204------for：系统管理 数据字典禁用和正常区别开，添加背景颜色 teambition JT-22------
+//update--begin--autor:wangshuai-----date:20191204------for：系統管理 數據字典禁用和正常區別開，添加背景顏色 teambition JT-22------
 /deep/ .data-rule-invalid{
   background: #f4f4f4;
   color: #bababa;
 }
-//update--begin--autor:wangshuai-----date:20191204------for：系统管理 数据字典禁用和正常区别开，添加背景颜色 teambition JT-22------
+//update--begin--autor:wangshuai-----date:20191204------for：系統管理 數據字典禁用和正常區別開，添加背景顏色 teambition JT-22------
 </style>

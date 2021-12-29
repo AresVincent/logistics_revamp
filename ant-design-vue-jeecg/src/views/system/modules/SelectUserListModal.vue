@@ -5,22 +5,22 @@
     :visible="visible"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
 
     <div class="table-page-search-wrapper">
       <a-form layout="inline">
         <a-row :gutter="24">
 
           <a-col :span="6">
-            <a-form-item label="账号">
-              <a-input placeholder="请输入账号" v-model="queryParam.username"></a-input>
+            <a-form-item label="賬號">
+              <a-input placeholder="請輸入賬號" v-model="queryParam.username"></a-input>
             </a-form-item>
           </a-col>
 
           <a-col :span="6">
-            <a-form-item label="性别">
-              <a-select v-model="queryParam.sex" placeholder="请选择性别">
-                <a-select-option value="">请选择性别查询</a-select-option>
+            <a-form-item label="性別">
+              <a-select v-model="queryParam.sex" placeholder="請選擇性別">
+                <a-select-option value="">請選擇性別查詢</a-select-option>
                 <a-select-option value="1">男性</a-select-option>
                 <a-select-option value="2">女性</a-select-option>
               </a-select>
@@ -30,23 +30,23 @@
 
           <template v-if="toggleSearchStatus">
             <a-col :span="6">
-              <a-form-item label="邮箱">
-                <a-input placeholder="请输入邮箱" v-model="queryParam.email"></a-input>
+              <a-form-item label="郵箱">
+                <a-input placeholder="請輸入郵箱" v-model="queryParam.email"></a-input>
               </a-form-item>
             </a-col>
 
             <a-col :span="6">
-              <a-form-item label="手机号码">
-                <a-input placeholder="请输入手机号码" v-model="queryParam.phone"></a-input>
+              <a-form-item label="手機號碼">
+                <a-input placeholder="請輸入手機號碼" v-model="queryParam.phone"></a-input>
               </a-form-item>
             </a-col>
 
             <a-col :span="6">
-              <a-form-item label="状态">
-                <a-select v-model="queryParam.status" placeholder="请选择状态">
-                  <a-select-option value="">请选择状态</a-select-option>
+              <a-form-item label="狀態">
+                <a-select v-model="queryParam.status" placeholder="請選擇狀態">
+                  <a-select-option value="">請選擇狀態</a-select-option>
                   <a-select-option value="1">正常</a-select-option>
-                  <a-select-option value="2">解冻</a-select-option>
+                  <a-select-option value="2">解凍</a-select-option>
                 </a-select>
               </a-form-item>
             </a-col>
@@ -54,10 +54,10 @@
 
           <a-col :span="6" >
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchByquery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchByquery" icon="search">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
               <a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
+                {{ toggleSearchStatus ? '收起' : '展開' }}
                 <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
               </a>
             </span>
@@ -66,7 +66,7 @@
         </a-row>
       </a-form>
     </div>
- <!--    update-begin author:kangxiaolin   date:20190921   for:系统发送通知 用户多选失败 #513  -->
+ <!--    update-begin author:kangxiaolin   date:20190921   for:系統發送通知 用戶多選失敗 #513  -->
     <a-table
       ref="table"
       rowKey="id"
@@ -76,7 +76,7 @@
       :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange,onSelect:onSelect}"
       @change="handleTableChange"
     >
-<!--     update-end   author:kangxiaolin  date:20190921     for:系统发送通知 用户多选失败 #513 -->
+<!--     update-end   author:kangxiaolin  date:20190921     for:系統發送通知 用戶多選失敗 #513 -->
     </a-table>
   </a-modal>
 </template>
@@ -92,20 +92,20 @@
     },
     data () {
       return {
-        title:"选择用户",
+        title:"選擇用戶",
         queryParam: {},
         columns: [{
-          title: '用户账号',
+          title: '用戶賬號',
           align:"center",
           dataIndex: 'username',
           fixed:'left',
           width:200
         },{
-          title: '用户名称',
+          title: '用戶名稱',
           align:"center",
           dataIndex: 'realname',
         },{
-          title: '性别',
+          title: '性別',
           align:"center",
           dataIndex: 'sex',
           customRender:function (text) {
@@ -118,22 +118,22 @@
             }
           }
         },{
-          title: '手机号码',
+          title: '手機號碼',
           align:"center",
           dataIndex: 'phone'
         },{
-          title: '邮箱',
+          title: '郵箱',
           align:"center",
           dataIndex: 'email'
         },{
-          title: '状态',
+          title: '狀態',
           align:"center",
           dataIndex: 'status',
           customRender:function (text) {
             if(text==1){
               return "正常";
             }else if(text==2){
-              return "冻结";
+              return "凍結";
             }else{
               return text;
             }
@@ -145,7 +145,7 @@
           pageSize: 5,
           pageSizeOptions: ['5', '10', '20'],
           showTotal: (total, range) => {
-            return range[0] + "-" + range[1] + " 共" + total + "条"
+            return range[0] + "-" + range[1] + " 共" + total + "條"
           },
           showQuickJumper: true,
           showSizeChanger: true,
@@ -170,7 +170,7 @@
         this.edit(selectUser,userIds);
       },
       edit(selectUser,userIds){
-        //控制台报错
+        //控制台報錯
         if(userIds&&userIds.length>0){
           this.selectedRowKeys = userIds.split(',');
         }else{
@@ -192,7 +192,7 @@
         if(arg===1){
           this.ipagination.current = 1;
         }
-        let params = this.getQueryParams();//查询条件
+        let params = this.getQueryParams();//查詢條件
         getUserList(params).then((res)=>{
           if(res.success){
             this.dataSource = res.result.records;
@@ -203,12 +203,12 @@
       getQueryParams(){
         let param = Object.assign({}, this.queryParam,this.isorter);
         param.field = this.getQueryField();
-        //--update-begin----author:scott---date:20190818------for:新建公告时指定特定用户翻页错误SelectUserListModal #379----
+        //--update-begin----author:scott---date:20190818------for:新建公告時指定特定用戶翻頁錯誤SelectUserListModal #379----
         // param.current = this.ipagination.current;
         // param.pageSize = this.ipagination.pageSize;
         param.pageNo = this.ipagination.current;
         param.pageSize = this.ipagination.pageSize;
-        //--update-end----author:scott---date:20190818------for:新建公告时指定特定用户翻页错误SelectUserListModal #379---
+        //--update-end----author:scott---date:20190818------for:新建公告時指定特定用戶翻頁錯誤SelectUserListModal #379---
         return filterObj(param);
       },
       getQueryField(){
@@ -218,7 +218,7 @@
         }
         return str;
       },
-      //--update-begin----author:kangxiaolin---date:20190921------for:系统发送通知 用户多选失败 #513----
+      //--update-begin----author:kangxiaolin---date:20190921------for:系統發送通知 用戶多選失敗 #513----
       onSelectChange (selectedRowKeys) {
         this.selectedRowKeys = selectedRowKeys;
       },
@@ -232,7 +232,7 @@
             }
           })
         }
-        //--update-end----author:kangxiaolin---date:20190921------for:系统发送通知 用户多选失败 #513----
+        //--update-end----author:kangxiaolin---date:20190921------for:系統發送通知 用戶多選失敗 #513----
       },
 
       searchReset(){
@@ -243,7 +243,7 @@
         that.loadData(1);
       },
       handleTableChange(pagination, filters, sorter){
-        //TODO 筛选
+        //TODO 篩選
         if (Object.keys(sorter).length>0){
           this.isorter.column = sorter.field;
           this.isorter.order = "ascend"==sorter.order?"asc":"desc"

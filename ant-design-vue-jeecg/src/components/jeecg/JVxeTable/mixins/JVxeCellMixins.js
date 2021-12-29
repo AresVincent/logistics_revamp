@@ -11,11 +11,11 @@ export default {
     value: PropTypes.any,
     row: PropTypes.object,
     column: PropTypes.object,
-    // 组件参数
+    // 組件參數
     params: PropTypes.object,
-    // 渲染选项
+    // 渲染選項
     renderOptions: PropTypes.object,
-    // 渲染类型
+    // 渲染類型
     renderType: PropTypes.string.def('default'),
   },
   data() {
@@ -50,7 +50,7 @@ export default {
 
       let props = {}
 
-      // 输入占位符
+      // 輸入佔位符
       props['placeholder'] = replaceProps(col, col.placeholder)
 
       // 解析props
@@ -60,20 +60,20 @@ export default {
         })
       }
 
-      // 判断是否是禁用的列
+      // 判斷是否是禁用的列
       props['disabled'] = (typeof col['disabled'] === 'boolean' ? col['disabled'] : props['disabled'])
 
-      // TODO 判断是否是禁用的行
+      // TODO 判斷是否是禁用的行
       // if (props['disabled'] !== true) {
       //   props['disabled'] = ((this.disabledRowIds || []).indexOf(row.id) !== -1)
       // }
 
-      // 判断是否禁用所有组件
+      // 判斷是否禁用所有組件
       if (renderOptions.disabled === true) {
         props['disabled'] = true
       }
 
-      // update-begin-author:taoyan date:20211011 for: online表单，附表用户选择器{"multiSelect":false}不生效，单表可以生效 #3036
+      // update-begin-author:taoyan date:20211011 for: online表單，附表用戶選擇器{"multiSelect":false}不生效，單表可以生效 #3036
       let jsonStr = col['fieldExtendJson']
       if(jsonStr){
         let fieldExtendJson = JSON.parse(jsonStr)
@@ -81,7 +81,7 @@ export default {
           props['multi'] = false
         }
       }
-      // update-end-author:taoyan date:20211011 for: online表单，附表用户选择器{"multiSelect":false}不生效，单表可以生效 #3036
+      // update-end-author:taoyan date:20211011 for: online表單，附表用戶選擇器{"multiSelect":false}不生效，單表可以生效 #3036
 
       return props
     },
@@ -99,21 +99,21 @@ export default {
       handler(val) {
         let value = val
 
-        // 验证值格式
+        // 驗證值格式
         let originValue = this.row[this.column.property]
         let getValue = this.enhanced.getValue.call(this, originValue)
         if (originValue !== getValue) {
-          // 值格式不正确，重新赋值
+          // 值格式不正確，重新賦值
           value = getValue
           vModel.call(this, value)
         }
 
         this.innerValue = this.enhanced.setValue.call(this, value)
 
-        // 判断是否启用翻译
+        // 判斷是否啟用翻譯
         if (this.renderType === JVXERenderType.spaner && this.enhanced.translate.enabled) {
           let res = this.enhanced.translate.handler.call(this, value)
-          // 异步翻译，目前仅【多级联动】使用
+          // 異步翻譯，目前僅【多級聯動】使用
           if (res instanceof Promise) {
             res.then(value => this.innerValue = value)
           } else {
@@ -127,11 +127,11 @@ export default {
   },
   methods: {
 
-    /** 通用处理change事件 */
+    /** 通用處理change事件 */
     handleChangeCommon(value) {
       let handle = this.enhanced.getValue.call(this, value)
       this.trigger('change', {value: handle})
-      // 触发valueChange事件
+      // 觸發valueChange事件
       this.parentTrigger('valueChange', {
         type: this.$type,
         value: handle,
@@ -141,16 +141,16 @@ export default {
         columnIndex: this.params.columnIndex,
       })
     },
-    /** 通用处理blur事件 */
+    /** 通用處理blur事件 */
     handleBlurCommon(value) {
       this.trigger('blur', {value})
     },
 
     /**
-     *  如果事件存在的话，就触发
+     *  如果事件存在的話，就觸發
      * @param name 事件名
-     * @param event 事件参数
-     * @param args 其他附带参数
+     * @param event 事件參數
+     * @param args 其他附帶參數
      */
     trigger(name, event, args = []) {
       let listener = this.listeners[name]
@@ -168,7 +168,7 @@ export default {
     packageEvent(name, event = {}) {
       event.row = this.row
       event.column = this.column
-      //online增强参数兼容
+      //online增強參數兼容
       event.column['key'] = this.column['property']
       event.cellTarget = this
       if (!event.type) {
@@ -177,7 +177,7 @@ export default {
       if (!event.cellType) {
         event.cellType = this.$type
       }
-      // 是否校验表单，默认为true
+      // 是否校驗表單，默認為true
       if (typeof event.validate !== 'boolean') {
         event.validate = true
       }
@@ -190,92 +190,92 @@ export default {
     event: 'change'
   },
   /**
-   * 【自定义增强】用于实现一些增强事件
-   * 【注】这里只是定义接口，具体功能需要到各个组件内实现（也有部分功能实现）
-   * 【注】该属性不是Vue官方属性，是JVxeTable组件自定义的
-   *      所以方法内的 this 指向并不是当前组件，而是方法自身，
-   *      也就是说并不能 this 打点调实例里的任何方法
+   * 【自定義增強】用於實現一些增強事件
+   * 【注】這裏只是定義接口，具體功能需要到各個組件內實現（也有部分功能實現）
+   * 【注】該屬性不是Vue官方屬性，是JVxeTable組件自定義的
+   *      所以方法內的 this 指向並不是當前組件，而是方法自身，
+   *      也就是說並不能 this 打點調實例里的任何方法
    */
   enhanced: {
-    // 注册参数（详见：https://xuliangzhan_admin.gitee.io/vxe-table/#/table/renderer/edit）
+    // 註冊參數（詳見：https://xuliangzhan_admin.gitee.io/vxe-table/#/table/renderer/edit）
     installOptions: {
-      // 自动聚焦的 class 类名
+      // 自動聚焦的 class 類名
       autofocus: '',
     },
-    // 事件拦截器（用于兼容）
+    // 事件攔截器（用於兼容）
     interceptor: {
-      // 已实现：event.clearActived
-      // 说明：比如点击了某个组件的弹出层面板之后，此时被激活单元格不应该被自动关闭，通过返回 false 可以阻止默认的行为。
+      // 已實現：event.clearActived
+      // 說明：比如點擊了某個組件的彈出層面板之後，此時被激活單元格不應該被自動關閉，通過返回 false 可以阻止默認的行為。
       ['event.clearActived'](params, event, target) {
         return true
       },
-      // 自定义：event.clearActived.className
-      // 说明：比原生的多了一个参数：className，用于判断点击的元素的样式名（递归到顶层）
+      // 自定義：event.clearActived.className
+      // 說明：比原生的多了一個參數：className，用於判斷點擊的元素的樣式名（遞歸到頂層）
       ['event.clearActived.className'](params, event, target) {
         return true
       },
     },
-    // 【功能开关】
+    // 【功能開關】
     switches: {
-      // 是否使用 editRender 模式（仅当前组件，并非全局）
-      // 如果设为true，则表头上方会出现一个可编辑的图标
+      // 是否使用 editRender 模式（僅當前組件，並非全局）
+      // 如果設為true，則表頭上方會出現一個可編輯的圖標
       editRender: true,
-      // false = 组件触发后可视）；true = 组件一直可视
+      // false = 組件觸發后可視）；true = 組件一直可視
       visible: false,
     },
-    // 【切面增强】切面事件处理，一般在某些方法执行后同步执行
+    // 【切面增強】切面事件處理，一般在某些方法執行后同步執行
     aopEvents: {
-      // 单元格被激活编辑时会触发该事件
+      // 單元格被激活編輯時會觸發該事件
       editActived() {
       },
-      // 单元格编辑状态下被关闭时会触发该事件
+      // 單元格編輯狀態下被關閉時會觸發該事件
       editClosed() {
       },
     },
-    // 【翻译增强】可以实现例如select组件保存的value，但是span模式下需要显示成text
+    // 【翻譯增強】可以實現例如select組件保存的value，但是span模式下需要显示成text
     translate: {
-      // 是否启用翻译
+      // 是否啟用翻譯
       enabled: false,
       /**
-       * 【翻译处理方法】如果handler留空，则使用默认的翻译方法
-       * (this指向当前组件)
+       * 【翻譯處理方法】如果handler留空，則使用默認的翻譯方法
+       * (this指向當前組件)
        *
-       * @param value 需要翻译的值
-       * @returns{*} 返回翻译后的数据
+       * @param value 需要翻譯的值
+       * @returns{*} 返回翻譯后的數據
        */
       handler(value,) {
-        // 默认翻译方法
+        // 默認翻譯方法
         return filterDictText(this.column.own.options, value)
       },
     },
     /**
-     * 【获取值增强】组件抛出的值
-     * (this指向当前组件)
+     * 【獲取值增強】組件拋出的值
+     * (this指向當前組件)
      *
-     * @param value 保存到数据库里的值
-     * @returns{*} 返回处理后的值
+     * @param value 保存到數據庫里的值
+     * @returns{*} 返回處理后的值
      */
     getValue(value) {
       return value
     },
     /**
-     * 【设置值增强】设置给组件的值
-     * (this指向当前组件)
+     * 【設置值增強】設置給組件的值
+     * (this指向當前組件)
      *
-     * @param value 组件触发的值
-     * @returns{*} 返回处理后的值
+     * @param value 組件觸發的值
+     * @returns{*} 返回處理后的值
      */
     setValue(value) {
       return value
     },
     /**
-     * 【新增行增强】在用户点击新增时触发的事件，返回新行的默认值
+     * 【新增行增強】在用戶點擊新增時觸發的事件，返回新行的默認值
      *
-     * @param row 行数据
-     * @param column 列配置，.own 是用户配置的参数
-     * @param $table vxe 实例
-     * @param renderOptions 渲染选项
-     * @param params 可以在这里获取 $table
+     * @param row 行數據
+     * @param column 列配置，.own 是用戶配置的參數
+     * @param $table vxe 實例
+     * @param renderOptions 渲染選項
+     * @param params 可以在這裏獲取 $table
      *
      * @returns 返回新值
      */
@@ -291,7 +291,7 @@ function getListeners() {
     listeners.change = async (event) => {
       vModel.call(this, event.value)
       await this.$nextTick()
-      // 处理 change 事件相关逻辑（例如校验）
+      // 處理 change 事件相關邏輯（例如校驗）
       this.params.$table.updateStatus(this.params)
     }
   }
@@ -308,9 +308,9 @@ export function vModel(value, row, property) {
   this.$set(row, property, value)
 }
 
-/** 模拟触发事件 */
+/** 模擬觸發事件 */
 export function dispatchEvent({cell, $event}, className, handler) {
-  // alwaysEdit 下不模拟触发事件，否者会导致触发两次
+  // alwaysEdit 下不模擬觸發事件，否者會導致觸發兩次
   if (this && this.alwaysEdit) {
     return
   }
@@ -320,7 +320,7 @@ export function dispatchEvent({cell, $event}, className, handler) {
       if (typeof handler === 'function') {
         handler(element[0])
       } else {
-        // 模拟触发点击事件
+        // 模擬觸發點擊事件
         if($event){
           element[0].dispatchEvent($event)
         }

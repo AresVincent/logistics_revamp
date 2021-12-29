@@ -9,7 +9,7 @@
           <a-tab-pane tab="分" key="minute">
             <minute-ui v-model="minute" :disabled="disabled"></minute-ui>
           </a-tab-pane>
-          <a-tab-pane tab="时" key="hour">
+          <a-tab-pane tab="時" key="hour">
             <hour-ui v-model="hour" :disabled="disabled"></hour-ui>
           </a-tab-pane>
           <a-tab-pane tab="日" key="day">
@@ -27,7 +27,7 @@
         </a-tabs>
       </div>
       <a-divider/>
-      <!-- 执行时间预览 -->
+      <!-- 執行時間預覽 -->
       <a-row :gutter="8">
         <a-col :span="18" style="margin-top: 22px;">
           <a-row :gutter="8">
@@ -38,7 +38,7 @@
               <a-input addon-before="分" v-model="inputValues.minute" @blur="onInputBlur"/>
             </a-col>
             <a-col :span="8" style="margin-bottom: 8px;">
-              <a-input addon-before="时" v-model="inputValues.hour" @blur="onInputBlur"/>
+              <a-input addon-before="時" v-model="inputValues.hour" @blur="onInputBlur"/>
             </a-col>
             <a-col :span="8" style="margin-bottom: 8px;">
               <a-input addon-before="日" v-model="inputValues.day" @blur="onInputBlur"/>
@@ -59,7 +59,7 @@
         </a-col>
         <a-col :span="6">
 
-          <div>近十次执行时间（不含年）</div>
+          <div>近十次執行時間（不含年）</div>
           <a-textarea type="textarea" :value="preTimeList" :rows="5"/>
         </a-col>
       </a-row>
@@ -125,7 +125,7 @@ export default {
       week: '?',
       year: '*',
       inputValues: {second: '', minute: '', hour: '', day: '', month: '', week: '', year: '', cron: ''},
-      preTimeList: '执行预览，会忽略年份参数',
+      preTimeList: '執行預覽，會忽略年份參數',
     }
   },
   computed: {
@@ -144,8 +144,12 @@ export default {
       const v = this.cronValue_c
       if (this.hideYear || this.hideSecond) return v
       const vs = v.split(' ')
+      if (vs.length >= 6) {
+        // 將 Quartz 星期 的規則轉換為 CronParser 的規則
+        vs[5] = this.convertQuartzWeekToCParser(vs[5])
+      }
       return vs.slice(0, vs.length - 1).join(' ')
-    }
+    },
   },
   watch: {
     cronValue(newVal, oldVal) {
@@ -226,11 +230,43 @@ export default {
       if (values.length > i) this.year = values[i]
       this.assignInput()
     },
+    // 將 Quartz 星期 的規則轉換為 CronParser 的規則：
+    // Quartz 的規則：1 = 周日，2 = 周一，3 = 周二，4 = 周三，5 = 周四，6 = 周五，7 = 周六
+    // CronParser 的規則： 0 = 周日，1 = 周一，2 = 周二，3 = 周三，4 = 周四，5 = 周五，6 = 周六，7 = 周日
+    convertQuartzWeekToCParser(week) {
+      let convert = (v) => {
+        if (v === '0') {
+          return '1'
+        }
+        if (v === '1') {
+          return '0'
+        }
+        return (Number.parseInt(v) - 1).toString()
+      }
+      // 匹配示例 1-7 or 1/7
+      let patten1 = /^([0-7])([-/])([0-7])$/
+      // 匹配示例 1,4,7
+      let patten2 = /^([0-7])(,[0-7])+$/
+      if (/^[0-7]$/.test(week)) {
+        return convert(week)
+      } else if (patten1.test(week)) {
+        return week.replace(patten1, ($0, before, separator, after) => {
+          if (separator === '/') {
+            return convert(before) + separator + after
+          } else {
+            return convert(before) + separator + convert(after)
+          }
+        })
+      } else if (patten2.test(week)) {
+        return week.split(',').map(v => convert(v)).join(',')
+      }
+      return week
+    },
     calTriggerList: simpleDebounce(function () {
       this.calTriggerListInner()
     }, 500),
     calTriggerListInner() {
-      // 设置了回调函数
+      // 設置了回調函數
       if (this.remote) {
         this.remote(this.cronValue_c, +new Date(), v => {
           this.preTimeList = v
@@ -246,7 +282,7 @@ export default {
       for (let i = 1; i <= 10; i++) {
         result.push(dateFormat(new Date(iter.next()), format))
       }
-      this.preTimeList = result.length > 0 ? result.join('\n') : '无执行时间'
+      this.preTimeList = result.length > 0 ? result.join('\n') : '無執行時間'
     },
     onInputBlur(){
       this.second = this.inputValues.second

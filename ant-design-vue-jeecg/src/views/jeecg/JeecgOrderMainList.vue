@@ -1,28 +1,28 @@
 <template>
   <a-card :bordered="false">
 
-    <!-- 查询区域 -->
+    <!-- 查詢區域 -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline">
         <a-row :gutter="24">
 
           <a-col :md="6" :sm="24">
-            <a-form-item label="订单号">
-              <a-input placeholder="请输入订单号" v-model="queryParam.orderCode"></a-input>
+            <a-form-item label="訂單號">
+              <a-input placeholder="請輸入訂單號" v-model="queryParam.orderCode"></a-input>
             </a-form-item>
           </a-col>
           <a-col :md="6" :sm="24">
-            <a-form-item label="订单类型">
-              <a-select placeholder="请输入订单类型"  v-model="queryParam.ctype">
-                <a-select-option value="1">国内订单</a-select-option>
-                <a-select-option value="2">国际订单</a-select-option>
+            <a-form-item label="訂單類型">
+              <a-select placeholder="請輸入訂單類型"  v-model="queryParam.ctype">
+                <a-select-option value="1">國內訂單</a-select-option>
+                <a-select-option value="2">國際訂單</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
 
           <a-col :md="6" :sm="24" >
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
             </span>
           </a-col>
@@ -31,26 +31,26 @@
       </a-form>
     </div>
 
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('一对多示例')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('一對多示例')">導出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" icon="import">导入</a-button>
+        <a-button type="primary" icon="import">導入</a-button>
       </a-upload>
 
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
-          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
+          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>刪除</a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -67,15 +67,15 @@
         @change="handleTableChange">
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">編輯</a>
 
           <a-divider type="vertical" />
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+                  <a>刪除</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -84,9 +84,9 @@
 
       </a-table>
     </div>
-    <!-- table区域-end -->
+    <!-- table區域-end -->
 
-    <!-- 表单区域 -->
+    <!-- 表單區域 -->
     <jeecgOrderMain-modal ref="modalForm" @ok="modalFormOk"></jeecgOrderMain-modal>
   </a-card>
 </template>
@@ -103,9 +103,9 @@
     },
     data () {
       return {
-        description: '订单管理页面',
+        description: '訂單管理頁面',
         importExcelUrl:`${window._CONFIG['domianURL']}/test/jeecgOrderMain/importExcel`,
-        // 表头
+        // 表頭
         columns: [
           {
             title: '#',
@@ -118,36 +118,36 @@
             }
           },
           {
-            title: '订单号',
+            title: '訂單號',
             align:"center",
             dataIndex: 'orderCode'
           },
           {
-            title: '订单类型',
+            title: '訂單類型',
             align:"center",
             dataIndex: 'ctype',
             customRender: (text, record, index) => {
               let re = "";
               if (text === '1') {
-                re = "国内订单";
+                re = "國內訂單";
               } else if (text === '2') {
-                re = "国际订单";
+                re = "國際訂單";
               }
               return re;
             }
           },
           {
-            title: '订单日期',
+            title: '訂單日期',
             align:"center",
             dataIndex: 'orderDate'
           },
           {
-            title: '订单金额',
+            title: '訂單金額',
             align:"center",
             dataIndex: 'orderMoney'
           },
           {
-            title: '订单备注',
+            title: '訂單備註',
             align:"center",
             dataIndex: 'content'
           },
@@ -172,7 +172,7 @@
   }
 </script>
 <style scoped>
-  /** Button按钮间距 */
+  /** Button按鈕間距 */
   .ant-btn {
     margin-left: 3px
   }

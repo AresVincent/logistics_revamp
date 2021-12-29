@@ -5,7 +5,7 @@ import { getAction } from '@/api/manage'
 
 const online = {
   state: {
-    //存储对象属性 value,text
+    //存儲對象屬性 value,text
     authFields: [],
   },
   mutations: {
@@ -15,7 +15,7 @@ const online = {
     }
   },
   actions: {
-    // TODO 如果没找到可以尝试请求一下
+    // TODO 如果沒找到可以嘗試請求一下
     xxxxxx({ commit }, userInfo) {
     }
 

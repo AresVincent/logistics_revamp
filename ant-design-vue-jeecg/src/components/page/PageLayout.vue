@@ -18,7 +18,7 @@
       <slot slot="extra" name="extra"></slot>
       <div slot="pageMenu">
         <div class="page-menu-search" v-if="search">
-          <a-input-search style="width: 80%; max-width: 522px;" placeholder="请输入..." size="large" enterButton="搜索" />
+          <a-input-search style="width: 80%; max-width: 522px;" placeholder="請輸入..." size="large" enterButton="搜索" />
         </div>
         <div class="page-menu-tabs" v-if="tabs && tabs.items">
           <!-- @change="callback" :activeKey="activeKey" -->
