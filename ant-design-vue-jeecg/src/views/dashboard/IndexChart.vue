@@ -2,7 +2,7 @@
   <div class="page-header-index-wide">
     <a-row :gutter="24">
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="總銷售額" total="HKD $ 126,560">
+        <chart-card :loading="loading" title="總銷售額" :total="'HKD$'+chartData.totalAmount">
           <a-tooltip title="指標說明" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
@@ -20,7 +20,7 @@
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="訂單量" :total="8846 | NumberFormat">
+        <chart-card :loading="loading" title="訂單量" :total="chartData.totalOrder | NumberFormat">
           <a-tooltip title="指標說明" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
@@ -149,7 +149,7 @@
 
   import Trend from '@/components/Trend'
   import { getLoginfo,getVisitInfo } from '@/api/api'
-
+  import { getAction } from '@/api/manage'
   const rankList = []
   for (let i = 0; i < 7; i++) {
     rankList.push({
@@ -188,14 +188,9 @@
         loginfo:{},
         visitFields:['ip','visit'],
         visitInfo:[],
-        indicator: <a-icon type="loading" style="font-size: 24px" spin />
+        indicator: <a-icon type="loading" style="font-size: 24px" spin />,
+        chartData:{totalAmount:'0',totalOrder:'0'}
       }
-    },
-    created() {
-      setTimeout(() => {
-        this.loading = !this.loading
-      }, 1000)
-      this.initLogInfo();
     },
     methods: {
       initLogInfo () {
@@ -213,7 +208,33 @@
            }
          })
       },
+      getLogisticsData(){
+        return  getAction("/online/cgform/api/getData/4028e4e87e22f956017e22f956810000",{pageSize:99999999,order:'asc',colunm:'send_time'});
+      },
+      //getLogiticsOrder Data
+      async loadLogiticsData(){
+          let data=await this.getLogisticsData();
+          this.chartData.totalOrder=data.result.total;
+          this.chartData.totalAmount=this.getTotalAmount(data.result.records);
+      },
+      getTotalAmount(arr){
+        let amount=0;
+        for(var item in arr){
+          amount+=arr[item].price;
+        }
+        return amount;
+      }
+    },
+    created() {
+      setTimeout(() => {
+        this.loading = !this.loading
+      }, 1000)
+      this.initLogInfo();
+    },
+    beforeMount(){
+      this.loadLogiticsData()
     }
+
   }
 </script>
 

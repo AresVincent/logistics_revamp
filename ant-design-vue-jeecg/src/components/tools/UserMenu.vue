@@ -38,7 +38,7 @@
         <span v-if="isDesktop()">歡迎您，{{ nickname() }}</span>
       </span>
       <a-menu slot="overlay" class="user-dropdown-menu-wrapper">
-        <a-menu-item key="0">
+        <!-- <a-menu-item key="0">
           <router-link :to="{ name: 'account-center' }">
             <a-icon type="user"/>
             <span>個人中心</span>
@@ -49,7 +49,7 @@
             <a-icon type="setting"/>
             <span>賬戶設置</span>
           </router-link>
-        </a-menu-item>
+        </a-menu-item> -->
         <a-menu-item key="3"  @click="systemSetting">
            <a-icon type="tool"/>
            <span>系統設置</span>

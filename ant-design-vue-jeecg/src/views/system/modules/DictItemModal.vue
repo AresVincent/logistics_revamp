@@ -164,7 +164,8 @@
           param.id = this.model.id
         }
         if(value){
-          let reg=new RegExp("[`_~!@#$^&*()=|{}'.<>《》/?！￥（）—【】‘；：”“。，、？]")
+          // 取消數據值"_"的限制
+          let reg=new RegExp("[`~!@#$^&*()=|{}'.<>《》/?！￥（）—【】‘；：”“。，、？]")
           if(reg.test(value)){
             callback("數據值不能包含特殊字符！")
           }else{

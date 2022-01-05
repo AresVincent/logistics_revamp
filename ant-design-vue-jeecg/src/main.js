@@ -62,7 +62,8 @@ Vue.use(preview)
 Vue.use(vueBus);
 Vue.use(JeecgComponents);
 Vue.use(VueAreaLinkage);
-
+console.log("environment");
+console.log(process.env);
 SSO.init(() => {
   main()
 })
