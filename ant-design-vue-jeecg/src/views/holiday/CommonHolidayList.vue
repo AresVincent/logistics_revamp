@@ -11,7 +11,7 @@
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchQuery" icon="search" >查询</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
               <a @click="handleToggleSearch" style="margin-left: 8px">
                 {{ toggleSearchStatus ? '收起' : '展开' }}
@@ -115,7 +115,7 @@
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import CommonHolidayModal from './modules/CommonHolidayModal'
   import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
-
+  import {colAuthFilter} from "@/utils/authFilter"
   export default {
     name: 'CommonHolidayList',
     mixins:[JeecgListMixin, mixinDevice],
@@ -197,7 +197,12 @@
       }
     },
     created() {
-    this.getSuperFieldList();
+    this.disableMixinCreated=true;
+      this.columns = colAuthFilter(this.columns,'commonHoliday:');
+      this.loadData();
+      this.initDictConfig();
+      this.getSuperFieldList();
+
     },
     computed: {
       importExcelUrl: function(){

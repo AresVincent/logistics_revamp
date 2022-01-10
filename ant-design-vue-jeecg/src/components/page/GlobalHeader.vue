@@ -18,7 +18,7 @@
         @click="toggle"/>
 
       <span v-if="device === 'desktop'">歡迎進入 King's 管理系統</span>
-      <span v-else>King's 管理系統</span>
+      <!-- <span v-else>King's管理系統</span> -->
 
       <user-menu :theme="theme"/>
     </div>

@@ -3,8 +3,8 @@
     <router-link :to="routerLinkTo">
 
       <!-- update-begin- author:sunjianlei --- date:20190814 --- for: logo顏色根據主題顏色變化 -->
-      <img v-if="navTheme === 'dark'" src="~@/assets/Kings_logo_white.png" alt="logo">
-      <img v-else src="~@/assets/Kings_logo_colour.png" alt="logo">
+      <img v-if="navTheme === 'dark'" src="~@/assets/Kings_logo_white.png" alt="logo" :class="isMobile()? 'hidden':''">
+      <img v-else src="~@/assets/Kings_logo_colour.png" alt="logo" :class="isMobile()? 'hidden':''">
       <!-- update-begin- author:sunjianlei --- date:20190814 --- for: logo顏色根據主題顏色變化 -->
 
       <h1 v-if="showTitle">{{ title }}</h1>
@@ -13,11 +13,11 @@
 </template>
 
 <script>
-  import { mixin } from '@/utils/mixin.js'
+  import { mixin,mixinDevice } from '@/utils/mixin.js'
 
   export default {
     name: 'Logo',
-    mixins: [mixin],
+    mixins: [mixin,mixinDevice],
     props: {
       title: {
         type: String,
@@ -60,5 +60,8 @@
     &.light .logo {
       background-color: @primary-color;
     }
+  }
+  .hidden{
+    display: none !important;;
   }
 </style>

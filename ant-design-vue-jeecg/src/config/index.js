@@ -1,6 +1,7 @@
 /** init domain config */
 import Vue from 'vue'
 //設置全局API_BASE_URL
+console.log("url:"+process.env.VUE_APP_API_BASE_URL)
 Vue.prototype.API_BASE_URL = process.env.VUE_APP_API_BASE_URL
 window._CONFIG['domianURL'] = Vue.prototype.API_BASE_URL
 //單點登錄地址

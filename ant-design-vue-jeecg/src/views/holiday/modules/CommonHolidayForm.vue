@@ -1,10 +1,10 @@
 <template>
   <a-spin :spinning="confirmLoading">
     <j-form-container :disabled="formDisabled">
-      <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
+      <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail" >
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="假期代碼" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="holidayCode">
+            <a-form-model-item label="假期代碼" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="holidayCode" v-has="'holiday'">
               <a-input v-model="model.holidayCode" placeholder="请输入假期代碼"  ></a-input>
             </a-form-model-item>
           </a-col>

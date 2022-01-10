@@ -49,6 +49,21 @@ import '@/components/jeecg/JVxeTable/install'
 import '@/components/JVxeCells/install'
 //表單驗證
 import { rules } from '@/utils/rules'
+
+//地圖組件
+// 引入vue-bmap-gl
+import VueBMap from 'vue-bmap-gl';
+import 'vue-bmap-gl/dist/style.css';
+Vue.use(VueBMap);
+
+// 初始化vue-amap
+VueBMap.initBMapApiLoader({
+  // 百度的key
+  ak: 'j2iUMQMq7Ye6N6k08rQmBogRvsyydr3F',
+  // 百度 sdk 版本，默认为 1.0
+  v: '1.0'
+});
+
 Vue.prototype.rules = rules
 Vue.config.productionTip = false
 Vue.use(Storage, config.storageOptions)
@@ -62,6 +77,7 @@ Vue.use(preview)
 Vue.use(vueBus);
 Vue.use(JeecgComponents);
 Vue.use(VueAreaLinkage);
+
 console.log("environment");
 console.log(process.env);
 SSO.init(() => {

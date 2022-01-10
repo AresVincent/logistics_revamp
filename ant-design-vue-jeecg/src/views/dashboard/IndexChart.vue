@@ -189,7 +189,7 @@
         visitFields:['ip','visit'],
         visitInfo:[],
         indicator: <a-icon type="loading" style="font-size: 24px" spin />,
-        chartData:{totalAmount:'0',totalOrder:'0'}
+        chartData:{totalAmount:'0',totalOrder:'0',methodCount:[]}
       }
     },
     methods: {
@@ -216,6 +216,7 @@
           let data=await this.getLogisticsData();
           this.chartData.totalOrder=data.result.total;
           this.chartData.totalAmount=this.getTotalAmount(data.result.records);
+          this.chartData.methodCount=this.getMethodCount(data.result.records);
       },
       getTotalAmount(arr){
         let amount=0;
@@ -234,7 +235,6 @@
     beforeMount(){
       this.loadLogiticsData()
     }
-
   }
 </script>
 
