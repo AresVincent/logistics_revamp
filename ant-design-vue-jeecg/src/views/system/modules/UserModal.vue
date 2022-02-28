@@ -88,7 +88,7 @@
         </a-form-model-item>
 
         <a-form-model-item label="頭像" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-image-upload class="avatar-uploader" text="上傳" v-model="model.avatar" ></j-image-upload>
+          <j-image-upload class="avatar-uploader" text="上傳" v-model="model.avatar"></j-image-upload>
         </a-form-model-item>
 
         <a-form-model-item label="生日" :labelCol="labelCol" :wrapperCol="wrapperCol">

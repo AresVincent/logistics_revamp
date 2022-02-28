@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "pre": "cnpm install || yarn --registry https://registry.npm.taobao.org || npm install --registry https://registry.npm.taobao.org ",
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve --mode development",
+    "serve": "vue-cli-service serve --mode production",
     "build:test": "vue-cli-service build --mode test",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -45,7 +46,8 @@
     "vuex": "^3.1.0",
     "vxe-table": "2.9.13",
     "vxe-table-plugin-antd": "1.8.10",
-    "xe-utils": "2.4.8"
+    "xe-utils": "2.4.8",
+    "yarn": "^1.22.17"
   },
   "devDependencies": {
     "@babel/polyfill": "^7.2.5",

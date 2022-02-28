@@ -26,6 +26,14 @@
         <img alt="example" style="width: 100%" :src="previewImage"/>
       </a-modal>
     </a-upload>
+    <a-modal
+        title="溫馨提示"
+        :visible="showConfirm"
+        @ok="handleConfirmDelete"
+        @cancel="handleCancelDelete"
+    >
+      <p>是否刪除該圖片？</p>
+    </a-modal>
   </div>
 </template>
 
@@ -55,6 +63,9 @@
         fileList: [],
         previewImage:"",
         previewVisible: false,
+        showConfirm:false,
+        file:[],
+        deleteFile:[]
       }
     },
     props:{
@@ -166,8 +177,12 @@
         }else if(info.file.status === 'removed'){
           this.handleDelete(info.file)
         }
-        this.fileList = fileList
-        if(info.file.status==='done' || info.file.status === 'removed'){
+        if(info.file.status!="removed"){
+          this.fileList = fileList
+        }else{
+          this.file=fileList;
+        }
+        if(info.file.status==='done'){
           this.handlePathChange()
         }
       },
@@ -209,11 +224,35 @@
       },
       handleDelete(file){
         //如有需要新增 刪除邏輯
+        this.deleteFile=file;
+        this.showConfirm=true;
         console.log(file)
       },
       handleCancel() {
         this.close();
         this.previewVisible = false;
+      },
+      handleConfirmDelete(){
+        this.showConfirm=false;
+        this.fileList=this.file;
+        this.handlePathChange()
+      },
+      handleCancelDelete(){
+        this.showConfirm=false;
+        this.fileList=this.file;
+        this.deleteFile.status="done";
+        this.fileList.push(this.deleteFile)
+        // recover record
+        let path=[];
+        let array=[]
+        let list=this.fileList;
+         for(let i=0;i<list.length;i++){
+           array.push(list[i].response.message);
+         }
+         if(array.length>0){
+          path = array.join(",")
+        }
+        this.initFileList(path);
       },
       close () {
 

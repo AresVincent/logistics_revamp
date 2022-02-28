@@ -210,7 +210,7 @@
         return option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0
       },
       handleChange (selectedValue) {
-        console.log("selectedValue",selectedValue)
+        console.log("selectedValue",selectedValue);
         this.selectedValue = selectedValue
         this.callback()
       },

@@ -1,0 +1,295 @@
+<template>
+  <a-spin :spinning="confirmLoading">
+    <j-form-container :disabled="formDisabled">
+      <!-- 主表單區域 -->
+      <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
+        <a-row>
+          <a-col :span="24" >
+            <a-form-model-item label="登錄令牌" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="token">
+              <a-input v-model="model.token" placeholder="請輸入登錄令牌" disabled></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24" >
+            <a-form-model-item label="公司名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="name">
+              <a-input v-model="model.name" placeholder="請輸入公司名稱" ></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24" >
+            <a-form-model-item label="登錄名" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="username">
+              <a-input v-model="model.username" placeholder="請輸入登錄名" ></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24" >
+            <a-form-model-item label="電郵地址" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="email">
+              <a-input v-model="model.email" placeholder="請輸入電郵地址" ></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24" >
+            <a-form-model-item label="密碼" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="password">
+              <a-input v-model="model.password" placeholder="請輸入密碼" disabled></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24" >
+            <a-form-model-item label="鹽" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="salt">
+              <a-input v-model="model.salt" placeholder="請輸入鹽" disabled></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24" >
+            <a-form-model-item label="聯絡人" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="contactPerson">
+              <a-input v-model="model.contactPerson" placeholder="請輸入聯絡人" ></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24" >
+            <a-form-model-item label="電話號碼" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="phone">
+              <a-input v-model="model.phone" placeholder="請輸入電話號碼" ></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24" >
+            <a-form-model-item label="公司區域ID" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="companyRegionId">
+              <j-dict-select-tag type="list" v-model="model.companyRegionId" dictCode="district" placeholder="請選擇公司區域ID" />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24" >
+            <a-form-model-item label="公司地區ID" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="companyAreaId">
+              <j-dict-select-tag type="list" v-model="model.companyAreaId" dictCode="area" placeholder="請選擇公司地區ID" />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24" >
+            <a-form-model-item label="街道名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="companyStreet">
+              <a-input v-model="model.companyStreet" placeholder="請輸入街道名稱" ></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24" >
+            <a-form-model-item label="大廈名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="companyBuilding">
+              <a-input v-model="model.companyBuilding" placeholder="請輸入大廈名稱" ></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24" >
+            <a-form-model-item label="公司地址" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="companyAddress">
+              <a-input v-model="model.companyAddress" placeholder="請輸入公司地址" ></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24" >
+            <a-form-model-item label="應用密鑰" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="appKey">
+              <a-input v-model="model.appKey" placeholder="請輸入應用密鑰" ></a-input>
+            </a-form-model-item>
+          </a-col>
+        </a-row>
+      </a-form-model>
+    </j-form-container>
+      <!-- 子表單區域 -->
+    <a-tabs v-model="activeKey" @change="handleChangeTabs">
+      <a-tab-pane tab="物流計費規則表" :key="refKeys[0]" :forceRender="true">
+        <j-editable-table
+          :ref="refKeys[0]"
+          :loading="logisticsMoneyTable.loading"
+          :columns="logisticsMoneyTable.columns"
+          :dataSource="logisticsMoneyTable.dataSource"
+          :maxHeight="300"
+          :disabled="formDisabled"
+          :rowNumber="true"
+          :rowSelection="true"
+          :actionButton="true"/>
+      </a-tab-pane>
+    </a-tabs>
+  </a-spin>
+</template>
+
+<script>
+
+  import { getAction } from '@/api/manage'
+  import { FormTypes,getRefPromise,VALIDATE_NO_PASSED } from '@/utils/JEditableTableUtil'
+  import { JEditableTableModelMixin } from '@/mixins/JEditableTableModelMixin'
+  import { validateDuplicateValue } from '@/utils/util'
+
+  export default {
+    name: 'LogisticsUserForm',
+    mixins: [JEditableTableModelMixin],
+    components: {
+    },
+    data() {
+      return {
+        labelCol: {
+          xs: { span: 24 },
+          sm: { span: 6 },
+        },
+        wrapperCol: {
+          xs: { span: 24 },
+          sm: { span: 16 },
+        },
+        labelCol2: {
+          xs: { span: 24 },
+          sm: { span: 3 },
+        },
+        wrapperCol2: {
+          xs: { span: 24 },
+          sm: { span: 20 },
+        },
+        model:{
+        },
+        // 新增時子表默認添加幾行空數據
+        addDefaultRowNum: 1,
+        validatorRules: {
+           token: [
+              { required: false},
+              { validator: (rule, value, callback) => validateDuplicateValue('logistics_user', 'token', value, this.model.id, callback)},
+           ],
+           username: [
+              { required: true, message: '請輸入登錄名!'},
+              { validator: (rule, value, callback) => validateDuplicateValue('logistics_user', 'username', value, this.model.id, callback)},
+           ],
+           password: [
+              { required: true, message: '請輸入密碼!'},
+           ],
+           phone: [
+              { required: false},
+              { pattern: /^\d{6,16}$/, message: '請輸入6到16位数字!'},
+           ],
+           appKey: [
+              { required: false},
+              { validator: (rule, value, callback) => validateDuplicateValue('logistics_user', 'app_key', value, this.model.id, callback)},
+           ],
+        },
+        refKeys: ['logisticsMoney', ],
+        tableKeys:['logisticsMoney', ],
+        activeKey: 'logisticsMoney',
+        // 物流計費規則表
+        logisticsMoneyTable: {
+          loading: false,
+          dataSource: [],
+          columns: [
+            {
+              title: '計費類型',
+              key: 'type',
+              type: FormTypes.sel_search,
+              dictCode:"price_rule",
+              width:"200px",
+              placeholder: '請輸入${title}',
+              defaultValue:'',
+            },
+            {
+              title: '首重',
+              key: 'firstWeight',
+              type: FormTypes.inputNumber,
+              width:"200px",
+              placeholder: '請輸入${title}',
+              defaultValue:'',
+              validateRules: [{ required: true, message: '${title}不能為空' }],
+            },
+            {
+              title: '首重金额',
+              key: 'firstMoney',
+              type: FormTypes.inputNumber,
+              width:"200px",
+              placeholder: '請輸入${title}',
+              defaultValue:'',
+              validateRules: [{ required: true, message: '${title}不能為空' }],
+            },
+            {
+              title: '續重金額',
+              key: 'money',
+              type: FormTypes.inputNumber,
+              width:"200px",
+              placeholder: '請輸入${title}',
+              defaultValue:'',
+              validateRules: [{ required: true, message: '${title}不能為空' }],
+            },
+            {
+              title: '地區id',
+              key: 'areaIds',
+              type: FormTypes.list_multi,
+              dictCode:"common_area,area,id",
+              width:"250px",
+              placeholder: '請輸入${title}',
+              defaultValue:'',
+              validateRules: [{ required: true, message: '${title}不能為空' }],
+            },
+            {
+              title: '所屬快遞公司',
+              key: 'companyId',
+              type: FormTypes.select,
+              dictCode:"logistics_company,name,id",
+              width:"200px",
+              placeholder: '請輸入${title}',
+              defaultValue:'',
+              validateRules: [{ required: true, message: '${title}不能為空' }],
+            },
+          ]
+        },
+        url: {
+          add: "/user/logisticsUser/add",
+          edit: "/user/logisticsUser/edit",
+          queryById: "/user/logisticsUser/queryById",
+          logisticsMoney: {
+            list: '/user/logisticsUser/queryLogisticsMoneyByMainId'
+          },
+        }
+      }
+    },
+    props: {
+      //表單禁用
+      disabled: {
+        type: Boolean,
+        default: false,
+        required: false
+      }
+    },
+    computed: {
+      formDisabled(){
+        return this.disabled
+      },
+    },
+    created () {
+    },
+    methods: {
+      addBefore(){
+        this.logisticsMoneyTable.dataSource=[]
+      },
+      getAllTable() {
+        let values = this.tableKeys.map(key => getRefPromise(this, key))
+        return Promise.all(values)
+      },
+      /** 調用完edit()方法之後會自動調用此方法 */
+      editAfter() {
+        this.$nextTick(() => {
+        })
+        // 加載子表數據
+        if (this.model.id) {
+          let params = { id: this.model.id }
+          this.requestSubTableData(this.url.logisticsMoney.list, params, this.logisticsMoneyTable)
+        }
+      },
+      //校驗所有一對一子表表單
+      validateSubForm(allValues){
+          return new Promise((resolve,reject)=>{
+            Promise.all([
+            ]).then(() => {
+              resolve(allValues)
+            }).catch(e => {
+              if (e.error === VALIDATE_NO_PASSED) {
+                // 如果有未通過表單驗證的子表，就自動跳轉到它所在的tab
+                this.activeKey = e.index == null ? this.activeKey : this.refKeys[e.index]
+              } else {
+                console.error(e)
+              }
+            })
+          })
+      },
+      /** 整理成formData */
+      classifyIntoFormData(allValues) {
+        let main = Object.assign(this.model, allValues.formValue)
+        return {
+          ...main, // 展開
+          logisticsMoneyList: allValues.tablesValue[0].values,
+        }
+      },
+      validateError(msg){
+        this.$message.error(msg)
+      },
+
+    }
+  }
+</script>
+
+<style scoped>
+</style>

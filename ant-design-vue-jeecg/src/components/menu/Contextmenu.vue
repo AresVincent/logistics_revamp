@@ -53,6 +53,7 @@ export default {
       this.target = e.target
     },
     handleClick ({key}) {
+      console.log("target",key)
       this.$emit('select', key, this.target)
       this.$emit('update:visible', false)
     }

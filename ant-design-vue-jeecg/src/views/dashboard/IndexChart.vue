@@ -158,9 +158,9 @@
     })
   }
   const barData = []
-  for (let i = 0; i < 12; i += 1) {
+  for (let i = 0; i < 31; i += 1) {
     barData.push({
-      x: `${i + 1}月`,
+      x: `${i + 1}日`,
       y: Math.floor(Math.random() * 1000) + 200
     })
   }
