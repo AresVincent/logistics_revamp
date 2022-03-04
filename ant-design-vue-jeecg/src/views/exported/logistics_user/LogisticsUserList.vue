@@ -132,16 +132,6 @@
         // 表頭
         columns: [
           {
-            title: '#',
-            dataIndex: '',
-            key:'rowIndex',
-            width:60,
-            align:"center",
-            customRender:function (t,r,index) {
-              return parseInt(index)+1;
-            }
-          },
-          {
             title:'公司名稱',
             align:"center",
             dataIndex: 'name'
@@ -201,11 +191,11 @@
           }
         ],
         url: {
-          list: "/logistics_user/logisticsUser/list",
-          delete: "/logistics_user/logisticsUser/delete",
-          deleteBatch: "/logistics_user/logisticsUser/deleteBatch",
-          exportXlsUrl: "/logistics_user/logisticsUser/exportXls",
-          importExcelUrl: "logistics_user/logisticsUser/importExcel",
+          list: "/user/logisticsUser/list",
+          delete: "/user/logisticsUser/delete",
+          deleteBatch: "/user/logisticsUser/deleteBatch",
+          exportXlsUrl: "/user/logisticsUser/exportXls",
+          importExcelUrl: "user/logisticsUser/importExcel",
           
         },
         dictOptions:{},

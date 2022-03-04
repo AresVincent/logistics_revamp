@@ -26,7 +26,7 @@
           </a-col>
           <a-col :span="24" >
             <a-form-model-item label="密碼" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="password">
-              <a-input v-model="model.password" placeholder="請輸入密碼" disabled></a-input>
+              <a-input v-model="model.password" placeholder="請輸入密碼" ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24" >
@@ -71,7 +71,7 @@
           </a-col>
           <a-col :span="24" >
             <a-form-model-item label="應用密鑰" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="appKey">
-              <a-input v-model="model.appKey" placeholder="請輸入應用密鑰" ></a-input>
+              <a-input v-model="model.appKey" placeholder="請輸入應用密鑰" disabled></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -96,7 +96,7 @@
 </template>
 
 <script>
-
+  import JEditableTable from '@/components/jeecg/JEditableTable'
   import { getAction } from '@/api/manage'
   import { FormTypes,getRefPromise,VALIDATE_NO_PASSED } from '@/utils/JEditableTableUtil'
   import { JEditableTableModelMixin } from '@/mixins/JEditableTableModelMixin'
@@ -106,6 +106,7 @@
     name: 'LogisticsUserForm',
     mixins: [JEditableTableModelMixin],
     components: {
+      JEditableTable 
     },
     data() {
       return {
@@ -217,11 +218,11 @@
           ]
         },
         url: {
-          add: "/logistics_user/logisticsUser/add",
-          edit: "/logistics_user/logisticsUser/edit",
-          queryById: "/logistics_user/logisticsUser/queryById",
+          add: "/user/logisticsUser/add",
+          edit: "/user/logisticsUser/edit",
+          queryById: "/user/logisticsUser/queryById",
           logisticsMoney: {
-            list: '/logistics_user/logisticsUser/queryLogisticsMoneyByMainId'
+            list: '/user/logisticsUser/queryLogisticsMoneyByMainId'
           },
         }
       }
@@ -243,7 +244,16 @@
     },
     methods: {
       addBefore(){
-        this.logisticsMoneyTable.dataSource=[]
+        this.logisticsMoneyTable.dataSource=[
+          {type:'SELF_SERVICE_STATION'},
+          {type:'SELF_PICKUP_STATION_3'},
+          {type:'SELF_PICKUP_STATION_20'},
+          {type:'HOME_DELIVERY_SMALL_20'},
+          {type:'HOME_DELIVERY_SMALL_30'},
+          {type:'HOME_DELIVERY_BIG_50'},
+          {type:'HOME_DELIVERY_BIG_75'},
+          {type:'HOME_DELIVERY_BIG_100'},
+        ]
       },
       getAllTable() {
         let values = this.tableKeys.map(key => getRefPromise(this, key))
@@ -256,6 +266,7 @@
         // 加載子表數據
         if (this.model.id) {
           let params = { id: this.model.id }
+          console.log("params",params)
           this.requestSubTableData(this.url.logisticsMoney.list, params, this.logisticsMoneyTable)
         }
       },

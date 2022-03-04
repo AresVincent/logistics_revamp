@@ -93,7 +93,8 @@ export const JEditableTableModelMixin = {
     requestSubTableData(url, params, tab, success) {
       tab.loading = true
       getAction(url, params).then(res => {
-        let { result } = res
+        let { result } = res;
+        console.log("reponse:",result);
         let dataSource = []
         if (result) {
           if (Array.isArray(result)) {

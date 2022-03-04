@@ -249,8 +249,8 @@
         let url='/online/cgreport/1478948967703412738';
         // url+='?user_id='+record.id;
         // url+='&pickup_date='+record.sendTime;
-        // window.open(url,"_self");
-        this.$router.push({path:url,query:{user_id:record.id,pickup_date:record.sendTime}});
+        this.$router.push({path:url,query:{user_id:record.id,pickup_date:record.sendTime}})
+        // window.open(url);
       },
      
     }

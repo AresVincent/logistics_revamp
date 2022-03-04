@@ -104,6 +104,11 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
+            <a-form-model-item label="派送异常时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="status7Time">
+              <a-input v-model="model.status7Time" placeholder="請輸入派送异常时间"  ></a-input>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
             <a-form-model-item label="是否上門取件?" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="pickupTag">
               <a-input v-model="model.pickupTag" placeholder="請輸入是否上門取件?"  ></a-input>
             </a-form-model-item>

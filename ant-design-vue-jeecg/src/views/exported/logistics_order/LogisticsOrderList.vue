@@ -48,7 +48,7 @@
 
     <!-- 操作按鈕區域 -->
     <div class="table-operator">
-      <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
+      <a-button @click="handleAdd" type="primary" icon="plus" v-has="'user:addNew'">新增</a-button>
       <a-button type="primary" icon="download" @click="handleExportXls('物流訂單表')">導出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">導入</a-button>
@@ -150,16 +150,6 @@
         // 表頭
         columns: [
           {
-            title: '#',
-            dataIndex: '',
-            key:'rowIndex',
-            width:60,
-            align:"center",
-            customRender:function (t,r,index) {
-              return parseInt(index)+1;
-            }
-          },
-          {
             title:'運單號',
             align:"center",
             dataIndex: 'waybillNo'
@@ -227,6 +217,7 @@
           {
             title:'下單時間',
             align:"center",
+            sorter: true,
             dataIndex: 'sendTime',
             customRender:function (text) {
               return !text?"":(text.length>10?text.substr(0,10):text)
@@ -263,17 +254,17 @@
             dataIndex: 'status2Time'
           },
           {
-            title:'倉庫簽出時間',
+            title:'轉運時間',
             align:"center",
             dataIndex: 'status3Time'
           },
           {
-            title:'派送失敗/再次派送時間',
+            title:'派送时间',
             align:"center",
             dataIndex: 'status4Time'
           },
           {
-            title:'派送時間',
+            title:'自提件上架时间',
             align:"center",
             dataIndex: 'status5Time'
           },
@@ -281,6 +272,11 @@
             title:'簽收時間',
             align:"center",
             dataIndex: 'status6Time'
+          },
+          {
+            title:'派送异常时间',
+            align:"center",
+            dataIndex: 'status7Time'
           },
           {
             title:'是否上門取件?',
@@ -316,6 +312,10 @@
           exportXlsUrl: "/order/logisticsOrder/exportXls",
           importExcelUrl: "order/logisticsOrder/importExcel",
           
+        },
+        isorter:{
+          column:"sendTime",
+          order:'desc'
         },
         dictOptions:{},
         superFieldList:[],
@@ -358,10 +358,11 @@
         fieldList.push({type:'string',value:'includeBattery',text:'是否包含電池?',dictCode:''})
         fieldList.push({type:'datetime',value:'status1Time',text:'運單創建時間'})
         fieldList.push({type:'datetime',value:'status2Time',text:'倉庫簽入時間'})
-        fieldList.push({type:'datetime',value:'status3Time',text:'倉庫簽出時間'})
-        fieldList.push({type:'datetime',value:'status4Time',text:'派送失敗/再次派送時間'})
-        fieldList.push({type:'datetime',value:'status5Time',text:'派送時間'})
+        fieldList.push({type:'datetime',value:'status3Time',text:'轉運時間'})
+        fieldList.push({type:'datetime',value:'status4Time',text:'派送时间'})
+        fieldList.push({type:'datetime',value:'status5Time',text:'自提件上架时间'})
         fieldList.push({type:'datetime',value:'status6Time',text:'簽收時間'})
+        fieldList.push({type:'string',value:'status7Time',text:'派送异常时间',dictCode:''})
         fieldList.push({type:'string',value:'pickupTag',text:'是否上門取件?',dictCode:'yn'})
         fieldList.push({type:'date',value:'pickupDate',text:'攬收日期'})
         fieldList.push({type:'string',value:'remarks',text:'備註',dictCode:''})

@@ -112,7 +112,7 @@ import { deleteAction, getAction,downFile,getFileAccessHttpUrl } from '@/api/man
         },
         created(){
             this.initDict();
-            this.loadData();
+            // this.loadData();
         },
         mounted(){
              this.$nextTick(() => {
