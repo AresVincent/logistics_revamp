@@ -94,9 +94,9 @@
            ],
         },
         url: {
-          add: "/holiday/commonHoliday/add",
-          edit: "/holiday/commonHoliday/edit",
-          queryById: "/holiday/commonHoliday/queryById"
+          add: "/common/holiday/add",
+          edit: "/common/holiday/edit",
+          queryById: "/common/holiday/queryById"
         }
       }
     },

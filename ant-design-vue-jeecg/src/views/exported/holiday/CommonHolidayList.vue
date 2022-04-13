@@ -185,11 +185,11 @@
           }
         ],
         url: {
-          list: "/holiday/commonHoliday/list",
-          delete: "/holiday/commonHoliday/delete",
-          deleteBatch: "/holiday/commonHoliday/deleteBatch",
-          exportXlsUrl: "/holiday/commonHoliday/exportXls",
-          importExcelUrl: "holiday/commonHoliday/importExcel",
+          list: "/common/holiday/list",
+          delete: "/common/holiday/delete",
+          deleteBatch: "/common/holiday/deleteBatch",
+          exportXlsUrl: "/common/holiday/exportXls",
+          importExcelUrl: "/common/holiday/importExcel",
           
         },
         dictOptions:{},

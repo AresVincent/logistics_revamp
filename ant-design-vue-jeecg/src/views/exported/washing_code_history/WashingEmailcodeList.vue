@@ -1,50 +1,35 @@
 <template>
   <a-card :bordered="false">
-    <!-- 查询区域 -->
+    <!-- 查詢區域 -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="年份">
-              <j-dict-select-tag placeholder="请选择年份" v-model="queryParam.occurYear" dictCode="year"/>
-            </a-form-item>
-          </a-col>
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search" >查询</a-button>
-              <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
-              <a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
-                <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
-              </a>
-            </span>
-          </a-col>
         </a-row>
       </a-form>
     </div>
-    <!-- 查询区域-END -->
+    <!-- 查詢區域-END -->
 
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('假期表格')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('洗衣驗證碼表')">導出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" icon="import">导入</a-button>
+        <a-button type="primary" icon="import">導入</a-button>
       </a-upload>
-      <!-- 高级查询区域 -->
+      <!-- 高級查詢區域 -->
       <j-super-query :fieldList="superFieldList" ref="superQueryModal" @handleSuperQuery="handleSuperQuery"></j-super-query>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
-          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
+          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>刪除</a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -66,11 +51,11 @@
           <div v-html="text"></div>
         </template>
         <template slot="imgSlot" slot-scope="text">
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无图片</span>
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">無圖片</span>
           <img v-else :src="getImgView(text)" height="25px" alt="" style="max-width:80px;font-size: 12px;font-style: italic;"/>
         </template>
         <template slot="fileSlot" slot-scope="text">
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无文件</span>
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">無文件</span>
           <a-button
             v-else
             :ghost="true"
@@ -78,23 +63,23 @@
             icon="download"
             size="small"
             @click="downloadFile(text)">
-            下载
+            下載
           </a-button>
         </template>
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">編輯</a>
 
           <a-divider type="vertical" />
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a @click="handleDetail(record)">详情</a>
+                <a @click="handleDetail(record)">詳情</a>
               </a-menu-item>
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+                  <a>刪除</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -104,7 +89,7 @@
       </a-table>
     </div>
 
-    <common-holiday-modal ref="modalForm" @ok="modalFormOk"></common-holiday-modal>
+    <washing-emailcode-modal ref="modalForm" @ok="modalFormOk"></washing-emailcode-modal>
   </a-card>
 </template>
 
@@ -113,19 +98,18 @@
   import '@/assets/less/TableExpand.less'
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
-  import CommonHolidayModal from './modules/CommonHolidayModal'
-  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
-  import {colAuthFilter} from "@/utils/authFilter"
+  import WashingEmailcodeModal from './modules/WashingEmailcodeModal'
+
   export default {
-    name: 'CommonHolidayList',
+    name: 'WashingEmailcodeList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
-      CommonHolidayModal
+      WashingEmailcodeModal
     },
     data () {
       return {
-        description: '假期表格管理页面',
-        // 表头
+        description: '洗衣驗證碼表管理頁面',
+        // 表頭
         columns: [
           {
             title: '#',
@@ -138,42 +122,22 @@
             }
           },
           {
-            title:'假期代碼',
+            title:'郵箱或者電話',
             align:"center",
-            dataIndex: 'holidayCode'
+            dataIndex: 'email'
           },
           {
-            title:'年份',
+            title:'驗證碼',
             align:"center",
-            dataIndex: 'occurYear_dictText'
+            dataIndex: 'code'
           },
           {
-            title:'日期',
+            title:'發送時間',
             align:"center",
-            dataIndex: 'occurDate',
+            dataIndex: 'sendTime',
             customRender:function (text) {
               return !text?"":(text.length>10?text.substr(0,10):text)
             }
-          },
-          {
-            title:'假期名稱',
-            align:"center",
-            dataIndex: 'holidayName'
-          },
-          {
-            title:'假期描述',
-            align:"center",
-            dataIndex: 'holidayDescription'
-          },
-          {
-            title:'勞工假',
-            align:"center",
-            dataIndex: 'statutoryHoliday'
-          },
-          {
-            title:'公眾假期',
-            align:"center",
-            dataIndex: 'publicHoliday'
           },
           {
             title: '操作',
@@ -185,11 +149,11 @@
           }
         ],
         url: {
-          list: "/holiday/commonHoliday/list",
-          delete: "/holiday/commonHoliday/delete",
-          deleteBatch: "/holiday/commonHoliday/deleteBatch",
-          exportXlsUrl: "/holiday/commonHoliday/exportXls",
-          importExcelUrl: "holiday/commonHoliday/importExcel",
+          list: "/washing/smsCode/list",
+          delete: "/washing/smsCode/delete",
+          deleteBatch: "/washing/smsCode/deleteBatch",
+          exportXlsUrl: "/washing/smsCode/exportXls",
+          importExcelUrl: "/washing/smsCode/importExcel",
           
         },
         dictOptions:{},
@@ -197,12 +161,7 @@
       }
     },
     created() {
-    this.disableMixinCreated=true;
-      this.columns = colAuthFilter(this.columns,'commonHoliday:');
-      this.loadData();
-      this.initDictConfig();
-      this.getSuperFieldList();
-
+    this.getSuperFieldList();
     },
     computed: {
       importExcelUrl: function(){
@@ -214,13 +173,9 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'holidayCode',text:'假期代碼',dictCode:''})
-        fieldList.push({type:'int',value:'occurYear',text:'年份',dictCode:'year'})
-        fieldList.push({type:'date',value:'occurDate',text:'日期'})
-        fieldList.push({type:'string',value:'holidayName',text:'假期名稱',dictCode:''})
-        fieldList.push({type:'string',value:'holidayDescription',text:'假期描述',dictCode:''})
-        fieldList.push({type:'int',value:'statutoryHoliday',text:'勞工假',dictCode:''})
-        fieldList.push({type:'int',value:'publicHoliday',text:'公眾假期',dictCode:''})
+        fieldList.push({type:'string',value:'email',text:'郵箱或者電話',dictCode:''})
+        fieldList.push({type:'string',value:'code',text:'驗證碼',dictCode:''})
+        fieldList.push({type:'date',value:'sendTime',text:'發送時間'})
         this.superFieldList = fieldList
       }
     }

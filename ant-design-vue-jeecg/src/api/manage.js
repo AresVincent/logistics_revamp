@@ -120,10 +120,11 @@ export function saveService(parameter) {
  * @param parameter
  * @returns {*}
  */
-export function downFile(url,parameter){
+export function downFile(url,parameter,timeout){
   return axios({
     url: url,
     params: parameter,
+    timeout:timeout,
     method:'get' ,
     responseType: 'blob'
   })
@@ -136,8 +137,8 @@ export function downFile(url,parameter){
  * @param parameter
  * @returns {*}
  */
-export function downloadFile(url, fileName, parameter) {
-  return downFile(url, parameter).then((data) => {
+export function downloadFile(url, fileName, parameter,timeout) {
+  return downFile(url, parameter,timeout).then((data) => {
     if (!data || data.size === 0) {
       Vue.prototype['$message'].warning('文件下載失敗')
       return

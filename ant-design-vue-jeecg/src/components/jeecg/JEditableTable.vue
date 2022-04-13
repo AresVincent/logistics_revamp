@@ -2562,6 +2562,7 @@
 
       /** 判斷某個ID是否包含了caseId */
       hasCaseId(id) {
+        id=id.toString()
         return id && id.startsWith(this.caseId)
       },
 

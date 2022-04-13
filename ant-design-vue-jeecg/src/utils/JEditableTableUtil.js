@@ -86,7 +86,7 @@ export function validateFormAndTables(form, cases) {
  * @returns {Promise<any>}
  * @author sunjianlei
  */
-export function validateFormModelAndTables(form,values, cases) {
+export function validateFormModelAndTables(form,values, cases,isDelId) {
 
   if (!(form && typeof form.validate === 'function')) {
     throw `form 參數需要的是一個form對象，而傳入的卻是${typeof form}`
@@ -100,6 +100,10 @@ export function validateFormModelAndTables(form,values, cases) {
   }).then(values => {
     Object.assign(options, { formValue: values })
     // 驗證所有子表的表單
+    console.log('驗證子表',isDelId,'真')
+    if(isDelId){
+      return validateTables(cases,isDelId)
+    }
     return validateTables(cases)
   }).then(all => {
     Object.assign(options, { tablesValue: all })

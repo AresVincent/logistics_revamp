@@ -81,6 +81,7 @@ export const JeecgListMixin = {
         this.ipagination.current = 1;
       }
       var params = this.getQueryParams();//查詢條件
+      console.log('查詢條件',params);
       this.loading = true;
       getAction(this.url.list, params).then((res) => {
         if (res.success) {
@@ -105,6 +106,7 @@ export const JeecgListMixin = {
     },
     handleSuperQuery(params, matchType) {
       //高級查詢方法
+      console.log('參數：',params,'類型：',matchType);
       if(!params){
         this.superQueryParams=''
         this.superQueryFlag = false
@@ -268,7 +270,7 @@ export const JeecgListMixin = {
       let url = `${window._CONFIG['domianURL']}/${this.url.exportXlsUrl}?paramsStr=${paramsStr}`;
       window.location.href = url;
     },
-    handleExportXls(fileName){
+    handleExportXls(fileName,timeout=9000){
       if(!fileName || typeof fileName != "string"){
         fileName = "導出文件"
       }
@@ -277,7 +279,36 @@ export const JeecgListMixin = {
         param['selections'] = this.selectedRowKeys.join(",")
       }
       console.log("導出參數",param)
-      downFile(this.url.exportXlsUrl,param).then((data)=>{
+      downFile(this.url.exportXlsUrl,param,timeout).then((data)=>{
+        if (!data) {
+          this.$message.warning("文件下載失敗")
+          return
+        }
+        if (typeof window.navigator.msSaveBlob !== 'undefined') {
+          window.navigator.msSaveBlob(new Blob([data],{type: 'application/vnd.ms-excel'}), fileName+'.xls')
+        }else{
+          let url = window.URL.createObjectURL(new Blob([data],{type: 'application/vnd.ms-excel'}))
+          let link = document.createElement('a')
+          link.style.display = 'none'
+          link.href = url
+          link.setAttribute('download', fileName+'.xls')
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link); //下載完成移除元素
+          window.URL.revokeObjectURL(url); //釋放掉blob對象
+        }
+      })
+    },
+    handlePFXExportXls(fileName,timeout=9000){
+      if(!fileName || typeof fileName != "string"){
+        fileName = "導出文件"
+      }
+      let param = this.getQueryParams();
+      if(this.selectedRowKeys && this.selectedRowKeys.length>0){
+        param['selections'] = this.selectedRowKeys.join(",")
+      }
+      console.log("導出參數",param)
+      downFile(this.url.exportFPXXlsUrl,param,timeout).then((data)=>{
         if (!data) {
           this.$message.warning("文件下載失敗")
           return

@@ -60,7 +60,7 @@
         rowKey="id"
         class="j-table-force-nowrap"
         :scroll="{x:true}"
-        :columns="columns"
+        :columns="sortColumn"
         :dataSource="dataSource"
         :pagination="ipagination"
         :loading="loading"
@@ -134,7 +134,7 @@
           {
             title:'公司名稱',
             align:"center",
-            dataIndex: 'name'
+            dataIndex: 'name',
           },
           {
             title:'電郵地址',
@@ -191,15 +191,20 @@
           }
         ],
         url: {
-          list: "/user/logisticsUser/list",
-          delete: "/user/logisticsUser/delete",
-          deleteBatch: "/user/logisticsUser/deleteBatch",
-          exportXlsUrl: "/user/logisticsUser/exportXls",
-          importExcelUrl: "user/logisticsUser/importExcel",
+          list: "/logistics/user/list",
+          delete: "/logistics/user/delete",
+          deleteBatch: "/logistics/user/deleteBatch",
+          exportXlsUrl: "/logistics/user/exportXls",
+          importExcelUrl: "/logistics/user/importExcel",
           
         },
         dictOptions:{},
         superFieldList:[],
+        isorter:{
+          column:'id',
+          order:'desc'
+        },
+        isSorted:true
       }
     },
     created() {
@@ -208,6 +213,19 @@
     computed: {
       importExcelUrl: function(){
         return `${window._CONFIG['domianURL']}/${this.url.importExcelUrl}`;
+      },
+      //為每一列添加排序屬性
+      sortColumn:function(){
+        let sortArray=this.columns;
+        if(this.isSorted){
+          return sortArray.map((item)=>{
+            item.sorter=true;
+            return item;
+          })
+        }else{
+          return sortArray
+        }
+       
       }
     },
     methods: {
@@ -229,8 +247,9 @@
          fieldList.push({type:'string',value:'companyBuilding',text:'大廈名稱',dictCode:''})
          fieldList.push({type:'string',value:'companyAddress',text:'公司地址',dictCode:''})
          fieldList.push({type:'string',value:'appKey',text:'應用密鑰',dictCode:''})
-        this.superFieldList = fieldList
-      }
+        fieldList.push({type:'string',value:'firstMoney',text:'價格',dictCode:''})
+      },
+      
     }
   }
 </script>

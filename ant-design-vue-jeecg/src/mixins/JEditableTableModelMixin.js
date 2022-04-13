@@ -19,7 +19,8 @@ export const JEditableTableModelMixin = {
       wrapperCol: {
         xs: { span: 24 },
         sm: { span: 18 }
-      }
+      },
+      isDelId:false,
     }
   },
   methods: {
@@ -94,7 +95,6 @@ export const JEditableTableModelMixin = {
       tab.loading = true
       getAction(url, params).then(res => {
         let { result } = res;
-        console.log("reponse:",result);
         let dataSource = []
         if (result) {
           if (Array.isArray(result)) {
@@ -148,7 +148,7 @@ export const JEditableTableModelMixin = {
       /** 觸發表單驗證 */
       this.getAllTable().then(tables => {
         /** 一次性驗證主表和所有的次表 */
-        return validateFormModelAndTables(this.$refs.form,this.model, tables)
+        return validateFormModelAndTables(this.$refs.form,this.model, tables,this.isDelId)
       }).then(allValues => {
         /** 一次性驗證一對一的所有子表 */
         return this.validateSubForm(allValues)

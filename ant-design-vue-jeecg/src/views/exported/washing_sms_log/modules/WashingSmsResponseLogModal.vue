@@ -7,18 +7,18 @@
     @ok="handleOk"
     :okButtonProps="{ class:{'jee-hidden': disableSubmit} }"
     @cancel="handleCancel"
-    cancelText="关闭">
-    <common-holiday-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></common-holiday-form>
+    cancelText="關閉">
+    <washing-sms-response-log-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></washing-sms-response-log-form>
   </j-modal>
 </template>
 
 <script>
 
-  import CommonHolidayForm from './CommonHolidayForm'
+  import WashingSmsResponseLogForm from './WashingSmsResponseLogForm'
   export default {
-    name: 'CommonHolidayModal',
+    name: 'WashingSmsResponseLogModal',
     components: {
-      CommonHolidayForm
+      WashingSmsResponseLogForm
     },
     data () {
       return {

@@ -12,3 +12,4 @@
 /ant-design-vue-jeecg/.env.test
 /ant-design-vue-jeecg/.env.development
 /ant-design-vue-jeecg/Dockerfile
+/ant-design-vue-jeecg/.env.dev

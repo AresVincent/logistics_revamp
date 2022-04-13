@@ -1,12 +1,23 @@
 <template>
   <div class="page-header-index-wide">
-    <a-row :gutter="24">
+    <a-row :gutter="24" v-has="'testdemo:showChart'">
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="總銷售額" :total="'HKD$'+chartData.totalAmount">
+        <chart-card :loading="loading" title="總收入" :total="'HKD$'+(chartData.totalRevenue==null ? 0:chartData.totalRevenue)">
           <a-tooltip title="指標說明" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
-          <div>
+          <!-- <div>
+            <mini-bar :height="40" />
+          </div>
+          <template slot="footer">轉化率 <span>60%</span></template> -->
+        </chart-card>
+      </a-col>
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
+        <chart-card :loading="loading" title="總訂單量" :total="chartData.totalAmount+'件'">
+          <a-tooltip title="指標說明" slot="action">
+            <a-icon type="info-circle-o" />
+          </a-tooltip>
+          <!-- <div>
             <trend flag="up" style="margin-right: 16px;">
               <span slot="term">週同比</span>
               12%
@@ -16,37 +27,37 @@
               11%
             </trend>
           </div>
-          <template slot="footer">日均銷售額<span>HKD $ 234.56</span></template>
+          <template slot="footer">日均銷售額<span>HKD $ 234.56</span></template> -->
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="訂單量" :total="chartData.totalOrder | NumberFormat">
+        <chart-card :loading="loading" title="已入倉" :total="chartData.totalInAmount+'件'">
           <a-tooltip title="指標說明" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
-          <div>
+          <!-- <div>
             <mini-area />
           </div>
-          <template slot="footer">日訂單量<span> {{ '1234' | NumberFormat }}</span></template>
+          <template slot="footer">日訂單量<span> {{ '1234' | NumberFormat }}</span></template> -->
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="支付筆數" :total="6560 | NumberFormat">
+        <chart-card :loading="loading" title="轉運中" :total="chartData.totalTransferAmount+'件'">
           <a-tooltip title="指標說明" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
-          <div>
+          <!-- <div>
             <mini-bar :height="40" />
           </div>
-          <template slot="footer">轉化率 <span>60%</span></template>
+          <template slot="footer">轉化率 <span>60%</span></template> -->
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
-        <chart-card :loading="loading" title="運營活動效果" total="78%">
+        <chart-card :loading="loading" title="派送中" :total="chartData.totalDeliveringAmount+'件'">
           <a-tooltip title="指標說明" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
-          <div>
+          <!-- <div>
             <mini-progress color="rgb(19, 194, 194)" :target="80" :percentage="78" :height="8" />
           </div>
           <template slot="footer">
@@ -58,34 +69,86 @@
               <span slot="term">日環比</span>
               80%
             </trend>
-          </template>
+          </template> -->
+        </chart-card>
+      </a-col>
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
+        <chart-card :loading="loading" title="已上架" :total="chartData.totalOnShelfAmount+'件'">
+          <a-tooltip title="指標說明" slot="action">
+            <a-icon type="info-circle-o" />
+          </a-tooltip>
+          <!-- <div>
+            <trend flag="up" style="margin-right: 16px;">
+              <span slot="term">週同比</span>
+              12%
+            </trend>
+            <trend flag="down">
+              <span slot="term">日同比</span>
+              11%
+            </trend>
+          </div>
+          <template slot="footer">日均銷售額<span>HKD $ 234.56</span></template> -->
+        </chart-card>
+      </a-col>
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
+        <chart-card :loading="loading" title="派送完成" :total="chartData.totalSuccessAmount+'件'">
+          <a-tooltip title="指標說明" slot="action">
+            <a-icon type="info-circle-o" />
+          </a-tooltip>
+          <!-- <div>
+            <mini-area />
+          </div>
+          <template slot="footer">日訂單量<span> {{ '1234' | NumberFormat }}</span></template> -->
+        </chart-card>
+      </a-col>
+      <a-col :sm="24" :md="12" :xl="6" :style="{ marginBottom: '24px' }">
+        <chart-card :loading="loading" title="異常件" :total="chartData.totalExceptionAmount+'件'">
+          <a-tooltip title="指標說明" slot="action">
+            <a-icon type="info-circle-o" />
+          </a-tooltip>
+          <!-- <div>
+            <mini-progress color="rgb(19, 194, 194)" :target="80" :percentage="78" :height="8" />
+          </div>
+          <template slot="footer">
+            <trend flag="down" style="margin-right: 16px;">
+              <span slot="term">同周比</span>
+              12%
+            </trend>
+            <trend flag="up">
+              <span slot="term">日環比</span>
+              80%
+            </trend>
+          </template> -->
         </chart-card>
       </a-col>
     </a-row>
 
-    <a-card :loading="loading" :bordered="false" :body-style="{padding: '0'}">
+    <a-card :loading="loading" :bordered="false" :body-style="{padding: '0'}"  v-has="'testdemo:showChart'">
       <div class="salesCard">
         <a-tabs default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
           <div class="extra-wrapper" slot="tabBarExtraContent">
             <div class="extra-item">
-              <a>今日</a>
-              <a>本週</a>
-              <a>本月</a>
-              <a>本年</a>
+              <!-- <a>今日</a> -->
+              <a @click="getLogisticsChartDate(2)">本週</a>
+              <a @click="getLogisticsChartDate(3)">本月</a>
+              <a @click="getLogisticsChartDate(4)">本年</a>
             </div>
-            <a-range-picker :style="{width: '256px'}" />
+            <!-- <a-range-picker :style="{width: '256px'}" /> -->
           </div>
           <a-tab-pane loading="true" tab="銷售額" key="1">
             <a-row>
-              <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
-                <bar title="銷售額排行" :dataSource="barData"/>
+              <a-col :xl="24" :lg="24" :md="24" :sm="24" :xs="24">
+                <bar v-if="isDataLoad==false" title="銷售額排行" :dataSource="chartInfo"/>
+                <div v-else class="loadBg">
+                  <a-spin :indicator="indicator" tip="正在獲取中" class="loadSpin" ></a-spin>
+                </div>
               </a-col>
-              <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
+              <!-- <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
                 <rank-list title="門店銷售排行榜" :list="rankList"/>
-              </a-col>
+              </a-col> -->
             </a-row>
           </a-tab-pane>
-          <a-tab-pane tab="銷售趨勢" key="2">
+          <!-- <a-tab-pane tab="銷售趨勢" key="2">
             <a-row>
               <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
                 <bar title="銷售額趨勢" :dataSource="barData"/>
@@ -94,12 +157,12 @@
                 <rank-list title="門店銷售排行榜" :list="rankList"/>
               </a-col>
             </a-row>
-          </a-tab-pane>
+          </a-tab-pane> -->
         </a-tabs>
       </div>
     </a-card>
 
-    <a-row>
+    <a-row  v-has="'testdemo:showChart'">
       <a-col :span="24">
         <a-card :loading="loading" :bordered="false" title="最近一週訪問量統計" :style="{ marginTop: '24px' }">
           <a-row>
@@ -132,6 +195,7 @@
         </a-card>
       </a-col>
     </a-row>
+    
   </div>
 </template>
 
@@ -146,19 +210,13 @@
   import Bar from '@/components/chart/Bar'
   import LineChartMultid from '@/components/chart/LineChartMultid'
   import HeadInfo from '@/components/tools/HeadInfo.vue'
+  import { colAuthFilter } from "@/utils/authFilter"
 
   import Trend from '@/components/Trend'
   import { getLoginfo,getVisitInfo } from '@/api/api'
   import { getAction } from '@/api/manage'
-  const rankList = []
-  for (let i = 0; i < 7; i++) {
-    rankList.push({
-      name: '白鷺島 ' + (i+1) + ' 號店',
-      total: 1234.56 - i * 100
-    })
-  }
   const barData = []
-  for (let i = 0; i < 31; i += 1) {
+  for (let i = 0; i < 7; i += 1) {
     barData.push({
       x: `${i + 1}日`,
       y: Math.floor(Math.random() * 1000) + 200
@@ -183,13 +241,29 @@
       return {
         loading: true,
         center: null,
-        rankList,
         barData,
         loginfo:{},
         visitFields:['ip','visit'],
         visitInfo:[],
         indicator: <a-icon type="loading" style="font-size: 24px" spin />,
-        chartData:{totalAmount:'0',totalOrder:'0',methodCount:[]}
+        chartData:{
+          totalAmount:'0',
+          totalDeliveringAmount:'0',
+          totalExceptionAmount:'0',
+          totalInAmount:'0',
+          totalOnShelfAmount:'0',
+          totalRevenue:'0',
+          totalSuccessAmount:'0',
+          totalTransferAmount:'0',
+          record:[]
+        },
+        logisticsParams:{
+          date:this.YMD(new Date()),
+          type:1
+        },
+        chartInfo:[],
+        indicator:<a-icon type="loading" style="font-size: 24px" spin />,
+       isDataLoad:true,
       }
     },
     methods: {
@@ -208,22 +282,42 @@
            }
          })
       },
-      getLogisticsData(){
-        return  getAction("/online/cgform/api/getData/4028e4e87e22f956017e22f956810000",{pageSize:99999999,order:'asc',colunm:'send_time'});
+      getLogisticsData(params){
+        // type 1,2,3,4 equal daily weekly monthly annual,params is an object{date,type,....}
+         getAction("/logistics/order/getOrderRecord",params).then(res=>{
+           if(res.code==200){
+             let data=res.result;
+             this.chartData=data;
+             console.log(res.result)
+           }
+         }).catch(err=>{
+           console.log(err)
+         });
       },
-      //getLogiticsOrder Data
-      async loadLogiticsData(){
-          let data=await this.getLogisticsData();
-          this.chartData.totalOrder=data.result.total;
-          this.chartData.totalAmount=this.getTotalAmount(data.result.records);
-          this.chartData.methodCount=this.getMethodCount(data.result.records);
+      getLogisticsChartDate(type){
+        this.isDataLoad=true;
+        getAction("/logistics/order/getOrderRecord",{"date":this.YMD(new Date()),"type":type}).then(res=>{
+           if(res.code==200){
+             let data=res.result;
+             this.chartData=data;
+             let infoArray=[];
+             for(let i=0;i<data.detail.length;i++){
+               infoArray.push({x:data.detail[i].date+' ',y:data.detail[i].amount})
+             }
+             this.chartInfo=infoArray.slice(0);
+             this.isDataLoad=false;
+           }
+         }).catch(err=>{
+            this.isDataLoad=false;
+            console.log(err)
+         });
       },
-      getTotalAmount(arr){
-        let amount=0;
-        for(var item in arr){
-          amount+=arr[item].price;
-        }
-        return amount;
+      YMD(date){
+        return (
+          date.getFullYear()+'-'
+          +(date.getMonth()+1>=10 ? date.getMonth()+1:'0'+(date.getMonth()+1))+'-'
+          +(date.getDate()>=10 ? date.getDate():'0'+date.getDate())
+        )
       }
     },
     created() {
@@ -231,9 +325,13 @@
         this.loading = !this.loading
       }, 1000)
       this.initLogInfo();
+      this.disableMixinCreated=true;
+      this.columns= colAuthFilter(this.columns,'testdemo:');
     },
     beforeMount(){
-      this.loadLogiticsData()
+      //get today
+      this.getLogisticsData(this.logisticsParams);
+      this.getLogisticsChartDate(2);
     }
   }
 </script>
@@ -285,5 +383,12 @@
         font-size: 1rem;
       }
     }
+  }
+  .loadBg{
+    display: flex;
+    width: 100%;
+    height: 300px;
+    justify-content: center;
+    align-items: center;
   }
 </style>

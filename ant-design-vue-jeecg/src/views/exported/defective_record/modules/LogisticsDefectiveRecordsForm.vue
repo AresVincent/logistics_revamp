@@ -10,12 +10,13 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="訂單號" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orderNo">
-              <j-search-select-tag v-model="model.orderNo" dict="logistics_order,order_no,order_no"  />
+              <!-- <j-search-select-tag v-model="model.orderNo" dict="logistics_order,order_no,order_no"  /> -->
+              <a-input v-model="model.orderNo"/>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="運單號" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="waybillNo">
-              <j-search-select-tag v-model="model.waybillNo" dict="logistics_order,waybill_no,waybill_no"  />
+              <a-input v-model="model.waybillNo"/>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -97,9 +98,9 @@
         validatorRules: {
         },
         url: {
-          add: "/defective/logisticsDefectiveRecords/add",
-          edit: "/defective/logisticsDefectiveRecords/edit",
-          queryById: "/defective/logisticsDefectiveRecords/queryById"
+          add: "logistics/defective/add",
+          edit: "logistics/defective/edit",
+          queryById: "logistics/defective/queryById"
         }
       }
     },

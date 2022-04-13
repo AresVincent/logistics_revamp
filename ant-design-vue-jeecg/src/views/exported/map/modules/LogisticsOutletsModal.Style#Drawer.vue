@@ -7,9 +7,9 @@
     @close="close"
     destroyOnClose
     :visible="visible">
-    <common-holiday-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit" normal></common-holiday-form>
+    <logistics-outlets-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit" normal></logistics-outlets-form>
     <div class="drawer-footer">
-      <a-button @click="handleCancel" style="margin-bottom: 0;">关闭</a-button>
+      <a-button @click="handleCancel" style="margin-bottom: 0;">關閉</a-button>
       <a-button v-if="!disableSubmit"  @click="handleOk" type="primary" style="margin-bottom: 0;">提交</a-button>
     </div>
   </a-drawer>
@@ -17,12 +17,12 @@
 
 <script>
 
-  import CommonHolidayForm from './CommonHolidayForm'
+  import LogisticsOutletsForm from './LogisticsOutletsForm'
 
   export default {
-    name: 'CommonHolidayModal',
+    name: 'LogisticsOutletsModal',
     components: {
-      CommonHolidayForm
+      LogisticsOutletsForm
     },
     data () {
       return {
@@ -64,7 +64,7 @@
 </script>
 
 <style lang="less" scoped>
-/** Button按钮间距 */
+/** Button按鈕間距 */
   .ant-btn {
     margin-left: 30px;
     margin-bottom: 30px;

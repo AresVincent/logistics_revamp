@@ -2,29 +2,22 @@
       <a-card :bordered="false">
         <!-- 查詢區域 -->
         <div class="table-page-search-wrapper">
-            <a-form layout="inline" :form="form" @submit="submitSearch" >
+            <a-form layout="inline"   @keyup.enter.native="searchQuery" >
                 <a-row :gutter="24">
-                  <a-col :xl="6" :lg="7" :md="8" :sm="24">
-                    <a-form-item label="物流用戶ID">
-                        <a-select 
-                            v-decorator="['company']" 
-                            placeholder="請選擇物流用戶ID" 
-                            labelInValue
-                            style="width:120px"
-                            allowClear>
-                          <a-select-option v-for="d in options" :key="d.value" :value="d.value">{{ d.text }}</a-select-option>
-                        </a-select>
-                    </a-form-item>
-                  </a-col>                    
-                  <a-col :xl="6" :lg="7" :md="8" :sm="24">
+                  <!-- <a-col :xl="6" :lg="8" :md="8" :sm="24">
+                        <a-form-item label="物流用戶ID">
+                          <j-search-select-tag placeholder="請選擇物流用戶ID" v-model="queryParam.userId" dict="logistics_user,name,id"/>
+                        </a-form-item>
+                  </a-col>                     -->
+                  <a-col :xl="6" :lg="8" :md="8" :sm="24">
                       <a-form-item label="交收表日期">
-                        <a-date-picker placeholder="請選擇日期" v-decorator="['date']"  />
+                          <j-date placeholder="請選擇下單時間" v-model="queryParam.date"  style="width: 100%" />
                       </a-form-item>
                   </a-col>
-                  <a-col :xl="6" :lg="7" :md="8" :sm="24">
+                  <a-col :xl="6" :lg="8" :md="8" :sm="24">
                       <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-                      <a-button type="primary" html-type="submit" icon="search">查詢</a-button>
-                      <a-button type="primary" @click="reset" icon="reload" style="margin-left: 8px">重置</a-button>
+                      <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
+                      <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
                       </span>
                   </a-col>
                 </a-row>
@@ -40,9 +33,9 @@
         size="middle"
         :scroll="{x:true}"
         bordered
-        rowKey="company_name"
+        rowKey="companyName"
         :columns="columns"
-        :dataSource="recordData"
+        :dataSource="dataSource"
         :loading="loading"
         :pagination="ipagination"
         class="j-table-force-nowrap"
@@ -51,23 +44,38 @@
           <div v-html="text"></div>
         </template>
         <span slot="action" slot-scope="text, record">
-          <a @click="gotoRecord(record)" href="javascript:void(0)">查看</a>
+          <a @click="getWaybill(record)" href="javascript:void(0)">查看</a>
         </span>
-
       </a-table>
     </div>
+      <template>
+      <a-drawer class="container" :destroyOnClose="true" title='預覽' :visible="iframeShow" wrapClassName="iframeWrap" width="560px"
+      :bodyStyle="{'display':'flex','justify-content':'center'}"
+       @close="closeDrawer"
+        
+      >
+        <div class="iframeBox">
+          <iframe :src="iframeURL" allow="fullscreen" width="520px" height="580px"></iframe>
+        </div>
+     </a-drawer>
+    </template>
   </a-card>
 </template>
 
 <script>
 
-  import '@/assets/less/TableExpand.less'
+   import '@/assets/less/TableExpand.less'
   import { mixinDevice } from '@/utils/mixin'
-  import { ajaxGetDictItems,getDictItemsFromCache } from '@/api/api'
+  import { JeecgListMixin } from '@/mixins/JeecgListMixin'
+  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
+  import {initDictOptions, filterDictText} from '@/components/dict/JDictSelectUtil'
+  import Vue from 'vue'
+  import { ACCESS_TOKEN } from '@/store/mutation-types'
+  import {downFile} from '@/api/manage'
 
   export default {
     name: 'DailyRecord',
-    mixins:[ mixinDevice],
+    mixins:[ mixinDevice,JeecgListMixin],
     components: {
     },
     data () {
@@ -79,17 +87,19 @@
             dataIndex: 'id',
             width:60,
             align:"center",
-           
+            customRender:(text,record,index)=>{
+              return (index+1);
+            }
           },
           {
             title:'公司名稱',
             align:"center",
-            dataIndex: 'company_name'
+            dataIndex: 'companyName'
           },
           {
             title:'日期',
             align:"center",
-            dataIndex: 'sendTime',
+            dataIndex: 'date',
           },
           {
             title: '操作',
@@ -104,157 +114,66 @@
 
         ],
         url: {
-          list: "/logistics_order/logisticsOrder/list",
-          delete: "/logistics_order/logisticsOrder/delete",
-          deleteBatch: "/logistics_order/logisticsOrder/deleteBatch",
-          exportXlsUrl: "/logistics_order/logisticsOrder/exportXls",
-          importExcelUrl: "logistics_order/logisticsOrder/importExcel",
+          list:"logistics/deliveryList/list"
         },
-        form:this.$form.createForm(this),
-        loading:false,
-        ipagination:{
-          pageSize:10,
-          showSizeChanger:true,
-          pageSizeOptions:['10','20','50'],
+        queryParam:{
+          date:this.YMD(new Date())
         },
-        options: [],
-        async:false,
-        dict:"logistics_user,name,id",
+        dictOptions:{},
+        superFieldList:[],
+        iframeShow:false,
+        iframeURL:''
       }
     },
     created(){
-      this.initDictData();
+      this.initDictConfig();
+      this.getSuperFieldList();
     },
     mounted(){
-      this.form.setFieldsValue({"company":[],date:""})
     },
     computed: {
 
     },
     methods: {
-      //initial DictData
-      initDictData(){
-        if(!this.async){
-          //如果字典項集合有數據
-          if(this.dictOptions && this.dictOptions.length>0){
-            this.options = [...this.dictOptions]
-          }else{
-            //根據字典Code, 初始化字典數組
-            let dictStr = ''
-            if(this.dict){
-                let arr = this.dict.split(',')
-                if(arr[0].indexOf('where')>0){
-                  let tbInfo = arr[0].split('where')
-                  dictStr = tbInfo[0].trim()+','+arr[1]+','+arr[2]+','+encodeURIComponent(tbInfo[1])
-                }else{
-                  dictStr = this.dict
-                }
-                if (this.dict.indexOf(",") == -1) {
-                  //優先從緩存中讀取字典配置
-                  if (getDictItemsFromCache(this.dictCode)) {
-                    this.options = getDictItemsFromCache(this.dictCode);
-                    return
-                  }
-                }
-                ajaxGetDictItems(dictStr, null).then((res) => {
-                  if (res.success) {
-                    this.options = res.result;
-                  }
-                })
-            }
-          }
-        }else{
-          if(!this.dict){
-            console.error('搜索組件未配置字典項')
-          }else{
-            //異步一開始也加載一點數據
-            this.loading=true
-            getAction(`/sys/dict/loadDict/${this.dict}`,{pageSize: this.pageSize, keyword:''}).then(res=>{
-              this.loading=false
-              if(res.success){
-                this.options = res.result
-              }else{
-                this.$message.warning(res.message)
-              }
-            })
-          }
-        }
+     getSuperFieldList(){
+        let fieldList=[];
+        fieldList.push({type:'string',value:'company_name',text:'訂單號',dictCode:''})
+        fieldList.push({type:'date',value:'date',text:'下單時間',dictCode:''})
+        fieldList.push({type:'sel_search',value:'userId',text:'物流用戶ID',dictTable:'logistics_user', dictText:'name', dictCode:'id'})
+        this.superFieldList = fieldList
       },
-      reset(){
-        this.form.setFieldsValue({"company":[],date:""})
-        this.recordData=[]
-        console.log('reset');
+      getWaybill(record){ 
+        let token = Vue.ls.get(ACCESS_TOKEN);
+        downFile(record.link,{token:token}).then(res=>{
+          let blobObj=this.base64ToBlob(res);
+          //生成文件訪問url
+          let blobUrl=window.URL.createObjectURL(blobObj);
+          console.log('link:',blobUrl)
+          this.iframeURL=blobUrl
+          this.iframeShow=true;
+        }).catch(err=>{
+          
+        })
       },
-      submitSearch(e){
-          e.preventDefault();
-          this.form.validateFields((err,values)=>{
-            if(err){
-              return;
-            }
-            let arrayList=[]
-            //當沒有選擇公司與時間時
-            if(values.company.length<1 && values.date==""){
-              return;
-            }else if(values.company.length<1){  //只選擇了時間
-              console.log(this.options);
-              for(var i in this.options){
-                arrayList.push({
-                  id:this.options[i].value,
-                  company_name:this.options[i].text,
-                  sendTime:values.date.format('yyyy/MM/DD')
-                })
-              }
-            }else if(values.date==""){   //只選擇了公司
-              const initialYear=2021,initialMonth=6;
-              let nowYear=new Date().getFullYear(),nowMonth=new Date().getMonth()+1,nowDate=new Date().getDate();
-              let leapDay=[31,29,31,30,31,30,31,31,30,31,30,31];
-              let normalDay=[31,28,31,30,31,30,31,31,30,31,30,31]
-              a:for(var year=2021;year<=nowYear;year++){
-                let dayLength=normalDay;
-                if(year%4==0&&year%100!=0||year%400==0){
-                  dayLength=leapDay
-                }
-                let minMonth=0;
-                if(year==initialYear){
-                  minMonth=initialMonth;
-                }
-                for(var month=minMonth;month<12;month++){
-                  console.log(nowYear,nowMonth,nowDate)
-                  for(var day=1;day<=dayLength[month];day++){
-                   if(year>=nowYear&&(month+1)>=nowMonth&&day>nowDate){
-                     break a;
-                   }
-                    arrayList.push({
-                      id:values.company.key,
-                      company_name:values.company.label,
-                      sendTime:(year+'/'+(month+1)+'/'+day)
-                    })
-                  
-                  }
-                }
-              } 
-            }else{
-              arrayList.push({
-                id:values.company.key,
-                company_name:values.company.label,
-                sendTime:values.date.format('yyyy/MM/DD')
-              });
-            }
-            this.recordData=arrayList;
-            console.log(values);
-          })
+      YMD(date){
+        return (
+          date.getFullYear()+'-'
+          +(date.getMonth()+1>=10 ? date.getMonth()+1:'0'+(date.getMonth()+1))+'-'
+          +(date.getDate()>=10 ? date.getDate():'0'+date.getDate())
+        )
       },
-      gotoRecord(record){
-        console.log(record)
-        let url='/online/cgreport/1478948967703412738';
-        // url+='?user_id='+record.id;
-        // url+='&pickup_date='+record.sendTime;
-        this.$router.push({path:url,query:{user_id:record.id,pickup_date:record.sendTime}})
-        // window.open(url);
+      base64ToBlob(code){
+        // code = code.replace(/[\n\r]/g, '');
+        // var raw = code;
+        return new Blob([code], {type: 'application/pdf'});//转成pdf类型
       },
-     
+      closeDrawer(){
+        this.iframeShow=false;
+        console.log('關閉')
+      }
     }
   }
 </script>
 <style scoped>
+  @import '~@assets/less/orderTable.less';
 </style>

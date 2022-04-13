@@ -4,7 +4,7 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+          <a-col :xl="6" :lg="7" :md="8" :sm="24" v-has="'testdemo:orderNoSearch'">
             <a-form-item label="訂單號">
               <a-input placeholder="請輸入訂單號" v-model="queryParam.orderNo"></a-input>
             </a-form-item>
@@ -48,10 +48,11 @@
 
     <!-- 操作按鈕區域 -->
     <div class="table-operator">
-      <a-button @click="handleAdd" type="primary" icon="plus" v-has="'user:addNew'">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('物流訂單表')">導出</a-button>
+      <a-button @click="handleAdd" type="primary" icon="plus" v-has="'testdemo:addNew'">新增</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('物流訂單表',300000)">導出</a-button>
+      <a-button type="primary" icon="download" @click="handlePFXExportXls('物流訂單表',300000)">導出(4px)</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" icon="import">導入</a-button>
+        <!-- <a-button type="primary" icon="import">導入</a-button> -->
       </a-upload>
       <!-- 高級查詢區域 -->
       <j-super-query :fieldList="superFieldList" ref="superQueryModal" @handleSuperQuery="handleSuperQuery"></j-super-query>
@@ -73,15 +74,15 @@
       <a-table
         ref="table"
         size="middle"
-        :scroll="{x:true}"
         bordered
         rowKey="id"
+        class="j-table-force-nowrap"
+        :scroll="{x:true}"
         :columns="columns"
         :dataSource="dataSource"
         :pagination="ipagination"
         :loading="loading"
         :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
-        class="j-table-force-nowrap"
         @change="handleTableChange">
 
         <template slot="htmlSlot" slot-scope="text">
@@ -105,7 +106,7 @@
         </template>
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">編輯</a>
+          <a @click="handleEdit(record)" v-has="'testdemo:editOrder'">編輯</a>
 
           <a-divider type="vertical" />
           <a-dropdown>
@@ -114,10 +115,13 @@
               <a-menu-item>
                 <a @click="handleDetail(record)">詳情</a>
               </a-menu-item>
-              <a-menu-item>
+              <a-menu-item v-has="'testdemo:deleteOrder'">
                 <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
                   <a>刪除</a>
                 </a-popconfirm>
+              </a-menu-item>
+              <a-menu-item>
+                <a @click="getWaybill(record)">預覽面單</a>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
@@ -125,30 +129,61 @@
 
       </a-table>
     </div>
-
-    <logistics-order-modal ref="modalForm" @ok="modalFormOk"></logistics-order-modal>
+    <template>
+      <a-drawer class="container" title='預覽' :visible="iframeShow" wrapClassName="iframeWrap" width="400px" @close="()=>{iframeShow=false;}"
+        :bodyStyle="{'display':'flex','justify-content':'center'}"
+      >
+        <div class="iframeBox">
+          <iframe :src="iframeURL" allow="fullscreen" width="360px" height="580px"></iframe>
+        </div>
+     </a-drawer>
+    </template>
+    <logistics-order-modal ref="modalForm" @ok="modalFormOk"/>
   </a-card>
 </template>
 
 <script>
 
-  import '@/assets/less/TableExpand.less'
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import LogisticsOrderModal from './modules/LogisticsOrderModal'
   import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
+  import {initDictOptions, filterDictText} from '@/components/dict/JDictSelectUtil'
+  import Vue from 'vue'
+  import { ACCESS_TOKEN } from '@/store/mutation-types'
+  import {downFile} from '@/api/manage'
+  import { colAuthFilter } from "@/utils/authFilter"
+  import '@/assets/less/TableExpand.less'
+
+  let statusOption=[];
+  let typeDictOptions=[];
+  let ynOptions=[];
+
 
   export default {
-    name: 'LogisticsOrderList',
-    mixins:[JeecgListMixin, mixinDevice],
+    name: "LogisticsOrderList",
+    mixins:[JeecgListMixin],
     components: {
       LogisticsOrderModal
     },
     data () {
       return {
+        iframeURL:'',
+        iframeShow:false,
+        statusDictOptions:[],
         description: '物流訂單表管理頁面',
         // 表頭
         columns: [
+          {
+            title: '#',
+            dataIndex: '',
+            key:'rowIndex',
+            width:60,
+            align:"center",
+            customRender:function (t,r,index) {
+              return parseInt(index)+1;
+            }
+          },
           {
             title:'運單號',
             align:"center",
@@ -157,12 +192,20 @@
           {
             title:'訂單狀態',
             align:"center",
-            dataIndex: 'status'
+            dataIndex: 'status',
+            customRender:function(text,record,index){
+              console.log(text)
+              return filterDictText(statusOption,text)
+            }
           },
           {
             title:'派送類型',
             align:"center",
-            dataIndex: 'type'
+            dataIndex: 'type',
+            customRender:function(text,record,index){
+              console.log(text)
+              return filterDictText(typeDictOptions,text)
+            }
           },
           {
             title:'物流用戶ID',
@@ -188,6 +231,11 @@
             title:'收件人電話',
             align:"center",
             dataIndex: 'getPhone'
+          },
+          {
+            title:'收件人地區ID',
+            align:"center",
+            dataIndex: 'getAreaId'
           },
           {
             title:'收件人地址',
@@ -217,7 +265,6 @@
           {
             title:'下單時間',
             align:"center",
-            sorter: true,
             dataIndex: 'sendTime',
             customRender:function (text) {
               return !text?"":(text.length>10?text.substr(0,10):text)
@@ -254,17 +301,17 @@
             dataIndex: 'status2Time'
           },
           {
-            title:'轉運時間',
+            title:'倉庫簽出時間',
             align:"center",
             dataIndex: 'status3Time'
           },
           {
-            title:'派送时间',
+            title:'派送失敗/再次派送時間',
             align:"center",
             dataIndex: 'status4Time'
           },
           {
-            title:'自提件上架时间',
+            title:'派送時間',
             align:"center",
             dataIndex: 'status5Time'
           },
@@ -274,14 +321,13 @@
             dataIndex: 'status6Time'
           },
           {
-            title:'派送异常时间',
-            align:"center",
-            dataIndex: 'status7Time'
-          },
-          {
             title:'是否上門取件?',
             align:"center",
-            dataIndex: 'pickupTag'
+            dataIndex: 'pickupTag',
+            customRender:function(text,record,index){
+              console.log(text)
+              return filterDictText(ynOptions,text)
+            }
           },
           {
             title:'攬收日期',
@@ -302,18 +348,18 @@
             align:"center",
             fixed:"right",
             width:147,
-            scopedSlots: { customRender: 'action' }
+            scopedSlots: { customRender: 'action' },
           }
         ],
         url: {
-          list: "/order/logisticsOrder/list",
-          delete: "/order/logisticsOrder/delete",
-          deleteBatch: "/order/logisticsOrder/deleteBatch",
-          exportXlsUrl: "/order/logisticsOrder/exportXls",
-          importExcelUrl: "order/logisticsOrder/importExcel",
-          
+          list: "/logistics/order/list",
+          delete: "/logistics/order/delete",
+          deleteBatch: "/logistics/order/deleteBatch",
+          exportXlsUrl: "/logistics/order/exportXls",
+          importExcelUrl: "/logistics/order/importExcel",
+          exportFPXXlsUrl:'/logistics/order/exportXls/fpx'
         },
-        isorter:{
+         isorter:{
           column:"sendTime",
           order:'desc'
         },
@@ -322,15 +368,34 @@
       }
     },
     created() {
-    this.getSuperFieldList();
+       this.disableMixinCreated=true;
+      this.columns= colAuthFilter(this.columns,'testdemo:');
+      this.initDictConfig();
+      this.getSuperFieldList();
     },
     computed: {
       importExcelUrl: function(){
         return `${window._CONFIG['domianURL']}/${this.url.importExcelUrl}`;
-      },
+      }
     },
     methods: {
-      initDictConfig(){
+     initDictConfig(){
+        initDictOptions('logistics_status').then((res) => {
+          if (res.success) {
+            statusOption = res.result;
+            console.log(this.statusDictOptions)
+          }
+        });
+        initDictOptions('logistics_send_type').then((res) => {
+          if (res.success) {
+            typeDictOptions = res.result;
+          }
+        });
+        initDictOptions('logistics_pickupTag').then(res=>{
+          if(res.success){
+            ynOptions=res.result;
+          }
+        })
       },
       getSuperFieldList(){
         let fieldList=[];
@@ -367,7 +432,31 @@
         fieldList.push({type:'date',value:'pickupDate',text:'攬收日期'})
         fieldList.push({type:'string',value:'remarks',text:'備註',dictCode:''})
         this.superFieldList = fieldList
-      }
+      },
+      changeRowClass(row,index){
+          if(row.userId=='161'){
+            return "outDateRecord"
+          }
+          return '';
+      },
+      getWaybill(record){ 
+        let token = Vue.ls.get(ACCESS_TOKEN);
+        downFile('/logistics/waybill/pdf/'+record.waybillNo,{token:token}).then(res=>{
+          let blobObj=this.base64ToBlob(res);
+          //生成文件訪問url
+          let blobUrl=window.URL.createObjectURL(blobObj);
+          console.log('link:',blobUrl)
+          this.iframeURL=blobUrl
+          this.iframeShow=true;
+        }).catch(err=>{
+          
+        })
+      },
+      base64ToBlob(code){
+        // code = code.replace(/[\n\r]/g, '');
+        // var raw = code;
+        return new Blob([code], {type: 'application/pdf'});//转成pdf类型
+      },
     }
   }
 </script>

@@ -194,15 +194,18 @@
           }
         ],
         url: {
-          list: "/defective/logisticsDefectiveRecords/list",
-          delete: "/defective/logisticsDefectiveRecords/delete",
-          deleteBatch: "/defective/logisticsDefectiveRecords/deleteBatch",
-          exportXlsUrl: "/defective/logisticsDefectiveRecords/exportXls",
-          importExcelUrl: "defective/logisticsDefectiveRecords/importExcel",
+          list: "logistics/defective/list",
+          deleteBatch: "logistics/defective/deleteBatch",
+          exportXlsUrl: "logistics/defective/exportXls",
+          importExcelUrl: "logistics/defective/importExcel",
           
         },
         dictOptions:{},
         superFieldList:[],
+        isort:{
+          column:"discoverTime",
+          order:'desc'
+        }
       }
     },
     created() {

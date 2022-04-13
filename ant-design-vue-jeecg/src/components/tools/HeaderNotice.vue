@@ -81,6 +81,7 @@
   import ShowAnnouncement from './ShowAnnouncement'
   import store from '@/store/'
   import DynamicNotice from './DynamicNotice'
+  import { message,Icon } from 'ant-design-vue'
 
 
   export default {
@@ -138,6 +139,14 @@
           this.loadData()
         },6000)
       },
+      testLoad(data){
+          var time =0;
+          this.$notification.open({
+            message:data.msgTitle,
+            duration:time,
+            description: data.msgTxt,
+          });      
+        },
       loadData (){
         try {
           // 獲取系統消息
@@ -219,6 +228,9 @@
       websocketOnmessage: function (e) {
         console.log("-----接收消息-------",e.data);
         var data = eval("(" + e.data + ")"); //解析對象
+        if(data.cmd=='alert'){
+          this.testLoad(data);
+        }
         if(data.cmd == "topic"){
             //系統通知
           this.loadData();

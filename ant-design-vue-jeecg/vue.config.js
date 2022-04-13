@@ -97,7 +97,7 @@ module.exports = {
       '/jeecg-boot': {
         target: 'http://localhost:8080', //請求本地 需要jeecg-boot後台項目
         ws: false,
-        changeOrigin: true
+        changeOrigin: true,
       },
     }
   },
