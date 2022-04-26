@@ -121,6 +121,7 @@ export function validateFormModelAndTables(form,values, cases,isDelId) {
  * @author sunjianlei
  */
 export function validateTables(cases, deleteTempId) {
+  console.log('是否新增行：',deleteTempId)
   if (!(cases instanceof Array)) {
     throw `'validateTables'函數的'cases'參數需要的是一個數組，而傳入的卻是${typeof cases}`
   }

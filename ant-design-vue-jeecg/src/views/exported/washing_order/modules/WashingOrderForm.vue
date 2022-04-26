@@ -70,27 +70,27 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="下單時間" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="orderTime">
-              <j-date placeholder="請選擇下單時間" v-model="model.orderTime"  style="width: 100%" />
+              <j-date placeholder="請選擇下單時間" v-model="model.orderTime"  style="width: 100%" date-format="YYYY-MM-DD hh:mm:ss" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="攬收時間" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="collectTime">
-              <j-date placeholder="請選擇攬收時間" v-model="model.collectTime"  style="width: 100%" />
+              <j-date placeholder="請選擇攬收時間" v-model="model.collectTime"  style="width: 100%" date-format="YYYY-MM-DD hh:mm:ss" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="洗衣完成時間" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="washedTime">
-              <j-date placeholder="請選擇洗衣完成時間" v-model="model.washedTime"  style="width: 100%" />
+              <j-date placeholder="請選擇洗衣完成時間" v-model="model.washedTime"  style="width: 100%" date-format="YYYY-MM-DD hh:mm:ss" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="倉庫簽入時間" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="warehouseReceiveTime">
-              <j-date placeholder="請選擇倉庫簽入時間" v-model="model.warehouseReceiveTime"  style="width: 100%" />
+              <j-date placeholder="請選擇倉庫簽入時間" v-model="model.warehouseReceiveTime"  style="width: 100%" date-format="YYYY-MM-DD hh:mm:ss" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="倉庫簽出時間" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="signTime">
-              <j-date placeholder="請選擇倉庫簽出時間" v-model="model.signTime"  style="width: 100%" />
+              <j-date placeholder="請選擇倉庫簽出時間" v-model="model.signTime" date-format="YYYY-MM-DD hh:mm:ss"  style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -129,8 +129,8 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="更新日期" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="updatedTime">
-              <j-date placeholder="請選擇更新日期" v-model="model.updatedTime"  style="width: 100%" />
+            <a-form-model-item label="更新時間" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="updatedTime">
+              <j-date placeholder="請選擇更新時間" v-model="model.updatedTime" date-format="YYYY-MM-DD hh:mm:ss" style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">

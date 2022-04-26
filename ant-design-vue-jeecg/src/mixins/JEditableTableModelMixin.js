@@ -112,6 +112,7 @@ export const JEditableTableModelMixin = {
     /** 發起請求，自動判斷是執行新增還是修改操作 */
     request(formData) {
       let url = this.url.add, method = 'post'
+      console.log('id',this.model.id);
       if (this.model.id) {
         url = this.url.edit
         method = 'put'

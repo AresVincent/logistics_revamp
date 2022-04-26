@@ -134,6 +134,7 @@ export const JeecgListMixin = {
       //TODO 字段權限控制
       var str = "id,";
       this.columns.forEach(function (value) {
+        console.log(value.dataIndex);
         str += "," + value.dataIndex;
       });
       return str;
@@ -226,6 +227,7 @@ export const JeecgListMixin = {
       console.log('currentIndex',currentIndex)
     },
     handleEdit: function (record) {
+      console.log(record)
       this.$refs.modalForm.edit(record);
       this.$refs.modalForm.title = "編輯";
       this.$refs.modalForm.disableSubmit = false;
