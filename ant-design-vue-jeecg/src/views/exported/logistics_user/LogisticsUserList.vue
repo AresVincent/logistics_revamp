@@ -248,6 +248,7 @@
          fieldList.push({type:'string',value:'companyAddress',text:'公司地址',dictCode:''})
          fieldList.push({type:'string',value:'appKey',text:'應用密鑰',dictCode:''})
         fieldList.push({type:'string',value:'firstMoney',text:'價格',dictCode:''})
+        this.superFieldList = fieldList;
       },
       
     }

@@ -134,7 +134,6 @@ export const JeecgListMixin = {
       //TODO 字段權限控制
       var str = "id,";
       this.columns.forEach(function (value) {
-        console.log(value.dataIndex);
         str += "," + value.dataIndex;
       });
       return str;
@@ -301,6 +300,7 @@ export const JeecgListMixin = {
         }
       })
     },
+    //4px export method
     handlePFXExportXls(fileName,timeout=9000){
       if(!fileName || typeof fileName != "string"){
         fileName = "導出文件"

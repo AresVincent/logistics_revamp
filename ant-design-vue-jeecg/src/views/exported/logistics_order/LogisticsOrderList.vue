@@ -27,7 +27,7 @@
             </a-col>
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
               <a-form-item label="收件人地區ID">
-                <j-search-select-tag placeholder="請徐哲收件人地區ID" v-model="queryParam.get_area_id" dict="common_area,area,id"></j-search-select-tag>
+                <j-search-select-tag placeholder="請選擇收件人地區ID" v-model="queryParam.get_area_id" dict="common_area,area,id"></j-search-select-tag>
               </a-form-item>
             </a-col>
           </template>
@@ -143,7 +143,7 @@
 </template>
 
 <script>
-
+  import { filterObj } from '@/utils/util';
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import LogisticsOrderModal from './modules/LogisticsOrderModal'
@@ -394,7 +394,6 @@ import JSearchSelectTag from '../../../components/dict/JSearchSelectTag.vue'
           //   align:'center',
           //   dataIndex:'order_no'
           // },
-         
           {
             title: '操作',
             dataIndex: 'action',
@@ -524,7 +523,7 @@ import JSearchSelectTag from '../../../components/dict/JSearchSelectTag.vue'
       },
       getWaybill(record){ 
         let token = Vue.ls.get(ACCESS_TOKEN);
-        downFile('/logistics/waybill/pdf/'+record.waybillNo,{token:token}).then(res=>{
+        downFile('/logistics/waybill/pdf/'+record.waybill_no,{token:token}).then(res=>{
           let blobObj=this.base64ToBlob(res);
           //生成文件訪問url
           let blobUrl=window.URL.createObjectURL(blobObj);
@@ -548,12 +547,12 @@ import JSearchSelectTag from '../../../components/dict/JSearchSelectTag.vue'
         this.$refs.modalForm.title = "編輯";
         this.$refs.modalForm.disableSubmit = false;
       },
-      // handleDetail:function(record){
-      //   let modifiedRecord=this.underToCamel(record);
-      //   this.$refs.modalForm.edit(modifiedRecord);
-      //   this.$refs.modalForm.title="詳情";
-      //   this.$refs.modalForm.disableSubmit = true;
-      // },
+      handleDetail:function(record){
+        let modifiedRecord=this.underToCamel(record);
+        this.$refs.modalForm.edit(modifiedRecord);
+        this.$refs.modalForm.title="詳情";
+        this.$refs.modalForm.disableSubmit = true;
+      },
       underToCamel:function(record){
         let recordObj=Object.assign(record,{});
         //舊鍵值對象
@@ -581,22 +580,117 @@ import JSearchSelectTag from '../../../components/dict/JSearchSelectTag.vue'
         return recordObj;
       },
       searchQuery() {
-        let queryParam=this.queryParam
-        this.queryParam=Object.assign(queryParam,{
-          "logistics_order@waybill_no":queryParam.waybill_no,
-          "logistics_order@user_id":queryParam.user_id,
-          "logistics_order@send_area_id":queryParam.send_area_id,
-          "logistics_order@get_area_id":queryParam.get_area_id,
-
-        });
+        let queryParam=this.queryParam;
+        //對queryParam進行判空處理
+        if(this.queryParam){
+          this.queryParam=Object.assign(queryParam,{
+            "logistics_order@waybill_no":queryParam.waybill_no,
+            "logistics_order@user_id":queryParam.user_id,
+            "logistics_order@send_area_id":queryParam.send_area_id,
+            "logistics_order@get_area_id":queryParam.get_area_id,
+          });
+        }
         this.loadData(1);
         // 點擊查詢清空列表選中行
         // https://gitee.com/jeecg/jeecg-boot/issues/I4KTU1
         this.selectedRowKeys = []
         this.selectionRows = []
-    },
-      
-    }
+      },
+      handleExportXls(fileName,timeout=9000){
+        //overwrite export function
+        if(!fileName || typeof fileName != "string"){
+          fileName = "導出文件"
+        }
+        let param = this.getExcelQuery();
+        if(this.selectedRowKeys && this.selectedRowKeys.length>0){
+          param['selections'] = this.selectedRowKeys.join(",")
+        }
+        console.log("導出參數",param)
+        downFile(this.url.exportXlsUrl,param,timeout).then((data)=>{
+          if (!data) {
+            this.$message.warning("文件下載失敗")
+            return
+          }
+          if (typeof window.navigator.msSaveBlob !== 'undefined') {
+            window.navigator.msSaveBlob(new Blob([data],{type: 'application/vnd.ms-excel'}), fileName+'.xls')
+          }else{
+            let url = window.URL.createObjectURL(new Blob([data],{type: 'application/vnd.ms-excel'}))
+            let link = document.createElement('a')
+            link.style.display = 'none'
+            link.href = url
+            link.setAttribute('download', fileName+'.xls')
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link); //下載完成移除元素
+            window.URL.revokeObjectURL(url); //釋放掉blob對象
+          }
+        })
+      },
+      handlePFXExportXls(fileName,timeout=9000){
+        //overwrite export function
+        if(!fileName || typeof fileName != "string"){
+          fileName = "導出文件"
+        }
+        let param = this.getExcelQuery();
+        
+        if(this.selectedRowKeys && this.selectedRowKeys.length>0){
+          param['selections'] = this.selectedRowKeys.join(",")
+        }
+        console.log("導出參數",param)
+        downFile(this.url.exportFPXXlsUrl,param,timeout).then((data)=>{
+          if (!data) {
+            this.$message.warning("文件下載失敗")
+            return
+          }
+          if (typeof window.navigator.msSaveBlob !== 'undefined') {
+            window.navigator.msSaveBlob(new Blob([data],{type: 'application/vnd.ms-excel'}), fileName+'.xls')
+          }else{
+            let url = window.URL.createObjectURL(new Blob([data],{type: 'application/vnd.ms-excel'}))
+            let link = document.createElement('a')
+            link.style.display = 'none'
+            link.href = url
+            link.setAttribute('download', fileName+'.xls')
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link); //下載完成移除元素
+            window.URL.revokeObjectURL(url); //釋放掉blob對象
+          }
+        })
+      },
+      getExcelQuery(){
+         //獲取查詢條件
+        let sqp = {}
+        //convert superQueryField to Camel Format,
+        // superQueryParams is string
+        if(this.superQueryParams){
+          let superQueryArray=JSON.parse(this.superQueryParams);
+          superQueryArray.forEach(item=>{
+            let fieldArr=item.field.split("_");
+            let itemField=fieldArr[0];
+            for(let i=1;i<fieldArr.length;i++){
+              itemField+=fieldArr[i][0].toUpperCase();
+              itemField+=fieldArr[i].substring(1,fieldArr[i].length);
+            }
+            item.field=itemField;
+          })
+          superQueryArray=JSON.stringify(superQueryArray);
+          console.log("已選擇高級查詢參數！",superQueryArray)
+          sqp['superQueryParams']=encodeURI(superQueryArray)
+          sqp['superQueryMatchType'] = this.superQueryMatchType
+        }
+        var param = Object.assign(sqp, this.queryParam , this.isorter ,this.filters);
+        //convert queryField to Camel Format 
+        let paramArray= this.getQueryField().split("_");
+        let queryList=paramArray[0];
+        for(let i=1;i<paramArray.length;i++){
+          queryList+=(paramArray[i][0].toUpperCase()+paramArray[i].substring(1,paramArray[i].length));
+        }
+        param.field=queryList;
+        param.pageNo = this.ipagination.current;
+        param.pageSize = this.ipagination.pageSize;
+        return filterObj(param);
+      }
+      }
   }
 </script>
 <style scoped>

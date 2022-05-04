@@ -35,7 +35,7 @@ export async function initDictOptions(dictCode) {
  * @return String
  */
 export function filterDictText(dictOptions, text) {
-  console.log('字典',dictOptions);
+  // console.log('字典',dictOptions);
   // --update-begin----author:sunjianlei---date:20200323------for: 字典翻譯 text 允許逗號分隔 ---
   if (text != null && Array.isArray(dictOptions)) {
     let result = []
