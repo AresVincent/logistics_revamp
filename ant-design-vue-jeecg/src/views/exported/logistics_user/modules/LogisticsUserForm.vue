@@ -256,11 +256,12 @@
           {type:'SELF_SERVICE_STATION',},
           {type:'SELF_PICKUP_STATION_3'},
           {type:'SELF_PICKUP_STATION_20'},
-          {type:'HOME_DELIVERY_SMALL_20'},
           {type:'HOME_DELIVERY_SMALL_30'},
           {type:'HOME_DELIVERY_BIG_50'},
+          {type:'HOME_DELIVERY_BIG_60'},
           {type:'HOME_DELIVERY_BIG_75'},
           {type:'HOME_DELIVERY_BIG_100'},
+          {type:'HOME_DELIVERY_BIG_LATER'}
         ];
         // firstWeight:1,firstMoney:1,money:1,,
         let dataArray=rawArray.map(element => {
@@ -273,22 +274,22 @@
               element=Object.assign({},element,{firstWeight:'1.00',firstMoney:'8',money:'3.50'})
             break;
             case 'SELF_PICKUP_STATION_20':
-              element=Object.assign({},element,{firstWeight:'4.00',firstMoney:'20.00',money:'5.00'})
-            break;
-            case 'HOME_DELIVERY_SMALL_20':
-              element=Object.assign({},element,{firstWeight:'5.00',firstMoney:'35.00',money:'3.00'})
+              element=Object.assign({},element,{firstWeight:'3.00',firstMoney:'15.00',money:'5.00'})
             break;
             case 'HOME_DELIVERY_SMALL_30':
-              element=Object.assign({},element,{firstWeight:'21.00',firstMoney:'85.00',money:'5.00'})
+              element=Object.assign({},element,{firstWeight:'5.00',firstMoney:'35.00',money:'3.00'})
             break;
             case 'HOME_DELIVERY_BIG_50':
-              element=Object.assign({},element,{firstWeight:'20.00',firstMoney:'120.00',money:'0.00'})
+              element=Object.assign({},element,{firstWeight:'30.00',firstMoney:'120.00',money:'0.00'})
+            break;
+            case 'HOME_DELIVERY_BIG_60':
+              element=Object.assign({},element,{firstWeight:'50.00',firstMoney:'120.00',money:'0.00'})
             break;
             case 'HOME_DELIVERY_BIG_75':
-              element=Object.assign({},element,{firstWeight:'51.00',firstMoney:'120.00',money:'0.00'})
+              element=Object.assign({},element,{firstWeight:'60.00',firstMoney:'120.00',money:'2.00'})
             break;
             case 'HOME_DELIVERY_BIG_100':
-              element=Object.assign({},element,{firstWeight:'76.00',firstMoney:'120.00',money:'0.00'})
+              element=Object.assign({},element,{firstWeight:'75.00',firstMoney:'150.00',money:'2.00'})
             break;
             default:break;
           }
